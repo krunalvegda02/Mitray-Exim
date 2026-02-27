@@ -1,15 +1,20 @@
-import { Hero } from "./home/sections/Hero";
-  import { WhyChoose } from "./home/sections/WhyChoose";
-import { FeaturedProducts } from "./home/sections/FeaturedProducts";
-import { ExportCountries } from "./home/sections/ExportCountries";
-import { Certifications } from "./home/sections/Certifications";
-import { Reviews } from "./home/sections/Reviews";
-import { FaqSection } from "./home/sections/FaqSection";
-import { BlogPreview } from "./home/sections/BlogPreview";
-import { InquiryForm } from "./home/sections/InquiryForm";
+import { Hero } from "./sections/Hero";
+import { WhyChoose } from "./sections/WhyChoose";
+import { FeaturedProducts } from "./sections/FeaturedProducts";
+import { ExportCountries } from "./sections/ExportCountries";
+import { Certifications } from "./sections/Certifications";
+import { Reviews } from "./sections/Reviews";
+import { FaqSection } from "./sections/FaqSection";
+import { BlogPreview } from "./sections/BlogPreview";
+import { InquiryForm } from "./sections/InquiryForm";
 import { Container } from "@/components/shared/Container";
 
-export default function Home() {
+export const metadata = {
+  title: "MITRAY EXIM – Agricultural Exports from India",
+  description: "Premium vegetable, fruit, spice, rice, and wheat exporter from India to international markets.",
+};
+
+export default function HomePage() {
   return (
     <div>
       <Hero />
