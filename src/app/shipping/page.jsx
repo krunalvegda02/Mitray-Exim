@@ -1,5 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { Button } from "@/components/shared/Button";
+import { PageHero } from "@/components/shared/PageHero";
 import { ColdStorage } from "./sections/ColdStorage";
 import { Packaging } from "./sections/Packaging";
 import { Documentation } from "./sections/Documentation";
@@ -13,14 +14,19 @@ export const metadata = {
 
 export default function ShippingPage() {
   return (
-    <div className="py-20 bg-white">
-      <Container>
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-brand-navy mb-4">
-          Shipping & Logistics
-        </h1>
-        <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-          Professional cold chain and export logistics services
-        </p>
+    <>
+      <PageHero 
+        badge="LOGISTICS & COLD CHAIN"
+        title="Shipping & Logistics"
+        description="Professional cold chain and export logistics services ensuring quality from farm to destination"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Shipping' }
+        ]}
+      />
+
+      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+        <Container>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <ColdStorage />
@@ -46,7 +52,8 @@ export default function ShippingPage() {
             </Button>
           </a>
         </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }

@@ -67,8 +67,8 @@ export function Hero() {
       </div>
 
       {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <div className="absolute bottom-0 left-0 right-0 -mb-px">
+        <svg viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
           {/* Gold accent wave */}
           <path d="M0 80L48 85C96 90 192 100 288 95C384 90 480 70 576 65C672 60 768 70 864 75C960 80 1056 80 1152 75C1248 70 1344 60 1392 55L1440 50V140H1392C1344 140 1248 140 1152 140C1056 140 960 140 864 140C768 140 672 140 576 140C480 140 384 140 288 140C192 140 96 140 48 140H0V80Z" fill="#D4A574" fillOpacity="0.15" />
           {/* Main white wave */}

@@ -1,6 +1,7 @@
 import { CERTIFICATIONS } from "@/data/certifications";
 import { Container } from "@/components/shared/Container";
 import { Button } from "@/components/shared/Button";
+import { PageHero } from "@/components/shared/PageHero";
 
 export const metadata = {
   title: "Export Certifications – APEDA, FSSAI, IEC | MITRAY EXIM",
@@ -10,14 +11,19 @@ export const metadata = {
 
 export default function CertificationsPage() {
   return (
-    <div className="py-20 bg-white">
-      <Container>
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-brand-navy mb-4">
-          Certifications & Compliance
-        </h1>
-        <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-          Fully certified and compliant with international export standards
-        </p>
+    <>
+      <PageHero 
+        badge="CERTIFIED & COMPLIANT"
+        title="Certifications & Compliance"
+        description="Fully certified and compliant with international export standards for quality assurance"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Certifications' }
+        ]}
+      />
+
+      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+        <Container>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {CERTIFICATIONS.map((cert) => (
@@ -47,7 +53,8 @@ export default function CertificationsPage() {
             Request Compliance Documents
           </Button>
         </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }

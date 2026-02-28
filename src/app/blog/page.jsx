@@ -1,6 +1,7 @@
 import { BLOGS } from "@/data/blogs";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Container } from "@/components/shared/Container";
+import { PageHero } from "@/components/shared/PageHero";
 
 export const metadata = {
   title: "Export & Vegetable Export Guides – MITRAY EXIM Blog",
@@ -10,21 +11,26 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="py-20 bg-white">
-      <Container>
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-brand-navy mb-4">
-          Export Resources & Guides
-        </h1>
-        <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-          Industry insights and export compliance guides
-        </p>
+    <>
+      <PageHero 
+        badge="EXPORT INSIGHTS"
+        title="Export Resources & Guides"
+        description="Industry insights and export compliance guides for international agricultural trade"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog' }
+        ]}
+      />
 
-        <div className="max-w-4xl mx-auto space-y-6">
-          {BLOGS.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
-      </Container>
-    </div>
+      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+        <Container>
+          <div className="max-w-4xl mx-auto space-y-6">
+            {BLOGS.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </Container>
+      </div>
+    </>
   );
 }

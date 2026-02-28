@@ -1,5 +1,6 @@
 import { LightboxGallery } from "@/components/gallery/LightboxGallery";
 import { Container } from "@/components/shared/Container";
+import { PageHero } from "@/components/shared/PageHero";
 
 export const metadata = {
   title: "Export, Packaging & Warehouse Photos | MITRAY EXIM",
@@ -18,17 +19,22 @@ export default function GalleryPage() {
   ];
 
   return (
-    <div className="py-20 bg-white">
-      <Container>
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-brand-navy mb-4">
-          Photo Gallery
-        </h1>
-        <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-          Our export operations, facilities, and international shipments
-        </p>
+    <>
+      <PageHero 
+        badge="VISUAL SHOWCASE"
+        title="Photo Gallery"
+        description="Our export operations, facilities, and international shipments captured in detail"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Gallery' }
+        ]}
+      />
 
-        <LightboxGallery images={images} />
-      </Container>
-    </div>
+      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+        <Container>
+          <LightboxGallery images={images} />
+        </Container>
+      </div>
+    </>
   );
 }
