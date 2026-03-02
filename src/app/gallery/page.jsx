@@ -24,6 +24,7 @@ export default function GalleryPage() {
         badge="VISUAL SHOWCASE"
         title="Photo Gallery"
         description="Our export operations, facilities, and international shipments captured in detail"
+        backgroundImage="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Gallery' }

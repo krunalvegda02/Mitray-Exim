@@ -18,6 +18,7 @@ export default function CertificationsPage() {
         badge="CERTIFIED & COMPLIANT"
         title="Certifications & Compliance"
         description="Fully certified and compliant with international export standards for quality assurance"
+        backgroundImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Certifications' }

@@ -5,8 +5,18 @@ export function FeaturedProducts() {
   const featured = PRODUCTS.slice(0, 4);
 
   return (
-    <section>
-      <div className="text-center mb-12">
+    <section className="relative">
+      {/* Background Image */}
+      <div className="absolute right-0 top-0 w-1/3 h-full opacity-5 hidden lg:block">
+        <img 
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop" 
+          alt="Fresh vegetables"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="relative">
+        <div className="text-center mb-12">
         <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
           <span className="text-sm font-semibold text-brand-navy-dark">Our Products</span>
         </div>
@@ -29,6 +39,7 @@ export function FeaturedProducts() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
+        </div>
       </div>
     </section>
   );

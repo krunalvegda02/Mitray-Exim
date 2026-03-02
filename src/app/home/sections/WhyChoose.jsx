@@ -39,8 +39,25 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section>
-      <div className="text-center mb-12">
+    <section className="relative overflow-hidden">
+      {/* Decorative Images */}
+      <div className="absolute left-0 top-1/4 w-64 h-64 opacity-5 hidden lg:block">
+        <img 
+          src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000&auto=format&fit=crop" 
+          alt="Quality certification"
+          className="w-full h-full object-cover rounded-full"
+        />
+      </div>
+      <div className="absolute right-0 bottom-1/4 w-72 h-72 opacity-5 hidden lg:block">
+        <img 
+          src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=1000&auto=format&fit=crop" 
+          alt="Logistics"
+          className="w-full h-full object-cover rounded-full"
+        />
+      </div>
+
+      <div className="relative">
+        <div className="text-center mb-12">
         <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
           <span className="text-sm font-semibold text-brand-navy-dark">Why Choose Us</span>
         </div>
@@ -69,6 +86,7 @@ export function WhyChoose() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

@@ -26,14 +26,14 @@ export function ProductCard({ product, onQuoteClick }) {
   };
 
   return (
-    <div className="group relative">
+    <div className="group relative h-full flex flex-col">
       {/* Glow Effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-gold to-brand-gold-dark rounded-xl md:rounded-3xl opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
       
-      <div className="relative bg-gradient-to-br from-white via-slate-50 to-white rounded-xl md:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+      <div className="relative h-full flex flex-col bg-gradient-to-br from-white via-slate-50 to-white rounded-xl md:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
         
         {/* Product Image with Gradient Overlay */}
-        <div className="relative h-40 sm:h-48 md:h-64 overflow-hidden">
+        <div className="relative h-48 md:h-56 overflow-hidden flex-shrink-0">
           <img 
             src={getProductImage(product.category)} 
             alt={product.name}
@@ -72,15 +72,15 @@ export function ProductCard({ product, onQuoteClick }) {
         </div>
         
         {/* Product Info */}
-        <div className="p-3 md:p-6 bg-gradient-to-br from-white to-slate-50/50">
+        <div className="p-4 md:p-6 bg-gradient-to-br from-white to-slate-50/50 flex-1 flex flex-col">
           
           {/* Title & Origin */}
-          <div className="mb-2">
-            <h3 className="text-base md:text-xl font-bold text-brand-navy mb-1 group-hover:text-brand-gold transition-colors line-clamp-1">
+          <div className="mb-3">
+            <h3 className="text-base md:text-lg font-bold text-brand-navy mb-1.5 group-hover:text-brand-gold transition-colors line-clamp-2 min-h-[2.5rem] md:min-h-[3rem]">
               {product.name}
             </h3>
             <div className="flex items-center text-slate-500">
-              <svg className="w-3 h-3 mr-0.5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 mr-1 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -88,48 +88,48 @@ export function ProductCard({ product, onQuoteClick }) {
             </div>
           </div>
 
-          {/* Description - Hidden on mobile */}
-          <p className="hidden sm:block text-xs md:text-sm text-slate-600 mb-3 line-clamp-2 leading-relaxed">
+          {/* Description */}
+          <p className="text-xs md:text-sm text-slate-600 mb-3 line-clamp-2 leading-relaxed min-h-[2.5rem]">
             {product.description}
           </p>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-2 gap-1.5 md:gap-3 mb-3">
-            <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-1.5 md:p-3 rounded-lg md:rounded-xl border border-slate-200">
-              <div className="flex items-center mb-0.5">
-                <svg className="w-2.5 md:w-4 h-2.5 md:h-4 text-brand-gold mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-2 gap-2 md:gap-3 mb-4 flex-shrink-0">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-2.5 md:p-3 rounded-lg md:rounded-xl border border-slate-200">
+              <div className="flex items-center mb-1">
+                <svg className="w-3.5 md:w-4 h-3.5 md:h-4 text-brand-gold mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
                 <span className="text-xs font-semibold text-slate-500">Pack</span>
               </div>
-              <p className="text-xs font-bold text-brand-navy line-clamp-1">{product.packaging}</p>
+              <p className="text-xs md:text-sm font-bold text-brand-navy line-clamp-1">{product.packaging}</p>
             </div>
             
-            <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-1.5 md:p-3 rounded-lg md:rounded-xl border border-slate-200">
-              <div className="flex items-center mb-0.5">
-                <svg className="w-2.5 md:w-4 h-2.5 md:h-4 text-brand-gold mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-2.5 md:p-3 rounded-lg md:rounded-xl border border-slate-200">
+              <div className="flex items-center mb-1">
+                <svg className="w-3.5 md:w-4 h-3.5 md:h-4 text-brand-gold mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
                 <span className="text-xs font-semibold text-slate-500">MOQ</span>
               </div>
-              <p className="text-xs font-bold text-brand-navy line-clamp-1">{product.moq}</p>
+              <p className="text-xs md:text-sm font-bold text-brand-navy line-clamp-1">{product.moq}</p>
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex gap-1.5 md:gap-2">
+          <div className="flex gap-2 mt-auto flex-shrink-0">
             <a
               href={'/products/' + product.slug}
-              className="flex-1 text-center px-2 md:px-4 py-2 md:py-3 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white rounded-lg md:rounded-xl text-xs md:text-base font-bold hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="flex-1 text-center px-3 md:px-4 py-2.5 md:py-3 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white rounded-lg md:rounded-xl text-xs md:text-sm font-bold hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Details
             </a>
             <button
               onClick={onQuoteClick}
-              className="px-2 md:px-4 py-2 md:py-3 bg-gradient-to-br from-slate-100 to-slate-200 text-brand-navy rounded-lg md:rounded-xl font-bold hover:from-brand-navy hover:to-brand-navy-dark hover:text-white transition-all duration-300 flex items-center justify-center"
+              className="px-3 md:px-4 py-2.5 md:py-3 bg-gradient-to-br from-slate-100 to-slate-200 text-brand-navy rounded-lg md:rounded-xl font-bold hover:from-brand-navy hover:to-brand-navy-dark hover:text-white transition-all duration-300 flex items-center justify-center"
               title="Request Quote"
             >
-              <svg className="w-3.5 md:w-5 h-3.5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 md:w-5 h-4 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </button>

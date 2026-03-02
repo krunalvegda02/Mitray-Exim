@@ -20,6 +20,7 @@ export default function ProductsPage() {
         badge="PREMIUM QUALITY EXPORTS"
         title="Our Products"
         description="Export-quality agricultural products from India, certified and compliant with international standards"
+        backgroundImage="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Products' }

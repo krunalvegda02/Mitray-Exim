@@ -17,6 +17,7 @@ export default function ShippingPage() {
         badge="LOGISTICS & COLD CHAIN"
         title="Shipping & Logistics"
         description="Professional cold chain and export logistics services ensuring quality from farm to destination"
+        backgroundImage="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=2074&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Shipping' }

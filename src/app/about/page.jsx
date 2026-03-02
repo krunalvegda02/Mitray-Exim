@@ -20,6 +20,7 @@ export default function AboutPage() {
         badge="ESTABLISHED 2020"
         title="About MITRAY EXIM"
         description="Your trusted partner for premium agricultural exports from India to global markets"
+        backgroundImage="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'About' }
