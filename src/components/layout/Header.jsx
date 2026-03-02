@@ -14,9 +14,9 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-1">
             <img
-              src="/logo.png"
+              src="/logoh.png"
               alt="MITRAY EXIM"
-              className="h-28"
+              className="h-15"
             />
             {/* <span className="text-xl font-bold text-brand-navy-dark">Mitray <span className="text-brand-gold">Exim</span></span> */}
           </Link>

@@ -23,31 +23,31 @@ export function Values() {
   ];
 
   return (
-    <div className="bg-white p-10 rounded-2xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-2xl transition-all duration-300 h-full">
-      <div className="flex items-center mb-8">
-        <div className="w-14 h-14 bg-brand-navy/10 rounded-xl flex items-center justify-center mr-5">
-          <svg className="w-7 h-7 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-brand-navy">Our Core Values</h3>
-      </div>
-      <div className="space-y-5">
-        {values.map((value, index) => (
-          <div 
-            key={value.title} 
-            className="flex items-start p-5 bg-slate-50 rounded-xl hover:bg-brand-gold/5 hover:shadow-md transition-all duration-300 group border border-transparent hover:border-brand-gold/20"
-            style={{ transitionDelay: `${index * 100}ms` }}
-          >
-            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-5 text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all duration-300 shadow-sm flex-shrink-0">
-              {value.icon}
-            </div>
-            <div>
-              <h4 className="font-bold text-brand-navy mb-2 text-lg">{value.title}</h4>
-              <p className="text-base text-slate-600 leading-relaxed">{value.desc}</p>
-            </div>
+    <div className="group relative h-full">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-navy/30 to-purple-300/30 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
+      
+      <div className="relative h-full bg-gradient-to-br from-white via-brand-navy/5 to-white p-6 sm:p-8 md:p-10 rounded-2xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-2xl transition-all">
+        <div className="flex items-center mb-6 md:mb-8">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-brand-navy/20 to-brand-navy/10 rounded-xl flex items-center justify-center mr-3 sm:mr-5 shadow-md border border-brand-navy/20">
+            <svg className="w-6 h-6 sm:w-7 sm:h-7 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
           </div>
-        ))}
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-navy">Our Core Values</h3>
+        </div>
+        <div className="space-y-3 sm:space-y-4 md:space-y-5">
+          {values.map((value) => (
+            <div key={value.title} className="flex items-start p-3 sm:p-4 md:p-5 bg-gradient-to-r from-slate-50 to-white rounded-xl hover:from-brand-gold/10 hover:to-brand-gold/5 hover:shadow-md transition-all group/item border border-slate-100 hover:border-brand-gold/30">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mr-3 sm:mr-4 md:mr-5 text-brand-gold group-hover/item:bg-brand-gold group-hover/item:text-white transition-all shadow-sm flex-shrink-0">
+                {value.icon}
+              </div>
+              <div>
+                <h4 className="font-bold text-brand-navy mb-1 sm:mb-2 text-base sm:text-lg">{value.title}</h4>
+                <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">{value.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

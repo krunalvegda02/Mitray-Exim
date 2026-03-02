@@ -41,6 +41,9 @@ export function WhyChoose() {
   return (
     <section>
       <div className="text-center mb-12">
+        <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
+          <span className="text-sm font-semibold text-brand-navy-dark">Why Choose Us</span>
+        </div>
         <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
           Why Choose MITRAY EXIM
         </h2>

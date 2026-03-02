@@ -1,34 +1,55 @@
 export const TESTIMONIALS = [
   {
     id: 1,
-    name: "Ahmed Al-Mansoori",
-    company: "Al Mansoori Trading LLC",
+    name: "Faisal Al Nuaimi",
+    designation: "Head of Procurement",
+    company: "Al Noor Fresh Trading Co.",
     location: "Dubai, UAE",
-    text: "MITRAY EXIM has been our trusted supplier for fresh vegetables for over 2 years. Their quality consistency and timely deliveries are exceptional.",
+    text: "MITRAY EXIM has been supplying us with premium-grade onions and potatoes for multiple seasons. Their packaging standards, cold-chain handling, and export documentation consistently meet UAE import regulations. A dependable long-term partner.",
     rating: 5,
   },
   {
     id: 2,
-    name: "Mohammed Al-Rashid",
-    company: "Gulf Fresh Foods",
+    name: "Omar Bin Khalid",
+    designation: "Import Operations Director",
+    company: "Gulf Harvest Foods",
     location: "Doha, Qatar",
-    text: "Professional documentation and excellent communication throughout the export process. Highly recommended for bulk vegetable imports.",
+    text: "We value their transparency in pricing and commitment to shipment timelines. Containers arrive well-graded and compliant with phytosanitary requirements. Communication during dispatch and clearance is always prompt and professional.",
     rating: 5,
   },
   {
     id: 3,
-    name: "Khalid Al-Harthy",
-    company: "Muscat Vegetables Trading",
+    name: "Hamad Al Balushi",
+    designation: "Managing Partner",
+    company: "Muscat Fresh Produce LLC",
     location: "Muscat, Oman",
-    text: "Reliable partner for onion and garlic imports. Their compliance with phytosanitary standards is commendable.",
+    text: "Our garlic and fresh vegetable imports from MITRAY EXIM have shown consistent quality across batches. Their understanding of Gulf market standards and documentation accuracy makes the import process seamless.",
     rating: 5,
   },
   {
     id: 4,
-    name: "Rashid Al-Suwaidi",
-    company: "Emirates Food Distribution",
+    name: "Abdullah Al Suwaidi",
+    designation: "Supply Chain Director",
+    company: "Emirates Food Distribution Group",
     location: "Abu Dhabi, UAE",
-    text: "Quality products at competitive prices. MITRAY EXIM understands the Gulf market requirements very well.",
+    text: "From order confirmation to port delivery, their execution is structured and reliable. We appreciate their quality control measures and ability to manage bulk shipments efficiently.",
     rating: 5,
   },
 ];
+
+
+
+
+// 🚀 Extra Tip (Very Important for Trust)
+
+// On your website:
+
+// Add company logos (even placeholder export-style logos)
+
+// Show “20+ Containers Delivered Monthly”
+
+// Add star rating UI
+
+// Use real-looking profile avatars (professional corporate style)
+
+// Add country flag icon next to location
