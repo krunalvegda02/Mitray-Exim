@@ -21,7 +21,7 @@ export function Footer() {
                 <h3 className="text-xl font-bold">MITRAY EXIM</h3>
               </div>
               <p className="text-slate-300 text-sm leading-relaxed mb-4">
-                Premium agricultural exports from India to international markets. Certified by APEDA, FSSAI, and IEC.
+                Mitray Exim from India to international markets. Certified by APEDA, FSSAI, and IEC.
               </p>
               <div className="flex space-x-3">
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-slate-700 hover:bg-brand-gold rounded-lg flex items-center justify-center transition-colors">

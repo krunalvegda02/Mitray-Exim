@@ -1,182 +1,417 @@
 "use client";
+
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 import { COUNTRIES } from "@/data/countries";
 
-export function ExportCountries() {
+const ComposableMap = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.ComposableMap),
+  { ssr: false, loading: () => <div className="w-full h-96 bg-slate-100 flex items-center justify-center rounded-2xl"><span className="text-slate-500">Loading map...</span></div> }
+);
+
+const Geographies = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.Geographies),
+  { ssr: false }
+);
+
+const Geography = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.Geography),
+  { ssr: false }
+);
+
+const Marker = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.Marker),
+  { ssr: false }
+);
+
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+// India coordinates (origin)
+const INDIA_COORDS = [78.9629, 20.5937];
+
+// Coordinates mapping for countries
+const COUNTRY_COORDINATES = {
+  ae: [53.8478, 23.4241],
+  sa: [45.0792, 23.8859],
+  qa: [51.1694, 25.3548],
+  om: [55.9754, 21.4735],
+  kw: [47.4818, 29.3117],
+  bh: [50.5577, 26.0667],
+  gb: [-3.4360, 55.3781],
+  us: [-95.7129, 37.0902],
+  mv: [73.5081, 4.1694],
+  so: [46.1996, 9.1450],
+};
+
+// Product mapping for countries
+const COUNTRY_PRODUCTS = {
+  ae: ["Fresh Vegetables", "Spices", "Rice"],
+  sa: ["Dates", "Spices", "Grains"],
+  qa: ["Fresh Produce", "Vegetables"],
+  om: ["Spices", "Vegetables"],
+  kw: ["Fresh Vegetables", "Fruits"],
+  bh: ["Spices", "Rice"],
+  gb: ["Organic Vegetables", "Spices"],
+  us: ["Fresh Produce", "Grains"],
+  mv: ["Spices", "Coconut"],
+  so: ["Vegetables", "Grains"],
+};
+
+// Enhance COUNTRIES with coordinates and products
+const EXPORT_COUNTRIES = COUNTRIES.map((country) => ({
+  ...country,
+  coordinates: COUNTRY_COORDINATES[country.code] || [0, 0],
+  products: COUNTRY_PRODUCTS[country.code] || [],
+}));
+
+const EXPORT_REGION_NAMES = COUNTRIES.map((c) => c.name);
+
+function MapContent() {
+  const [hoveredCountry, setHoveredCountry] = useState(null);
+
   return (
-    <>
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+    <div className="relative bg-white w-full">
+      <ComposableMap 
+        projection="geoMercator" 
+        projectionConfig={{ 
+          scacle: 250,
+          center: [10, 25],
+        }}
+        width={1200}
+        height={480}
+        style={{
+          width: "100%",
+          height: "auto",
+        }}
+      >
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => {
+              const isExportRegion = EXPORT_REGION_NAMES.includes(geo.properties.name);
+              const isIndia = geo.properties.name === "India";
+              const isGulfRegion = ["United Arab Emirates", "Saudi Arabia", "Qatar", "Oman", "Kuwait", "Bahrain"].includes(geo.properties.name);
+
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  style={{
+                    default: {
+                      fill: isIndia ? "#D4A574" : isGulfRegion ? "#fef3c7" : isExportRegion ? "#e0e7ff" : "#f1f5f9",
+                      stroke: "#cbd5e1",
+                      strokeWidth: 0.5,
+                      outline: "none",
+                      transition: "all 300ms ease-in-out",
+                    },
+                    hover: {
+                      fill: isIndia ? "#C69560" : isGulfRegion ? "#fde68a" : isExportRegion ? "#c7d2fe" : "#e2e8f0",
+                      stroke: "#94a3b8",
+                      strokeWidth: 0.75,
+                      outline: "none",
+                      cursor: "pointer",
+                      transition: "all 300ms ease-in-out",
+                    },
+                    pressed: {
+                      fill: "#d4a574",
+                      stroke: "#94a3b8",
+                      strokeWidth: 0.75,
+                      outline: "none",
+                    },
+                  }}
+                />
+              );
+            })
           }
-          @keyframes scroll-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-          .scroll-left { animation: scroll-left 60s linear infinite; }
-          .scroll-right { animation: scroll-right 60s linear infinite; }
-        `
-      }} />
+        </Geographies>
 
-      <section className="relative overflow-hidden">
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 bg-gradient-to-r from-brand-gold/10 to-brand-navy/10 rounded-full mb-3 sm:mb-4 border border-brand-gold/20">
-            <svg className="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
-            <span className="text-xs sm:text-sm font-bold text-brand-navy">Global Reach</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-navy mb-2 sm:mb-3 px-4">
-            Trusted Across International Markets
-          </h2>
-          <p className="text-xs sm:text-sm md:text-base text-slate-600 max-w-2xl mx-auto px-4">
-            Delivering premium agricultural products to leading importers worldwide
-          </p>
-        </div>
+        {/* India Origin Marker */}
+        <Marker coordinates={INDIA_COORDS}>
+          <g className="pointer-events-none">
+            <circle
+              r="8"
+              fill="#D4A574"
+              stroke="#2C4A5E"
+              strokeWidth="3"
+              className="drop-shadow-lg"
+            />
+            <circle
+              r="12"
+              fill="none"
+              stroke="#D4A574"
+              strokeWidth="1"
+              opacity="0.5"
+              className="animate-pulse"
+            />
+          </g>
+        </Marker>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12">
-          <div className="group relative bg-gradient-to-br from-white to-slate-50 p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 hover:border-brand-gold text-center transition-all hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-brand-gold/20 to-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md border border-brand-gold/20">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-1">45+</p>
-              <p className="text-xs sm:text-sm md:text-base text-slate-600 font-medium">Countries Served</p>
-            </div>
-          </div>
+        {/* Export Country Markers */}
+        {EXPORT_COUNTRIES.map((country) => (
+          <Marker 
+            key={country.name} 
+            coordinates={country.coordinates}
+            onMouseEnter={() => setHoveredCountry(country.name)}
+            onMouseLeave={() => setHoveredCountry(null)}
+          >
+            <g className="group cursor-pointer">
+              <circle
+                r={hoveredCountry === country.name ? 7 : 5}
+                fill="#D4A574"
+                opacity={hoveredCountry === country.name ? 1 : 0.3}
+                className="transition-all duration-300"
+              />
+              <circle
+                r={hoveredCountry === country.name ? 10 : 6}
+                fill="none"
+                stroke="#D4A574"
+                strokeWidth="1.5"
+                opacity={hoveredCountry === country.name ? 0.6 : 0}
+                className="transition-all duration-300"
+              />
+              <circle
+                r="4"
+                fill="#D4A574"
+                stroke="#2C4A5E"
+                strokeWidth="2"
+                className="transition-all duration-300"
+              />
+            </g>
+          </Marker>
+        ))}
+      </ComposableMap>
 
-          <div className="group relative bg-gradient-to-br from-white to-slate-50 p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 hover:border-brand-gold text-center transition-all hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-brand-navy/20 to-brand-navy/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md border border-brand-navy/20">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-1">500+</p>
-              <p className="text-xs sm:text-sm md:text-base text-slate-600 font-medium">Annual Shipments</p>
-            </div>
-          </div>
+      {/* Curved Routes SVG Overlay */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ top: 0, left: 0 }}
+        viewBox="0 0 1000 600"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="10"
+            markerHeight="10"
+            refX="9"
+            refY="3"
+            orient="auto"
+          >
+            <polygon points="0 0, 10 3, 0 6" fill="#D4A574" opacity="0.5" />
+          </marker>
+        </defs>
 
-          <div className="group relative bg-gradient-to-br from-white to-slate-50 p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 hover:border-brand-gold text-center transition-all hover:shadow-lg hover:-translate-y-1">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md border border-green-200">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-1">100%</p>
-              <p className="text-xs sm:text-sm md:text-base text-slate-600 font-medium">Compliance Rate</p>
-            </div>
-          </div>
-        </div>
+        {/* Curved Routes */}
+        {EXPORT_COUNTRIES.map((country, idx) => {
+          const [x1, y1] = INDIA_COORDS;
+          const [x2, y2] = country.coordinates;
+          
+          // Simple projection approximation for SVG
+          const scale = 280;
+          const centerX = 500;
+          const centerY = 300;
+          
+          const sx1 = centerX + (x1 - 40) * (scale / 100);
+          const sy1 = centerY - (y1 - 15) * (scale / 100);
+          const sx2 = centerX + (x2 - 40) * (scale / 100);
+          const sy2 = centerY - (y2 - 15) * (scale / 100);
+          
+          // Control point for curve
+          const cx = (sx1 + sx2) / 2;
+          const cy = (sy1 + sy2) / 2 + 30;
+          
+          const pathData = `M ${sx1} ${sy1} Q ${cx} ${cy} ${sx2} ${sy2}`;
+          
+          return (
+            <path
+              key={`route-${country.name}`}
+              d={pathData}
+              stroke="#D4A574"
+              strokeWidth={hoveredCountry === country.name ? "2.5" : "1.5"}
+              fill="none"
+              opacity={hoveredCountry === country.name ? 0.8 : 0.15}
+              strokeDasharray="5,5"
+              markerEnd="url(#arrowhead)"
+              className="transition-all duration-300"
+              style={{
+                filter: hoveredCountry === country.name ? "drop-shadow(0 0 3px #D4A574)" : "none",
+              }}
+            />
+          );
+        })}
+      </svg>
 
-        {/* Countries Carousel */}
-        <div className="relative group bg-gradient-to-br from-white via-slate-50/50 to-white rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 p-4 sm:p-6 md:p-8 shadow-lg overflow-hidden">
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy/20 via-brand-gold/20 to-brand-navy/20 rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition duration-700"></div>
-
-          <div className="relative">
-            {/* Row 1 - Scroll Left */}
-            <div className="mb-6 sm:mb-8 md:mb-10 overflow-hidden">
-              <div className="flex scroll-left">
-                {[...COUNTRIES, ...COUNTRIES].map((country, index) => (
-                  <div
-                    key={`left-${index}`}
-                    className="flex-shrink-0 group/card relative bg-gradient-to-br from-white to-slate-50 hover:from-slate-50 hover:to-white p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 hover:border-brand-gold transition-all hover:shadow-lg text-center mx-2 sm:mx-3 md:mx-4 w-24 sm:w-32 md:w-40"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
-                    
-                    <div className="relative">
-                      <div className="relative w-16 h-10 sm:w-20 sm:h-12 md:w-24 md:h-16 mb-2 sm:mb-3 mx-auto transform group-hover/card:scale-105 transition-all duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-md transform translate-y-0.5 blur-sm opacity-30"></div>
-                        <div className="relative w-full h-full rounded-md overflow-hidden shadow-lg border-2 border-white group-hover/card:border-brand-gold transition-all">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-                          <img 
-                            src={`https://flagcdn.com/w320/${country.code}.png`}
-                            alt={country.name}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 pointer-events-none"></div>
-                        </div>
-                      </div>
-                      <p className="font-bold text-brand-navy text-xs sm:text-sm md:text-base mb-0.5 group-hover/card:text-brand-gold transition-colors line-clamp-1">
-                        {country.name}
-                      </p>
-                      <div className="flex items-center justify-center gap-1">
-                        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-xs text-green-600 font-semibold">Verified</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Row 2 - Scroll Right */}
-            <div className="overflow-hidden">
-              <div className="flex scroll-right">
-                {[...COUNTRIES, ...COUNTRIES].map((country, index) => (
-                  <div
-                    key={`right-${index}`}
-                    className="flex-shrink-0 group/card relative bg-gradient-to-br from-white to-slate-50 hover:from-slate-50 hover:to-white p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-slate-200 hover:border-brand-gold transition-all hover:shadow-lg text-center mx-2 sm:mx-3 md:mx-4 w-24 sm:w-32 md:w-40"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-lg sm:rounded-xl md:rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
-                    
-                    <div className="relative">
-                      <div className="relative w-16 h-10 sm:w-20 sm:h-12 md:w-24 md:h-16 mb-2 sm:mb-3 mx-auto transform group-hover/card:scale-105 transition-all duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-md transform translate-y-0.5 blur-sm opacity-30"></div>
-                        <div className="relative w-full h-full rounded-md overflow-hidden shadow-lg border-2 border-white group-hover/card:border-brand-gold transition-all">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-                          <img 
-                            src={`https://flagcdn.com/w320/${country.code}.png`}
-                            alt={country.name}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 pointer-events-none"></div>
-                        </div>
-                      </div>
-                      <p className="font-bold text-brand-navy text-xs sm:text-sm md:text-base mb-0.5 group-hover/card:text-brand-gold transition-colors line-clamp-1">
-                        {country.name}
-                      </p>
-                      <div className="flex items-center justify-center gap-1">
-                        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-xs text-green-600 font-semibold">Verified</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Certification Badge */}
-          <div className="mt-6 sm:mt-8 md:mt-10 pt-4 sm:pt-6 md:pt-8 border-t-2 border-slate-200">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl border-2 border-green-200">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <p className="text-xs sm:text-sm md:text-base text-slate-700 font-bold text-center sm:text-left">
-                All exports certified by APEDA, FSSAI & compliant with international standards
+      {/* Hover Tooltip Card */}
+      {hoveredCountry && (
+        <div className="absolute top-4 right-4 bg-white rounded-xl shadow-2xl border-2 border-brand-gold p-4 w-64 z-50 animate-fade-in-down">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-4xl">
+              {EXPORT_COUNTRIES.find(c => c.name === hoveredCountry)?.flag}
+            </span>
+            <div>
+              <h4 className="font-bold text-brand-navy text-lg">
+                {hoveredCountry}
+              </h4>
+              <p className="text-xs text-slate-600">
+                {EXPORT_COUNTRIES.find(c => c.name === hoveredCountry)?.region}
               </p>
             </div>
           </div>
+          
+          <div className="border-t border-slate-200 pt-3">
+            <p className="text-xs font-semibold text-slate-600 mb-2">PRODUCTS EXPORTED:</p>
+            <div className="flex flex-wrap gap-2">
+              {EXPORT_COUNTRIES.find(c => c.name === hoveredCountry)?.products.map((product, idx) => (
+                <span key={idx} className="text-xs bg-brand-gold/10 text-brand-gold font-semibold px-2 py-1 rounded-full">
+                  {product}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-3 pt-3 border-t border-slate-200">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs text-green-600 font-semibold">Active Export Route</span>
+            </div>
+          </div>
         </div>
-      </section>
-    </>
+      )}
+    </div>
+  );
+}
+
+export function ExportCountries() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const gulfCountries = EXPORT_COUNTRIES.filter(c => c.region === "Gulf");
+
+  return (
+    <section className="relative py-20 md:py-8  overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-navy/5 rounded-full blur-3xl -z-10"></div>
+
+      {/* HEADER */}
+      <div className="text-center max-w-4xl mx-auto px-4 mb-16 md:mb-20">
+        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-brand-gold/10 rounded-full border border-brand-gold/30 mb-6">
+          <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
+          <span className="text-sm font-semibold text-brand-gold uppercase tracking-wider">✈️ Global Export Routes</span>
+        </div>
+
+        <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-brand-navy mb-6 leading-tight">
+          Exporting to <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-brand-gold-light">{EXPORT_COUNTRIES.length}+ Countries</span>
+        </h2>
+
+        <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+          Our extensive global network ensures reliable delivery of premium agricultural products to international markets with full compliance and quality assurance.
+        </p>
+      </div>
+
+      {/* WORLD MAP - FULL WIDTH */}
+      <div className="w-full px-4 mb-16 md:mb-20 ">
+        <div className="max-w-7xl mx-auto ">
+          {isClient ? (
+            <MapContent />
+          ) : (
+            <div className="w-full h-96 bg-slate-100 flex items-center justify-center rounded-2xl">
+              <span className="text-slate-500">Loading map...</span>
+            </div>
+          )}
+
+          {/* Map Legend */}
+          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-brand-gold border-2 border-brand-navy"></div>
+              <span className="text-slate-600 font-medium">Active Export Markets</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-fuchsia-300"></div>
+              <span className="text-slate-600 font-medium">Gulf Focus Region</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-indigo-200"></div>
+              <span className="text-slate-600 font-medium">Export Regions</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#D4A574" strokeWidth="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span className="text-slate-600 font-medium">Airline Routes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* STATS - PREMIUM CARDS */}
+      <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {[
+            { value: `${EXPORT_COUNTRIES.length}+`, label: "Countries", icon: "🌍" },
+            { value: `${gulfCountries.length}`, label: "Gulf Markets", icon: "🏙️" },
+            { value: "500+", label: "Containers Shipped", icon: "📦" },
+            { value: "100%", label: "Compliance Rate", icon: "✓" },
+          ].map((stat, idx) => (
+            <div
+              key={idx}
+              className="group bg-gradient-to-br from-white to-slate-50 hover:from-brand-gold/5 hover:to-brand-navy/5 p-6 md:p-8 rounded-2xl border-2 border-slate-200 hover:border-brand-gold transition-all duration-300 hover:shadow-lg text-center"
+            >
+              <div className="text-3xl md:text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                {stat.icon}
+              </div>
+              <p className="text-3xl md:text-4xl font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
+                {stat.value}
+              </p>
+              <p className="text-sm md:text-base text-slate-600 font-medium">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* GULF REGION HIGHLIGHT */}
+      <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20">
+        <div className="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border-2 border-amber-200 rounded-3xl p-8 md:p-10">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-4xl">🏙️</span>
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-brand-navy">
+                Gulf Region Focus
+              </h3>
+              <p className="text-sm text-slate-600">Our primary export hub with {gulfCountries.length} active markets</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {gulfCountries.map((country) => (
+              <div
+                key={country.name}
+                className="group bg-white hover:bg-brand-gold/10 p-4 rounded-xl border-2 border-amber-200 hover:border-brand-gold transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-3xl">{country.flag}</span>
+                  <div>
+                    <p className="font-bold text-brand-navy text-sm">{country.name}</p>
+                    <p className="text-xs text-slate-600">{country.region}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {country.products.slice(0, 2).map((product, idx) => (
+                    <span key={idx} className="text-xs bg-brand-gold/10 text-brand-gold px-2 py-0.5 rounded">
+                      {product}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </section>
   );
 }

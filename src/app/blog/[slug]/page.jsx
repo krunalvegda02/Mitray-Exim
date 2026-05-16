@@ -222,7 +222,7 @@ export default function BlogPage() {
                   </div>
 
                   <p className="text-xs sm:text-sm text-slate-600 text-center mb-6 leading-relaxed">
-                    Premium agricultural exports with complete compliance and quality assurance
+                    Mitray Exim with complete compliance and quality assurance
                   </p>
 
                   <div className="space-y-3 mb-6 pt-6 border-t border-slate-200">

@@ -65,7 +65,7 @@ export function WhyChoose() {
           Why Choose MITRAY EXIM
         </h2>
         <p className="text-slate-600 max-w-2xl mx-auto">
-          Your trusted partner for premium agricultural exports from India
+          Your trusted partner for Mitray Exim from India
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

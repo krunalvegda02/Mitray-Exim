@@ -63,3 +63,49 @@ export function Certifications() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // {/* CERTIFICATIONS - PREMIUM */}
+    //   <div className="max-w-4xl mx-auto px-4 text-center">
+    //     <div className="bg-gradient-to-r from-brand-navy/5 via-brand-gold/5 to-brand-navy/5 border-2 border-brand-gold/20 rounded-3xl p-8 md:p-10">
+    //       <h4 className="text-xl md:text-2xl font-bold text-brand-navy mb-6">
+    //         International Certifications & Compliance
+    //       </h4>
+
+    //       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    //         {[
+    //           { name: "APEDA", desc: "Agricultural Export" },
+    //           { name: "FSSAI", desc: "Food Safety" },
+    //           { name: "ISO 9001", desc: "Quality Mgmt" },
+    //           { name: "GlobalGAP", desc: "Good Practices" },
+    //         ].map((cert, idx) => (
+    //           <div
+    //             key={idx}
+    //             className="group bg-white hover:bg-brand-gold/10 p-4 rounded-xl border-2 border-slate-200 hover:border-brand-gold transition-all duration-300"
+    //           >
+    //             <div className="text-2xl font-bold text-brand-gold mb-1 group-hover:scale-110 transition-transform">
+    //               ✓
+    //             </div>
+    //             <p className="font-semibold text-brand-navy text-sm mb-1">
+    //               {cert.name}
+    //             </p>
+    //             <p className="text-xs text-slate-600">
+    //               {cert.desc}
+    //             </p>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>

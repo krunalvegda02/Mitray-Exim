@@ -26,7 +26,7 @@ export function Hero() {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in-up animation-delay-200">
-            Premium Agricultural Exports
+            Mitray Exim
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-gold-light to-brand-gold">from India</span>
           </h1>
 
