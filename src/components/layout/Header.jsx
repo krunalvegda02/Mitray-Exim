@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { FiGlobe, FiSend, FiMenu, FiX, FiActivity, FiArrowUpRight, FiZap } from "react-icons/fi";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,100 +18,143 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled 
-          ? "top-0 bg-white/90 backdrop-blur-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] h-20" 
-          : "top-10 bg-white h-24"
+          ? "bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border-b border-slate-100" 
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 h-full">
-        <div className="flex items-center justify-between h-full">
-          <Link href="/" className="group flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-            <img
-              src="/logoh.png"
-              alt="MITRAY EXIM - Premium Export Partner"
-              className={`transition-all duration-500 ${isScrolled ? "h-10" : "h-14"}`}
-            />
-          </Link>
+      {/* INSTITUTIONAL ANNOUNCEMENT BAR */}
+      <div className={`w-full bg-brand-navy overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100 border-b border-white/5'}`}>
+         <div className="container mx-auto px-8 h-full flex items-center justify-between">
+            <div className="flex items-center gap-6">
+               <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
+                  <span className="text-[8px] font-black text-white/60 uppercase tracking-[0.2em]">Global Logistics Hub v2.4 Active</span>
+               </div>
+               <div className="hidden md:flex items-center gap-2">
+                  <FiZap className="text-brand-gold text-[10px]" />
+                  <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Transit Latency: 2.4ms Grid</span>
+               </div>
+            </div>
+            <div className="flex items-center gap-4">
+               <span className="text-[8px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Pricing Available</span>
+               <FiArrowUpRight className="text-brand-gold text-[10px]" />
+            </div>
+         </div>
+      </div>
 
-          <nav className="hidden lg:flex items-center space-x-10">
-            {[
-              ["Home", "/"],
-              ["About", "/about"],
-              ["Products", "/products"],
-              ["Certifications", "/certifications"],
-              ["Shipping", "/shipping"],
-              ["Blog", "/blog"],
-            ].map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                className="text-sm font-bold uppercase tracking-widest text-brand-navy hover:text-brand-gold transition-colors relative group py-2"
-              >
-                {label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-500 rounded-full"></span>
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden lg:flex items-center">
-            <Link 
-              href="/contact" 
-              className="px-6 py-3 bg-brand-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy-dark transition-all duration-500 shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              Get a Quote
+      {/* MAIN NAVIGATION BAR */}
+      <div className={`transition-all duration-500 ${isScrolled ? 'h-20' : 'h-24'}`}>
+        <div className="container mx-auto px-8 md:px-12 h-full">
+          <div className="flex items-center justify-between h-full">
+            
+            {/* LOGO MANIFEST */}
+            <Link href="/" className="group flex items-center space-x-4 transition-transform duration-500 hover:scale-[1.02]">
+              <img
+                src="/logoh.png"
+                alt="MITRAY EXIM"
+                className={`transition-all duration-700 ${isScrolled ? "h-10" : "h-14 brightness-100 "}`}
+              />
+              <div className={`h-8 w-px hidden sm:block transition-colors ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
+              <div className="hidden sm:flex flex-col">
+                 <span className={`text-[9px] font-black uppercase tracking-[0.4em] leading-none transition-colors ${isScrolled ? 'text-brand-navy' : 'text-white'}`}>Trade</span>
+                 <span className="text-[9px] font-black uppercase tracking-[0.4em] text-brand-gold leading-none mt-1">Network</span>
+              </div>
             </Link>
+
+            {/* STRATEGIC NAVIGATION LINKS - HIGH CONTRAST UPGRADE */}
+            <nav className="hidden lg:flex items-center space-x-12">
+              {[
+                ["Strategic Hub", "/"],
+                ["Institutional", "/about"],
+                ["Portfolio", "/products"],
+                ["Compliance", "/certifications"],
+                ["Intelligence", "/blog"],
+              ].map(([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`text-[11px] font-black uppercase tracking-[0.3em] transition-all duration-500 relative group py-2 ${
+                    isScrolled ? 'text-brand-navy/70 hover:text-brand-gold' : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  {label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-700 rounded-full"></span>
+                </Link>
+              ))}
+            </nav>
+
+            {/* ACTIONS */}
+            <div className="flex items-center gap-6">
+              <Link 
+                href="/contact" 
+                className={`hidden md:flex items-center gap-3 px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-700 shadow-2xl active:scale-95 ${
+                  isScrolled 
+                    ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy' 
+                    : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-brand-navy'
+                }`}
+              >
+                Request Manifest <FiSend className="text-sm" />
+              </Link>
+
+              {/* MOBILE MENU TOGGLE */}
+              <button
+                className={`lg:hidden w-12 h-12 flex items-center justify-center rounded-2xl transition-all ${
+                  isScrolled ? 'bg-brand-navy text-white' : 'bg-white shadow-lg text-brand-navy'
+                }`}
+                onClick={() => setIsMenuOpen((p) => !p)}
+              >
+                {isMenuOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
+              </button>
+            </div>
           </div>
-
-          <button
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-brand-navy-dark border border-slate-200"
-            onClick={() => setIsMenuOpen((p) => !p)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              )}
-            </svg>
-          </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        <div 
-          className={`lg:hidden fixed inset-x-0 bg-white shadow-2xl transition-all duration-500 overflow-hidden ${
-            isMenuOpen ? "top-[100%] opacity-100 max-h-screen border-t border-slate-100" : "top-[110%] opacity-0 max-h-0"
-          }`}
-        >
-          <nav className="flex flex-col p-6 space-y-2">
+      {/* MOBILE COMMAND CENTER OVERLAY */}
+      <div 
+        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/95 backdrop-blur-2xl transition-all duration-700 ease-in-out ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full p-10 pt-32">
+          <button 
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-10 right-10 w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-white"
+          >
+            <FiX className="text-3xl" />
+          </button>
+
+          <nav className="flex flex-col space-y-4">
             {[
-              ["Home", "/"],
-              ["About", "/about"],
-              ["Products", "/products"],
-              ["Certifications", "/certifications"],
-              ["Shipping", "/shipping"],
-              ["Blog", "/blog"],
-              ["Contact", "/contact"],
+              ["Global Hub", "/"],
+              ["Institutional", "/about"],
+              ["Portfolio", "/products"],
+              ["Compliance", "/certifications"],
+              ["Intel", "/blog"],
+              ["Request Manifest", "/contact"],
             ].map(([label, href]) => (
               <Link
                 key={href}
                 href={href}
-                className="px-4 py-3 rounded-xl text-brand-navy font-bold hover:bg-slate-50 hover:text-brand-gold transition-all"
+                className="text-3xl font-black text-white uppercase tracking-tighter hover:text-brand-gold transition-colors py-4 border-b border-white/5"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {label}
               </Link>
             ))}
           </nav>
+
+          <div className="mt-auto pt-10 flex items-center justify-between border-t border-white/10">
+             <div className="flex items-center gap-3">
+                <FiGlobe className="text-brand-gold text-2xl" />
+                <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">Network Ops v2.4</span>
+             </div>
+             <FiActivity className="text-emerald-400 animate-pulse" />
+          </div>
         </div>
       </div>
     </header>
   );
 }
-

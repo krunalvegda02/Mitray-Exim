@@ -1,5 +1,7 @@
 import { Hero } from "./sections/Hero";
+import { TrustPartners } from "./sections/TrustPartners";
 import { WhyChoose } from "./sections/WhyChoose";
+
 import { FeaturedProducts } from "./sections/FeaturedProducts";
 import { ExportCountries } from "./sections/ExportCountries";
 import { Certifications } from "./sections/Certifications";
@@ -26,8 +28,10 @@ export default function HomePage() {
       </div>
 
       <Hero />
+      <TrustPartners />
       
       {/* TIGHTER, MORE DYNAMIC SPACING - py-12 md:py-20 */}
+
       <div className="py-12 md:py-20 relative z-10">
         <Container>
           <WhyChoose />

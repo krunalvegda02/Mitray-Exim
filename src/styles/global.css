@@ -101,6 +101,28 @@
   animation: subtleFloat 8s ease-in-out infinite;
 }
 
+@keyframes marqueeFast {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  20%, 100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-marquee-fast {
+  animation: marqueeFast 20s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 20s ease-in-out alternate infinite;
+}
+
+
+
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
@@ -138,4 +160,12 @@
   background: radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 70%);
   filter: blur(80px);
   border-radius: 50%;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

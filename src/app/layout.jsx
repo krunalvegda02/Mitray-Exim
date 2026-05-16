@@ -35,13 +35,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen flex flex-col bg-white antialiased text-slate-900 font-inter">
+      <body className="min-h-screen flex flex-col bg-white antialiased text-slate-900 font-inter selection:bg-brand-gold selection:text-brand-navy">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -76,18 +76,17 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        <div className="fixed left-0 top-0 h-10 w-full bg-brand-navy-dark text-brand-gold-light text-xs text-center flex items-center justify-center z-50 border-b border-brand-navy-light/30 backdrop-blur-sm">
-          <span className="flex items-center space-x-2 tracking-wide font-medium">
-            <svg className="w-3 h-3 text-brand-gold animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-            </svg>
-            <span className="uppercase">Premium Agricultural Export Solutions from India</span>
-          </span>
-        </div>
+        
+        {/* UNIFIED NAVIGATION SYSTEM */}
         <Header />
-        <main id="main-content" className="flex-1 pt-10">
-          {children}
+
+        <main id="main-content" className="flex-1 relative">
+           {/* SMOOTH SECTION TRANSITION MASK */}
+           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div>
+           
+           {children}
         </main>
+
         <Footer />
         <WhatsAppButton />
         <ScrollToTop />
@@ -95,4 +94,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

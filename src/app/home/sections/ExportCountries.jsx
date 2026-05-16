@@ -1,9 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { COUNTRIES } from "@/data/countries";
-import { FiGlobe, FiTruck, FiCheckCircle, FiActivity, FiZap, FiBox, FiChevronRight, FiShield, FiPackage } from "react-icons/fi";
+import { FiGlobe, FiTruck, FiCheckCircle, FiActivity, FiZap, FiBox, FiChevronRight, FiShield, FiPackage, FiPlus, FiMinus, FiTarget, FiMove, FiChevronUp } from "react-icons/fi";
 
 const ComposableMap = dynamic(
   () => import("react-simple-maps").then((mod) => mod.ComposableMap),
@@ -25,300 +25,275 @@ const Marker = dynamic(
   { ssr: false }
 );
 
+const Line = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.Line),
+  { ssr: false }
+);
+
+const ZoomableGroup = dynamic(
+  () => import("react-simple-maps").then((mod) => mod.ZoomableGroup),
+  { ssr: false }
+);
+
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-const COUNTRY_DATA = {
-  ae: { coords: [53.8478, 23.4241], label: "Dubai Hub", capacity: "High", speed: "98%" },
-  sa: { coords: [45.0792, 23.8859], label: "Riyadh Hub", capacity: "Mid", speed: "99%" },
-  qa: { coords: [51.1694, 25.3548], label: "Doha Port", capacity: "High", speed: "97%" },
-  om: { coords: [58.4059, 23.5859], label: "Muscat Port", capacity: "Mid", speed: "98%" },
-  kw: { coords: [47.4818, 29.3117], label: "Kuwait Terminal", capacity: "Mid", speed: "96%" },
-  bh: { coords: [50.5577, 26.0667], label: "Manama Hub", capacity: "Mid", speed: "99%" },
-  gb: { coords: [-0.1276, 51.5074], label: "London Gateway", capacity: "High", speed: "95%" },
-  us: { coords: [-74.006, 40.7128], label: "New York Port", capacity: "High", speed: "94%" },
-  mv: { coords: [73.5093, 4.1755], label: "Malé Terminal", capacity: "Low", speed: "99%" },
-  so: { coords: [45.3182, 2.0469], label: "Berbera Port", capacity: "Mid", speed: "92%" },
-};
-
-const EXPORT_COUNTRIES = COUNTRIES.map((country) => ({
-  ...country,
-  coords: COUNTRY_DATA[country.code]?.coords || [0, 0],
-  hub: COUNTRY_DATA[country.code]?.label || country.name,
-  capacity: COUNTRY_DATA[country.code]?.capacity || "Standard",
-  speed: COUNTRY_DATA[country.code]?.speed || "95%"
-}));
+const EXPORT_COUNTRIES = [
+  { code: "ae", name: "United Arab Emirates", flag: "🇦🇪", region: "Gulf", coords: [55.2708, 25.2048] },
+  { code: "sa", name: "Saudi Arabia", flag: "🇸🇦", region: "Gulf", coords: [45.0792, 23.8859] },
+  { code: "qa", name: "Qatar", flag: "🇶🇦", region: "Gulf", coords: [51.1839, 25.3548] },
+  { code: "om", name: "Oman", flag: "🇴🇲", region: "Gulf", coords: [58.4059, 23.5859] },
+  { code: "kw", name: "Kuwait", flag: "🇰🇼", region: "Gulf", coords: [47.9774, 29.3759] },
+  { code: "gb", name: "United Kingdom", flag: "🇬🇧", region: "Europe", coords: [-0.1276, 51.5074] },
+  { code: "us", name: "United States", flag: "🇺🇸", region: "Americas", coords: [-95.7129, 37.0902] },
+  { code: "ca", name: "Canada", flag: "🇨🇦", region: "Americas", coords: [-106.3468, 56.1304] },
+];
 
 const GULF_COUNTRIES = EXPORT_COUNTRIES.filter(c => c.region === "Gulf");
-const OTHER_COUNTRIES = EXPORT_COUNTRIES.filter(c => c.region !== "Gulf");
-
-function MapView({ hovered, setHovered, mapConfig }) {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => { 
-    setIsMobile(window.innerWidth < 1024);
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const currentCountry = EXPORT_COUNTRIES.find(c => c.name === hovered);
-
-  return (
-    <div className="flex flex-col gap-4 w-full">
-      {/* GLOBAL COMMAND INTERFACE - INCREASED HEIGHT FOR DESKTOP BALANCE */}
-      <div className="relative bg-[#F8FAFC] rounded-[2rem] md:rounded-[3rem] shadow-xl border border-white overflow-hidden min-h-[400px] md:min-h-[650px] lg:min-h-[750px] flex items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
-        
-        {/* STATUS BAR */}
-        <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
-           <div className="flex items-center gap-3 bg-white/90 backdrop-blur-xl px-4 py-2 rounded-full border border-slate-100 shadow-sm">
-              <div className="relative flex h-1.5 w-1.5">
-                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-              </div>
-              <span className="text-[8px] md:text-[9px] font-black text-brand-navy uppercase tracking-widest">Network Active</span>
-           </div>
-           {!isMobile && (
-             <div className="flex items-center gap-4 text-[8px] font-black text-slate-400 uppercase tracking-widest bg-white/40 backdrop-blur-md px-5 py-2 rounded-full border border-white/40">
-                <span className="flex items-center gap-2"><FiActivity className="text-brand-gold" /> System Stable</span>
-                <span className="w-px h-3 bg-slate-200"></span>
-                <span className="flex items-center gap-2"><FiZap className="text-brand-gold" /> 14 Nodes</span>
-             </div>
-           )}
-        </div>
-
-        <div className="w-full relative z-10 pt-8 md:pt-0">
-          <ComposableMap 
-            projection="geoMercator" 
-            projectionConfig={{ 
-              scale: isMobile ? mapConfig.scale * 0.8 : mapConfig.scale,
-              center: isMobile ? [mapConfig.center[0], mapConfig.center[1] + 10] : mapConfig.center 
-            }}
-            width={1000}
-            height={isMobile ? 550 : 750}
-            className="w-full h-auto transition-all duration-1000 ease-in-out"
-          >
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo) => {
-                  const geoName = geo.properties.name;
-                  const isIndia = geoName === "India";
-                  const isExport = EXPORT_COUNTRIES.some(c => {
-                    const names = { "United Arab Emirates": "UAE", "United Kingdom": "UK", "United States of America": "USA", "United States": "USA" };
-                    return (names[c.name] || c.name) === (names[geoName] || geoName) || c.name === geoName;
-                  });
-                  
-                  return (
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      onMouseEnter={() => isExport && setHovered(geoName)}
-                      onMouseLeave={() => setHovered(null)}
-                      style={{
-                        default: { fill: isIndia ? "#D4A574" : isExport ? "#FEF3C7" : "#FFFFFF", stroke: isExport ? "#D4A574" : "#E2E8F0", strokeWidth: 0.5, outline: "none" },
-                        hover: { fill: isIndia ? "#C69560" : isExport ? "#2C4A5E" : "#FFFFFF", stroke: isExport ? "#D4A574" : "#E2E8F0", strokeWidth: 1, outline: "none", cursor: isExport ? "pointer" : "default" },
-                      }}
-                    />
-                  );
-                })
-              }
-            </Geographies>
-
-            {EXPORT_COUNTRIES.map((country) => {
-              if (hovered !== country.name) return null;
-              const [x1, y1] = [78.9629, 20.5937];
-              const [x2, y2] = country.coords;
-              const cx = (x1 + x2) / 2;
-              const cy = (y1 + y2) / 2 - 40;
-              return (
-                <Marker key={`path-${country.code}`} coordinates={[cx, cy]}>
-                   <path d={`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`} fill="none" stroke="#D4A574" strokeWidth="3" strokeDasharray="8 6" className="animate-pulse" />
-                </Marker>
-              );
-            })}
-
-            <Marker coordinates={[78.9629, 20.5937]}>
-              <g>
-                <circle r={isMobile ? 30 : 45} fill="#D4A574" opacity="0.1" className="animate-ping" />
-                <rect x={isMobile ? "-8" : "-12"} y={isMobile ? "-8" : "-12"} width={isMobile ? "16" : "24"} height={isMobile ? "16" : "24"} rx={isMobile ? "4" : "8"} fill="#2C4A5E" className="rotate-45" />
-                <text textAnchor="middle" y={isMobile ? "4" : "7"} className={`${isMobile ? 'text-[10px]' : 'text-[14px]'}`}>🇮🇳</text>
-              </g>
-            </Marker>
-
-            {EXPORT_COUNTRIES.map((country) => (
-              <Marker key={country.code} coordinates={country.coords}>
-                <g 
-                  className="cursor-pointer"
-                  onMouseEnter={() => setHovered(country.name)}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  <circle r={hovered === country.name ? (isMobile ? 25 : 35) : (isMobile ? 18 : 22)} fill={hovered === country.name ? "#D4A574" : "#CBD5E1"} opacity={hovered === country.name ? 0.3 : 0.1} className="transition-all duration-700" />
-                  <circle r={hovered === country.name ? (isMobile ? 14 : 20) : (isMobile ? 10 : 14)} fill="white" stroke={hovered === country.name ? "#D4A574" : "#E2E8F0"} strokeWidth="2" className="transition-all duration-300" />
-                  <text textAnchor="middle" y={hovered === country.name ? (isMobile ? 5 : 8) : (isMobile ? 4 : 6)} className={`transition-all duration-300 ${hovered === country.name ? (isMobile ? 'text-[16px]' : 'text-[24px]') : (isMobile ? 'text-[12px]' : 'text-[18px]')}`}>{country.flag}</text>
-                </g>
-              </Marker>
-            ))}
-          </ComposableMap>
-        </div>
-
-        {/* MANIFEST OVERLAY */}
-        <div className={`absolute bottom-6 left-6 right-6 transition-all duration-1000 cubic-bezier(0.2, 0.8, 0.2, 1) ${hovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-           <div className="bg-white/95 backdrop-blur-2xl p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] border border-white shadow-2xl flex items-center justify-between">
-              <div className="flex items-center gap-4 md:gap-6">
-                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-brand-navy flex items-center justify-center text-2xl md:text-3xl shadow-xl">{currentCountry?.flag}</div>
-                 <div>
-                    <h4 className="text-brand-navy font-black text-xl md:text-2xl tracking-tighter leading-none mb-1">{hovered}</h4>
-                    <p className="text-slate-400 font-bold text-[7px] md:text-[9px] uppercase tracking-[0.3em]">{currentCountry?.hub}</p>
-                 </div>
-              </div>
-              <div className="flex items-center gap-8 md:gap-12 mr-4 md:mr-8">
-                 <div className="text-right">
-                    <p className="text-slate-300 text-[8px] font-black uppercase tracking-widest mb-0.5">Speed</p>
-                    <p className="text-xl md:text-3xl font-black text-brand-navy tracking-tight">{currentCountry?.speed}</p>
-                 </div>
-                 <div className="text-right">
-                    <p className="text-slate-300 text-[8px] font-black uppercase tracking-widest mb-0.5">Capacity</p>
-                    <p className="text-xl md:text-3xl font-black text-brand-gold tracking-tight">{currentCountry?.capacity}</p>
-                 </div>
-              </div>
-           </div>
-        </div>
-      </div>
-
-      {/* ADDITIONAL CONTENT TO FILL HEIGHT & REMOVE NULL SPACE */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-         <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center gap-4 group hover:border-brand-gold/30 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-brand-gold"><FiShield /></div>
-            <div>
-               <p className="text-[10px] font-black text-brand-navy uppercase tracking-widest mb-0.5">SGS Quality Inspected</p>
-               <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest">Every shipment verified at source</p>
-            </div>
-         </div>
-         <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center gap-4 group hover:border-brand-navy transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-brand-navy"><FiPackage /></div>
-            <div>
-               <p className="text-[10px] font-black text-brand-navy uppercase tracking-widest mb-0.5">Custom Cold-Chain</p>
-               <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest">Precision temperature maintenance</p>
-            </div>
-         </div>
-      </div>
-
-      <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center justify-between gap-4">
-         {[
-           { icon: <FiActivity />, label: "Load", val: "Optimized" },
-           { icon: <FiZap />, label: "Uptime", val: "99.9%" },
-           { icon: <FiBox />, label: "Safety", val: "Grade AAA" }
-         ].map((m, i) => (
-           <div key={i} className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-brand-navy text-xs">{m.icon}</div>
-              <div>
-                 <p className="text-[7px] font-black text-slate-300 uppercase tracking-widest">{m.label}</p>
-                 <p className="text-[10px] font-black text-brand-navy uppercase tracking-widest">{m.val}</p>
-              </div>
-           </div>
-         ))}
-      </div>
-    </div>
-  );
-}
 
 export function ExportCountries() {
-  const [isClient, setIsClient] = useState(false);
   const [hovered, setHovered] = useState(null);
-  const [mapConfig, setMapConfig] = useState({ scale: 380, center: [48, 22] });
+  const [position, setPosition] = useState({ coordinates: [60, 25], zoom: 1 });
+  const [isClient, setIsClient] = useState(false);
+  const [isStatsOpen, setIsStatsOpen] = useState(true);
+  const sectionRef = useRef(null);
+  const hasAutoFocused = useRef(false);
 
-  useEffect(() => setIsClient(true), []);
+  useEffect(() => {
+    setIsClient(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAutoFocused.current) {
+          const uae = GULF_COUNTRIES.find(c => c.name === "United Arab Emirates");
+          if (uae) {
+            handleCountryFocus(uae);
+            hasAutoFocused.current = true;
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleCountryFocus = (country) => {
     setHovered(country.name);
+    setIsStatsOpen(true);
     const isMobile = window.innerWidth < 1024;
-    const zoomLevel = country.region === "Gulf" ? (isMobile ? 550 : 700) : (isMobile ? 250 : 350);
-    setMapConfig({ scale: zoomLevel, center: country.coords });
-    if (window.innerWidth < 1024) document.getElementById('discovery-dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const zoomLevel = country.region === "Gulf" ? (isMobile ? 3.5 : 5) : (isMobile ? 2.5 : 3.5);
+    setPosition({ coordinates: country.coords, zoom: zoomLevel });
   };
 
+  const handleZoomIn = () => {
+    if (position.zoom >= 8) return;
+    setPosition(pos => ({ ...pos, zoom: pos.zoom * 1.5 }));
+  };
+
+  const handleZoomOut = () => {
+    if (position.zoom <= 1) return;
+    setPosition(pos => ({ ...pos, zoom: pos.zoom / 1.5 }));
+  };
+
+  const handleResetMap = () => {
+    setPosition({ coordinates: [60, 25], zoom: 1 });
+    setHovered(null);
+  };
+
+  const handleMoveEnd = (position) => {
+    setPosition(position);
+  };
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   return (
-    <section className="relative py-12 md:py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section ref={sectionRef} className="relative py-12 md:py-32 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-12 relative z-10">
         
-        {/* COMPACT HEADER */}
-        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 bg-slate-50 rounded-full border border-slate-100 mb-6">
-            <FiGlobe className="text-brand-gold" />
-            <span className="text-[9px] font-black text-brand-navy uppercase tracking-[0.4em]">Global Operations Network</span>
+        {/* HEADER - COMPACT FOR MOBILE */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 md:mb-24 gap-4">
+          <div className="max-w-4xl animate-reveal">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-gold/10 rounded-full mb-4 border border-brand-gold/20 backdrop-blur-md">
+              <FiGlobe className="text-brand-gold text-sm" />
+              <span className="text-[8px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.4em]">Global Expansion Grid</span>
+            </div>
+            <h2 className="text-4xl md:text-8xl font-black text-brand-navy mb-4 tracking-tighter leading-none">
+              STRATEGIC <span className="text-gradient">NETWORK.</span>
+            </h2>
+            {/* SUB-CONTENT ADDED PER USER REQUEST */}
+            <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl leading-relaxed uppercase tracking-tight opacity-70">
+              Mitray Exim powers a high-speed logistics network connecting India’s finest produce to elite trade corridors worldwide. Our presence in major hubs ensures 24/7 compliance, rapid transit, and a seamless supply chain.
+            </p>
           </div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-navy mb-4 tracking-tighter leading-tight">
-            Strategic <span className="text-gradient">Expansion</span>
-          </h2>
-          <p className="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest opacity-80 max-w-xl mx-auto">
-            Institutional Infrastructure Connecting India to 14+ Strategic Markets.
-          </p>
+          
+          {/* COMPACT COUNTRY SELECTOR - NO SCROLLBAR */}
+          <div className="flex overflow-x-auto pb-2 -mx-4 px-4 gap-2 no-scrollbar lg:flex-wrap lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-4 lg:mt-0">
+             {EXPORT_COUNTRIES.map(c => (
+                <button 
+                  key={c.code}
+                  onClick={() => handleCountryFocus(c)}
+                  className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-4 rounded-xl md:rounded-2xl text-[8px] md:text-[10px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${
+                    hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100'
+                  }`}
+                >
+                  {c.flag} {c.name}
+                </button>
+             ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* MAP DASHBOARD TERMINAL */}
+        <div className="relative glass-panel rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border-white shadow-2xl bg-slate-50/50 min-h-[550px] md:min-h-[750px]">
           
-          {/* NAVIGATION - COMPACT CARDS */}
-          <div className="lg:col-span-5 space-y-8 order-2 lg:order-1">
-            <div className="space-y-3">
-               <div className="flex items-center justify-between px-4 mb-4">
-                  <h3 className="text-[9px] font-black text-brand-navy uppercase tracking-[0.4em]">Gulf Hubs</h3>
-                  <div className="h-px flex-1 bg-slate-100 mx-6"></div>
-               </div>
-               {GULF_COUNTRIES.map((c) => (
-                 <button 
-                  key={c.code} 
-                  onClick={() => handleCountryFocus(c)}
-                  onMouseEnter={() => setHovered(c.name)}
-                  onMouseLeave={() => { setHovered(null); setMapConfig({ scale: 380, center: [48, 22] }); }}
-                  className={`group w-full flex items-center justify-between p-4 lg:p-5 rounded-2xl md:rounded-3xl border transition-all duration-500 text-left ${
-                    hovered === c.name 
-                    ? "bg-brand-navy border-brand-navy shadow-xl scale-[1.02] lg:translate-x-4 z-20" 
-                    : "bg-white border-slate-100 hover:border-brand-gold/30 hover:shadow-md"
-                  }`}
-                 >
-                    <div className="flex items-center gap-4 lg:gap-6">
-                       <span className={`text-2xl lg:text-3xl transition-all duration-500 ${hovered === c.name ? "scale-110" : "grayscale opacity-20"}`}>{c.flag}</span>
-                       <div>
-                          <p className={`font-black text-sm lg:text-lg uppercase tracking-tight ${hovered === c.name ? "text-brand-gold" : "text-brand-navy"}`}>{c.name}</p>
-                          <p className={`text-[8px] lg:text-[10px] font-black uppercase tracking-widest mt-0.5 ${hovered === c.name ? "text-white/30" : "text-slate-400"}`}>{c.city}</p>
+          {/* MAP HUD */}
+          <div className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-20 flex justify-between items-start pointer-events-none">
+             <div className="glass-panel px-4 py-3 rounded-2xl border-white shadow-xl pointer-events-auto backdrop-blur-xl bg-white/60">
+                <div className="flex items-center gap-2 mb-1">
+                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                   <span className="text-[8px] md:text-[10px] font-black text-brand-navy uppercase tracking-widest leading-none">Terminal v2.4 Active</span>
+                </div>
+             </div>
+             
+             <div className="flex flex-col gap-2 pointer-events-auto">
+                <button onClick={handleZoomIn} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiPlus /></button>
+                <button onClick={handleZoomOut} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiMinus /></button>
+                <button onClick={handleResetMap} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiTarget /></button>
+             </div>
+          </div>
+
+          {isClient && (
+            <ComposableMap
+              projection="geoMercator"
+              projectionConfig={{ scale: 220 }}
+              width={1000}
+              height={isMobile ? 1200 : 750}
+              className="w-full h-auto"
+            >
+              <ZoomableGroup
+                zoom={position.zoom}
+                center={position.coordinates}
+                onMoveEnd={handleMoveEnd}
+                maxZoom={8}
+                minZoom={1}
+              >
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => {
+                      const geoName = geo.properties.name;
+                      const isIndia = geoName === "India";
+                      const isExport = EXPORT_COUNTRIES.some(c => {
+                        const names = { "United Arab Emirates": "UAE", "United Kingdom": "UK", "United States of America": "USA", "United States": "USA" };
+                        return (names[c.name] || c.name) === (names[geoName] || geoName) || c.name === geoName;
+                      });
+                      
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          onMouseEnter={() => isExport && setHovered(geoName)}
+                          style={{
+                            default: { fill: isIndia ? "#D4A574" : isExport ? "#FEF3C7" : "#FFFFFF", stroke: isExport ? "#D4A574" : "#E2E8F0", strokeWidth: 0.5, outline: "none" },
+                            hover: { fill: isIndia ? "#C69560" : isExport ? "#2C4A5E" : "#FFFFFF", stroke: isExport ? "#D4A574" : "#E2E8F0", strokeWidth: 1, outline: "none", cursor: isExport ? "pointer" : "default" },
+                          }}
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+
+                {EXPORT_COUNTRIES.map((country) => {
+                  if (hovered !== country.name) return null;
+                  return (
+                    <Line
+                      key={`path-${country.code}`}
+                      from={[78.9629, 20.5937]}
+                      to={country.coords}
+                      stroke="#D4A574"
+                      strokeWidth={1.5}
+                      strokeLinecap="round"
+                      strokeDasharray="4 4"
+                      className="animate-pulse"
+                    />
+                  );
+                })}
+
+                <Marker coordinates={[78.9629, 20.5937]}>
+                  <g>
+                    <circle r={12} fill="#D4A574" opacity="0.1" className="animate-ping" />
+                    <rect x="-7" y="-7" width="14" height="14" rx="3" fill="#2C4A5E" className="rotate-45" />
+                    <text textAnchor="middle" y="3.5" className="text-[7px] font-black fill-white">IN</text>
+                  </g>
+                </Marker>
+
+                {EXPORT_COUNTRIES.map((country) => (
+                  <Marker key={country.code} coordinates={country.coords}>
+                    <g 
+                      className="cursor-pointer"
+                      onMouseEnter={() => setHovered(country.name)}
+                      onClick={() => handleCountryFocus(country)}
+                    >
+                      <circle r={hovered === country.name ? 12 : 7} fill={hovered === country.name ? "#D4A574" : "#CBD5E1"} opacity={hovered === country.name ? 0.3 : 0.1} className="transition-all duration-700" />
+                      <circle r={hovered === country.name ? 9 : 6} fill="white" stroke={hovered === country.name ? "#D4A574" : "#E2E8F0"} strokeWidth="1" className="transition-all duration-300" />
+                      <text textAnchor="middle" y={hovered === country.name ? 3 : 2} className={`transition-all duration-300 ${hovered === country.name ? 'text-[16px]' : 'text-[10px]'}`}>{country.flag}</text>
+                    </g>
+                  </Marker>
+                ))}
+              </ZoomableGroup>
+            </ComposableMap>
+          )}
+
+          {/* HINT OVERLAY */}
+          <div className="absolute bottom-28 md:bottom-32 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-40">
+             <span className="px-4 py-2 bg-brand-navy/60 backdrop-blur-md rounded-full text-[7px] font-black text-white uppercase tracking-[0.2em] shadow-xl border border-white/10">
+               Gesture Control Active
+             </span>
+          </div>
+
+          {/* FLOATING DATA DRAWER */}
+          {hovered && (
+            <div className={`absolute bottom-0 left-0 right-0 z-30 transition-transform duration-700 ${isStatsOpen ? 'translate-y-0' : 'translate-y-[calc(100%-60px)]'}`}>
+               <div className="glass-panel p-6 md:p-12 rounded-t-[2.5rem] md:rounded-[3.5rem] border-t-white shadow-[0_-20px_60px_-15px_rgba(0,0,0,0.15)] bg-white/95 backdrop-blur-2xl">
+                  
+                  <button 
+                    onClick={() => setIsStatsOpen(!isStatsOpen)}
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-slate-100 md:hidden"
+                  >
+                    <FiChevronUp className={`transition-transform duration-500 ${isStatsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+                    <div className="flex items-center gap-6 w-full">
+                       <div className="text-5xl md:text-8xl">{EXPORT_COUNTRIES.find(c => c.name === hovered)?.flag}</div>
+                       <div className="flex-1">
+                          <p className="text-[8px] md:text-[12px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">Trade Hub Active</p>
+                          <h3 className="text-xl md:text-5xl font-black text-brand-navy tracking-tighter uppercase leading-none">{hovered}</h3>
                        </div>
                     </div>
-                    <FiChevronRight className={`text-sm lg:text-xl transition-all ${hovered === c.name ? "text-brand-gold translate-x-1" : "text-slate-100"}`} />
-                 </button>
-               ))}
-            </div>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-12 w-full lg:w-auto border-t md:border-none border-slate-100 pt-6 md:pt-0">
+                       {[
+                         { icon: <FiPackage />, label: "Volume", val: "High" },
+                         { icon: <FiZap />, label: "Transit", val: "98%" },
+                         { icon: <FiShield />, label: "Compliance", val: "A-Grade" },
+                         { icon: <FiActivity />, label: "Nodes", val: "4 Hubs" }
+                       ].map((stat, i) => (
+                         <div key={i} className="text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start gap-1.5 md:gap-2 text-brand-gold mb-1">
+                               <span className="text-sm">{stat.icon}</span>
+                               <span className="text-[7px] md:text-[9px] font-black uppercase tracking-widest">{stat.label}</span>
+                            </div>
+                            <p className="text-[11px] md:text-[16px] font-black text-brand-navy uppercase tracking-widest">{stat.val}</p>
+                         </div>
+                       ))}
+                    </div>
 
-            <div className="space-y-3">
-               <div className="flex items-center justify-between px-4 mb-4">
-                  <h3 className="text-[9px] font-black text-brand-navy uppercase tracking-[0.4em]">International</h3>
-                  <div className="h-px flex-1 bg-slate-100 mx-6"></div>
-               </div>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-                  {OTHER_COUNTRIES.map((c) => (
-                    <button 
-                      key={c.code} 
-                      onClick={() => handleCountryFocus(c)}
-                      onMouseEnter={() => setHovered(c.name)}
-                      onMouseLeave={() => { setHovered(null); setMapConfig({ scale: 380, center: [48, 22] }); }}
-                      className={`group flex items-center justify-between p-4 rounded-2xl border transition-all duration-500 text-left ${
-                        hovered === c.name ? "bg-brand-gold border-brand-gold shadow-md scale-[1.02] lg:translate-x-2" : "bg-slate-50/50 border-slate-50 hover:bg-white hover:border-slate-100 hover:shadow-sm"
-                      }`}
-                    >
-                       <div className="flex items-center gap-3">
-                          <span className="text-xl lg:text-2xl">{c.flag}</span>
-                          <p className={`font-black uppercase tracking-widest text-[8px] lg:text-[9px] ${hovered === c.name ? "text-brand-navy" : "text-slate-500"}`}>{c.name}</p>
-                       </div>
-                       <FiChevronRight className={`text-[10px] transition-all ${hovered === c.name ? "translate-x-1 text-brand-navy" : "opacity-0"}`} />
+                    <button className="w-full lg:w-auto px-10 py-5 bg-brand-navy text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 shadow-xl">
+                       Initialize Portfolio
                     </button>
-                  ))}
+                  </div>
                </div>
             </div>
-          </div>
-
-          {/* DASHBOARD - MAXIMIZED TO MATCH SIDEBAR HEIGHT */}
-          <div id="discovery-dashboard" className="lg:col-span-7 lg:sticky lg:top-8 h-fit space-y-4 order-1 lg:order-2">
-            {isClient && <MapView hovered={hovered} setHovered={setHovered} mapConfig={mapConfig} />}
-          </div>
-
+          )}
         </div>
 
       </div>
