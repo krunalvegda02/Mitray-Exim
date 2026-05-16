@@ -1,52 +1,66 @@
+"use client";
+
+import { FiShield, FiCpu, FiEye, FiClock, FiActivity, FiZap } from "react-icons/fi";
+
 export function Values() {
   const values = [
     { 
-      title: "Quality First", 
-      desc: "Rigorous quality control at every stage",
-      icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      title: "Quality Manifest", 
+      desc: "Rigorous high-fidelity quality control at every stage of the supply chain.",
+      icon: <FiShield />
     },
     { 
-      title: "Compliance", 
-      desc: "Full adherence to international standards",
-      icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+      title: "Compliance Protocol", 
+      desc: "Absolute adherence to APEDA, FSSAI, and global regulatory standards.",
+      icon: <FiCpu />
     },
     { 
-      title: "Transparency", 
-      desc: "Clear communication and documentation",
-      icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+      title: "Operational Clarity", 
+      desc: "Strategic transparency through precise documentation and real-time tracking.",
+      icon: <FiEye />
     },
     { 
-      title: "Reliability", 
-      desc: "Consistent supply and timely delivery",
-      icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      title: "Supply Reliability", 
+      desc: "Consistent resource allocation and optimized delivery schedules for global partners.",
+      icon: <FiClock />
     },
   ];
 
   return (
-    <div className="group relative h-full">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-navy/30 to-purple-300/30 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
+    <div className="relative h-full group animate-reveal delay-700 opacity-0">
+      {/* GLOW ACCENT */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy/20 via-brand-gold/10 to-brand-navy/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
       
-      <div className="relative h-full bg-gradient-to-br from-white via-brand-navy/5 to-white p-6 sm:p-8 md:p-10 rounded-2xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-2xl transition-all">
-        <div className="flex items-center mb-6 md:mb-8">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-brand-navy/20 to-brand-navy/10 rounded-xl flex items-center justify-center mr-3 sm:mr-5 shadow-md border border-brand-navy/20">
-            <svg className="w-6 h-6 sm:w-7 sm:h-7 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-          </div>
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-navy">Our Core Values</h3>
+      <div className="relative h-full glass-card p-8 md:p-12 rounded-[2rem] bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
+        
+        <div className="flex items-center gap-4 mb-10 md:mb-12">
+           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-gold rounded-2xl flex items-center justify-center text-brand-navy shadow-xl group-hover:rotate-12 transition-transform duration-700">
+              <FiZap className="text-2xl md:text-3xl" />
+           </div>
+           <div>
+              <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Ethics</p>
+              <h3 className="text-2xl md:text-4xl font-black text-brand-navy tracking-tighter uppercase leading-none">Core Ethics.</h3>
+           </div>
         </div>
-        <div className="space-y-3 sm:space-y-4 md:space-y-5">
-          {values.map((value) => (
-            <div key={value.title} className="flex items-start p-3 sm:p-4 md:p-5 bg-gradient-to-r from-slate-50 to-white rounded-xl hover:from-brand-gold/10 hover:to-brand-gold/5 hover:shadow-md transition-all group/item border border-slate-100 hover:border-brand-gold/30">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mr-3 sm:mr-4 md:mr-5 text-brand-gold group-hover/item:bg-brand-gold group-hover/item:text-white transition-all shadow-sm flex-shrink-0">
-                {value.icon}
-              </div>
-              <div>
-                <h4 className="font-bold text-brand-navy mb-1 sm:mb-2 text-base sm:text-lg">{value.title}</h4>
-                <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">{value.desc}</p>
-              </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
+          {values.map((value, idx) => (
+            <div key={idx} className="group/item relative p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-brand-navy transition-all duration-500">
+               <div className="text-brand-gold text-xl mb-4 group-hover/item:text-white transition-colors">{value.icon}</div>
+               <h4 className="text-[11px] md:text-[13px] font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
+               <p className="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">
+                 {value.desc}
+               </p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between">
+           <div className="flex items-center gap-3">
+              <FiActivity className="text-brand-gold animate-pulse" />
+              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ethical Status: Verified</span>
+           </div>
+           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
         </div>
       </div>
     </div>

@@ -1,103 +1,105 @@
+"use client";
+
 import { Container } from "./Container";
+import { FiChevronRight, FiShield, FiGlobe, FiZap } from "react-icons/fi";
 
 export function PageHero({ 
   badge, 
   title, 
   description, 
   breadcrumbs = [],
-  badges = [],
-  quickInfo = [],
   backgroundImage
 }) {
   return (
-    <div className="relative bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light text-white pt-36 pb-24 overflow-hidden">
-      {/* Background Image */}
-      {backgroundImage && (
-        <div className="absolute inset-0">
-          <img 
-            src={backgroundImage}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-navy-dark/75 via-brand-navy/70 to-brand-navy-dark/75"></div>
-        </div>
-      )}
+    <section className="relative min-h-[50vh] md:min-h-[65vh] flex items-center pt-44 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-brand-navy">
       
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+      {/* BACKGROUND ARCHITECTURE - CLEANER & MORE CINEMATIC */}
+      <div className="absolute inset-0 z-0">
+        {backgroundImage ? (
+          <>
+            <img 
+              src={backgroundImage} 
+              alt={title} 
+              className="w-full h-full object-cover opacity-40 animate-subtle-zoom"
+            />
+            {/* Elegant Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
+          </>
+        ) : (
+          <div className="w-full h-full bg-brand-navy"></div>
+        )}
+        
+        {/* Subtle Atmospheric Glow */}
+        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-brand-gold/10 blur-[150px] rounded-full animate-subtle-float"></div>
       </div>
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-brand-gold/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl"></div>
-      
-      <Container>
-        <div className="max-w-5xl mx-auto relative z-10">
-          {/* Breadcrumbs */}
-          {breadcrumbs.length > 0 && (
-            <div className="flex items-center gap-3 mb-10 animate-fade-in-down">
-              {breadcrumbs.map((crumb, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  {index > 0 && (
-                    <svg className="w-4 h-4 text-brand-gold-light/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  )}
-                  {crumb.href ? (
-                    <a href={crumb.href} className="text-brand-gold-light/70 hover:text-brand-gold transition-colors duration-300 text-sm font-medium">
-                      {crumb.label}
-                    </a>
-                  ) : (
-                    <span className="text-brand-gold text-sm font-semibold">{crumb.label}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
 
-          {/* Badge */}
-          {badge && (
-            <div className="inline-block px-5 py-2 bg-brand-gold/20 backdrop-blur-sm rounded-full border border-brand-gold/30 mb-8 animate-fade-in-down">
-              <span className="text-sm font-semibold text-brand-gold-light tracking-wide uppercase">{badge}</span>
-            </div>
-          )}
+      <Container className="relative z-10">
+        <div className="max-w-5xl">
+          
+          {/* MINIMAL BREADCRUMBS */}
+          <div className="flex items-center gap-3 mb-8 md:mb-12 animate-reveal opacity-0">
+            {breadcrumbs.map((crumb, idx) => (
+              <div key={idx} className="flex items-center gap-3 group">
+                {idx > 0 && <FiChevronRight className="text-white/20 text-sm" />}
+                <a 
+                  href={crumb.href || "#"} 
+                  className={`text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] transition-all ${
+                    crumb.href ? 'text-white/40 hover:text-brand-gold' : 'text-brand-gold'
+                  }`}
+                >
+                  {crumb.label}
+                </a>
+              </div>
+            ))}
+          </div>
 
-          {/* Badges Array */}
-          {badges.length > 0 && (
-            <div className="flex flex-wrap items-center gap-4 mb-8 animate-fade-in-up animation-delay-200">
-              {badges.map((badgeItem, index) => (
-                <span key={index} className={`inline-flex items-center px-5 py-2.5 backdrop-blur-sm rounded-full text-sm font-semibold border ${badgeItem.className || 'bg-white/10 text-white border-white/20'}`}>
-                  {badgeItem.icon && <span className="mr-2">{badgeItem.icon}</span>}
-                  {badgeItem.label}
-                </span>
-              ))}
-            </div>
-          )}
+          {/* CONTENT BLOCK */}
+          <div className="space-y-6 md:space-y-8">
+            {/* Clean Badge */}
+            {badge && (
+              <div className="inline-flex items-center gap-3 px-5 py-1.5 bg-brand-gold/10 border border-brand-gold/20 rounded-lg animate-reveal opacity-0 backdrop-blur-md">
+                <div className="w-1.5 h-1.5 rounded-full bg-brand-gold"></div>
+                <span className="text-[9px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.4em]">{badge}</span>
+              </div>
+            )}
 
-          {/* Title */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-8 animate-fade-in-up animation-delay-200 leading-[1.1] tracking-tight">
-            {title}
-          </h1>
+            {/* Bold Elegant Title */}
+            <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.9] animate-reveal delay-100 opacity-0 uppercase">
+               {title.split('.').map((part, i) => (
+                 <span key={i} className="block">
+                    {part.trim()}
+                    {i === title.split('.').length - 1 && part.trim() && <span className="text-brand-gold">.</span>}
+                 </span>
+               ))}
+            </h1>
 
-          {/* Description */}
-          {description && (
-            <p className="text-xl md:text-2xl lg:text-3xl text-brand-gold-light/95 leading-relaxed font-light animate-fade-in-up animation-delay-400 max-w-4xl">
+            {/* Clear Description */}
+            <p className="text-sm md:text-2xl text-slate-300 font-medium max-w-3xl leading-relaxed animate-reveal delay-300 opacity-0 uppercase tracking-tight opacity-80">
               {description}
             </p>
-          )}
 
-          {/* Quick Info */}
-          {quickInfo.length > 0 && (
-            <div className={`grid grid-cols-2 md:grid-cols-${quickInfo.length} gap-4 mt-12 animate-fade-in-up animation-delay-500`}>
-              {quickInfo.map((info, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300">
-                  <p className="text-brand-gold-light/70 text-sm font-medium mb-1">{info.label}</p>
-                  <p className="text-white font-bold text-lg">{info.value}</p>
-                </div>
-              ))}
+            {/* TRUST INDICATORS - SIMPLE LINE */}
+            <div className="flex flex-wrap items-center gap-8 md:gap-12 pt-4 animate-reveal delay-500 opacity-0">
+               {[
+                 { label: "Compliance", val: "Institutional Grade", icon: <FiShield /> },
+                 { label: "Export Hubs", val: "Global Access", icon: <FiGlobe /> },
+                 { label: "Efficiency", val: "A-Grade Transit", icon: <FiZap /> }
+               ].map((item, i) => (
+                 <div key={i} className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
+                    <div className="text-brand-gold text-lg">{item.icon}</div>
+                    <div className="hidden sm:block">
+                       <p className="text-[10px] font-black text-white uppercase tracking-widest leading-none">{item.val}</p>
+                    </div>
+                 </div>
+               ))}
             </div>
-          )}
+          </div>
         </div>
       </Container>
-    </div>
+
+      {/* SUBTLE SCANNER LINE AT BOTTOM ONLY */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent w-full"></div>
+    </section>
   );
 }

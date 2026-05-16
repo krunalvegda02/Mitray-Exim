@@ -30,15 +30,15 @@ export function Header() {
             <div className="flex items-center gap-6">
                <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
-                  <span className="text-[8px] font-black text-white/60 uppercase tracking-[0.2em]">Global Logistics Hub v2.4 Active</span>
+                  <span className="text-[8px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network</span>
                </div>
                <div className="hidden md:flex items-center gap-2">
                   <FiZap className="text-brand-gold text-[10px]" />
-                  <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Transit Latency: 2.4ms Grid</span>
+                  <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
                </div>
             </div>
             <div className="flex items-center gap-4">
-               <span className="text-[8px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Pricing Available</span>
+               <span className="text-[8px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
                <FiArrowUpRight className="text-brand-gold text-[10px]" />
             </div>
          </div>
@@ -58,19 +58,19 @@ export function Header() {
               />
               <div className={`h-8 w-px hidden sm:block transition-colors ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
               <div className="hidden sm:flex flex-col">
-                 <span className={`text-[9px] font-black uppercase tracking-[0.4em] leading-none transition-colors ${isScrolled ? 'text-brand-navy' : 'text-white'}`}>Trade</span>
-                 <span className="text-[9px] font-black uppercase tracking-[0.4em] text-brand-gold leading-none mt-1">Network</span>
+                 <span className={`text-[9px] font-black uppercase tracking-[0.4em] leading-none transition-colors ${isScrolled ? 'text-brand-navy' : 'text-white'}`}>Mitray</span>
+                 <span className="text-[9px] font-black uppercase tracking-[0.4em] text-brand-gold leading-none mt-1">Exim</span>
               </div>
             </Link>
 
-            {/* STRATEGIC NAVIGATION LINKS - HIGH CONTRAST UPGRADE */}
+            {/* SIMPLIFIED NAVIGATION LINKS */}
             <nav className="hidden lg:flex items-center space-x-12">
               {[
-                ["Strategic Hub", "/"],
-                ["Institutional", "/about"],
-                ["Portfolio", "/products"],
-                ["Compliance", "/certifications"],
-                ["Intelligence", "/blog"],
+                ["Home", "/"],
+                ["About Us", "/about"],
+                ["Products", "/products"],
+                ["Certifications", "/certifications"],
+                ["Blog", "/blog"],
               ].map(([label, href]) => (
                 <Link
                   key={href}
@@ -95,7 +95,7 @@ export function Header() {
                     : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-brand-navy'
                 }`}
               >
-                Request Manifest <FiSend className="text-sm" />
+                Inquiry Now <FiSend className="text-sm" />
               </Link>
 
               {/* MOBILE MENU TOGGLE */}
@@ -128,12 +128,12 @@ export function Header() {
 
           <nav className="flex flex-col space-y-4">
             {[
-              ["Global Hub", "/"],
-              ["Institutional", "/about"],
-              ["Portfolio", "/products"],
-              ["Compliance", "/certifications"],
-              ["Intel", "/blog"],
-              ["Request Manifest", "/contact"],
+              ["Home", "/"],
+              ["About Us", "/about"],
+              ["Our Products", "/products"],
+              ["Certifications", "/certifications"],
+              ["Latest News", "/blog"],
+              ["Contact Us", "/contact"],
             ].map(([label, href]) => (
               <Link
                 key={href}
@@ -149,7 +149,7 @@ export function Header() {
           <div className="mt-auto pt-10 flex items-center justify-between border-t border-white/10">
              <div className="flex items-center gap-3">
                 <FiGlobe className="text-brand-gold text-2xl" />
-                <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">Network Ops v2.4</span>
+                <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">MITRAY EXIM Hub</span>
              </div>
              <FiActivity className="text-emerald-400 animate-pulse" />
           </div>
