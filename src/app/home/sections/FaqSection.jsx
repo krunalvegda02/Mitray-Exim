@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FiHelpCircle, FiChevronDown, FiBookOpen } from "react-icons/fi";
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -34,68 +35,61 @@ export function FaqSection() {
 
   return (
     <section className="relative py-12">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20">
-          <span className="text-xs font-bold text-brand-gold uppercase tracking-[0.2em]">Insights</span>
+      <div className="max-w-4xl mx-auto">
+        
+        {/* STANDARDIZED HEADER */}
+        <div className="text-center mb-16 animate-reveal">
+          <div className="inline-flex items-center px-5 py-2 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20 backdrop-blur-md">
+            <FiBookOpen className="text-brand-gold mr-2" />
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.4em]">Operations Wiki</span>
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter leading-none">
+            Common <span className="text-gradient">Queries</span>
+          </h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium opacity-80 uppercase tracking-tight">
+            Comprehensive insights into our global agricultural export architecture.
+          </p>
         </div>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">
-          Common <span className="text-gradient">Queries</span>
-        </h2>
-        <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light">
-          Everything you need to know about our global agricultural export operations.
-        </p>
-      </div>
 
-      <div className="space-y-4">
+        <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-xl"
+              className={`glass-card rounded-[1.5rem] md:rounded-[2rem] overflow-hidden transition-all duration-500 ${openIndex === idx ? 'bg-white/80 scale-[1.01] shadow-2xl' : 'hover:scale-[1.005]'}`}
             >
               <button
                 onClick={() => toggleFaq(idx)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left group transition-colors hover:bg-slate-50"
+                className="w-full px-6 py-6 md:px-10 md:py-8 flex items-center justify-between text-left group transition-all"
               >
-                <div className="flex items-center space-x-4 flex-1">
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                <div className="flex items-center gap-6 md:gap-10 flex-1">
+                  <div className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ${
                     openIndex === idx
-                      ? "bg-brand-gold text-white"
-                      : "bg-brand-gold/10 text-brand-gold"
+                      ? "bg-brand-navy text-brand-gold rotate-12"
+                      : "bg-slate-50 text-slate-300 group-hover:bg-brand-gold/10 group-hover:text-brand-gold"
                   }`}>
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <FiHelpCircle className="text-xl md:text-2xl" />
                   </div>
-                  <h3 className="text-lg font-semibold text-brand-navy pr-4">
+                  <h3 className={`text-base md:text-xl font-black uppercase tracking-tight transition-colors duration-300 ${openIndex === idx ? 'text-brand-navy' : 'text-slate-500'}`}>
                     {faq.q}
                   </h3>
                 </div>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
                   openIndex === idx
-                    ? "bg-brand-gold/10 rotate-180"
-                    : "bg-slate-100 group-hover:bg-brand-gold/10"
+                    ? "bg-brand-gold text-brand-navy rotate-180"
+                    : "bg-slate-50 group-hover:bg-brand-gold/10 text-slate-300"
                 }`}>
-                  <svg
-                    className={`w-5 h-5 transition-colors ${
-                      openIndex === idx ? "text-brand-gold" : "text-slate-600"
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <FiChevronDown className="text-lg md:text-xl" />
                 </div>
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                className={`overflow-hidden transition-all duration-700 ease-in-out ${
                   openIndex === idx ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="px-6 pb-6 pl-[88px]">
-                  <div className="pt-2 pb-4 border-t border-slate-100">
-                    <p className="text-slate-600 leading-relaxed">
+                <div className="px-6 pb-8 md:px-10 md:pb-10 md:pl-[120px]">
+                  <div className="pt-6 border-t border-slate-100/50">
+                    <p className="text-slate-500 text-sm md:text-base font-bold uppercase tracking-widest leading-relaxed opacity-70">
                       {faq.a}
                     </p>
                   </div>
@@ -104,6 +98,7 @@ export function FaqSection() {
             </div>
           ))}
         </div>
+      </div>
     </section>
   );
 }

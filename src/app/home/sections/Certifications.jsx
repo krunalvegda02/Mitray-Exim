@@ -1,37 +1,39 @@
 "use client";
 
 import { CERTIFICATIONS } from "@/data/certifications";
+import { FiCheckCircle, FiShield, FiArrowRight } from "react-icons/fi";
 
 export function Certifications() {
   return (
     <section className="relative py-12 overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[url('/dots.svg')] opacity-5 pointer-events-none"></div>
-
       <div className="relative">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20">
-            <span className="text-xs font-bold text-brand-gold uppercase tracking-[0.2em]">Compliance</span>
+        {/* HEADER */}
+        <div className="text-center mb-16 animate-reveal">
+          <div className="inline-flex items-center px-5 py-2 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20 backdrop-blur-md">
+            <FiShield className="text-brand-gold mr-2" />
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.4em]">Institutional Compliance</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">
+          <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter leading-none">
             Global <span className="text-gradient">Certifications</span>
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light">
-            We adhere to the highest international food safety and trade standards, ensuring trust in every shipment.
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium opacity-80 uppercase tracking-tight">
+            Adhering to the most stringent international food safety and trade standards.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {CERTIFICATIONS.slice(0, 3).map((cert) => (
+        {/* CERTIFICATION CARDS - GLASS STYLE */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {CERTIFICATIONS.slice(0, 3).map((cert, index) => (
             <div
               key={cert.id}
-              className="group bg-white p-10 rounded-[2.5rem] border border-slate-100 hover:border-brand-gold transition-all duration-500 hover:shadow-2xl flex flex-col items-center text-center"
+              className="group glass-card p-12 rounded-[3.5rem] flex flex-col items-center text-center animate-reveal"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              {/* Certification Badge Container */}
-              <div className="relative w-40 h-40 mb-8 p-6 bg-slate-50 rounded-full border-4 border-slate-100 group-hover:border-brand-gold/20 transition-colors duration-500 flex items-center justify-center overflow-hidden">
+              <div className="relative w-44 h-44 mb-10 p-8 glass-panel rounded-full group-hover:scale-105 transition-all duration-700 flex items-center justify-center shadow-2xl">
                  <img
                   src={cert.logo}
                   alt={cert.fullName}
-                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-100"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'flex';
@@ -41,15 +43,15 @@ export function Certifications() {
                   <span className="text-3xl font-black text-brand-gold">{cert.name}</span>
                 </div>
                 
-                {/* Shine Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                {/* Orbital Ring Animation */}
+                <div className="absolute inset-[-8px] border border-dashed border-brand-gold/20 rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </div>
 
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">{cert.name}</h3>
-                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{cert.fullName}</p>
-                <div className="w-12 h-1 bg-brand-gold/20 mx-auto mb-6 rounded-full group-hover:w-24 group-hover:bg-brand-gold transition-all duration-500"></div>
-                <p className="text-slate-500 text-sm leading-relaxed font-light line-clamp-3">
+              <div className="flex-1 space-y-4">
+                <h3 className="text-3xl font-black text-brand-navy tracking-tighter group-hover:text-brand-gold transition-colors duration-500">{cert.name}</h3>
+                <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] h-8 flex items-center justify-center">{cert.fullName}</p>
+                <div className="h-px w-12 bg-slate-100 mx-auto group-hover:w-full group-hover:bg-brand-gold transition-all duration-700 opacity-40"></div>
+                <p className="text-slate-500 text-[11px] leading-relaxed font-bold uppercase tracking-widest opacity-60 line-clamp-3">
                   {cert.description}
                 </p>
               </div>
@@ -57,15 +59,15 @@ export function Certifications() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        {/* CTA */}
+        <div className="mt-20 text-center animate-reveal delay-500">
           <a
             href="/certifications"
-            className="group inline-flex items-center space-x-3 px-10 py-5 bg-brand-navy text-white rounded-2xl font-bold hover:bg-brand-gold hover:text-brand-navy-dark transition-all duration-500 shadow-xl hover:shadow-2xl hover:scale-105"
+            className="group relative inline-flex items-center gap-4 px-12 py-6 bg-brand-navy rounded-[2rem] text-white font-black uppercase tracking-widest text-[11px] hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-2xl overflow-hidden active:scale-95"
           >
-            <span>View All Accreditations</span>
-            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            <span className="relative z-10">View Compliance Manifest</span>
+            <FiArrowRight className="relative z-10 text-lg group-hover:translate-x-2 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </a>
         </div>
       </div>
