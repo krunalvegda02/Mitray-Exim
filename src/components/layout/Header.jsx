@@ -1,49 +1,69 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-
-export const HEADER_OFFSET = 80;
+import { useState, useEffect } from "react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed left-0 top-10 right-0 z-40 bg-white/98 backdrop-blur-md shadow-md border-b border-zinc-200">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center space-x-1">
+    <header 
+      className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
+        isScrolled 
+          ? "top-0 bg-white/90 backdrop-blur-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] h-20" 
+          : "top-10 bg-white h-24"
+      }`}
+    >
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex items-center justify-between h-full">
+          <Link href="/" className="group flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
             <img
               src="/logoh.png"
-              alt="MITRAY EXIM"
-              className="h-15"
+              alt="MITRAY EXIM - Premium Export Partner"
+              className={`transition-all duration-500 ${isScrolled ? "h-10" : "h-14"}`}
             />
-            {/* <span className="text-xl font-bold text-brand-navy-dark">Mitray <span className="text-brand-gold">Exim</span></span> */}
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex items-center space-x-10">
             {[
               ["Home", "/"],
               ["About", "/about"],
               ["Products", "/products"],
-              ["Shipping", "/shipping"],
               ["Certifications", "/certifications"],
+              ["Shipping", "/shipping"],
               ["Blog", "/blog"],
-              ["Gallery", "/gallery"],
             ].map(([label, href]) => (
               <Link
                 key={href}
                 href={href}
-                className="text-zinc-700 hover:text-brand-gold font-medium transition-colors relative group"
+                className="text-sm font-bold uppercase tracking-widest text-brand-navy hover:text-brand-gold transition-colors relative group py-2"
               >
                 {label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-500 rounded-full"></span>
               </Link>
             ))}
           </nav>
 
+          <div className="hidden lg:flex items-center">
+            <Link 
+              href="/contact" 
+              className="px-6 py-3 bg-brand-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy-dark transition-all duration-500 shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              Get a Quote
+            </Link>
+          </div>
+
           <button
-            className="md:hidden text-brand-navy-dark"
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-brand-navy-dark border border-slate-200"
             onClick={() => setIsMenuOpen((p) => !p)}
           >
             <svg
@@ -53,41 +73,44 @@ export function Header() {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              )}
             </svg>
           </button>
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-zinc-200 py-4">
-            <nav className="flex flex-col space-y-4">
-              {[
-                ["Home", "/"],
-                ["About", "/about"],
-                ["Products", "/products"],
-                ["Shipping", "/shipping"],
-                ["Certifications", "/certifications"],
-                ["Blog", "/blog"],
-                ["Gallery", "/gallery"],
-              ].map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-zinc-700 hover:text-brand-gold font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
+        {/* Mobile Menu */}
+        <div 
+          className={`lg:hidden fixed inset-x-0 bg-white shadow-2xl transition-all duration-500 overflow-hidden ${
+            isMenuOpen ? "top-[100%] opacity-100 max-h-screen border-t border-slate-100" : "top-[110%] opacity-0 max-h-0"
+          }`}
+        >
+          <nav className="flex flex-col p-6 space-y-2">
+            {[
+              ["Home", "/"],
+              ["About", "/about"],
+              ["Products", "/products"],
+              ["Certifications", "/certifications"],
+              ["Shipping", "/shipping"],
+              ["Blog", "/blog"],
+              ["Contact", "/contact"],
+            ].map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                className="px-4 py-3 rounded-xl text-brand-navy font-bold hover:bg-slate-50 hover:text-brand-gold transition-all"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );
 }
+

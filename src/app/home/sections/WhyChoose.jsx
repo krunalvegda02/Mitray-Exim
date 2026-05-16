@@ -1,93 +1,82 @@
 const reasons = [
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: "APEDA & FSSAI Certified",
-    text: "Export-compliant certifications ensuring quality and safety standards for international markets.",
+    number: "01",
+    title: "Global Certifications",
+    text: "Certified by APEDA & FSSAI, meeting the most stringent food safety and quality standards for global export.",
+    gradient: "from-blue-500 to-cyan-500"
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-      </svg>
-    ),
-    title: "Cold Chain Logistics",
-    text: "Temperature-controlled containers and cold storage for fresh produce.",
+    number: "02",
+    title: "Advanced Cold Chain",
+    text: "Precision temperature-controlled logistics ensuring your produce arrives as fresh as the day it was harvested.",
+    gradient: "from-brand-navy to-brand-navy-light"
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-      </svg>
-    ),
-    title: "Direct Sourcing",
-    text: "Direct from Indian farms to your warehouse with minimal handling.",
+    number: "03",
+    title: "Ethical Direct Sourcing",
+    text: "Establishing direct partnerships with Indian farmers to ensure fair trade and the highest quality control.",
+    gradient: "from-brand-gold to-brand-gold-dark"
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: "Competitive Pricing",
-    text: "Bulk export pricing without compromising on quality.",
+    number: "04",
+    title: "Strategic Pricing",
+    text: "Optimized supply chain management allowing us to offer premium products at highly competitive market rates.",
+    gradient: "from-emerald-500 to-teal-500"
   },
 ];
 
 export function WhyChoose() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Decorative Images */}
-      <div className="absolute left-0 top-1/4 w-64 h-64 opacity-5 hidden lg:block">
-        <img 
-          src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000&auto=format&fit=crop" 
-          alt="Quality certification"
-          className="w-full h-full object-cover rounded-full"
-        />
-      </div>
-      <div className="absolute right-0 bottom-1/4 w-72 h-72 opacity-5 hidden lg:block">
-        <img 
-          src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=1000&auto=format&fit=crop" 
-          alt="Logistics"
-          className="w-full h-full object-cover rounded-full"
-        />
-      </div>
-
+    <section className="relative py-12">
       <div className="relative">
-        <div className="text-center mb-12">
-        <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
-          <span className="text-sm font-semibold text-brand-navy-dark">Why Choose Us</span>
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-          Why Choose MITRAY EXIM
-        </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">
-          Your trusted partner for Mitray Exim from India
-        </p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {reasons.map((reason, index) => (
-          <div
-            key={index}
-            className="group relative bg-white p-8 rounded-xl border-2 border-slate-200 hover:border-brand-gold transition-all hover:shadow-xl"
-          >
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative">
-              <div className="w-16 h-16 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold mb-4 group-hover:bg-brand-gold group-hover:text-white transition-colors">
-                {reason.icon}
-              </div>
-              <h3 className="text-lg font-semibold mb-3 text-brand-navy">
-                {reason.title}
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{reason.text}</p>
-            </div>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20">
+            <span className="text-xs font-bold text-brand-gold uppercase tracking-[0.2em]">Our Edge</span>
           </div>
-        ))}
+          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">
+            The MITRAY <span className="text-gradient">Advantage</span>
+          </h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light">
+            Combining tradition with technology to deliver India's finest agricultural treasures to the world.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {reasons.map((reason, index) => (
+            <div
+              key={index}
+              className="group relative bg-white p-10 rounded-[2rem] border border-slate-100 hover:border-brand-gold/30 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col h-full"
+            >
+              {/* Number Background */}
+              <span className="absolute top-6 right-8 text-6xl font-black text-slate-50 group-hover:text-brand-gold/10 transition-colors duration-500">
+                {reason.number}
+              </span>
+
+              <div className="relative z-10 flex flex-col h-full">
+                <div className={`w-14 h-14 bg-gradient-to-br ${reason.gradient} rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                   <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                   </svg>
+                </div>
+                
+                <h3 className="text-xl font-bold mb-4 text-brand-navy group-hover:text-brand-gold transition-colors duration-300">
+                  {reason.title}
+                </h3>
+                
+                <p className="text-slate-500 text-sm leading-relaxed font-light">
+                  {reason.text}
+                </p>
+
+                {/* Bottom Accent */}
+                <div className="mt-auto pt-6">
+                   <div className="w-10 h-1 bg-slate-100 group-hover:w-full group-hover:bg-brand-gold transition-all duration-500 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+

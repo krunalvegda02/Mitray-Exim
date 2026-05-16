@@ -33,16 +33,16 @@ export function FaqSection() {
   };
 
   return (
-    <section>
-      <div className="text-center mb-12">
-        <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
-          <span className="text-sm font-semibold text-brand-navy-dark">FAQ</span>
+    <section className="relative py-12">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20">
+          <span className="text-xs font-bold text-brand-gold uppercase tracking-[0.2em]">Insights</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-          Frequently Asked Questions
+        <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">
+          Common <span className="text-gradient">Queries</span>
         </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">
-          Find answers to common questions about our export services
+        <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light">
+          Everything you need to know about our global agricultural export operations.
         </p>
       </div>
 

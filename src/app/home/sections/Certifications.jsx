@@ -4,108 +4,71 @@ import { CERTIFICATIONS } from "@/data/certifications";
 
 export function Certifications() {
   return (
-    <section>
-      <div className="text-center mb-12">
-        <div className="inline-block px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
-          <span className="text-sm font-semibold text-brand-navy-dark">Certifications</span>
+    <section className="relative py-12 overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[url('/dots.svg')] opacity-5 pointer-events-none"></div>
+
+      <div className="relative">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-6 border border-brand-gold/20">
+            <span className="text-xs font-bold text-brand-gold uppercase tracking-[0.2em]">Compliance</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">
+            Global <span className="text-gradient">Certifications</span>
+          </h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light">
+            We adhere to the highest international food safety and trade standards, ensuring trust in every shipment.
+          </p>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-          Certified & Compliant
-        </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">
-          Fully certified and compliant with international export standards
-        </p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {CERTIFICATIONS.slice(0, 3).map((cert) => (
-          <div
-            key={cert.id}
-            className="group bg-white p-6 rounded-xl border-2 border-slate-200 hover:border-brand-gold transition-all hover:shadow-xl"
-          >
-            <div className="relative bg-slate-50 rounded-lg p-4 mb-4 h-64 flex items-center justify-center overflow-hidden border border-slate-200">
-              <img
-                src={cert.logo}
-                alt={cert.fullName}
-                className="max-w-full max-h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-              <div className="hidden flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-8 h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0121 12c0 .34-.028.675-.083 1M3 12a9 9 0 0118 0 9 9 0 01-18 0z" />
-                  </svg>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {CERTIFICATIONS.slice(0, 3).map((cert) => (
+            <div
+              key={cert.id}
+              className="group bg-white p-10 rounded-[2.5rem] border border-slate-100 hover:border-brand-gold transition-all duration-500 hover:shadow-2xl flex flex-col items-center text-center"
+            >
+              {/* Certification Badge Container */}
+              <div className="relative w-40 h-40 mb-8 p-6 bg-slate-50 rounded-full border-4 border-slate-100 group-hover:border-brand-gold/20 transition-colors duration-500 flex items-center justify-center overflow-hidden">
+                 <img
+                  src={cert.logo}
+                  alt={cert.fullName}
+                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="hidden flex-col items-center justify-center">
+                  <span className="text-3xl font-black text-brand-gold">{cert.name}</span>
                 </div>
-                <p className="text-2xl font-bold text-brand-navy">{cert.name}</p>
+                
+                {/* Shine Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">{cert.name}</h3>
+                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{cert.fullName}</p>
+                <div className="w-12 h-1 bg-brand-gold/20 mx-auto mb-6 rounded-full group-hover:w-24 group-hover:bg-brand-gold transition-all duration-500"></div>
+                <p className="text-slate-500 text-sm leading-relaxed font-light line-clamp-3">
+                  {cert.description}
+                </p>
               </div>
             </div>
-            <div className="text-center">
-              <h3 className="font-bold text-brand-navy text-lg mb-2">{cert.name}</h3>
-              <p className="text-sm text-slate-600 mb-3">{cert.fullName}</p>
-              <p className="text-xs text-slate-500 leading-relaxed">{cert.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-8 text-center">
-        <a
-          href="/certifications"
-          className="inline-flex items-center px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:border-brand-gold hover:text-brand-gold transition-all"
-        >
-          <span>View All Certifications</span>
-          <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </a>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <a
+            href="/certifications"
+            className="group inline-flex items-center space-x-3 px-10 py-5 bg-brand-navy text-white rounded-2xl font-bold hover:bg-brand-gold hover:text-brand-navy-dark transition-all duration-500 shadow-xl hover:shadow-2xl hover:scale-105"
+          >
+            <span>View All Accreditations</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // {/* CERTIFICATIONS - PREMIUM */}
-    //   <div className="max-w-4xl mx-auto px-4 text-center">
-    //     <div className="bg-gradient-to-r from-brand-navy/5 via-brand-gold/5 to-brand-navy/5 border-2 border-brand-gold/20 rounded-3xl p-8 md:p-10">
-    //       <h4 className="text-xl md:text-2xl font-bold text-brand-navy mb-6">
-    //         International Certifications & Compliance
-    //       </h4>
-
-    //       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    //         {[
-    //           { name: "APEDA", desc: "Agricultural Export" },
-    //           { name: "FSSAI", desc: "Food Safety" },
-    //           { name: "ISO 9001", desc: "Quality Mgmt" },
-    //           { name: "GlobalGAP", desc: "Good Practices" },
-    //         ].map((cert, idx) => (
-    //           <div
-    //             key={idx}
-    //             className="group bg-white hover:bg-brand-gold/10 p-4 rounded-xl border-2 border-slate-200 hover:border-brand-gold transition-all duration-300"
-    //           >
-    //             <div className="text-2xl font-bold text-brand-gold mb-1 group-hover:scale-110 transition-transform">
-    //               ✓
-    //             </div>
-    //             <p className="font-semibold text-brand-navy text-sm mb-1">
-    //               {cert.name}
-    //             </p>
-    //             <p className="text-xs text-slate-600">
-    //               {cert.desc}
-    //             </p>
-    //           </div>
-    //         ))}
-    //       </div>
-    //     </div>
-    //   </div>
