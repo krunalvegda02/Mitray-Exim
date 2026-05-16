@@ -1,172 +1,144 @@
+"use client";
+
 import { CERTIFICATIONS } from "@/data/certifications";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import { CertificateCard } from "@/components/CertificateCard";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { FiShield, FiGlobe, FiCheckCircle, FiActivity, FiArrowRight, FiLock, FiZap } from "react-icons/fi";
 import Link from "next/link";
-
-export const metadata = {
-  title: "Export Certifications – APEDA, FSSAI, IEC | MITRAY EXIM",
-  description:
-    "Learn about APEDA, FSSAI, Import Export Code (IEC), Phytosanitary Certificate, and quality assurance standards for vegetable exports from India.",
-};
 
 export default function CertificationsPage() {
   return (
-    <>
+    <div className="bg-white">
+      {/* 1. INSTITUTIONAL HERO - SHARP EDGES */}
       <PageHero
-        badge="CERTIFIED & COMPLIANT"
-        title="Certifications & Compliance"
-        description="Fully certified and compliant with international export standards for quality assurance"
+        badge="VERIFIED EXPORT PROTOCOLS"
+        title="Verified. Protocols."
+        description="Access technical compliance manifests and quality assurance certifications. 100% verified against global trade standards."
         backgroundImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Certifications' }
+          { label: 'Compliance Manifests' }
         ]}
       />
 
-      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-12 sm:py-16 md:py-20">
+      <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
         <Container>
-          {/* Section Header */}
-          <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-brand-gold/10 to-brand-navy/10 rounded-full border border-brand-gold/20 mb-4">
-              <span className="text-sm font-bold text-brand-navy">Trusted & Verified</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4">Our Certifications</h2>
-            <p className="text-slate-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
-              Fully licensed and certified by government authorities to ensure quality and compliance
-            </p>
+          
+          {/* 2. EDGY SECTION HEADER */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
+             <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                   <div className="h-px w-12 bg-brand-gold"></div>
+                   <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Audit Logs</span>
+                </div>
+                <h2 className="text-5xl md:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.85]">
+                   COMPLIANCE <br />
+                   <span className="text-gradient">TERMINALS.</span>
+                </h2>
+             </div>
+             <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 shadow-sm">
+                   <FiLock className="text-emerald-500" />
+                   <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Security Layer: Active</span>
+                </div>
+                <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 shadow-sm">
+                   <FiActivity className="text-brand-gold animate-pulse" />
+                   <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Live Sync: 5 Certificates</span>
+                </div>
+             </div>
           </div>
 
-          {/* Certification Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16 md:mb-20">
-            {CERTIFICATIONS.slice(0, 3).map((cert) => (
-              <CertificateCard key={cert.id} cert={cert} />
+          {/* 3. CERTIFICATION MANIFEST GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 mb-24">
+            {CERTIFICATIONS.map((cert, index) => (
+              <div key={cert.id} className="animate-reveal opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
+                <CertificateCard cert={cert} />
+              </div>
             ))}
           </div>
 
-          {/* Quality Assurance Section */}
-          <div className="group relative mb-12 sm:mb-16 md:mb-20">
-            <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy/20 via-brand-gold/20 to-brand-navy/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
-
-            <div className="relative bg-gradient-to-br from-white via-slate-50/50 to-white border-2 border-slate-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all">
-              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-brand-gold/20 to-brand-gold/10 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg border-2 border-brand-gold/30">
-                  <svg className="w-7 h-7 sm:w-8 sm:h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+          {/* 4. INSTITUTIONAL SECURITY MANIFEST */}
+          <div className="relative mb-24 animate-reveal">
+             <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
+             <div className="relative bg-white border-2 border-slate-100 p-8 md:p-16 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 border-t-8 border-r-8 border-brand-gold/5"></div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                   <div className="lg:col-span-7 space-y-8">
+                      <div className="flex items-center gap-4">
+                         <div className="w-16 h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-3xl font-black">
+                            <FiShield />
+                         </div>
+                         <div>
+                            <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">Security & Compliance Manifest</h3>
+                            <p className="text-xs font-black text-brand-gold uppercase tracking-widest">Protocol Version 4.2.0</p>
+                         </div>
+                      </div>
+                      <p className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed">
+                         We implement strict quality control protocols at every hub synchronization. All shipments are accompanied by a full suite of phytosanitary and regulatory manifests verified by international audit authorities.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                         {CERTIFICATIONS.map((cert, i) => (
+                           <div key={i} className="flex items-start gap-5 p-6 bg-slate-50 border border-slate-100 group hover:border-brand-gold transition-all">
+                              <div className="w-20 h-20 bg-white border border-slate-100 flex items-center justify-center p-2 group-hover:scale-110 transition-transform">
+                                 <img 
+                                   src={cert.logo} 
+                                   alt={cert.name} 
+                                   className="max-w-full max-h-full object-contain transition-all"
+                                   onError={(e) => {
+                                     e.target.style.display = 'none';
+                                     e.target.nextSibling.style.display = 'flex';
+                                   }}
+                                 />
+                                 <FiShield className="hidden text-brand-gold text-2xl" />
+                              </div>
+                              <div>
+                                 <h4 className="text-xs md:text-sm font-black text-brand-navy uppercase tracking-widest mb-1">{cert.name} Manifest</h4>
+                                 <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-widest">Verified Status: Active</p>
+                              </div>
+                           </div>
+                         ))}
+                      </div>
+                   </div>
+                   
+                   <div className="lg:col-span-5">
+                      <div className="p-10 bg-brand-navy text-white relative overflow-hidden group">
+                         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 blur-3xl"></div>
+                         <h4 className="text-xl font-black uppercase tracking-tighter mb-6">Manifest Request</h4>
+                         <p className="text-sm font-bold text-white/40 uppercase tracking-widest leading-relaxed mb-10">
+                            Our institutional audit team is ready to provide complete documentation manifests for your procurement review.
+                         </p>
+                         <Link href="/contact" className="group/btn block w-full py-5 bg-brand-gold text-brand-navy text-xs font-black text-center uppercase tracking-[0.3em] hover:bg-white transition-all duration-700">
+                            Initialize Audit Request <FiArrowRight className="inline ml-2 group-hover/btn:translate-x-2 transition-transform" />
+                         </Link>
+                      </div>
+                   </div>
                 </div>
-                <div className="flex-1">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-navy mb-3 sm:mb-4">
-                    Quality Assurance & Compliance
-                  </h2>
-                  <p className="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed mb-6 sm:mb-8">
-                    We follow strict quality control procedures at every stage of sourcing, packing, and shipping to meet international standards for global markets. All shipments include phytosanitary certificates and compliance documentation.
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <div className="flex items-start p-4 bg-gradient-to-br from-green-50 to-white rounded-xl border border-green-200 hover:shadow-md transition-all group/item">
-                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-brand-navy text-sm sm:text-base mb-1">FSSAI Licensed</h4>
-                        <p className="text-xs sm:text-sm text-slate-600">Food Safety Standards</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start p-4 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-200 hover:shadow-md transition-all group/item">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-brand-navy text-sm sm:text-base mb-1">APEDA Registered</h4>
-                        <p className="text-xs sm:text-sm text-slate-600">Agricultural Exports</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start p-4 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200 hover:shadow-md transition-all group/item">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <svg className="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-brand-navy text-sm sm:text-base mb-1">IEC Authorized</h4>
-                        <p className="text-xs sm:text-sm text-slate-600">International Trade</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start p-4 bg-gradient-to-br from-amber-50 to-white rounded-xl border border-amber-200 hover:shadow-md transition-all group/item">
-                      <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-brand-navy text-sm sm:text-base mb-1">Phytosanitary</h4>
-                        <p className="text-xs sm:text-sm text-slate-600">Plant Health Certificate</p>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/contact" className="inline-block">
-                    <button className="group/btn relative px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-sm sm:text-base font-semibold bg-gradient-to-r from-brand-gold to-brand-gold-light text-white rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl">
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        Request Compliance Documents
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-brand-navy to-brand-navy-dark opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+             </div>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="group relative text-center p-4 sm:p-6 bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy mb-2">
-                  <AnimatedCounter end={100} suffix="%" />
-                </div>
-                <div className="text-xs sm:text-sm text-slate-600 font-medium">Compliant</div>
+          {/* 5. TECHNICAL OPERATIONAL METRICS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-slate-100 bg-white animate-reveal">
+            {[
+              { label: "Compliance Rate", val: 100, suffix: "%" },
+              { label: "Active Terminals", val: 5, suffix: "+" },
+              { label: "Establishment", val: 2020, suffix: "" },
+              { label: "Global Presence", val: 10, suffix: "+" }
+            ].map((stat, i) => (
+              <div key={i} className={`p-10 text-center group ${i < 3 ? 'border-r-2' : ''} border-slate-100 hover:bg-slate-50 transition-colors`}>
+                 <div className="text-3xl md:text-5xl font-black text-brand-navy mb-4 group-hover:text-brand-gold transition-colors">
+                    <AnimatedCounter end={stat.val} suffix={stat.suffix} />
+                 </div>
+                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">{stat.label}</div>
               </div>
-            </div>
-            <div className="group relative text-center p-4 sm:p-6 bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy mb-2">
-                  <AnimatedCounter end={5} suffix="+" />
-                </div>
-                <div className="text-xs sm:text-sm text-slate-600 font-medium">Certifications</div>
-              </div>
-            </div>
-            <div className="group relative text-center p-4 sm:p-6 bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy mb-2">
-                  <AnimatedCounter end={2020} />
-                </div>
-                <div className="text-xs sm:text-sm text-slate-600 font-medium">Established</div>
-              </div>
-            </div>
-            <div className="group relative text-center p-4 sm:p-6 bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 border-slate-200 hover:border-brand-gold hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy mb-2">
-                  <AnimatedCounter end={10} suffix="+" />
-                </div>
-                <div className="text-xs sm:text-sm text-slate-600 font-medium">Countries</div>
-              </div>
-            </div>
+            ))}
           </div>
-        </Container >
+
+        </Container>
       </div>
-
-    </>
+    </div>
   );
 }

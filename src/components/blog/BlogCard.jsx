@@ -1,44 +1,91 @@
-import Link from "next/link";
+"use client";
 
-export function BlogCard({ post }) {
+import Link from "next/link";
+import { FiArrowRight, FiCalendar, FiBookOpen, FiArrowUpRight, FiZap, FiActivity } from "react-icons/fi";
+
+const getBlogImage = (post) => {
+  if (post.image && !post.image.startsWith('/images/')) return post.image;
+  const categoryImages = {
+    'Export Guide': 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop',
+    'Market Trends': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
+    'Compliance': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop',
+    'Logistics': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop'
+  };
+  return categoryImages[post.category] || 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop';
+};
+
+export function BlogCard({ post, featured = false }) {
+  const blogImage = getBlogImage(post);
+
   return (
-    <article className="group relative">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-gold/20 via-brand-navy/20 to-brand-gold/20 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
+    <Link href={`/blog/${post.slug}`} className="group relative block">
+      {/* SHARP EDGY SHADOW */}
+      <div className="absolute inset-0 bg-brand-gold/5 translate-x-3 translate-y-3 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-500"></div>
       
-      <div className="relative bg-gradient-to-br from-white via-slate-50/30 to-white p-6 sm:p-8 rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-brand-gold transition-all duration-300 hover:shadow-2xl">
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-brand-navy bg-gradient-to-r from-brand-gold/10 to-brand-gold/5 px-4 py-2 rounded-full border border-brand-gold/20">
-            <svg className="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-            </svg>
-            {post.category}
-          </span>
-          <span className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-medium">
-            <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            {post.date}
-          </span>
+      <article className={`relative bg-white border-2 border-brand-navy/5 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-2 group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full`}>
+        
+        {/* VISUAL HUB - SHARP EDGES */}
+        <div className={`${featured ? 'md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-[300px] md:h-[500px]' : 'aspect-video'}`}>
+           <img 
+             src={blogImage} 
+             alt={post.title} 
+             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-105 opacity-80"
+           />
+           
+           {/* DATA OVERLAY */}
+           <div className="absolute top-6 left-6 flex items-center gap-2">
+              <div className="px-4 py-1.5 bg-brand-gold text-brand-navy text-[10px] font-black uppercase tracking-widest shadow-xl">
+                 Verified Protocol
+              </div>
+           </div>
+
+           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-60"></div>
         </div>
-        
-        <h2 className="text-xl sm:text-2xl font-bold text-brand-navy mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors leading-tight">
-          {post.title}
-        </h2>
-        
-        <p className="text-sm sm:text-base text-slate-600 mb-5 sm:mb-6 leading-relaxed line-clamp-3">
-          {post.excerpt}
-        </p>
-        
-        <Link 
-          href={`/blog/${post.slug}`}
-          className="group/btn inline-flex items-center gap-2 text-sm sm:text-base font-bold text-brand-navy hover:text-brand-gold transition-all"
-        >
-          <span>Read Full Article</span>
-          <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
-      </div>
-    </article>
+
+        {/* CONTENT HUB - EDGY BOX */}
+        <div className={`${featured ? 'md:w-2/5' : 'w-full'} p-8 md:p-12 flex flex-col justify-between bg-white relative`}>
+           
+           {/* CORNER ACCENT */}
+           <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-slate-100 group-hover:border-brand-gold transition-colors"></div>
+
+           <div className="space-y-6">
+              <div className="flex items-center gap-4 text-[10px] font-black text-brand-gold uppercase tracking-[0.3em]">
+                 <FiZap className="animate-pulse" /> {post.category}
+              </div>
+
+              <h3 className={`font-black text-brand-navy uppercase tracking-tighter leading-none group-hover:text-brand-gold transition-all duration-500 ${featured ? 'text-3xl md:text-6xl' : 'text-xl md:text-3xl'}`}>
+                {post.title}
+              </h3>
+              
+              <p className="text-xs md:text-sm text-slate-400 font-bold uppercase tracking-tight leading-relaxed line-clamp-3">
+                {post.excerpt}
+              </p>
+           </div>
+
+           <div className="mt-12 space-y-8">
+              <div className="flex items-center justify-between text-[10px] font-black text-slate-300 uppercase tracking-widest border-b border-slate-50 pb-6">
+                 <div className="flex items-center gap-3">
+                    <FiCalendar className="text-brand-gold" />
+                    {post.date}
+                 </div>
+                 <div className="flex items-center gap-3">
+                    <FiActivity className="text-emerald-500" />
+                    Public Manifest
+                 </div>
+              </div>
+
+              <div className="flex items-center justify-between group/action">
+                 <span className="text-xs font-black text-brand-navy uppercase tracking-widest group-hover/action:translate-x-2 transition-transform">
+                    Initialize Access <FiArrowRight className="inline ml-2" />
+                 </span>
+                 <div className="text-[10px] font-black text-slate-200 uppercase tracking-[0.2em] group-hover:text-brand-gold transition-colors">
+                    DocRef: MIT-0{post.slug.length}
+                 </div>
+              </div>
+           </div>
+        </div>
+
+      </article>
+    </Link>
   );
 }

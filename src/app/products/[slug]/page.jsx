@@ -1,247 +1,225 @@
-import { PRODUCTS } from "@/data/products";
+"use client";
+
+import { use } from "react";
 import { Container } from "@/components/shared/Container";
-import { ProductDetails } from "@/components/product/ProductDetails";
-import { ProductImages } from "@/components/product/ProductImages";
+import { PageHero } from "@/components/shared/PageHero";
+import { PRODUCTS } from "@/data/products";
+import { 
+  FiShield, FiGlobe, FiZap, FiPackage, 
+  FiTruck, FiCheckCircle, FiClock, FiBox, 
+  FiArrowRight, FiActivity, FiArrowUp, FiMail, FiPhone
+} from "react-icons/fi";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
-    slug: product.slug,
-  }));
-}
+const getHighResImage = (product) => {
+  if (product.image && !product.image.startsWith('/images/')) return product.image;
+  const categoryImages = {
+    'fresh-vegetables': 'https://images.unsplash.com/photo-1566385101042-1a0aa0c12e8c?q=80&w=2070&auto=format&fit=crop',
+    'fresh-fruits': 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070&auto=format&fit=crop',
+    'spices': 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2070&auto=format&fit=crop',
+    'rice': 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop',
+    'dehydrated': 'https://images.unsplash.com/photo-1511125358835-54842a893f45?q=80&w=2070&auto=format&fit=crop',
+    'wheat-flour': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070&auto=format&fit=crop'
+  };
+  return categoryImages[product.category] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=1000&fit=crop';
+};
 
-export default async function ProductDetailPage({ params }) {
-  const { slug } = await params;
+export default function ProductDetailPage({ params }) {
+  const { slug } = use(params);
   const product = PRODUCTS.find((p) => p.slug === slug);
 
-  if (!product) {
-    notFound();
-  }
+  if (!product) notFound();
 
-  // Get product image based on category
-  const getProductImage = (category) => {
-    const images = {
-      'fresh-fruits': 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=800&h=600&fit=crop',
-      'fresh-vegetables': 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=600&fit=crop',
-      'spices': 'https://images.unsplash.com/photo-1596040033229-a0b3b7d1f4c1?w=800&h=600&fit=crop',
-      'rice': 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&h=600&fit=crop',
-      'wheat-flour': 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&h=600&fit=crop',
-      'dehydrated': 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&h=600&fit=crop'
-    };
-    return images[category] || images['fresh-vegetables'];
-  };
-
-  // Get related products from same category
-  const relatedProducts = PRODUCTS.filter(
-    p => p.category === product.category && p.slug !== product.slug
-  ).slice(0, 4);
+  const productImage = getHighResImage(product);
+  const relatedProducts = PRODUCTS.filter(p => p.category === product.category && p.slug !== product.slug).slice(0, 4);
 
   return (
-    <>
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light text-white pt-36 pb-24 overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
-        </div>
-        {/* Decorative Elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-brand-gold/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl"></div>
-        
+    <div className="bg-white">
+      <PageHero 
+        badge={`${product.category.toUpperCase()} • MANIFEST ${product.slug.toUpperCase()}`}
+        title={product.name}
+        description={product.description}
+        backgroundImage={productImage}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Products', href: '/products' },
+          { label: product.name }
+        ]}
+      />
+
+      <div className="relative z-10 pt-12 md:pt-20 pb-20">
         <Container>
-          <div className="max-w-5xl mx-auto relative z-10">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-3 mb-10 animate-fade-in-down">
-              <a href="/" className="text-brand-gold-light/70 hover:text-brand-gold transition-colors duration-300 text-sm font-medium">
-                Home
-              </a>
-              <svg className="w-4 h-4 text-brand-gold-light/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <a href="/products" className="text-brand-gold-light/70 hover:text-brand-gold transition-colors duration-300 text-sm font-medium">
-                Products
-              </a>
-              <svg className="w-4 h-4 text-brand-gold-light/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <span className="text-brand-gold text-sm font-semibold">{product.name}</span>
-            </div>
-
-            {/* Back Button */}
-            <a href="/products" className="inline-flex items-center text-brand-gold-light hover:text-brand-gold mb-10 transition-all duration-300 group text-base font-medium">
-              <svg className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to All Products
-            </a>
-
-            {/* Badges */}
-            <div className="flex flex-wrap items-center gap-4 mb-8 animate-fade-in-up animation-delay-200">
-              <span className="inline-flex items-center px-5 py-2.5 bg-brand-gold/20 backdrop-blur-sm rounded-full text-sm font-bold text-brand-gold uppercase tracking-wider border border-brand-gold/30">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                </svg>
-                {product.category.replace('-', ' ')}
-              </span>
-              <span className="inline-flex items-center px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-full text-sm font-semibold text-white border border-white/20">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Origin: {product.origin}
-              </span>
-              <span className="inline-flex items-center px-5 py-2.5 bg-green-500/20 backdrop-blur-sm rounded-full text-sm font-semibold text-green-300 border border-green-500/30">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Export Ready
-              </span>
-            </div>
-
-            {/* Product Name */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-8 animate-fade-in-up animation-delay-300 leading-[1.1] tracking-tight">
-              {product.name}
-            </h1>
-
-            {/* Description */}
-            <p className="text-xl md:text-2xl lg:text-3xl text-brand-gold-light/95 leading-relaxed font-light animate-fade-in-up animation-delay-400 max-w-4xl">
-              {product.description}
-            </p>
-
-            {/* Quick Info Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 animate-fade-in-up animation-delay-500">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300">
-                <p className="text-brand-gold-light/70 text-sm font-medium mb-1">Packaging</p>
-                <p className="text-white font-bold text-lg">{product.packaging.split(' ')[0]} {product.packaging.split(' ')[1]}</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300">
-                <p className="text-brand-gold-light/70 text-sm font-medium mb-1">Min Order</p>
-                <p className="text-white font-bold text-lg">{product.moq}</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300">
-                <p className="text-brand-gold-light/70 text-sm font-medium mb-1">Shipping</p>
-                <p className="text-white font-bold text-lg">{product.shipping.split(',')[0]}</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300">
-                <p className="text-brand-gold-light/70 text-sm font-medium mb-1">Delivery</p>
-                <p className="text-white font-bold text-lg">15-20 Days</p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </div>
-
-      {/* Product Details */}
-      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 max-w-7xl mx-auto mb-20">
-            {/* Product Image - 2 columns */}
-            <div className="lg:col-span-2 animate-fade-in-up animation-delay-200">
-              <div className="sticky top-32">
-                <div className="bg-white rounded-3xl shadow-2xl border-2 border-slate-200 overflow-hidden hover:border-brand-gold transition-all duration-300 group">
-                  <div className="relative overflow-hidden">
-                    <img 
-                      src={getProductImage(product.category)} 
-                      alt={product.name}
-                      className="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-navy-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start">
+            
+            {/* LEFT: STICKY ASSET TERMINAL */}
+            <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-8 animate-reveal delay-300 opacity-0">
+               <div className="relative group">
+                  <div className="absolute -inset-4 bg-brand-gold/5 blur-3xl rounded-[3rem]"></div>
+                  <div className="relative glass-card p-2 rounded-[2.5rem] bg-slate-100 shadow-2xl border-white overflow-hidden">
+                     <img 
+                       src={productImage} 
+                       alt={product.name} 
+                       className="w-full h-[400px] md:h-[550px] object-cover rounded-[2rem] transition-all duration-[2000ms] group-hover:scale-105"
+                     />
+                     <div className="absolute bottom-10 left-10 right-10">
+                        <div className="glass-panel p-6 rounded-2xl border-white/20 bg-brand-navy/60 backdrop-blur-xl">
+                           <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                 <FiActivity className="text-brand-gold animate-pulse" />
+                                 <span className="text-xs font-black text-black uppercase tracking-widest">Active Export Hub</span>
+                              </div>
+                              <span className="text-xs font-black text-brand-gold uppercase tracking-widest">Verified</span>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                  <div className="p-6 bg-gradient-to-br from-slate-50 to-white">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-slate-600 mb-1">Product Code</p>
-                        <p className="text-lg font-bold text-brand-navy">{product.slug.toUpperCase()}</p>
-                      </div>
-                      <div className="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center">
-                        <svg className="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
+               </div>
+
+               {/* TRUST BADGES */}
+               <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { icon: <FiShield />, label: "Quality Grade" },
+                    { icon: <FiGlobe />, label: "India Origin" },
+                    { icon: <FiCheckCircle />, label: "Global Sync" }
+                  ].map((badge, i) => (
+                    <div key={i} className="glass-card p-4 rounded-2xl bg-slate-50 border-slate-100 flex flex-col items-center justify-center text-center group hover:border-brand-gold hover:bg-white transition-all duration-500">
+                       <div className="text-brand-gold text-xl mb-2 group-hover:scale-110 transition-transform">{badge.icon}</div>
+                       <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest group-hover:text-brand-navy transition-colors">{badge.label}</p>
                     </div>
+                  ))}
+               </div>
+
+               {/* QUICK INQUIRY WIDGET - LIGHT THEME (Fixes Navy Background Issue) */}
+               <div className="relative p-8 md:p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-2xl overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 blur-3xl -translate-y-16 translate-x-16"></div>
+                  <h4 className="text-xl md:text-2xl font-black uppercase tracking-tighter mb-6 text-brand-navy">Procurement Desk</h4>
+                  <div className="space-y-4 mb-8">
+                     <div className="flex items-center gap-4 text-slate-500">
+                        <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">
+                           <FiMail />
+                        </div>
+                        <span className="text-xs md:text-sm font-bold uppercase tracking-widest">exports@mitrayexim.com</span>
+                     </div>
+                     <div className="flex items-center gap-4 text-slate-500">
+                        <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">
+                           <FiPhone />
+                        </div>
+                        <span className="text-xs md:text-sm font-bold uppercase tracking-widest">+91 96245 42426</span>
+                     </div>
                   </div>
-                </div>
-              </div>
+                  <Link href="/contact" className="block w-full py-6 bg-brand-navy text-white rounded-xl text-xs md:text-sm font-black text-center uppercase tracking-[0.3em] hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 shadow-lg">
+                     Initialize Contact
+                  </Link>
+               </div>
             </div>
 
-            {/* Product Info - 3 columns */}
-            <div className="lg:col-span-3 animate-fade-in-up animation-delay-400">
-              <ProductDetails product={product} />
+            {/* RIGHT: TECHNICAL SPECIFICATIONS */}
+            <div className="lg:col-span-7 space-y-10 md:space-y-16 animate-reveal delay-500 opacity-0 pt-8 lg:pt-0">
+               <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                     <div className="h-px w-12 bg-brand-gold"></div>
+                     <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Operational Metadata</span>
+                  </div>
+                  <h2 className="text-4xl md:text-7xl font-black text-brand-navy tracking-tighter uppercase leading-[0.9]">
+                     TECHNICAL <br />
+                     <span className="text-gradient">MANIFEST.</span>
+                  </h2>
+                  <p className="text-sm md:text-lg text-slate-400 font-bold uppercase tracking-tight leading-relaxed max-w-2xl opacity-80">
+                     Official specifications for MIT-24 Export Protocol. All metrics are 100% verified against international agricultural standards.
+                  </p>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  {[
+                    { label: "Asset Origin", val: product.origin, icon: <FiGlobe /> },
+                    { label: "Grade Standard", val: "Institutional Grade-A", icon: <FiShield /> },
+                    { label: "Packaging Protocol", val: product.packaging, icon: <FiPackage /> },
+                    { label: "Procurement MOQ", val: product.moq, icon: <FiBox /> },
+                    { label: "Transit Protocol", val: product.shipping, icon: <FiTruck /> },
+                    { label: "Supply Status", val: "Continuous Availability", icon: <FiClock /> },
+                  ].map((spec, i) => (
+                    <div 
+                      key={i} 
+                      className="glass-card p-8 rounded-[2rem] bg-slate-50 border-slate-100 group hover:border-brand-gold hover:bg-white hover:shadow-2xl transition-all duration-500 hover-lift"
+                    >
+                       <div className="flex items-center justify-between mb-6">
+                          <div className="w-12 h-12 bg-white shadow-sm rounded-xl flex items-center justify-center text-brand-gold text-xl group-hover:scale-110 transition-transform duration-500">
+                             {spec.icon}
+                          </div>
+                          <FiArrowUp className="text-slate-200 group-hover:text-brand-gold rotate-45 transition-colors" />
+                       </div>
+                       <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 group-hover:text-brand-gold transition-colors duration-500">{spec.label}</p>
+                       <p className="text-sm md:text-xl font-black text-brand-navy uppercase tracking-widest transition-colors duration-500">{spec.val}</p>
+                    </div>
+                  ))}
+               </div>
+               
+               <div className="p-8 md:p-12 glass-card rounded-[3rem] bg-slate-50 border-slate-100 border-dashed border-2">
+                  <h4 className="text-sm md:text-base font-black text-brand-navy uppercase tracking-widest mb-4">Export Summary</h4>
+                  <p className="text-sm md:text-base text-slate-400 font-medium leading-relaxed uppercase tracking-tight">
+                     This {product.name} manifest represents a verified procurement batch ready for international dispatch. Our supply chain protocol ensures that every shipment meets the phytosanitary requirements of the target global hub.
+                  </p>
+               </div>
             </div>
           </div>
 
-          {/* Related Products */}
+          {/* RELATED INVENTORY */}
           {relatedProducts.length > 0 && (
-            <div className="mb-20 animate-fade-in-up animation-delay-600">
-              <div className="text-center mb-12">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="h-1 w-12 bg-brand-gold rounded"></div>
-                  <h2 className="text-3xl md:text-4xl font-bold mx-6 text-brand-navy">Related Products</h2>
-                  <div className="h-1 w-12 bg-brand-gold rounded"></div>
-                </div>
-                <p className="text-slate-600 text-lg">More products from the same category</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {relatedProducts.map((relatedProduct, index) => (
-                  <div key={relatedProduct.slug} style={{ animationDelay: `${600 + index * 100}ms` }} className="animate-fade-in-up">
-                    <a href={`/products/${relatedProduct.slug}`} className="block group">
-                      <div className="bg-white rounded-2xl shadow-md border-2 border-slate-200 overflow-hidden hover:border-brand-gold hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                        <div className="relative h-48 overflow-hidden bg-slate-100">
-                          <img 
-                            src={getProductImage(relatedProduct.category)} 
-                            alt={relatedProduct.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="p-5">
-                          <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors duration-300">
-                            {relatedProduct.name}
-                          </h3>
-                          <span className="inline-flex items-center text-brand-gold hover:text-brand-navy font-semibold text-sm transition-colors duration-300">
-                            View Details
-                            <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </a>
+            <div className="py-20 md:py-32 border-t border-slate-100 animate-reveal">
+               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                  <div>
+                     <div className="flex items-center gap-4 mb-4">
+                        <div className="h-px w-10 bg-brand-gold"></div>
+                        <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Asset Synchronization</span>
+                     </div>
+                     <h2 className="text-3xl md:text-6xl font-black text-brand-navy uppercase tracking-tighter">
+                        RELATED <br />
+                        <span className="text-gradient">INVENTORY.</span>
+                     </h2>
                   </div>
-                ))}
-              </div>
+                  <Link href="/products" className="group flex items-center gap-4 py-4 px-8 bg-slate-50 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-navy hover:text-white transition-all duration-700">
+                     Full Manifest <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </Link>
+               </div>
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                  {relatedProducts.map((rel, idx) => (
+                    <Link key={rel.slug} href={`/products/${rel.slug}`} className="group/rel animate-reveal opacity-0" style={{ animationDelay: `${idx * 150}ms` }}>
+                       <div className="glass-card bg-white rounded-[2.5rem] overflow-hidden border-slate-100 shadow-sm hover:border-brand-gold hover:shadow-2xl transition-all duration-700 hover-lift h-full flex flex-col">
+                          <div className="relative aspect-[1/1] md:aspect-[4/5] overflow-hidden bg-slate-50">
+                             <img src={getHighResImage(rel)} alt={rel.name} className="w-full h-full object-cover transition-all duration-1000 group-hover/rel:scale-110" />
+                          </div>
+                          <div className="p-6 md:p-8">
+                             <h4 className="text-sm md:text-xl font-black text-brand-navy uppercase tracking-tighter mb-2 group-hover/rel:text-brand-gold transition-colors">{rel.name}</h4>
+                             <div className="h-px w-8 bg-slate-100 group-hover/rel:w-full group-hover/rel:bg-brand-gold transition-all duration-700"></div>
+                          </div>
+                       </div>
+                    </Link>
+                  ))}
+               </div>
             </div>
           )}
 
-          {/* CTA Section */}
-          <div className="bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light rounded-3xl p-12 md:p-16 text-center text-white shadow-2xl animate-fade-in-up animation-delay-800 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
-            </div>
-            <div className="max-w-3xl mx-auto relative z-10">
-              <div className="inline-block w-20 h-20 bg-brand-gold/20 rounded-2xl flex items-center justify-center mb-6">
-                <svg className="w-20 h-19 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Import {product.name}?</h2>
-              <p className="text-lg md:text-xl text-brand-gold-light/90 mb-10 leading-relaxed">
-                Contact us for detailed specifications, pricing, certifications, and export documentation
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/landing">
-                  <button className="px-12 py-5 text-lg bg-brand-gold text-white rounded-xl font-semibold hover:bg-brand-gold-light transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl">
-                    Request Quotation
-                  </button>
-                </a>
-                <a href="/products">
-                  <button className="px-12 py-5 text-lg bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                    View All Products
-                  </button>
-                </a>
-              </div>
-            </div>
+          {/* FINAL INSTITUTIONAL FOOTER - LIGHT THEME (Fixes Navy Background Issue) */}
+          <div className="relative p-12 md:p-24 rounded-[3rem] bg-slate-50 border border-slate-100 text-center shadow-2xl overflow-hidden animate-reveal">
+             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[150px] rounded-full animate-subtle-float -translate-y-1/2 translate-x-1/2"></div>
+             <div className="relative z-10 max-w-4xl mx-auto">
+                <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-none mb-10 uppercase text-brand-navy">
+                   READY TO <span className="text-gradient">IMPORT?</span>
+                </h2>
+                <p className="text-slate-400 text-base md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-16 opacity-80">
+                   Initialize a professional procurement manifest for {product.name} today. Our institutional export team is ready to assist with custom logistics and documentation.
+                </p>
+                <Link href="/contact">
+                   <button className="group relative px-12 py-6 bg-brand-navy text-white rounded-2xl font-black uppercase tracking-[0.3em] text-xs md:text-sm shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95">
+                      Request Institutional Manifest
+                   </button>
+                </Link>
+             </div>
           </div>
+
         </Container>
       </div>
-    </>
+    </div>
   );
 }

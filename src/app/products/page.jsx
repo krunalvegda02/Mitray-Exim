@@ -1,244 +1,251 @@
 "use client";
 
-import { useState } from "react";
-import { PRODUCTS, CATEGORIES } from "@/data/products";
-import { ProductCard } from "@/components/product/ProductCard";
+import { useState, useMemo, useEffect } from "react";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
+import { PRODUCTS } from "@/data/products";
+import { FiSearch, FiArrowRight, FiActivity, FiZap, FiPackage, FiShield, FiGlobe, FiChevronRight, FiGrid, FiArrowUp, FiTruck, FiBox, FiCpu } from "react-icons/fi";
+import Link from "next/link";
+
+const CATEGORIES = [
+  { id: "all", label: "Full Manifest", icon: <FiGrid />, gradient: "from-brand-navy to-slate-800" },
+  { id: "fresh-vegetables", label: "Vegetables", icon: <FiPackage />, gradient: "from-emerald-600 to-teal-800" },
+  { id: "fresh-fruits", label: "Fresh Fruits", icon: <FiActivity />, gradient: "from-orange-500 to-red-700" },
+  { id: "spices", label: "Premium Spices", icon: <FiZap />, gradient: "from-brand-gold to-orange-600" },
+  { id: "rice", label: "Rice & Grains", icon: <FiBox />, gradient: "from-blue-600 to-indigo-800" },
+  { id: "dehydrated", label: "Dehydrated", icon: <FiCpu />, gradient: "from-slate-600 to-slate-900" },
+];
+
+const ITEMS_PER_PAGE = 12;
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const filteredProducts = selectedCategory === "all" 
-    ? PRODUCTS 
-    : PRODUCTS.filter(p => p.category === selectedCategory);
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 1000);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    return PRODUCTS.filter((p) => {
+      const matchesCategory = selectedCategory === "all" || p.category === selectedCategory;
+      const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  const displayedProducts = filteredProducts.slice(0, visibleCount);
 
   return (
-    <>
+    <div className="bg-white">
       <PageHero 
-        badge="PREMIUM QUALITY EXPORTS"
-        title="Our Products"
-        description="Export-quality agricultural products from India, certified and compliant with international standards"
-        backgroundImage="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop"
+        badge="INSTITUTIONAL ASSETS"
+        title="PRODUCT MANIFEST."
+        description="A high-fidelity exploration hub for India's finest agricultural exports. Engineered for global procurement excellence."
+        backgroundImage="https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Products' }
         ]}
       />
 
-      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+      <div className="relative z-10 -mt-20 md:-mt-32">
         <Container>
           
-          {/* Category Filter Tabs */}
-          <div className="mb-12">
-            <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide snap-x snap-mandatory md:flex-wrap md:justify-center">
-              <button
-                onClick={() => setSelectedCategory("all")}
-                className={`flex-shrink-0 snap-start px-5 py-2.5 rounded-lg font-semibold transition-all text-sm md:text-base ${
-                  selectedCategory === "all"
-                    ? "bg-brand-gold text-white shadow-lg"
-                    : "bg-white text-slate-700 border-2 border-slate-200 hover:border-brand-gold"
-                }`}
-              >
-                All ({PRODUCTS.length})
-              </button>
-              {CATEGORIES.map((category) => {
-                const count = PRODUCTS.filter(p => p.category === category.id).length;
-                return (
+          {/* UNIQUE BENTO DISCOVERY HUB */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-16 md:mb-24 animate-reveal delay-500 opacity-0">
+             
+             {/* 1. SEARCH CONSOLE (Large Block) */}
+             <div className="lg:col-span-8 group relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-navy/20 rounded-[2rem] blur-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-1000"></div>
+                <div className="relative h-full glass-card p-8 md:p-12 rounded-[2rem] bg-white border-white shadow-2xl flex flex-col justify-center">
+                   <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] mb-6">Manifest Search Console</p>
+                   <div className="relative">
+                      <FiSearch className="absolute left-0 top-1/2 -translate-y-1/2 text-3xl md:text-5xl text-slate-200 group-focus-within:text-brand-gold transition-all duration-700" />
+                      <input 
+                        type="text" 
+                        placeholder="Type to search global assets..." 
+                        value={searchQuery}
+                        onChange={(e) => {setSearchQuery(e.target.value); setVisibleCount(ITEMS_PER_PAGE);}}
+                        className="w-full bg-transparent border-none pl-12 md:pl-20 py-4 text-2xl md:text-6xl font-black text-brand-navy placeholder:text-slate-100 outline-none transition-all tracking-tighter"
+                      />
+                   </div>
+                </div>
+             </div>
+
+             {/* 2. STATS CONSOLE (Small Block) */}
+             <div className="lg:col-span-4 hidden lg:flex flex-col gap-4">
+                <div className="flex-1 glass-card p-8 rounded-[2rem] bg-brand-navy text-white flex flex-col justify-between border-white/5 relative overflow-hidden group">
+                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 blur-3xl -translate-y-16 translate-x-16"></div>
+                   <FiActivity className="text-brand-gold text-2xl animate-pulse" />
+                   <div>
+                      <p className="text-4xl font-black tracking-tighter mb-1">{filteredProducts.length}</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 leading-none">Institutional Assets Synced</p>
+                   </div>
+                </div>
+                <div className="flex-1 glass-card p-8 rounded-[2rem] bg-slate-50 border-slate-100 flex flex-col justify-between group hover:bg-brand-gold transition-all duration-700">
+                   <FiGlobe className="text-brand-gold group-hover:text-brand-navy text-2xl transition-colors" />
+                   <div>
+                      <p className="text-xl font-black text-brand-navy tracking-tighter mb-1 uppercase">Global Hubs</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-brand-navy/60 transition-colors leading-none">14+ Trade Corridors Active</p>
+                   </div>
+                </div>
+             </div>
+
+             {/* 3. CATEGORY HUB - UNIQUE TILE GRID */}
+             <div className="lg:col-span-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mt-2">
+                {CATEGORIES.map((cat, idx) => (
                   <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`flex-shrink-0 snap-start px-5 py-2.5 rounded-lg font-semibold transition-all text-sm md:text-base whitespace-nowrap ${
-                      selectedCategory === category.id
-                        ? "bg-brand-gold text-white shadow-lg"
-                        : "bg-white text-slate-700 border-2 border-slate-200 hover:border-brand-gold"
+                    key={cat.id}
+                    onClick={() => {setSelectedCategory(cat.id); setVisibleCount(ITEMS_PER_PAGE);}}
+                    className={`relative group/cat overflow-hidden rounded-[1.5rem] md:rounded-[2rem] p-6 text-left transition-all duration-700 hover-lift border-2 ${
+                      selectedCategory === cat.id 
+                        ? 'border-brand-gold bg-brand-navy text-white shadow-2xl scale-105 z-10' 
+                        : 'border-transparent bg-slate-50 text-brand-navy hover:bg-white hover:border-brand-gold/30'
                     }`}
                   >
-                    {category.label} ({count})
+                    {/* Background Icon Accent */}
+                    <div className={`absolute -right-4 -bottom-4 text-7xl opacity-[0.03] group-hover/cat:opacity-[0.08] transition-opacity duration-1000 ${selectedCategory === cat.id ? 'text-brand-gold' : 'text-brand-navy'}`}>
+                       {cat.icon}
+                    </div>
+
+                    <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center text-xl transition-all duration-700 ${
+                      selectedCategory === cat.id ? 'bg-brand-gold text-brand-navy' : 'bg-white shadow-sm text-brand-gold group-hover/cat:rotate-12'
+                    }`}>
+                       {cat.icon}
+                    </div>
+                    <p className={`text-[10px] md:text-[11px] font-black uppercase tracking-widest leading-tight ${selectedCategory === cat.id ? 'text-white' : 'text-brand-navy'}`}>
+                       {cat.label}
+                    </p>
                   </button>
-                );
-              })}
-            </div>
+                ))}
+             </div>
           </div>
 
-          {/* Products Count */}
-          <div className="text-center mb-8">
-            <p className="text-slate-600">
-              Showing <span className="font-bold text-brand-navy">{filteredProducts.length}</span> products
-              {selectedCategory !== "all" && (
-                <span> in <span className="font-bold text-brand-navy">
-                  {CATEGORIES.find(c => c.id === selectedCategory)?.label}
-                </span></span>
+          {/* PRODUCT MANIFEST - UNIQUE CARD ARCHITECTURE */}
+          {displayedProducts.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 pb-20">
+                 {displayedProducts.map((product, idx) => (
+                   <Link 
+                     key={product.slug} 
+                     href={`/products/${product.slug}`}
+                     className="group relative animate-reveal opacity-0 block"
+                     style={{ animationDelay: `${(idx % 12) * 50}ms` }}
+                   >
+                      <div className="relative glass-card bg-white rounded-[2rem] overflow-hidden border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-700 hover-lift h-full flex flex-col group/card">
+                         
+                         {/* Visual Manifest */}
+                         <div className="relative aspect-[4/5] overflow-hidden bg-slate-50">
+                            <img 
+                              src={product.image} 
+                              alt={product.name} 
+                              className="w-full h-full object-cover transition-all duration-[2000ms] group-hover/card:scale-110 group-hover/card:rotate-2"
+                            />
+                            
+                            {/* Overlay Hub (Appears on Hover) */}
+                            <div className="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm opacity-0 group-hover/card:opacity-100 transition-all duration-700 p-8 flex flex-col justify-between">
+                               <div className="space-y-4 translate-y-8 group-hover/card:translate-y-0 transition-transform duration-700">
+                                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                                     <span className="text-[9px] font-black text-white/40 uppercase tracking-widest">Origin</span>
+                                     <span className="text-[10px] font-black text-brand-gold uppercase tracking-widest">{product.origin}</span>
+                                  </div>
+                                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                                     <span className="text-[9px] font-black text-white/40 uppercase tracking-widest">Moq Status</span>
+                                     <span className="text-[10px] font-black text-white uppercase tracking-widest">{product.moq}</span>
+                                  </div>
+                                  <div className="flex items-center gap-3 pt-2">
+                                     <FiTruck className="text-brand-gold" />
+                                     <span className="text-[9px] font-black text-white uppercase tracking-widest">{product.shipping}</span>
+                                  </div>
+                               </div>
+                               
+                               <div className="w-full py-4 bg-brand-gold text-brand-navy rounded-xl text-[10px] font-black text-center uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 active:scale-95">
+                                  Initialize Inquiry
+                               </div>
+                            </div>
+                            
+                            {/* Floating Category Badge */}
+                            <div className="absolute top-6 left-6 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-lg text-[8px] font-black text-brand-navy uppercase tracking-widest border border-white shadow-xl group-hover/card:opacity-0 transition-opacity">
+                               {CATEGORIES.find(c => c.id === product.category)?.label || product.category}
+                            </div>
+                         </div>
+
+                         {/* Info Manifest */}
+                         <div className="p-6 md:p-8 flex-1 flex flex-col">
+                            <div className="flex items-start justify-between mb-4">
+                               <h3 className="text-lg md:text-xl font-black text-brand-navy uppercase tracking-tighter leading-tight group-hover/card:text-brand-gold transition-colors">
+                                  {product.name}
+                               </h3>
+                               <FiChevronRight className="text-brand-gold translate-x-0 group-hover/card:translate-x-2 transition-transform" />
+                            </div>
+                            <p className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed mb-6 line-clamp-2 opacity-60">
+                               {product.description}
+                            </p>
+                            <div className="mt-auto h-1 w-8 bg-slate-100 group-hover/card:w-full group-hover/card:bg-brand-gold transition-all duration-700"></div>
+                         </div>
+                      </div>
+                   </Link>
+                 ))}
+              </div>
+
+              {/* DYNAMIC LOAD TRIGGER */}
+              {visibleCount < filteredProducts.length && (
+                <div className="flex flex-col items-center py-16 animate-reveal">
+                   <div className="w-px h-16 bg-gradient-to-b from-brand-gold to-transparent mb-12"></div>
+                   <button 
+                     onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
+                     className="group relative px-16 py-6 bg-brand-navy text-white rounded-2xl font-black uppercase tracking-[0.4em] text-[11px] shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95"
+                   >
+                      Reveal More Assets
+                   </button>
+                </div>
               )}
-            </p>
+            </>
+          ) : (
+            <div className="py-32 text-center animate-reveal">
+               <FiActivity className="text-6xl text-slate-100 mx-auto mb-6 animate-pulse" />
+               <h3 className="text-2xl font-black text-brand-navy uppercase tracking-widest mb-2">Manifest Out of Sync</h3>
+               <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">No matches found in the current trade grid.</p>
+            </div>
+          )}
+
+          {/* FINAL CTA TERMINAL */}
+          <div className="py-20">
+             <div className="relative glass-card p-12 md:p-24 rounded-[3rem] bg-brand-navy text-center text-white shadow-2xl overflow-hidden animate-reveal">
+                <div className="absolute inset-0 z-0 opacity-20">
+                   <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/20 blur-[150px] rounded-full animate-subtle-float"></div>
+                </div>
+                <div className="relative z-10 max-w-4xl mx-auto">
+                   <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-none mb-10 uppercase">
+                      BULK <span className="text-gradient">INQUIRY.</span>
+                   </h2>
+                   <p className="text-slate-400 text-sm md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-16 opacity-80">
+                      Need specialized quotes for our entire portfolio? Connect with our institutional export desk today.
+                   </p>
+                   <Link href="/contact">
+                      <button className="group relative px-12 py-6 bg-brand-gold text-brand-navy rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95">
+                         Initialize Bulk Manifest
+                      </button>
+                   </Link>
+                </div>
+             </div>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} onQuoteClick={() => setIsModalOpen(true)} />
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light rounded-2xl p-6 md:p-10 text-center text-white shadow-xl">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Interested in Our Products?</h2>
-            <p className="text-base md:text-lg text-brand-gold-light/90 mb-5 md:mb-6">
-              Get in touch to receive detailed product specifications, pricing, and export documentation
-            </p>
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-brand-gold text-white rounded-lg font-semibold hover:bg-brand-gold-light transition-all shadow-lg"
-            >
-              Request Quotation
-            </button>
-          </div>
         </Container>
       </div>
 
-      {/* Modal */}
-      {isModalOpen && <InquiryModal onClose={() => setIsModalOpen(false)} />}
-    </>
-  );
-}
-
-function InquiryModal({ onClose }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Inquiry submitted. We will get back to you.");
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full sm:max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="relative">
-          {/* Animated Background Blobs */}
-          <div className="absolute inset-0 overflow-hidden rounded-t-3xl sm:rounded-3xl">
-            <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-brand-gold/20 to-orange-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-blue-300/20 to-purple-300/20 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/95 via-slate-50/95 to-white/95 rounded-t-3xl sm:rounded-3xl border-2 border-white/50 p-6 sm:p-8 md:p-10 shadow-2xl">
-            
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors"
-            >
-              <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            {/* Header */}
-            <div className="text-center mb-6 sm:mb-8">
-              <div className="inline-flex items-center backdrop-blur-md bg-gradient-to-r from-brand-gold/20 to-orange-400/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 border border-brand-gold/30">
-                <svg className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-brand-gold mr-1.5 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <span className="text-xs sm:text-sm font-bold text-brand-navy">Request Quotation</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-brand-navy via-brand-navy-dark to-brand-navy bg-clip-text text-transparent mb-2 sm:mb-3">
-                Get Your Custom Quote
-              </h2>
-              <p className="text-sm sm:text-base text-slate-600 px-4">
-                Fill out the form and our export team will contact you within 24 hours
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
-                <div className="relative group">
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div className="relative group">
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-
-                <div className="relative group">
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    Phone Number *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
-                    placeholder="+91 XXXXXXXXXX"
-                  />
-                </div>
-
-                <div className="relative group">
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
-                    placeholder="Your Company"
-                  />
-                </div>
-              </div>
-
-              <div className="relative group mb-5 sm:mb-6">
-                <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                  <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Product Requirements *
-                </label>
-                <textarea
-                  rows={4}
-                  required
-                  className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all resize-none"
-                  placeholder="Please specify products and quantities you need..."
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white rounded-2xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-2 sm:space-x-3"
-              >
-                <span>Submit Inquiry</span>
-                <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+      {/* FLOAT ACTION: SCROLL TO TOP */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-10 right-10 w-16 h-16 rounded-full bg-brand-navy text-brand-gold shadow-2xl border border-white/10 z-50 flex items-center justify-center transition-all duration-700 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
+      >
+         <FiArrowUp className="text-2xl animate-bounce" />
+      </button>
     </div>
   );
 }

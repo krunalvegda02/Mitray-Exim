@@ -128,14 +128,24 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Compliance Bar */}
-      <div className="bg-black/20 border-y border-white/5 animate-reveal opacity-0 delay-1000">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-24 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+      {/* Compliance Bar - Institutional Row */}
+      <div className="bg-black/40 border-y border-white/5 relative overflow-hidden group/bar">
+        <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover/bar:opacity-100 transition-opacity"></div>
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 lg:gap-12 animate-reveal opacity-0 delay-1000">
              {CERTIFICATIONS.map((cert) => (
-               <div key={cert.id} className="flex items-center space-x-4 group cursor-default">
-                  <img src={cert.logo} alt={cert.name} className="h-10 md:h-12 w-auto object-contain group-hover:scale-110 transition-transform" />
-                  <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] group-hover:text-brand-gold transition-colors">{cert.name}</span>
+               <div key={cert.id} className="flex items-center gap-6 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl">
+                  <div className="w-12 h-12 md:w-20 md:h-20 flex items-center justify-center flex-shrink-0">
+                     <img 
+                       src={cert.logo} 
+                       alt={cert.name} 
+                       className="max-h-full max-w-full object-contain transition-all duration-500" 
+                     />
+                  </div>
+                  <div className="hidden sm:block">
+                     <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">{cert.name}</p>
+                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 group-hover/logo:text-brand-navy/60 transition-colors">Verified Protocol</p>
+                  </div>
                </div>
              ))}
           </div>

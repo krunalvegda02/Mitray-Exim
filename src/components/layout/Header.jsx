@@ -30,15 +30,15 @@ export function Header() {
             <div className="flex items-center gap-6">
                <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
-                  <span className="text-[8px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network</span>
+                  <span className="text-[10px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network</span>
                </div>
                <div className="hidden md:flex items-center gap-2">
                   <FiZap className="text-brand-gold text-[10px]" />
-                  <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
+                  <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
                </div>
             </div>
             <div className="flex items-center gap-4">
-               <span className="text-[8px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
+               <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
                <FiArrowUpRight className="text-brand-gold text-[10px]" />
             </div>
          </div>
@@ -54,12 +54,11 @@ export function Header() {
               <img
                 src="/logoh.png"
                 alt="MITRAY EXIM"
-                className={`transition-all duration-700 ${isScrolled ? "h-10" : "h-14 brightness-100 "}`}
+                className={`transition-all duration-700 ${isScrolled ? "h-16" : "h-18 brightness-100 "}`}
               />
               <div className={`h-8 w-px hidden sm:block transition-colors ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
               <div className="hidden sm:flex flex-col">
-                 <span className={`text-[9px] font-black uppercase tracking-[0.4em] leading-none transition-colors ${isScrolled ? 'text-brand-navy' : 'text-white'}`}>Mitray</span>
-                 <span className="text-[9px] font-black uppercase tracking-[0.4em] text-brand-gold leading-none mt-1">Exim</span>
+
               </div>
             </Link>
 
@@ -75,7 +74,7 @@ export function Header() {
                 <Link
                   key={href}
                   href={href}
-                  className={`text-[11px] font-black uppercase tracking-[0.3em] transition-all duration-500 relative group py-2 ${
+                  className={`text-sm md:text-lg font-black uppercase tracking-[0.3em] transition-all duration-500 relative group py-2 ${
                     isScrolled ? 'text-brand-navy/70 hover:text-brand-gold' : 'text-white/80 hover:text-white'
                   }`}
                 >
@@ -89,11 +88,11 @@ export function Header() {
             <div className="flex items-center gap-6">
               <Link 
                 href="/contact" 
-                className={`hidden md:flex items-center gap-3 px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-700 shadow-2xl active:scale-95 ${
+                className={`hidden md:flex  items-center gap-3 px-8 py-5 rounded-2xl text-sm md:text-md font-black uppercase tracking-widest transition-all duration-700 shadow-2xl active:scale-95 ${
                   isScrolled 
                     ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy' 
                     : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-brand-navy'
-                }`}
+                } `}
               >
                 Inquiry Now <FiSend className="text-sm" />
               </Link>

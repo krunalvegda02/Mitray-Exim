@@ -1,10 +1,16 @@
-'use client';
+"use client";
 
 import { BLOGS } from "@/data/blogs";
 import { Container } from "@/components/shared/Container";
+import { PageHero } from "@/components/shared/PageHero";
 import { useParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { 
+  FiCalendar, FiClock, FiBookOpen, FiArrowLeft, 
+  FiShare2, FiUser, FiShield, FiGlobe, 
+  FiArrowRight, FiActivity, FiArrowUpRight, FiZap
+} from "react-icons/fi";
 
 const renderContent = (content) => {
   const sections = content.split(/(?=##\s)/);
@@ -16,17 +22,22 @@ const renderContent = (content) => {
       const body = rest.join('\n').trim();
       
       return (
-        <div key={idx} className="mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6 pb-3 border-b-3 border-brand-gold/30">
-            {title}
-          </h2>
-          <div className="space-y-4 sm:space-y-5">
+        <div key={idx} className="mb-12 md:mb-16 animate-reveal">
+          <div className="flex items-center gap-4 mb-6">
+             <div className="h-px w-8 bg-brand-gold"></div>
+             <h2 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">
+               {title}
+             </h2>
+          </div>
+          <div className="space-y-6">
             {body.split('\n').map((line, i) => {
               if (line.startsWith('-')) {
                 return (
-                  <div key={i} className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-2 h-2 bg-brand-gold rounded-full mt-2.5 flex-shrink-0"></div>
-                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  <div key={i} className="flex items-start gap-4 group/item">
+                    <div className="w-6 h-6 bg-slate-50 border border-slate-100 flex items-center justify-center mt-1 group-hover/item:border-brand-gold transition-colors">
+                       <div className="w-1.5 h-1.5 bg-brand-gold rotate-45"></div>
+                    </div>
+                    <p className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
                       {line.replace(/^-\s*/, '')}
                     </p>
                   </div>
@@ -34,7 +45,7 @@ const renderContent = (content) => {
               }
               if (line.trim()) {
                 return (
-                  <p key={i} className="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed">
+                  <p key={i} className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed opacity-80">
                     {line}
                   </p>
                 );
@@ -48,13 +59,15 @@ const renderContent = (content) => {
     
     if (section.trim()) {
       return (
-        <div key={idx} className="mb-8 sm:mb-10">
+        <div key={idx} className="mb-10">
           {section.split('\n').map((line, i) => {
             if (line.startsWith('-')) {
               return (
-                <div key={i} className="flex items-start gap-3 sm:gap-4 mb-3">
-                  <div className="w-2 h-2 bg-brand-gold rounded-full mt-2.5 flex-shrink-0"></div>
-                  <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                <div key={i} className="flex items-start gap-4 mb-4 group/item">
+                  <div className="w-6 h-6 bg-slate-50 border border-slate-100 flex items-center justify-center mt-1 group-hover/item:border-brand-gold transition-colors">
+                     <div className="w-1.5 h-1.5 bg-brand-gold rotate-45"></div>
+                  </div>
+                  <p className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
                     {line.replace(/^-\s*/, '')}
                   </p>
                 </div>
@@ -62,7 +75,7 @@ const renderContent = (content) => {
             }
             if (line.trim()) {
               return (
-                <p key={i} className="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed mb-4">
+                <p key={i} className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed mb-6 opacity-80">
                   {line}
                 </p>
               );
@@ -76,14 +89,12 @@ const renderContent = (content) => {
   });
 };
 
-export default function BlogPage() {
+export default function BlogDetailPage() {
   const params = useParams();
   const blog = BLOGS.find((b) => b.slug === params.slug);
   const relatedBlogs = BLOGS.filter((b) => b.slug !== params.slug).slice(0, 2);
 
-  if (!blog) {
-    notFound();
-  }
+  if (!blog) notFound();
 
   const blogImages = {
     "vegetable-export-india-to-uae": "https://images.unsplash.com/photo-1488459716781-6f3ee409e8f5?q=80&w=2070&auto=format&fit=crop",
@@ -91,199 +102,181 @@ export default function BlogPage() {
     "apeda-fssai-compliance-exporters": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
   };
 
+  const bannerImage = blogImages[params.slug] || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop";
+
   return (
-    <>
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light text-white pt-24 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-15">
-          <img 
-            src={blogImages[params.slug] || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop"}
-            alt={blog.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-navy-dark/95 via-brand-navy/90 to-brand-navy-dark/95"></div>
-        </div>
+    <div className="bg-white">
+      {/* 1. INSTITUTIONAL HERO - EDGY MANIFEST STYLE */}
+      <PageHero 
+        badge={`TECHNICAL PUBLICATION • ${blog.category.toUpperCase()}`}
+        title={`${blog.title}.`}
+        description={blog.excerpt}
+        backgroundImage={bannerImage}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Intelligence Terminal', href: '/blog' },
+          { label: 'Publication Manifest' }
+        ]}
+      />
 
+      <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
         <Container>
-          <div className="relative max-w-6xl mx-auto">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 mb-6 sm:mb-8 text-sm text-brand-gold-light">
-              <Link href="/" className="hover:text-brand-gold transition-colors">Home</Link>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <Link href="/blog" className="hover:text-brand-gold transition-colors">Blog</Link>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <span className="text-brand-gold">{blog.category}</span>
-            </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-start">
+            
+            {/* LEFT: PUBLICATION CONTENT */}
+            <div className="lg:col-span-8 space-y-12 animate-reveal delay-300 opacity-0">
+               
+               {/* FEATURED ASSET - SHARP EDGES */}
+               <div className="relative group">
+                  <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
+                  <div className="relative bg-white border-2 border-slate-100 overflow-hidden shadow-2xl">
+                     <img 
+                       src={bannerImage} 
+                       alt={blog.title} 
+                       className="w-full h-[300px] md:h-[500px] object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                     />
+                     <div className="absolute top-8 left-8 flex items-center gap-3">
+                        <div className="px-6 py-2 bg-brand-gold text-brand-navy text-[10px] font-black uppercase tracking-widest shadow-xl">
+                           Official Manifest
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
-            {/* Badge & Date */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-gold/20 rounded-full border border-brand-gold/40 backdrop-blur-sm">
-                <svg className="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v2h16V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h12a1 1 0 100-2H6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-xs sm:text-sm font-bold text-brand-gold">{new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              </span>
-              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm font-semibold text-white border border-white/20">
-                {blog.category}
-              </span>
-              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm font-semibold text-white border border-white/20">
-                {blog.readTime}
-              </span>
-            </div>
-
-            {/* Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              {blog.title}
-            </h1>
-
-            {/* Excerpt */}
-            <p className="text-base sm:text-lg md:text-xl text-brand-gold-light/95 leading-relaxed max-w-3xl">
-              {blog.excerpt}
-            </p>
-          </div>
-        </Container>
-      </div>
-
-      {/* Main Content */}
-      <div className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
-        <Container>
-          <div className="max-w-6xl mx-auto">
-            {/* Featured Image */}
-            <div className="mb-12 sm:mb-16 md:mb-20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-200 group">
-              <div className="relative overflow-hidden bg-slate-100 h-64 sm:h-80 md:h-96 lg:h-[500px]">
-                <img 
-                  src={blogImages[params.slug] || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop"}
-                  alt={blog.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-
-            {/* Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 md:gap-12">
-              {/* Main Content - 3 cols */}
-              <div className="lg:col-span-3">
-                {/* Article Content */}
-                <article className="max-w-none mb-12 sm:mb-16">
-                  <p className="text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed font-medium mb-8 sm:mb-10 italic text-slate-600">
-                    {blog.excerpt}
-                  </p>
-
-                  <div className="mb-12 sm:mb-16">
-                    {renderContent(blog.content)}
+               {/* ARTICLE BODY */}
+               <div className="bg-white border-2 border-slate-100 p-8 md:p-16 relative shadow-sm">
+                  {/* CORNER ACCENT */}
+                  <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-slate-50"></div>
+                  
+                  <div className="prose prose-slate max-w-none">
+                     {renderContent(blog.content)}
                   </div>
 
-                  {/* Key Takeaways */}
-                  {blog.keyTakeaways && blog.keyTakeaways.length > 0 && (
-                    <div className="my-12 sm:my-16 md:my-20 p-6 sm:p-8 md:p-10 bg-gradient-to-br from-brand-gold/5 to-brand-navy/5 rounded-2xl border-2 border-brand-gold/20">
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-8 sm:mb-10 flex items-center gap-3">
-                        <span className="text-brand-gold">✓</span> Key Takeaways
-                      </h3>
-                      <ul className="space-y-4 sm:space-y-5">
-                        {blog.keyTakeaways.map((takeaway, i) => (
-                          <li key={i} className="flex items-start gap-3 sm:gap-4">
-                            <div className="w-6 h-6 sm:w-7 sm:h-7 bg-brand-gold rounded-full flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
-                              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            </div>
-                            <span className="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed font-medium">{takeaway}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  {/* KEY TAKEAWAYS - SHARP EDGY BOX */}
+                  {blog.keyTakeaways && (
+                    <div className="mt-16 p-10 bg-brand-navy text-white relative overflow-hidden group">
+                       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 blur-[100px]"></div>
+                       <div className="relative z-10">
+                          <div className="flex items-center gap-4 mb-10">
+                             <FiZap className="text-brand-gold text-2xl animate-pulse" />
+                             <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Strategic Intelligence</h3>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                             {blog.keyTakeaways.map((point, i) => (
+                               <div key={i} className="flex items-start gap-4 group/point">
+                                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-brand-gold group-hover/point:bg-brand-gold group-hover/point:text-brand-navy transition-all duration-500">
+                                     <FiArrowRight />
+                                  </div>
+                                  <p className="text-xs md:text-sm font-black uppercase tracking-widest leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                                     {point}
+                                  </p>
+                               </div>
+                             ))}
+                          </div>
+                       </div>
                     </div>
                   )}
-                </article>
+               </div>
 
-                {/* CTA Section */}
-                <div className="bg-gradient-to-r from-brand-gold/10 to-brand-navy/10 rounded-2xl border-2 border-slate-200 p-6 sm:p-8 md:p-10 text-center">
-                  <h3 className="text-xl sm:text-2xl font-bold text-brand-navy mb-2 sm:mb-3">Ready to Export?</h3>
-                  <p className="text-sm sm:text-base text-slate-600 mb-6 sm:mb-8">Get expert guidance from our export specialists</p>
-                  <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-brand-gold text-white rounded-lg font-bold hover:bg-brand-gold-dark transition-all hover:scale-105">
-                    Contact Our Team
-                  </Link>
-                </div>
-              </div>
-
-              {/* Sidebar - 1 col */}
-              <div className="lg:col-span-1">
-                {/* Author Card */}
-                <div className="sticky top-20 bg-white rounded-2xl border-2 border-slate-200 p-6 sm:p-8 shadow-lg">
-                  <div className="text-center mb-6">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-brand-gold to-brand-gold-dark rounded-full flex items-center justify-center text-white font-bold text-2xl sm:text-3xl mx-auto mb-4 shadow-lg">
-                      M
-                    </div>
-                    <h4 className="text-lg sm:text-xl font-bold text-brand-navy">MITRAY EXIM</h4>
-                    <p className="text-xs sm:text-sm text-brand-gold font-semibold mt-1">Export Specialists</p>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-slate-600 text-center mb-6 leading-relaxed">
-                    Mitray Exim with complete compliance and quality assurance
-                  </p>
-
-                  <div className="space-y-3 mb-6 pt-6 border-t border-slate-200">
-                    <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-700">
-                      <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                      <span>India to Global Markets</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-700">
-                      <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>APEDA & FSSAI Certified</span>
-                    </div>
-                  </div>
-
-                  <Link href="/contact" className="w-full block text-center px-4 py-2.5 bg-brand-gold/10 text-brand-gold rounded-lg font-bold hover:bg-brand-gold hover:text-white transition-all text-sm sm:text-base">
-                    Get in Touch
-                  </Link>
-                </div>
-              </div>
+               {/* RETURN NAVIGATION */}
+               <Link href="/blog" className="inline-flex items-center gap-4 py-4 px-8 border-2 border-slate-100 font-black text-xs text-brand-navy uppercase tracking-widest hover:border-brand-gold hover:bg-white transition-all shadow-sm group">
+                  <FiArrowLeft className="group-hover:-translate-x-2 transition-transform" /> Back to Intelligence Terminal
+               </Link>
             </div>
 
-            {/* Related Articles */}
-            {relatedBlogs.length > 0 && (
-              <div className="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t-2 border-slate-200">
-                <h3 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-8 sm:mb-10">Related Articles</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                  {relatedBlogs.map((relatedBlog) => (
-                    <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`}>
-                      <div className="group bg-white rounded-2xl border-2 border-slate-200 hover:border-brand-gold overflow-hidden shadow-lg hover:shadow-2xl transition-all h-full">
-                        <div className="relative overflow-hidden bg-slate-100 h-48 sm:h-56">
-                          <img 
-                            src={blogImages[relatedBlog.slug] || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop"}
-                            alt={relatedBlog.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="p-6 sm:p-8">
-                          <span className="text-xs sm:text-sm font-bold text-brand-gold">{relatedBlog.category}</span>
-                          <h4 className="text-lg sm:text-xl font-bold text-brand-navy mt-3 group-hover:text-brand-gold transition-colors line-clamp-2">
-                            {relatedBlog.title}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-slate-600 mt-3 line-clamp-2">{relatedBlog.excerpt}</p>
-                          <div className="mt-4 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs sm:text-sm text-brand-gold font-semibold group-hover:gap-3 transition-all">
-                            Read More
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+            {/* RIGHT: PUBLICATION METADATA SIDEBAR */}
+            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 animate-reveal delay-500 opacity-0">
+               
+               {/* AUTHOR TERMINAL */}
+               <div className="p-10 bg-white border-2 border-slate-100 shadow-xl relative group">
+                  <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-brand-gold/10 group-hover:border-brand-gold transition-colors"></div>
+                  <div className="flex items-center gap-6 mb-10">
+                     <div className="w-16 h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-3xl font-black shadow-xl">
+                        M
+                     </div>
+                     <div>
+                        <h4 className="text-lg font-black text-brand-navy uppercase tracking-widest">Mitray Exim</h4>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Protocol Intelligence</p>
+                     </div>
+                  </div>
+                  <div className="space-y-6">
+                     <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-xs md:text-sm font-gray text-brand-navy uppercase tracking-widest flex items-center gap-3"><FiCalendar className="text-brand-gold text-lg" /> Publication Date</span>
+                        <span className="text-sm md:text-base font-black text-brand-navy uppercase tracking-widest">{blog.date}</span>
+                     </div>
+                     <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-xs md:text-sm font-gray text-brand-navy uppercase tracking-widest flex items-center gap-3"><FiClock className="text-brand-gold text-lg" /> Reading Latency</span>
+                        <span className="text-sm md:text-base font-black text-brand-navy uppercase tracking-widest">{blog.readTime}</span>
+                     </div>
+                     <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-xs md:text-sm font-gray text-brand-navy uppercase tracking-widest flex items-center gap-3"><FiShield className="text-brand-gold text-lg" /> Status</span>
+                        <span className="text-sm md:text-base font-black text-emerald-500 uppercase tracking-widest flex items-center gap-2">Verified <FiActivity className="animate-pulse" /></span>
+                     </div>
+                  </div>
+                  <div className="mt-10">
+                     <button className="w-full py-5 bg-brand-navy text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl flex items-center justify-center gap-3">
+                        Share Intelligence <FiShare2 />
+                     </button>
+                  </div>
+               </div>
+
+               {/* STRATEGIC HUB CTA */}
+               <div className="p-10 bg-slate-50 border-2 border-brand-gold/10 border-dashed relative overflow-hidden group">
+                  <div className="relative z-10">
+                     <h4 className="text-lg font-black text-brand-navy uppercase tracking-tighter mb-4">Strategic Partnership?</h4>
+                     <p className="text-[13px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed mb-8">
+                        Our institutional procurement desk is ready to synchronize with your global supply chain. Initialize a direct communication manifest today.
+                     </p>
+                     <Link href="/contact" className="inline-flex items-center gap-4 text-xs font-black text-brand-gold uppercase tracking-[0.2em] group-hover:gap-6 transition-all">
+                        Initialize Connection <FiArrowRight />
+                     </Link>
+                  </div>
+               </div>
+
+            </div>
+
+          </div>
+
+          {/* RELATED PUBLICATIONS */}
+          {relatedBlogs.length > 0 && (
+            <div className="mt-20 md:mt-32 pt-20 md:pt-32 border-t-2 border-slate-100">
+               <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                  <div className="space-y-6">
+                     <div className="flex items-center gap-4">
+                        <div className="h-px w-12 bg-brand-gold"></div>
+                        <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Resource Synchronization</span>
+                     </div>
+                     <h3 className="text-3xl md:text-6xl font-black text-brand-navy uppercase tracking-tighter">
+                        CROSS-REFERENCE <br />
+                        <span className="text-gradient">PUBLICATIONS.</span>
+                     </h3>
+                  </div>
+                  <Link href="/blog" className="inline-flex items-center gap-4 py-4 px-8 bg-slate-50 border border-slate-100 text-xs font-black text-brand-navy uppercase tracking-widest hover:bg-brand-navy hover:text-white transition-all shadow-sm">
+                     Full Archives <FiArrowUpRight />
+                  </Link>
+               </div>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  {relatedBlogs.map((rel, idx) => (
+                    <Link key={rel.slug} href={`/blog/${rel.slug}`} className="group relative block animate-reveal" style={{ animationDelay: `${idx * 150}ms` }}>
+                       <div className="absolute inset-0 bg-brand-gold/5 translate-x-3 translate-y-3"></div>
+                       <div className="relative bg-white border-2 border-slate-100 p-8 hover:border-brand-gold transition-all duration-500 shadow-sm">
+                          <span className="text-[10px] font-black text-brand-gold uppercase tracking-widest mb-4 block">{rel.category}</span>
+                          <h4 className="text-xl md:text-2xl font-black text-brand-navy uppercase tracking-tighter group-hover:text-brand-gold transition-colors mb-4">{rel.title}</h4>
+                          <p className="text-xs text-slate-400 font-bold uppercase tracking-widest line-clamp-2">{rel.excerpt}</p>
+                          <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
+                             <span className="text-[10px] font-black text-brand-navy uppercase tracking-widest">Read Publication</span>
+                             <FiArrowRight className="text-brand-gold group-hover:translate-x-2 transition-transform" />
                           </div>
-                        </div>
-                      </div>
+                       </div>
                     </Link>
                   ))}
-                </div>
-              </div>
-            )}
-          </div>
+               </div>
+            </div>
+          )}
+
         </Container>
       </div>
-    </>
+    </div>
   );
 }
