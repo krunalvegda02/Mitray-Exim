@@ -26,18 +26,18 @@ export function Header() {
     >
       {/* INSTITUTIONAL ANNOUNCEMENT BAR */}
       <div className={`w-full bg-brand-navy overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100 border-b border-white/5'}`}>
-         <div className="container mx-auto px-8 h-full flex items-center justify-between">
+         <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-center sm:justify-between">
             <div className="flex items-center gap-6">
                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
-                  <span className="text-[10px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network</span>
+                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
+                  <span className="text-[8px] sm:text-[10px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network Active</span>
                </div>
-               <div className="hidden md:flex items-center gap-2">
+               <div className="hidden lg:flex items-center gap-2">
                   <FiZap className="text-brand-gold text-[10px]" />
                   <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
                </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-3 sm:gap-4">
                <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
                <FiArrowUpRight className="text-brand-gold text-[10px]" />
             </div>
