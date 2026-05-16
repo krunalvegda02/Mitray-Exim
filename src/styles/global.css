@@ -20,115 +20,103 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
   background: #2C4A5E;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #1E3240;
 }
 
-/* Animations */
-@keyframes fade-in-down {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* --- PREMIUM ANIMATION SUITE --- */
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes mouse-scroll {
-  0% { opacity: 0; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(5px); }
-  100% { opacity: 0; transform: translateY(10px); }
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.animate-mouse {
-  animation: mouse-scroll 2s infinite;
+@keyframes lineGrow {
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-.animate-fade-in-down {
-  animation: fade-in-down 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
 }
 
+@keyframes pulseBorder {
+  0%, 100% { border-color: rgba(212, 165, 116, 0.2); }
+  50% { border-color: rgba(212, 165, 116, 0.6); }
+}
+
+/* Utility Classes for Animations */
+.animate-reveal {
+  animation: revealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-reveal-right {
+  animation: revealRight 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-reveal-left {
+  animation: revealLeft 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-line-grow {
+  animation: lineGrow 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-pulse-border {
+  animation: pulseBorder 3s ease-in-out infinite;
+}
+
+/* Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+/* Text Gradient & Glassmorphism */
 .text-gradient {
   background: linear-gradient(135deg, #D4A574 0%, #C69560 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.animation-delay-200 { animation-delay: 0.2s; opacity: 0; }
-.animation-delay-400 { animation-delay: 0.4s; opacity: 0; }
-.animation-delay-600 { animation-delay: 0.6s; opacity: 0; }
-.animation-delay-800 { animation-delay: 0.8s; opacity: 0; }
-
-/* Premium Animation Suite */
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes subtleFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.5deg); }
-}
-
-.animate-reveal {
-  animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.animate-scale-up {
-  animation: scaleUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.animate-subtle-float {
-  animation: subtleFloat 8s ease-in-out infinite;
-}
-
-@keyframes marqueeFast {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@keyframes scan {
-  0% { transform: translateX(-100%) skewX(-12deg); }
-  20%, 100% { transform: translateX(200%) skewX(-12deg); }
-}
-
-.animate-marquee-fast {
-  animation: marqueeFast 20s linear infinite;
-  display: flex;
-  width: max-content;
-}
-
-.animate-subtle-zoom {
-  animation: subtleZoom 20s ease-in-out alternate infinite;
-}
-
-
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-
-/* Global Glassmorphism System */
 .glass-panel {
   @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
 }
@@ -137,29 +125,16 @@
   @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-sm hover:shadow-xl hover:bg-white/60 transition-all duration-500;
 }
 
-.glass-nav {
-  @apply bg-white/60 backdrop-blur-2xl border-b border-white/20 sticky top-0 z-[100];
+/* Specialized Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* Background Blobs for Glass Effect Visibility */
-.bg-blob-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.bg-blob {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 70%);
-  filter: blur(80px);
-  border-radius: 50%;
+.animate-marquee-fast {
+  animation: marquee 20s linear infinite;
+  display: flex;
+  width: max-content;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -168,4 +143,13 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Live Website "Active" Feel */
+.hover-lift {
+  @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98];
+}
+
+.hover-glow {
+  @apply transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,165,116,0.3)] hover:border-brand-gold/50;
 }

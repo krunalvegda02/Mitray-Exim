@@ -10,7 +10,6 @@ export function ProductCard({ product, onQuoteClick }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Lower threshold to 40% for better mobile trigger reliability
         if (window.innerWidth < 1024) {
           setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.4);
         }
@@ -43,7 +42,7 @@ export function ProductCard({ product, onQuoteClick }) {
   return (
     <div 
       ref={cardRef}
-      className={`group relative h-[420px] md:h-[600px] flex flex-col rounded-[2rem] md:rounded-[3.5rem] overflow-hidden bg-brand-navy shadow-2xl transition-all duration-700 animate-reveal ${isActive ? '-translate-y-4 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]' : 'hover:-translate-y-4 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]'}`}
+      className={`group relative h-[420px] md:h-[550px] flex flex-col rounded-xl md:rounded-2xl overflow-hidden bg-brand-navy shadow-2xl transition-all duration-700 animate-reveal ${isActive ? '-translate-y-4 shadow-2xl' : 'hover:-translate-y-4 hover:shadow-2xl'}`}
     >
       
       {/* BACKGROUND IMAGE */}
@@ -57,9 +56,9 @@ export function ProductCard({ product, onQuoteClick }) {
       </div>
 
       {/* TOP STRIP */}
-      <div className="relative z-10 p-6 md:p-8 flex justify-between items-start">
+      <div className="relative z-10 p-5 md:p-6 flex justify-between items-start">
         <div className="flex flex-col gap-2">
-           <div className={`flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 transition-all duration-500 ${isActive ? 'bg-brand-gold/20 border-brand-gold/30' : ''}`}>
+           <div className={`flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg border border-white/20 transition-all duration-500 ${isActive ? 'bg-brand-gold/20 border-brand-gold/30' : ''}`}>
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
               <span className="text-[8px] font-black text-white uppercase tracking-widest">A-Grade Certified</span>
            </div>
@@ -68,33 +67,33 @@ export function ProductCard({ product, onQuoteClick }) {
               <span className="text-[9px] font-black uppercase tracking-[0.2em]">Origin: India</span>
            </div>
         </div>
-        <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white text-lg transition-all duration-500 ${isActive ? 'bg-brand-gold text-brand-navy rotate-12 scale-110' : 'group-hover:bg-brand-gold group-hover:text-brand-navy group-hover:rotate-12 group-hover:scale-110'}`}>
+        <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white text-lg transition-all duration-500 ${isActive ? 'bg-brand-gold text-brand-navy rotate-12 scale-110' : 'group-hover:bg-brand-gold group-hover:text-brand-navy group-hover:rotate-12 group-hover:scale-110'}`}>
            <FiZap />
         </div>
       </div>
 
       {/* BOTTOM CONTENT */}
-      <div className={`relative z-10 mt-auto p-6 md:p-10 flex flex-col gap-4 transition-transform duration-700 ${isActive ? 'translate-y-0' : 'translate-y-12 md:translate-y-8 group-hover:translate-y-0'}`}>
+      <div className={`relative z-10 mt-auto p-6 md:p-8 flex flex-col gap-4 transition-transform duration-700 ${isActive ? 'translate-y-0' : 'translate-y-12 md:translate-y-8 group-hover:translate-y-0'}`}>
         
         <div className="space-y-1">
            <p className="text-brand-gold text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em]">{product.category}</p>
-           <h3 className={`text-xl md:text-4xl font-black transition-colors duration-500 tracking-tighter leading-none ${isActive ? 'text-brand-gold' : 'text-white group-hover:text-brand-gold'}`}>
+           <h3 className={`text-xl md:text-3xl font-black transition-colors duration-500 tracking-tighter leading-none ${isActive ? 'text-brand-gold' : 'text-white group-hover:text-brand-gold'}`}>
              {product.name}
            </h3>
         </div>
 
         {/* REVEALABLE SPECS */}
         <div className={`flex flex-col gap-4 transition-all duration-700 delay-100 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0'}`}>
-           <p className="text-white/60 text-[10px] md:text-[13px] font-bold uppercase tracking-widest leading-relaxed line-clamp-2">
+           <p className="text-white/60 text-[10px] md:text-[12px] font-bold uppercase tracking-widest leading-relaxed line-clamp-2">
              {product.description}
            </p>
 
            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white/5 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/10">
                  <p className="text-[7px] font-black text-brand-gold uppercase tracking-widest mb-1 flex items-center gap-1.5"><FiPackage /> Packing</p>
                  <p className="text-[9px] md:text-[10px] font-black text-white uppercase truncate">{product.packaging}</p>
               </div>
-              <div className="bg-white/5 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/10">
                  <p className="text-[7px] font-black text-brand-gold uppercase tracking-widest mb-1 flex items-center gap-1.5"><FiShield /> Safety</p>
                  <p className="text-[9px] md:text-[10px] font-black text-white uppercase truncate">Grade AAA</p>
               </div>
@@ -102,16 +101,16 @@ export function ProductCard({ product, onQuoteClick }) {
         </div>
 
         {/* ACTIONS */}
-        <div className={`flex gap-3 pt-4 transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-16 md:translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100'}`}>
+        <div className={`flex gap-3 pt-2 transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-16 md:translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100'}`}>
            <button 
              onClick={onQuoteClick}
-             className="flex-1 bg-brand-gold text-brand-navy font-black text-[9px] md:text-[11px] uppercase tracking-[0.3em] py-4 md:py-5 rounded-xl md:rounded-2xl shadow-2xl hover:bg-white transition-all duration-500 flex items-center justify-center gap-2"
+             className="flex-1 bg-brand-gold text-brand-navy font-black text-[9px] md:text-[10px] uppercase tracking-[0.3em] py-4 rounded-xl shadow-2xl hover:bg-white transition-all duration-500 flex items-center justify-center gap-2"
            >
              Quote <FiArrowUpRight className="text-lg" />
            </button>
            <a 
              href={`/products/${product.slug}`}
-             className="w-14 h-14 md:w-16 md:h-16 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl flex items-center justify-center text-white hover:bg-brand-navy-light transition-all duration-500"
+             className="w-12 h-12 md:w-14 md:h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-brand-navy-light transition-all duration-500"
            >
              <FiZap className="text-xl" />
            </a>
@@ -124,7 +123,7 @@ export function ProductCard({ product, onQuoteClick }) {
       </div>
 
       {/* BORDER GLOW */}
-      <div className={`absolute inset-0 border border-white/10 rounded-[2rem] md:rounded-[3.5rem] transition-colors duration-700 pointer-events-none ${isActive ? 'border-brand-gold/40 shadow-[inset_0_0_20px_rgba(212,165,116,0.2)]' : 'group-hover:border-brand-gold/30'}`}></div>
+      <div className={`absolute inset-0 border border-white/10 rounded-xl md:rounded-2xl transition-colors duration-700 pointer-events-none ${isActive ? 'border-brand-gold/40 shadow-[inset_0_0_20px_rgba(212,165,116,0.2)]' : 'group-hover:border-brand-gold/30'}`}></div>
     </div>
   );
 }
