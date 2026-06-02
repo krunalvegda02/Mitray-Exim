@@ -27,4 +27,12 @@ export const CERTIFICATIONS = [
     description: "Registered for spice exports from India",
     logo: "/images/certifications/spice-board.png",
   },
+  {
+    id: "fieo",
+    name: "FIEO",
+    fullName: "Federation of Indian Export Organisations",
+    description: "Apex body of Indian export promotion organizations set up by Ministry of Commerce",
+    logo: "/images/certifications/fieo.png",
+  },
 ];
+

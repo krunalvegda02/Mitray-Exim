@@ -17,7 +17,7 @@ export function FaqSection() {
     },
     {
       q: "What certifications does MITRAY EXIM hold?",
-      a: "MITRAY EXIM maintains a 100% verified compliance manifest. Our active certifications include APEDA, FSSAI, IEC, and Spice Board India.",
+      a: "MITRAY EXIM maintains a 100% verified compliance manifest. Our active certifications include APEDA, FSSAI, IEC, FIEO, and Spice Board India.",
     },
     {
       q: "Do you provide custom packaging for vegetables?",

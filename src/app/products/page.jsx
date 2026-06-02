@@ -47,7 +47,7 @@ export default function ProductsPage() {
             badge="INSTITUTIONAL ASSETS"
             title="PRODUCT MANIFEST."
             description="A high-fidelity exploration hub for India's finest agricultural exports. Engineered for global procurement excellence."
-            backgroundImage="https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80&w=2070&auto=format&fit=crop"
+            backgroundImage="https://images.unsplash.com/photo-1595855759920-86582396756a?q=80&w=2070&auto=format&fit=crop"
             breadcrumbs={[
                { label: 'Home', href: '/' },
                { label: 'Products' }

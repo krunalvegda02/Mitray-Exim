@@ -32,7 +32,7 @@ export function Certifications() {
         </div>
 
         {/* CERTIFICATION GRID - STAGGERED REVEAL */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 justify-center">
           {CERTIFICATIONS.map((cert, index) => (
             <div
               key={cert.id}
@@ -48,7 +48,14 @@ export function Certifications() {
                         src={cert.logo}
                         alt={cert.fullName}
                         className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 opacity-40 group-hover:opacity-100"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
                       />
+                      <div className="hidden flex-col items-center justify-center text-center">
+                         <FiShield className="text-3xl text-brand-gold/40 group-hover:text-brand-gold transition-colors" />
+                      </div>
                    </div>
                 </div>
 

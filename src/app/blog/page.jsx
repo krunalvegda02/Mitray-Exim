@@ -18,7 +18,7 @@ export default function BlogPage() {
         badge="MARKET INTELLIGENCE HUB"
         title="Institutional. Insights."
         description="Access technical manifestos and real-time market telemetry. Global trade analysis for the agricultural elite."
-        backgroundImage="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2070&auto=format&fit=crop"
+        backgroundImage="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Intelligence Hub' }

@@ -133,7 +133,7 @@ export function Footer() {
       <div className="bg-black/40 border-y border-white/5 relative overflow-hidden group/bar">
         <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover/bar:opacity-100 transition-opacity"></div>
         <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 lg:gap-12 animate-reveal opacity-0 delay-1000">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 animate-reveal opacity-0 delay-1000">
              {CERTIFICATIONS.map((cert) => (
                <div key={cert.id} className="flex items-center gap-6 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl">
                   <div className="w-12 h-12 md:w-20 md:h-20 flex items-center justify-center flex-shrink-0">
@@ -141,7 +141,16 @@ export function Footer() {
                        src={cert.logo} 
                        alt={cert.name} 
                        className="max-h-full max-w-full object-contain transition-all duration-500" 
+                       onError={(e) => {
+                         e.target.style.display = 'none';
+                         e.target.nextSibling.style.display = 'flex';
+                       }}
                      />
+                     <div className="hidden flex-col items-center justify-center text-center">
+                        <svg className="w-6 h-6 md:w-10 md:h-10 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                     </div>
                   </div>
                   <div className="hidden sm:block">
                      <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">{cert.name}</p>

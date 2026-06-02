@@ -16,7 +16,7 @@ export default function CertificationsPage() {
         badge="VERIFIED EXPORT PROTOCOLS"
         title="Verified. Protocols."
         description="Access technical compliance manifests and quality assurance certifications. 100% verified against global trade standards."
-        backgroundImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop"
+        backgroundImage="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Compliance Manifests' }
@@ -38,16 +38,7 @@ export default function CertificationsPage() {
                    <span className="text-gradient">TERMINALS.</span>
                 </h2>
              </div>
-             <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 shadow-sm">
-                   <FiLock className="text-emerald-500" />
-                   <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Security Layer: Active</span>
-                </div>
-                <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 shadow-sm">
-                   <FiActivity className="text-brand-gold animate-pulse" />
-                   <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Live Sync: 5 Certificates</span>
-                </div>
-             </div>
+             
           </div>
 
           {/* 3. CERTIFICATION MANIFEST GRID */}
@@ -73,7 +64,7 @@ export default function CertificationsPage() {
                          </div>
                          <div>
                             <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">Security & Compliance Manifest</h3>
-                            <p className="text-xs font-black text-brand-gold uppercase tracking-widest">Protocol Version 4.2.0</p>
+                            {/* <p className="text-xs font-black text-brand-gold uppercase tracking-widest">Protocol Version 4.2.0</p> */}
                          </div>
                       </div>
                       <p className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed">

@@ -45,10 +45,8 @@ export function CertificateCard({ cert }) {
            </div>
 
            <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-[10px] font-black text-emerald-500 uppercase tracking-widest">
-                 <FiCheckCircle /> Active Sync
-              </div>
-              <div className="text-[10px] font-black text-slate-200 uppercase tracking-widest">
+              
+              <div className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
                  Ref: CERT-0{cert.id}
               </div>
            </div>

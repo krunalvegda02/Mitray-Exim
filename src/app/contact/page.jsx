@@ -41,7 +41,7 @@ export default function ContactPage() {
         badge="GLOBAL COMMUNICATION TERMINAL"
         title="Initialize. Connection."
         description="Connect with the MIT-24 Export Protocol desk. Our institutional partners receive 24/7 priority procurement assistance."
-        backgroundImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+        backgroundImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Communication Hub' }

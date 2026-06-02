@@ -99,7 +99,7 @@ export default function BlogDetailPage() {
   const blogImages = {
     "vegetable-export-india-to-uae": "https://images.unsplash.com/photo-1488459716781-6f3ee409e8f5?q=80&w=2070&auto=format&fit=crop",
     "onion-export-requirements-gulf": "https://images.unsplash.com/photo-1599599810694-b5ac4dd64b73?q=80&w=2070&auto=format&fit=crop",
-    "apeda-fssai-compliance-exporters": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
+    "apeda-fssai-compliance-exporters": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
   };
 
   const bannerImage = blogImages[params.slug] || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop";

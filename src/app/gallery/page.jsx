@@ -60,7 +60,7 @@ export default function GalleryPage() {
             badge="VISUAL TRUST PROTOCOLS"
             title="Visual. Showcase."
             description="A technical exhibit of our 60+ operational nodes, export terminals, and verified logistics manifests."
-            backgroundImage="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=2070&auto=format&fit=crop"
+            backgroundImage="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
             breadcrumbs={[
                { label: 'Home', href: '/' },
                { label: 'Visual Showcase' }
