@@ -41,12 +41,12 @@ export function Header() {
       </div>
 
       {/* FLOATING CAPSULE NAVIGATION */}
-      <div className={`w-full transition-all duration-500 ${isScrolled ? 'pt-3' : 'pt-4'}`}>
+      <div className="w-full transition-all duration-500 pt-4">
         <div className="container mx-auto px-4 md:px-8">
           <div
             className={`mx-auto max-w-7xl rounded-full transition-all duration-500 flex items-center justify-between px-6 md:px-8
               ${isScrolled
-                ? "bg-white/[0.7] backdrop-blur-[30px] backdrop-saturate-[180%] border border-white/[0.25] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-2.5 md:py-3"
+                ? "bg-white/[0.7] backdrop-blur-[30px] backdrop-saturate-[180%] border border-white/[0.25] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-3.5 md:py-4.5"
                 : "bg-gradient-to-r from-brand-navy/60 to-slate-900/60 backdrop-blur-[30px] backdrop-saturate-[190%] border border-white/15 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)] py-3.5 md:py-4.5"
               }`}
           >
@@ -57,7 +57,7 @@ export function Header() {
                 alt="MITRAY EXIM"
                 className={`object-contain transition-all duration-500 ${
                   isScrolled 
-                    ? "w-[90px] md:w-[145px] brightness-100" 
+                    ? "w-[90px] md:w-[175px] brightness-100" 
                     : "w-[110px] md:w-[185px] brightness-0 invert"
                 }`}
               />
