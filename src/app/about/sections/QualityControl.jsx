@@ -6,12 +6,12 @@ export function QualityControl() {
   return (
     <div className="relative h-full group animate-reveal delay-800 opacity-0">
       {/* GLOW ACCENT */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-brand-navy/10 to-emerald-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-brand-navy/10 to-emerald-500/20 rounded-sm blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
       
-      <div className="relative h-full glass-card p-8 md:p-12 rounded-[2rem] bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
+      <div className="relative h-full glass-card p-8 md:p-12 rounded-sm bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
         
         <div className="flex items-center gap-4 mb-10 md:mb-12">
-           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-navy rounded-2xl flex items-center justify-center text-emerald-500 shadow-xl group-hover:rotate-12 transition-transform duration-700">
+           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-navy rounded-sm flex items-center justify-center text-emerald-500 shadow-xl group-hover:rotate-12 transition-transform duration-700">
               <FiShield className="text-2xl md:text-3xl" />
            </div>
            <div>

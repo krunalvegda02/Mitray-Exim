@@ -29,12 +29,12 @@ export function Values() {
   return (
     <div className="relative h-full group animate-reveal delay-700 opacity-0">
       {/* GLOW ACCENT */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy/20 via-brand-gold/10 to-brand-navy/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy/20 via-brand-gold/10 to-brand-navy/20 rounded-sm blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
       
-      <div className="relative h-full glass-card p-8 md:p-12 rounded-[2rem] bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
+      <div className="relative h-full glass-card p-8 md:p-12 rounded-sm bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
         
         <div className="flex items-center gap-4 mb-10 md:mb-12">
-           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-gold rounded-2xl flex items-center justify-center text-brand-navy shadow-xl group-hover:rotate-12 transition-transform duration-700">
+           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-gold rounded-sm flex items-center justify-center text-brand-navy shadow-xl group-hover:rotate-12 transition-transform duration-700">
               <FiZap className="text-2xl md:text-3xl" />
            </div>
            <div>
@@ -45,7 +45,7 @@ export function Values() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
           {values.map((value, idx) => (
-            <div key={idx} className="group/item relative p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-brand-navy transition-all duration-500">
+            <div key={idx} className="group/item relative p-6 bg-slate-50/50 rounded-sm border border-slate-100 hover:bg-brand-navy transition-all duration-500">
                <div className="text-brand-gold text-xl mb-4 group-hover/item:text-white transition-colors">{value.icon}</div>
                <h4 className="text-[11px] md:text-[13px] font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
                <p className="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">

@@ -11,37 +11,37 @@ import Link from "next/link";
 export default function CertificationsPage() {
   return (
     <div className="bg-white">
-      {/* 1. INSTITUTIONAL HERO - SHARP EDGES */}
+      {/* 1. HERO SECTION */}
       <PageHero
-        badge="VERIFIED EXPORT PROTOCOLS"
-        title="Verified. Protocols."
-        description="Access technical compliance manifests and quality assurance certifications. 100% verified against global trade standards."
+        badge="QUALITY CERTIFICATIONS"
+        title="Quality. Certified."
+        description="Access our quality assurance certifications and compliance documentation. All products are fully verified and certified to meet international trade standards."
         backgroundImage="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Compliance Manifests' }
+          { label: 'Certifications' }
         ]}
       />
 
       <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
         <Container>
           
-          {/* 2. EDGY SECTION HEADER */}
+          {/* 2. SECTION HEADER */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
              <div className="space-y-6">
                 <div className="flex items-center gap-4">
                    <div className="h-px w-12 bg-brand-gold"></div>
-                   <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Audit Logs</span>
+                   <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Global Standards</span>
                 </div>
                 <h2 className="text-5xl md:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.85]">
                    COMPLIANCE <br />
-                   <span className="text-gradient">TERMINALS.</span>
+                   <span className="text-gradient">STANDARDS.</span>
                 </h2>
              </div>
              
           </div>
 
-          {/* 3. CERTIFICATION MANIFEST GRID */}
+          {/* 3. CERTIFICATION GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-12 mb-16 md:mb-24">
             {CERTIFICATIONS.map((cert, index) => (
               <div key={cert.id} className="animate-reveal opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
@@ -50,7 +50,7 @@ export default function CertificationsPage() {
             ))}
           </div>
 
-          {/* 4. INSTITUTIONAL SECURITY MANIFEST */}
+          {/* 4. SECURITY & COMPLIANCE */}
           <div className="relative mb-24 animate-reveal">
              <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
              <div className="relative bg-white border-2 border-slate-100 p-8 md:p-16 overflow-hidden">
@@ -63,12 +63,11 @@ export default function CertificationsPage() {
                             <FiShield />
                          </div>
                          <div>
-                            <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">Security & Compliance Manifest</h3>
-                            {/* <p className="text-xs font-black text-brand-gold uppercase tracking-widest">Protocol Version 4.2.0</p> */}
+                            <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">Quality & Compliance Standards</h3>
                          </div>
                       </div>
                       <p className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed">
-                         We implement strict quality control protocols at every hub synchronization. All shipments are accompanied by a full suite of phytosanitary and regulatory manifests verified by international audit authorities.
+                         We implement rigorous quality control processes at every stage of sourcing and packing. All shipments are accompanied by comprehensive phytosanitary certificates and export documentation verified by international bodies.
                       </p>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -87,8 +86,8 @@ export default function CertificationsPage() {
                                  <FiShield className="hidden text-brand-gold text-2xl" />
                               </div>
                               <div>
-                                 <h4 className="text-xs md:text-sm font-black text-brand-navy uppercase tracking-widest mb-1">{cert.name} Manifest</h4>
-                                 <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-widest">Verified Status: Active</p>
+                                 <h4 className="text-xs md:text-sm font-black text-brand-navy uppercase tracking-widest mb-1">{cert.name} Certification</h4>
+                                 <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-widest">Status: Active & Verified</p>
                               </div>
                            </div>
                          ))}
@@ -98,12 +97,12 @@ export default function CertificationsPage() {
                    <div className="lg:col-span-5">
                       <div className="p-10 bg-brand-navy text-white relative overflow-hidden group">
                          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 blur-3xl"></div>
-                         <h4 className="text-xl font-black uppercase tracking-tighter mb-6">Manifest Request</h4>
+                         <h4 className="text-xl font-black uppercase tracking-tighter mb-6">Document Request</h4>
                          <p className="text-sm font-bold text-white/40 uppercase tracking-widest leading-relaxed mb-10">
-                            Our institutional audit team is ready to provide complete documentation manifests for your procurement review.
+                            Our documentation team is ready to provide complete compliance certificates, test reports, and export records for your review.
                          </p>
                          <Link href="/contact" className="group/btn block w-full py-5 bg-brand-gold text-brand-navy text-xs font-black text-center uppercase tracking-[0.3em] hover:bg-white transition-all duration-700">
-                            Initialize Audit Request <FiArrowRight className="inline ml-2 group-hover/btn:translate-x-2 transition-transform" />
+                            Request Certificates <FiArrowRight className="inline ml-2 group-hover/btn:translate-x-2 transition-transform" />
                          </Link>
                       </div>
                    </div>
@@ -111,11 +110,11 @@ export default function CertificationsPage() {
              </div>
           </div>
 
-          {/* 5. TECHNICAL OPERATIONAL METRICS */}
+          {/* 5. OPERATIONAL METRICS */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-slate-100 bg-white animate-reveal">
             {[
               { label: "Compliance Rate", val: 100, suffix: "%" },
-              { label: "Active Terminals", val: 5, suffix: "+" },
+              { label: "Export Hubs", val: 5, suffix: "+" },
               { label: "Establishment", val: 2020, suffix: "" },
               { label: "Global Presence", val: 10, suffix: "+" }
             ].map((stat, i) => (

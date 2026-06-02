@@ -51,9 +51,9 @@ export function GlobalPresence() {
   return (
     <div className="relative group animate-reveal delay-1000 opacity-0">
       {/* GLOW ACCENT */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-[2rem] blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-brand-navy via-brand-gold to-brand-navy rounded-sm blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
       
-      <div className="relative bg-brand-navy p-8 sm:p-12 md:p-16 rounded-[2.5rem] text-white shadow-2xl overflow-hidden border border-white/5">
+      <div className="relative bg-brand-navy p-8 sm:p-12 md:p-16 rounded-sm text-white shadow-2xl overflow-hidden border border-white/5">
         
         {/* ATMOSPHERIC BACKGROUND */}
         <div className="absolute inset-0 z-0 opacity-20">
@@ -65,7 +65,7 @@ export function GlobalPresence() {
           
           {/* HEADER ARCHITECTURE - CENTER ALIGNED */}
           <div className="text-center mb-16 md:mb-24">
-            <div className="inline-flex items-center gap-3 px-6 py-2 bg-brand-gold/10 rounded-xl mb-8 border border-brand-gold/20 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-6 py-2 bg-brand-gold/10 rounded-sm mb-8 border border-brand-gold/20 backdrop-blur-md">
               <FiGlobe className="text-brand-gold animate-pulse" />
               <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em]">Global Export Corridors</span>
             </div>
@@ -88,9 +88,9 @@ export function GlobalPresence() {
                      <div className="lg:w-1/3">
                         <div className="flex items-center gap-3 mb-4">
                            <div className="w-10 h-px bg-brand-gold/40"></div>
-                           <h4 className="text-[12px] md:text-[14px] font-black uppercase tracking-[0.4em] text-brand-gold">{region.name}</h4>
+                           <h4 className="text-[12px] md:text-[16px] font-black uppercase tracking-[0.4em] text-brand-gold">{region.name}</h4>
                         </div>
-                        <p className="text-[10px] md:text-[13px] font-bold text-white/40 uppercase tracking-widest leading-relaxed">
+                        <p className="text-[10px] md:text-[14px] font-bold text-white/40 uppercase tracking-widest leading-relaxed">
                           {region.description}
                         </p>
                      </div>
@@ -99,7 +99,7 @@ export function GlobalPresence() {
                         {region.countries.map((country, cidx) => (
                           <div 
                             key={cidx} 
-                            className="glass-card p-5 rounded-2xl bg-white/5 border-white/5 hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-default group/country"
+                            className="glass-card p-5 rounded-sm bg-white/5 border-white/5 hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-default group/country"
                           >
                             <div className="flex items-center justify-between">
                                <div className="flex items-center gap-4">
