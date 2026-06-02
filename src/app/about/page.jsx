@@ -69,7 +69,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
               {[
                 { val: 500, label: "Shipments Delivered", color: "text-brand-gold", icon: <FiZap /> },
-                { val: 14, label: "Global Trade Hubs", color: "text-brand-navy", icon: <FiGlobe /> },
+                { val: 20, label: "Global Trade Hubs", color: "text-brand-navy", icon: <FiGlobe /> },
                 { val: 150, label: "Strategic Partners", color: "text-emerald-500", icon: <FiShield /> },
                 { val: 4, label: "Years of Excellence", color: "text-brand-navy", icon: <FiActivity /> },
               ].map((stat, idx) => (
@@ -93,7 +93,7 @@ export default function AboutPage() {
         {/* SECTION: FINAL CTA TERMINAL */}
         <div className="py-12 md:py-20 bg-white">
           <Container>
-             <div className="relative glass-card p-12 md:p-24 rounded-[3rem] bg-brand-navy text-center text-white shadow-2xl overflow-hidden animate-reveal opacity-0">
+             <div className="relative glass-card p-12 md:p-24 rounded-[3rem] text-center shadow-2xl overflow-hidden animate-reveal opacity-0">
                 {/* ATMOSPHERIC BACKGROUND */}
                 <div className="absolute inset-0 z-0 opacity-20">
                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/20 blur-[150px] rounded-full animate-subtle-float"></div>
@@ -103,21 +103,21 @@ export default function AboutPage() {
                 <div className="relative z-10 max-w-4xl mx-auto">
                    <div className="flex items-center justify-center gap-4 mb-10">
                       <div className="h-px bg-brand-gold/40 animate-line-grow w-0"></div>
-                      <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em]">INITIALIZE PARTNERSHIP</span>
+                      <span className="text-[10px] font-black text-brand-navy/60 uppercase tracking-[0.5em]">INITIALIZE PARTNERSHIP</span>
                       <div className="h-px bg-brand-gold/40 animate-line-grow w-0"></div>
                    </div>
                    
-                   <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-none mb-10 uppercase">
+                   <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-none mb-10 uppercase text-brand-navy">
                       READY TO <br />
                       <span className="text-gradient">PARTNER WITH US?</span>
                    </h2>
                    
-                   <p className="text-slate-400 text-sm md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-16 opacity-80">
+                   <p className="text-slate-600 text-sm md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-16 opacity-80">
                       Connect with MITRAY EXIM today to discuss your global procurement requirements and receive a tailored institutional manifest.
                    </p>
                    
                    <a href="/contact">
-                      <button className="group relative px-12 py-6 bg-brand-gold text-brand-navy rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95 overflow-hidden">
+                      <button className="group relative px-12 py-6 bg-brand-navy text-white rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95 overflow-hidden">
                         <span className="relative z-10 flex items-center gap-4">
                           Request Institutional Manifest <FiArrowRight className="text-xl group-hover:translate-x-2 transition-transform" />
                         </span>

@@ -55,21 +55,21 @@ export function Certifications() {
                 <div className="flex-1 space-y-4 text-center">
                   <div>
                     <h3 className="text-2xl font-black text-brand-navy tracking-tighter mb-1 group-hover:text-brand-gold transition-colors duration-500">{cert.name}</h3>
-                    <p className="text-[7px] font-black text-slate-400 uppercase tracking-[0.3em] leading-tight px-2">{cert.fullName}</p>
+                    <p className="text-[8.8px] font-black text-slate-400 uppercase tracking-[0.3em] leading-tight px-2">{cert.fullName}</p>
                   </div>
                   
                   <div className="h-px w-10 bg-slate-100 mx-auto group-hover:w-full group-hover:bg-brand-gold/20 transition-all duration-700"></div>
                   
-                  <p className="text-slate-500 text-[9px] leading-relaxed font-bold uppercase tracking-[0.1em] opacity-60 line-clamp-2">
+                  <p className="text-slate-500 text-[10px] leading-relaxed font-bold uppercase tracking-[0.1em] opacity-60 line-clamp-2">
                     {cert.description}
                   </p>
                 </div>
 
                 <div className="mt-8 grid grid-cols-2 gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                   <button className="flex items-center justify-center gap-2 py-2.5 bg-brand-navy text-white rounded-lg text-[8px] font-black uppercase tracking-widest hover:bg-brand-gold transition-all duration-300">
+                   <button className="flex items-center justify-center gap-2 py-2.5 bg-brand-navy text-white rounded-lg text-[10.5px] font-black uppercase tracking-widest hover:bg-brand-gold transition-all duration-300">
                       <FiDownload /> Document
                    </button>
-                   <button className="flex items-center justify-center gap-2 py-2.5 border border-slate-100 text-brand-navy rounded-lg text-[8px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all duration-300">
+                   <button className="flex items-center justify-center gap-2 py-2.5 border border-slate-100 text-brand-navy rounded-lg text-[10.5px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all duration-300">
                       <FiExternalLink /> Verify
                    </button>
                 </div>

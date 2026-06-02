@@ -128,7 +128,7 @@ export function Reviews() {
         {/* TRUST ACCELERATOR */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-slate-100/30 rounded-xl md:rounded-2xl overflow-hidden border border-slate-100 animate-reveal delay-700 opacity-0">
            {[
-             { label: "Global Reach", val: "14+ Trade Corridors", icon: <FiGlobe /> },
+             { label: "Global Reach", val: "20+ Trade Corridors", icon: <FiGlobe /> },
              { label: "Transit Logistics", val: "A-Grade Efficiency", icon: <FiZap /> },
              { label: "Compliance Status", val: "100% Export Verified", icon: <FiShield /> }
            ].map((item, i) => (

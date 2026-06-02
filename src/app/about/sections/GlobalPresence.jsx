@@ -16,22 +16,33 @@ const REGIONS = [
     ]
   },
   {
-    name: "Western Gateway",
-    description: "High-compliance supply lines serving premium European and North American markets.",
+    name: "Western & Eurasian Gateways",
+    description: "High-compliance supply lines serving premium European, Eurasian, and North American markets.",
     countries: [
       { name: "UK", flag: "🇬🇧" },
       { name: "USA", flag: "🇺🇸" },
       { name: "Canada", flag: "🇨🇦" },
       { name: "Germany", flag: "🇩🇪" },
+      { name: "Russia", flag: "🇷🇺" },
     ]
   },
   {
-    name: "Asia Pacific Nodes",
-    description: "Strategic logistics hubs connecting to Southeast Asian trade centers.",
+    name: "Asia & Indian Ocean Nodes",
+    description: "Strategic logistics hubs connecting to Southeast Asian and Indian Ocean trade centers.",
     countries: [
       { name: "Singapore", flag: "🇸🇬" },
       { name: "Malaysia", flag: "🇲🇾" },
       { name: "Vietnam", flag: "🇻🇳" },
+      { name: "Sri Lanka", flag: "🇱🇰" },
+      { name: "Maldives", flag: "🇲🇻" },
+    ]
+  },
+  {
+    name: "Emerging African Corridors",
+    description: "Expanding export channels connecting to agricultural networks in East and Central Africa.",
+    countries: [
+      { name: "Tanzania", flag: "🇹🇿" },
+      { name: "Kenya", flag: "🇰🇪" },
     ]
   }
 ];
@@ -93,7 +104,7 @@ export function GlobalPresence() {
                             <div className="flex items-center justify-between">
                                <div className="flex items-center gap-4">
                                   <span className="text-2xl group-hover/country:scale-110 transition-transform">{country.flag}</span>
-                                  <span className="text-[9px] md:text-[11px] font-black uppercase tracking-widest whitespace-nowrap">{country.name}</span>
+                                  <span className="text-[9px] md:text-[13.5px] font-black uppercase tracking-widest whitespace-nowrap">{country.name}</span>
                                </div>
                                <FiChevronRight className="text-brand-gold group-hover/country:text-brand-navy opacity-0 group-hover/country:opacity-100 transition-all -translate-x-2 group-hover/country:translate-x-0" />
                             </div>

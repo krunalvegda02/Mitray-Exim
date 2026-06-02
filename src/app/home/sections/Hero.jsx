@@ -33,7 +33,7 @@ export function Hero() {
             </div>
 
             {/* INTEGRATED BRAND HEADLINE */}
-            <h1 className="text-4xl md:text-8xl lg:text-[9rem] font-black text-white mb-4 md:mb-6 tracking-[-0.04em] leading-[0.9] md:leading-[0.85]">
+            <h1 className="text-4xl sm:text-5xl md:text-[6.5rem] lg:text-[8rem] font-black text-white mb-4 md:mb-6 tracking-[-0.04em] leading-[0.95] md:leading-[0.9]">
               <span className="block animate-reveal opacity-0">MITRAY <span className="text-gradient">EXIM.</span></span>
               <span className="block animate-reveal delay-200 opacity-0 text-white/40 uppercase">Global Excellence.</span>
             </h1>
@@ -42,8 +42,8 @@ export function Hero() {
               India's leading merchant exporter delivering <span className="text-white font-black decoration-brand-gold decoration-2 underline underline-offset-8">Fresh Vegetables</span>, Fruits, and Spices to strategic global markets.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center md:items-start gap-4 md:gap-6">
-              <button className="group relative w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 bg-brand-gold rounded-xl text-brand-navy font-black uppercase tracking-[0.2em] text-[10px] md:text-[11px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95 overflow-hidden animate-reveal delay-500 opacity-0">
+            <div className="flex flex-col sm:flex-row items-stretch gap-4 md:gap-6">
+              <button className="group relative w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 bg-brand-gold rounded-xl text-brand-navy font-black uppercase tracking-[0.2em] text-[10px] md:text-[11px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95 overflow-hidden animate-reveal delay-500 opacity-0 flex items-center justify-center">
                 <span className="relative z-10 flex items-center justify-center gap-3 md:gap-4">
                   Explore Products <FiArrowRight className="text-sm md:text-xl group-hover:translate-x-2 transition-transform duration-500" />
                 </span>
@@ -55,7 +55,7 @@ export function Hero() {
                  </div>
                  <div className="text-left">
                     <p className="text-[7px] md:text-[9px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">Global Supply Chain</p>
-                    <p className="text-[9px] md:text-[11px] font-black text-white uppercase tracking-widest leading-none">14+ Export Hubs</p>
+                    <p className="text-[9px] md:text-[11px] font-black text-white uppercase tracking-widest leading-none">20+ Export Hubs</p>
                  </div>
               </div>
             </div>
@@ -93,14 +93,14 @@ export function Hero() {
                 { icon: <FiActivity />, label: "Grid Status", val: "Operational" },
                 { icon: <FiShield />, label: "APEDA Certified", val: "A-Grade" },
                 { icon: <FiZap />, label: "Export Ready", val: "Instant Load" },
-                { icon: <FiGlobe />, label: "Global Hubs", val: "14 Nodes" },
+                { icon: <FiGlobe />, label: "Global Hubs", val: "20+ Nodes" },
                 { icon: <FiCheckCircle />, label: "Quality Audit", val: "FSSAI Verified" },
                 { icon: <FiTruck />, label: "Fast Logistics", val: "Optimized" },
                 // Loop
                 { icon: <FiActivity />, label: "Grid Status", val: "Operational" },
                 { icon: <FiShield />, label: "APEDA Certified", val: "A-Grade" },
                 { icon: <FiZap />, label: "Export Ready", val: "Instant Load" },
-                { icon: <FiGlobe />, label: "Global Hubs", val: "14 Nodes" },
+                { icon: <FiGlobe />, label: "Global Hubs", val: "20+ Nodes" },
                 { icon: <FiCheckCircle />, label: "Quality Audit", val: "FSSAI Verified" },
                 { icon: <FiTruck />, label: "Fast Logistics", val: "Optimized" },
               ].map((m, i) => (

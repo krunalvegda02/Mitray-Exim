@@ -38,7 +38,7 @@ export function CompanyIntro() {
                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 md:mt-16 animate-reveal delay-500 opacity-0">
                   {[
                     { val: "2020", label: "Establishment", icon: <FiActivity /> },
-                    { val: "14+", label: "Trade Hubs", icon: <FiGlobe /> },
+                    { val: "20+", label: "Trade Hubs", icon: <FiGlobe /> },
                     { val: "100%", label: "Compliance", icon: <FiShield /> },
                     { val: "Elite", label: "Grid Status", icon: <FiZap /> },
                   ].map((stat, idx) => (

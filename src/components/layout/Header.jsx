@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { FiGlobe, FiSend, FiMenu, FiX, FiActivity, FiArrowUpRight, FiZap } from "react-icons/fi";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,94 +19,104 @@ export function Header() {
   }, []);
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-        isScrolled 
-          ? "bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border-b border-slate-100" 
-          : "bg-transparent"
-      }`}
-    >
-      {/* INSTITUTIONAL ANNOUNCEMENT BAR */}
-      <div className={`w-full bg-brand-navy overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100 border-b border-white/5'}`}>
-         <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-center sm:justify-between">
-            <div className="flex items-center gap-6">
-               <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
-                  <span className="text-[8px] sm:text-[10px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network Active</span>
-               </div>
-               <div className="hidden lg:flex items-center gap-2">
-                  <FiZap className="text-brand-gold text-[10px]" />
-                  <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
-               </div>
+    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500">
+      {/* SLIM INSTITUTIONAL ANNOUNCEMENT BAR */}
+      <div className={`w-full bg-brand-navy overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-9 opacity-100 border-b border-white/5'}`}>
+        <div className="container mx-auto px-6 md:px-12 h-full flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
+              <span className="text-[9px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network Active</span>
             </div>
-            <div className="hidden sm:flex items-center gap-3 sm:gap-4">
-               <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
-               <FiArrowUpRight className="text-brand-gold text-[10px]" />
+            <div className="hidden lg:flex items-center gap-2">
+              <FiZap className="text-brand-gold text-[9px]" />
+              <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
             </div>
-         </div>
+          </div>
+          <div className="hidden sm:flex items-center gap-4">
+            <span className="text-[9px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
+            <FiArrowUpRight className="text-brand-gold text-[9px]" />
+          </div>
+        </div>
       </div>
 
-      {/* MAIN NAVIGATION BAR */}
-      <div className={`transition-all duration-500 ${isScrolled ? 'h-20' : 'h-24'}`}>
-        <div className="container mx-auto px-8 md:px-12 h-full">
-          <div className="flex items-center justify-between h-full">
-            
-            {/* LOGO MANIFEST */}
+      {/* FLOATING CAPSULE NAVIGATION */}
+      <div className={`w-full transition-all duration-500 ${isScrolled ? 'pt-3' : 'pt-4'}`}>
+        <div className="container mx-auto px-4 md:px-8">
+          <div
+            className={`mx-auto max-w-7xl rounded-full transition-all duration-500 flex items-center justify-between px-6 md:px-8
+              ${isScrolled
+                ? "bg-white/[0.7] backdrop-blur-[30px] backdrop-saturate-[180%] border border-white/[0.25] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-2.5 md:py-3"
+                : "bg-gradient-to-r from-brand-navy/60 to-slate-900/60 backdrop-blur-[30px] backdrop-saturate-[190%] border border-white/15 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)] py-3.5 md:py-4.5"
+              }`}
+          >
+            {/* LOGO */}
             <Link href="/" className="group flex items-center space-x-4 transition-transform duration-500 hover:scale-[1.02]">
               <img
-                src="/logoh.png"
+                src="/newLogo.png"
                 alt="MITRAY EXIM"
-                className={`transition-all duration-700 ${isScrolled ? "h-16" : "h-18 brightness-100 "}`}
+                className={`object-contain transition-all duration-500 ${
+                  isScrolled 
+                    ? "w-[90px] md:w-[145px] brightness-100" 
+                    : "w-[110px] md:w-[185px] brightness-0 invert"
+                }`}
               />
-              <div className={`h-8 w-px hidden sm:block transition-colors ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
-              <div className="hidden sm:flex flex-col">
-
-              </div>
             </Link>
-
-            {/* SIMPLIFIED NAVIGATION LINKS */}
-            <nav className="hidden lg:flex items-center space-x-12">
+ 
+            {/* NAV LINKS */}
+            <nav className="hidden lg:flex items-center space-x-1.5">
               {[
                 ["Home", "/"],
                 ["About Us", "/about"],
                 ["Products", "/products"],
                 ["Certifications", "/certifications"],
-                ["Blog", "/blog"],
-              ].map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`text-sm md:text-lg font-black uppercase tracking-[0.3em] transition-all duration-500 relative group py-2 ${
-                    isScrolled ? 'text-brand-navy/70 hover:text-brand-gold' : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-700 rounded-full"></span>
-                </Link>
-              ))}
+                ["Blogs", "/blog"],
+                ["Gallery", "/gallery"],
+              ].map(([label, href]) => {
+                const isActive = pathname === href;
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`text-[13px] md:text-[14.5px] font-black uppercase tracking-[0.16em] px-4.5 py-2 md:px-5 md:py-2.5 rounded-full transition-all duration-300 relative group
+                      ${isScrolled
+                        ? isActive
+                          ? 'bg-brand-navy text-white shadow-md shadow-brand-navy/10 scale-[1.03]'
+                          : 'text-brand-navy/70 hover:text-brand-navy hover:bg-slate-50'
+                        : isActive
+                          ? 'bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/15 scale-[1.03]'
+                          : 'text-white/80 hover:text-white hover:bg-white/10'
+                      }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
             </nav>
-
+ 
             {/* ACTIONS */}
-            <div className="flex items-center gap-6">
-              <Link 
-                href="/contact" 
-                className={`hidden md:flex  items-center gap-3 px-8 py-5 rounded-2xl text-sm md:text-md font-black uppercase tracking-widest transition-all duration-700 shadow-2xl active:scale-95 ${
-                  isScrolled 
-                    ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy' 
-                    : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white hover:text-brand-navy'
-                } `}
+            <div className="flex items-center gap-3">
+              <Link
+                href="/contact"
+                className={`hidden md:flex items-center gap-2.5 px-6 py-3.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500 shadow-sm active:scale-95
+                  ${isScrolled
+                    ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy shadow-brand-navy/10'
+                    : 'bg-brand-gold text-brand-navy hover:bg-white hover:text-brand-navy'
+                  }`}
               >
-                Inquiry Now <FiSend className="text-sm" />
+                Inquiry Now <FiSend className="text-[11px]" />
               </Link>
-
+ 
               {/* MOBILE MENU TOGGLE */}
               <button
-                className={`lg:hidden w-12 h-12 flex items-center justify-center rounded-2xl transition-all ${
-                  isScrolled ? 'bg-brand-navy text-white' : 'bg-white shadow-lg text-brand-navy'
-                }`}
+                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-all
+                  ${isScrolled
+                    ? 'bg-brand-navy text-white shadow-sm'
+                    : 'bg-white text-brand-navy shadow-md'
+                  }`}
                 onClick={() => setIsMenuOpen((p) => !p)}
               >
-                {isMenuOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
+                {isMenuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
               </button>
             </div>
           </div>
@@ -112,13 +124,12 @@ export function Header() {
       </div>
 
       {/* MOBILE COMMAND CENTER OVERLAY */}
-      <div 
-        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/95 backdrop-blur-2xl transition-all duration-700 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+      <div
+        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/98 backdrop-blur-2xl transition-all duration-700 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full p-10 pt-32">
-          <button 
+          <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-10 right-10 w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-white"
           >
@@ -146,11 +157,11 @@ export function Header() {
           </nav>
 
           <div className="mt-auto pt-10 flex items-center justify-between border-t border-white/10">
-             <div className="flex items-center gap-3">
-                <FiGlobe className="text-brand-gold text-2xl" />
-                <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">MITRAY EXIM Hub</span>
-             </div>
-             <FiActivity className="text-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-3">
+              <FiGlobe className="text-brand-gold text-2xl" />
+              <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">MITRAY EXIM Hub</span>
+            </div>
+            <FiActivity className="text-emerald-400 animate-pulse" />
           </div>
         </div>
       </div>

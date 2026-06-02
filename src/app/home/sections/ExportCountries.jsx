@@ -38,8 +38,15 @@ const EXPORT_COUNTRIES = [
   { code: "om", name: "Oman", flag: "🇴🇲", region: "Gulf", coords: [58.4059, 23.5859] },
   { code: "kw", name: "Kuwait", flag: "🇰🇼", region: "Gulf", coords: [47.9774, 29.3759] },
   { code: "gb", name: "United Kingdom", flag: "🇬🇧", region: "Europe", coords: [-0.1276, 51.5074] },
+  { code: "de", name: "European Countries", flag: "🇪🇺", region: "Europe", coords: [10.4515, 51.1657] },
+  { code: "ru", name: "Russia", flag: "🇷🇺", region: "Europe", coords: [37.6173, 55.7558] },
   { code: "us", name: "United States", flag: "🇺🇸", region: "Americas", coords: [-95.7129, 37.0902] },
   { code: "ca", name: "Canada", flag: "🇨🇦", region: "Americas", coords: [-106.3468, 56.1304] },
+  { code: "lk", name: "Sri Lanka", flag: "🇱🇰", region: "Asia", coords: [80.7718, 7.8731] },
+  { code: "mv", name: "Maldives", flag: "🇲🇻", region: "Asia", coords: [73.5093, 3.2028] },
+  { code: "vn", name: "Vietnam", flag: "🇻🇳", region: "Asia", coords: [108.2772, 14.0583] },
+  { code: "tz", name: "Tanzania (East Africa)", flag: "🇹🇿", region: "Africa", coords: [34.8888, -6.3690] },
+  { code: "ke", name: "Kenya (East Africa)", flag: "🇰🇪", region: "Africa", coords: [37.9062, -0.0236] },
 ];
 
 const GULF_COUNTRIES = EXPORT_COUNTRIES.filter(c => c.region === "Gulf");
@@ -54,21 +61,6 @@ export function ExportCountries() {
 
   useEffect(() => {
     setIsClient(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAutoFocused.current) {
-          const uae = GULF_COUNTRIES.find(c => c.name === "United Arab Emirates");
-          if (uae) {
-            handleCountryFocus(uae);
-            hasAutoFocused.current = true;
-          }
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
   }, []);
 
   const handleCountryFocus = (country) => {
@@ -119,12 +111,12 @@ export function ExportCountries() {
             Mitray Exim powers a high-speed logistics network connecting India’s finest produce to elite trade corridors worldwide.
           </p>
 
-          <div className="flex overflow-x-auto pb-2 -mx-4 px-4 gap-2 no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-8">
+          <div className="flex overflow-x-auto pb-2 -mx-4 px-1 gap-2 no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-8">
              {EXPORT_COUNTRIES.map(c => (
                 <button 
                   key={c.code}
                   onClick={() => handleCountryFocus(c)}
-                  className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl md:rounded-2xl text-[8px] md:text-[9px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${
+                  className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl md:rounded-2xl text-[8px] md:text-[12px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${
                     hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100'
                   }`}
                 >
@@ -168,7 +160,15 @@ export function ExportCountries() {
                       const geoName = geo.properties.name;
                       const isIndia = geoName === "India";
                       const isExport = EXPORT_COUNTRIES.some(c => {
-                        const names = { "United Arab Emirates": "UAE", "United Kingdom": "UK", "United States of America": "USA", "United States": "USA" };
+                        const names = { 
+                          "United Arab Emirates": "UAE", 
+                          "United Kingdom": "UK", 
+                          "United States of America": "USA", 
+                          "United States": "USA",
+                          "Tanzania (East Africa)": "United Republic of Tanzania",
+                          "Kenya (East Africa)": "Kenya",
+                          "European Countries": "Germany"
+                        };
                         return (names[c.name] || c.name) === (names[geoName] || geoName) || c.name === geoName;
                       });
                       

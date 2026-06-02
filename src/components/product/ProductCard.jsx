@@ -48,7 +48,7 @@ export function ProductCard({ product, onQuoteClick }) {
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
         <img 
-          src={getProductImage(product.category)} 
+          src={product.image || getProductImage(product.category)} 
           alt={product.name}
           className={`w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-110 opacity-40' : 'group-hover:scale-110 opacity-70 group-hover:opacity-40'}`}
         />
@@ -103,7 +103,7 @@ export function ProductCard({ product, onQuoteClick }) {
         {/* ACTIONS */}
         <div className={`flex gap-3 pt-2 transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-16 md:translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100'}`}>
            <button 
-             onClick={onQuoteClick}
+             onClick={() => onQuoteClick ? onQuoteClick() : window.location.href = '/contact'}
              className="flex-1 bg-brand-gold text-brand-navy font-black text-[9px] md:text-[10px] uppercase tracking-[0.3em] py-4 rounded-xl shadow-2xl hover:bg-white transition-all duration-500 flex items-center justify-center gap-2"
            >
              Quote <FiArrowUpRight className="text-lg" />
