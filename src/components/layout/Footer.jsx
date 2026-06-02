@@ -135,8 +135,8 @@ export function Footer() {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 animate-reveal opacity-0 delay-1000">
              {CERTIFICATIONS.map((cert) => (
-               <div key={cert.id} className="flex items-center gap-6 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl">
-                  <div className="w-12 h-12 md:w-20 md:h-20 flex items-center justify-center flex-shrink-0">
+               <div key={cert.id} className="flex items-center gap-3 md:gap-5 p-2 md:p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl">
+                  <div className="w-8 h-8 md:w-16 md:h-16 flex items-center justify-center flex-shrink-0">
                      <img 
                        src={cert.logo} 
                        alt={cert.name} 
@@ -147,14 +147,14 @@ export function Footer() {
                        }}
                      />
                      <div className="hidden flex-col items-center justify-center text-center">
-                        <svg className="w-6 h-6 md:w-10 md:h-10 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 md:w-8 md:h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
                      </div>
                   </div>
-                  <div className="hidden sm:block">
-                     <p className="text-[10px] font-black uppercase tracking-widest text-brand-gold">{cert.name}</p>
-                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 group-hover/logo:text-brand-navy/60 transition-colors">Verified Protocol</p>
+                  <div className="block min-w-0 flex-1">
+                     <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-brand-gold truncate">{cert.name}</p>
+                     <p className="text-[6.5px] md:text-[8px] font-black uppercase tracking-[0.1em] text-white/40 group-hover/logo:text-brand-navy/60 transition-colors truncate">Verified Protocol</p>
                   </div>
                </div>
              ))}
@@ -169,7 +169,7 @@ export function Footer() {
             © {currentYear} MITRAY EXIM. <span className="text-brand-gold/40">Handcrafted with Excellence.</span>
           </p>
           <div className="flex items-center space-x-8 lg:space-x-12">
-            {["Privacy", "Terms", "Sitemap"].map((link) => (
+            {["Privacy", "Terms"].map((link) => (
               <Link key={link} href={`/${link.toLowerCase()}`} className="text-slate-500 hover:text-white text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-colors">
                 {link}
               </Link>

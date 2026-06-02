@@ -42,7 +42,7 @@ export default function CertificationsPage() {
           </div>
 
           {/* 3. CERTIFICATION MANIFEST GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 mb-24">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-12 mb-16 md:mb-24">
             {CERTIFICATIONS.map((cert, index) => (
               <div key={cert.id} className="animate-reveal opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
                 <CertificateCard cert={cert} />

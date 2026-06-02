@@ -58,7 +58,7 @@ export function Header() {
                 alt="MITRAY EXIM"
                 className={`object-contain transition-all duration-500 ${
                   isScrolled 
-                    ? "w-[90px] md:w-[175px] brightness-100" 
+                    ? "w-[110px] md:w-[175px] brightness-100" 
                     : "w-[110px] md:w-[185px] brightness-0 invert"
                 }`}
               />

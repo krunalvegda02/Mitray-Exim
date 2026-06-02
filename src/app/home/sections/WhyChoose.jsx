@@ -29,7 +29,7 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section className="relative py-12 md:py-20 overflow-hidden bg-white">
+    <section className="relative py-12 md:py-20 overflow-hidden bg-slate-50">
       <div className="container mx-auto px-4 md:px-12 relative z-10">
         
         {/* STANDARDIZED HEADER ARCHITECTURE */}

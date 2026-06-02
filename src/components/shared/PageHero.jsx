@@ -20,11 +20,11 @@ export function PageHero({
             <img 
               src={backgroundImage} 
               alt={title} 
-              className="w-full h-full object-cover opacity-40 animate-subtle-zoom"
+              className="w-full h-full object-cover opacity-75 animate-subtle-zoom"
             />
             {/* Elegant Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-transparent"></div>
           </>
         ) : (
           <div className="w-full h-full bg-brand-navy"></div>

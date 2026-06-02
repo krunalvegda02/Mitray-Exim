@@ -12,7 +12,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 export function Reviews() {
   return (
-    <section className="relative overflow-hidden py-12 md:py-20 bg-white">
+    <section className="relative overflow-hidden py-12 md:py-20 bg-slate-50">
       
       {/* UNIFIED ATMOSPHERIC BACKGROUND */}
       <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">

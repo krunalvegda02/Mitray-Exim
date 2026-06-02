@@ -11,10 +11,10 @@ export function Hero() {
         <img 
           src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1920&h=1080&fit=crop" 
           alt="MITRAY EXIM Premium Agricultural Exports India" 
-          className="w-full h-full object-cover opacity-20 animate-subtle-zoom"
+          className="w-full h-full object-cover opacity-65 animate-subtle-zoom"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/90 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-brand-navy/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/35 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-brand-navy/15"></div>
         
         {/* DATA SCANNER SWEEP */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-gold/5 to-transparent -skew-x-12 translate-x-[-200%] animate-[scan_8s_infinite] pointer-events-none"></div>

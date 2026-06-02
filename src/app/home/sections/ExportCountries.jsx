@@ -61,6 +61,11 @@ export function ExportCountries() {
 
   useEffect(() => {
     setIsClient(true);
+    // On mobile screens, default to focusing on Dubai/UAE with zoom 3 to make the map packed and interactive
+    if (window.innerWidth < 1024) {
+      setPosition({ coordinates: [55.2708, 25.2048], zoom: 3 });
+      setHovered("United Arab Emirates");
+    }
   }, []);
 
   const handleCountryFocus = (country) => {
@@ -68,7 +73,9 @@ export function ExportCountries() {
     setIsStatsOpen(true);
     const isMobile = window.innerWidth < 1024;
     const zoomLevel = country.region === "Gulf" ? (isMobile ? 3.5 : 5) : (isMobile ? 2.5 : 3.5);
-    setPosition({ coordinates: country.coords, zoom: zoomLevel });
+    // Cap vertical center latitude at a minimum of 10 degrees North to prevent pulling up empty southern ocean
+    const targetLatitude = Math.max(10, country.coords[1]);
+    setPosition({ coordinates: [country.coords[0], targetLatitude], zoom: zoomLevel });
   };
 
   const handleZoomIn = () => {
@@ -82,8 +89,14 @@ export function ExportCountries() {
   };
 
   const handleResetMap = () => {
-    setPosition({ coordinates: [60, 25], zoom: 1 });
-    setHovered(null);
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      setPosition({ coordinates: [55.2708, 25.2048], zoom: 3 });
+      setHovered("United Arab Emirates");
+    } else {
+      setPosition({ coordinates: [60, 25], zoom: 1 });
+      setHovered(null);
+    }
   };
 
   const handleMoveEnd = (position) => {
@@ -93,7 +106,7 @@ export function ExportCountries() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
-    <section ref={sectionRef} className="relative py-12 md:py-20 overflow-hidden bg-white">
+    <section ref={sectionRef} className="relative py-12 md:py-20 overflow-hidden bg-slate-50">
       <div className="container mx-auto px-4 md:px-12 relative z-10">
         
         {/* STANDARDIZED HEADER ARCHITECTURE */}
@@ -127,7 +140,7 @@ export function ExportCountries() {
         </div>
 
         {/* MAP DASHBOARD TERMINAL */}
-        <div className="relative glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden border-white shadow-2xl bg-slate-50/50 min-h-[500px] md:min-h-[650px] animate-reveal delay-500 opacity-0">
+        <div className="relative glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden border-white shadow-2xl bg-slate-50/50 min-h-[350px] sm:min-h-[450px] md:min-h-[600px] lg:min-h-[650px] animate-reveal delay-500 opacity-0">
           
           {/* MAP HUD */}
           <div className="absolute top-4 md:top-6 left-4 md:left-6 right-4 md:right-6 z-20 flex justify-between items-start pointer-events-none">
@@ -144,13 +157,13 @@ export function ExportCountries() {
                 <button onClick={handleResetMap} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiTarget /></button>
              </div>
           </div>
-
+ 
           {isClient && (
             <ComposableMap
               projection="geoMercator"
               projectionConfig={{ scale: 220 }}
               width={1000}
-              height={isMobile ? 1000 : 700}
+              height={500}
               className="w-full h-auto"
             >
               <ZoomableGroup zoom={position.zoom} center={position.coordinates} onMoveEnd={handleMoveEnd} maxZoom={8} minZoom={1}>

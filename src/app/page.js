@@ -13,48 +13,13 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      
-      <div className="py-12 md:py-20 bg-slate-50">
-        <Container>
-          <WhyChoose />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-white">
-        <Container>
-          <FeaturedProducts />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-slate-50">
-        <Container>
-          <ExportCountries />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-white">
-        <Container>
-          <Certifications />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-slate-50">
-        <Container>
-          <Reviews />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-white">
-        <Container>
-          <FaqSection />
-        </Container>
-      </div>
-
-      <div className="py-12 md:py-20 bg-slate-50">
-        <Container>
-          <BlogPreview />
-        </Container>
-      </div>
+      <WhyChoose />
+      <FeaturedProducts />
+      <ExportCountries />
+      <Certifications />
+      <Reviews />
+      <FaqSection />
+      <BlogPreview />
 
       <div className="py-12 md:py-20 relative overflow-hidden bg-white">
         {/* ATMOSPHERIC BACKGROUND */}
