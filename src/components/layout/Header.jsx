@@ -21,8 +21,9 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500">
       {/* SLIM INSTITUTIONAL ANNOUNCEMENT BAR */}
-      <div className={`w-full bg-brand-navy overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-9 opacity-100 border-b border-white/5'}`}>
-        <div className="container mx-auto px-6 md:px-12 h-full flex items-center justify-between">
+      <div className={`w-full bg-brand-navy relative overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-9 opacity-100 border-b border-white/5'}`}>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-gold/10 to-transparent -skew-x-12 translate-x-[-200%] animate-[scan_8s_infinite] pointer-events-none"></div>
+        <div className="container mx-auto px-6 md:px-12 h-full flex items-center justify-between relative z-10">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
@@ -44,10 +45,10 @@ export function Header() {
       <div className="w-full transition-all duration-500 pt-4">
         <div className="container mx-auto px-4 md:px-8">
           <div
-            className={`mx-auto max-w-7xl rounded-full transition-all duration-500 flex items-center justify-between px-6 md:px-8
+            className={`mx-auto max-w-7xl rounded-full transition-all duration-700 flex items-center justify-between px-6 md:px-8 border hover:shadow-brand-gold/5 hover:border-brand-gold/30 hover:scale-[1.01]
               ${isScrolled
-                ? "bg-white/[0.7] backdrop-blur-[30px] backdrop-saturate-[180%] border border-white/[0.25] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-3.5 md:py-4.5"
-                : "bg-gradient-to-r from-brand-navy/60 to-slate-900/60 backdrop-blur-[30px] backdrop-saturate-[190%] border border-white/15 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)] py-3.5 md:py-4.5"
+                ? "bg-white/[0.8] backdrop-blur-[30px] border-white/[0.15] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-3.5 md:py-4.5"
+                : "bg-brand-navy/70 backdrop-blur-[30px] border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)] py-3.5 md:py-4.5"
               }`}
           >
             {/* LOGO */}

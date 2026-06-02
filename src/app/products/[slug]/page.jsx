@@ -35,7 +35,11 @@ export default function ProductDetailPage({ params }) {
   const relatedProducts = PRODUCTS.filter(p => p.category === product.category && p.slug !== product.slug).slice(0, 4);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white relative overflow-hidden">
+      {/* Decorative premium ambient glow */}
+      <div className="absolute top-[40vh] left-0 w-[500px] h-[500px] bg-brand-gold/5 blur-[120px] rounded-full pointer-events-none animate-subtle-float"></div>
+      <div className="absolute top-[80vh] right-0 w-[600px] h-[600px] bg-brand-navy/5 blur-[150px] rounded-full pointer-events-none animate-subtle-float delay-1000"></div>
+
       <PageHero 
         badge={`${product.category.toUpperCase()} • MANIFEST ${product.slug.toUpperCase()}`}
         title={product.name}
@@ -53,23 +57,23 @@ export default function ProductDetailPage({ params }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start">
             
             {/* LEFT: STICKY ASSET TERMINAL */}
-            <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-8 animate-reveal delay-300 opacity-0">
+            <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-4 md:space-y-8 animate-reveal delay-300 opacity-0">
                <div className="relative group">
                   <div className="absolute -inset-4 bg-brand-gold/5 blur-3xl rounded-[3rem]"></div>
-                  <div className="relative glass-card p-2 rounded-[2.5rem] bg-slate-100 shadow-2xl border-white overflow-hidden">
+                  <div className="relative glass-card p-2 rounded-2xl md:rounded-[2.5rem] bg-slate-100 shadow-2xl border-white overflow-hidden">
                      <img 
                        src={productImage} 
                        alt={product.name} 
-                       className="w-full h-[400px] md:h-[550px] object-cover rounded-[2rem] transition-all duration-[2000ms] group-hover:scale-105"
+                       className="w-full h-[300px] sm:h-[400px] md:h-[550px] object-cover rounded-xl md:rounded-[2rem] transition-all duration-[2000ms] group-hover:scale-105"
                      />
-                     <div className="absolute bottom-10 left-10 right-10">
-                        <div className="glass-panel p-6 rounded-2xl border-white/20 bg-brand-navy/60 backdrop-blur-xl">
+                     <div className="absolute bottom-4 left-4 right-4 md:bottom-10 md:left-10 md:right-10">
+                        <div className="glass-panel p-4 md:p-6 rounded-xl md:rounded-2xl border-white/20 bg-brand-navy/60 backdrop-blur-xl">
                            <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3">
                                  <FiActivity className="text-brand-gold animate-pulse" />
-                                 <span className="text-xs font-black text-black uppercase tracking-widest">Active Export Hub</span>
+                                 <span className="text-[10px] md:text-xs font-black text-black uppercase tracking-widest">Active Export Hub</span>
                               </div>
-                              <span className="text-xs font-black text-brand-gold uppercase tracking-widest">Verified</span>
+                              <span className="text-[10px] md:text-xs font-black text-brand-gold uppercase tracking-widest">Verified</span>
                            </div>
                         </div>
                      </div>
@@ -77,55 +81,55 @@ export default function ProductDetailPage({ params }) {
                </div>
 
                {/* TRUST BADGES */}
-               <div className="grid grid-cols-3 gap-4">
+               <div className="grid grid-cols-3 gap-3 md:gap-4">
                   {[
                     { icon: <FiShield />, label: "Quality Grade" },
                     { icon: <FiGlobe />, label: "India Origin" },
                     { icon: <FiCheckCircle />, label: "Global Sync" }
                   ].map((badge, i) => (
-                    <div key={i} className="glass-card p-4 rounded-2xl bg-slate-50 border-slate-100 flex flex-col items-center justify-center text-center group hover:border-brand-gold hover:bg-white transition-all duration-500">
-                       <div className="text-brand-gold text-xl mb-2 group-hover:scale-110 transition-transform">{badge.icon}</div>
-                       <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest group-hover:text-brand-navy transition-colors">{badge.label}</p>
+                    <div key={i} className="glass-card p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-50 border-slate-100 flex flex-col items-center justify-center text-center group hover:border-brand-gold hover:bg-white transition-all duration-500">
+                       <div className="text-brand-gold text-lg md:text-xl mb-1.5 md:mb-2 group-hover:scale-110 transition-transform">{badge.icon}</div>
+                       <p className="text-[8.5px] md:text-xs font-black text-slate-400 uppercase tracking-widest group-hover:text-brand-navy transition-colors">{badge.label}</p>
                     </div>
                   ))}
                </div>
 
                {/* QUICK INQUIRY WIDGET - LIGHT THEME (Fixes Navy Background Issue) */}
-               <div className="relative p-8 md:p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-2xl overflow-hidden group">
+               <div className="relative p-5 md:p-10 rounded-2xl md:rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-2xl overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 blur-3xl -translate-y-16 translate-x-16"></div>
-                  <h4 className="text-xl md:text-2xl font-black uppercase tracking-tighter mb-6 text-brand-navy">Procurement Desk</h4>
-                  <div className="space-y-4 mb-8">
-                     <div className="flex items-center gap-4 text-slate-500">
+                  <h4 className="text-lg md:text-2xl font-black uppercase tracking-tighter mb-4 md:mb-6 text-brand-navy">Procurement Desk</h4>
+                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                     <div className="flex items-center gap-3 md:gap-4 text-slate-500">
                         <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">
                            <FiMail />
                         </div>
                         <span className="text-xs md:text-sm font-bold uppercase tracking-widest">exports@mitrayexim.com</span>
                      </div>
-                     <div className="flex items-center gap-4 text-slate-500">
+                     <div className="flex items-center gap-3 md:gap-4 text-slate-500">
                         <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">
                            <FiPhone />
                         </div>
                         <span className="text-xs md:text-sm font-bold uppercase tracking-widest">+91 96245 42426</span>
                      </div>
                   </div>
-                  <Link href="/contact" className="block w-full py-6 bg-brand-navy text-white rounded-xl text-xs md:text-sm font-black text-center uppercase tracking-[0.3em] hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 shadow-lg">
+                  <Link href="/contact" className="block w-full py-4.5 md:py-6 bg-brand-navy text-white rounded-xl text-xs md:text-sm font-black text-center uppercase tracking-[0.3em] hover:bg-brand-gold hover:text-brand-navy transition-all duration-500 shadow-lg">
                      Initialize Contact
                   </Link>
                </div>
             </div>
 
             {/* RIGHT: TECHNICAL SPECIFICATIONS */}
-            <div className="lg:col-span-7 space-y-10 md:space-y-16 animate-reveal delay-500 opacity-0 pt-8 lg:pt-0">
-               <div className="space-y-6">
+            <div className="lg:col-span-7 space-y-8 md:space-y-16 animate-reveal delay-500 opacity-0 pt-4 lg:pt-0">
+               <div className="space-y-4 md:space-y-6">
                   <div className="flex items-center gap-4">
                      <div className="h-px w-12 bg-brand-gold"></div>
-                     <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Operational Metadata</span>
+                     <span className="text-[10px] md:text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Operational Metadata</span>
                   </div>
-                  <h2 className="text-4xl md:text-7xl font-black text-brand-navy tracking-tighter uppercase leading-[0.9]">
+                  <h2 className="text-3xl md:text-7xl font-black text-brand-navy tracking-tighter uppercase leading-[0.9]">
                      TECHNICAL <br />
                      <span className="text-gradient">MANIFEST.</span>
                   </h2>
-                  <p className="text-sm md:text-lg text-slate-400 font-bold uppercase tracking-tight leading-relaxed max-w-2xl opacity-80">
+                  <p className="text-xs md:text-lg text-slate-400 font-bold uppercase tracking-tight leading-relaxed max-w-2xl opacity-80">
                      Official specifications for MIT-24 Export Protocol. All metrics are 100% verified against international agricultural standards.
                   </p>
                </div>
@@ -141,23 +145,23 @@ export default function ProductDetailPage({ params }) {
                   ].map((spec, i) => (
                     <div 
                       key={i} 
-                      className="glass-card p-8 rounded-[2rem] bg-slate-50 border-slate-100 group hover:border-brand-gold hover:bg-white hover:shadow-2xl transition-all duration-500 hover-lift"
+                      className="glass-card p-5 md:p-8 rounded-xl md:rounded-[2rem] bg-slate-50/60 border border-slate-100/60 backdrop-blur-md group hover:border-brand-gold/40 hover:bg-white hover:shadow-[0_20px_50px_-15px_rgba(212,165,116,0.15)] transition-all duration-500 hover-lift"
                     >
-                       <div className="flex items-center justify-between mb-6">
-                          <div className="w-12 h-12 bg-white shadow-sm rounded-xl flex items-center justify-center text-brand-gold text-xl group-hover:scale-110 transition-transform duration-500">
+                       <div className="flex items-center justify-between mb-4 md:mb-6">
+                          <div className="w-10 h-10 md:w-12 md:h-12 bg-white shadow-sm rounded-xl flex items-center justify-center text-brand-gold text-lg md:text-xl group-hover:scale-110 transition-transform duration-500">
                              {spec.icon}
                           </div>
                           <FiArrowUp className="text-slate-200 group-hover:text-brand-gold rotate-45 transition-colors" />
                        </div>
-                       <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-2 group-hover:text-brand-gold transition-colors duration-500">{spec.label}</p>
-                       <p className="text-sm md:text-xl font-black text-brand-navy uppercase tracking-widest transition-colors duration-500">{spec.val}</p>
+                       <p className="text-[9px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-1.5 md:mb-2 group-hover:text-brand-gold transition-colors duration-500">{spec.label}</p>
+                       <p className="text-xs md:text-xl font-black text-brand-navy uppercase tracking-widest transition-colors duration-500">{spec.val}</p>
                     </div>
                   ))}
                </div>
                
-               <div className="p-8 md:p-12 glass-card rounded-[3rem] bg-slate-50 border-slate-100 border-dashed border-2">
-                  <h4 className="text-sm md:text-base font-black text-brand-navy uppercase tracking-widest mb-4">Export Summary</h4>
-                  <p className="text-sm md:text-base text-slate-400 font-medium leading-relaxed uppercase tracking-tight">
+               <div className="p-5 md:p-12 glass-card rounded-xl md:rounded-[3rem] bg-slate-50 border-slate-100 border-dashed border-2">
+                  <h4 className="text-xs md:text-base font-black text-brand-navy uppercase tracking-widest mb-2 md:mb-4">Export Summary</h4>
+                  <p className="text-xs md:text-base text-slate-400 font-medium leading-relaxed uppercase tracking-tight">
                      This {product.name} manifest represents a verified procurement batch ready for international dispatch. Our supply chain protocol ensures that every shipment meets the phytosanitary requirements of the target global hub.
                   </p>
                </div>
@@ -201,17 +205,17 @@ export default function ProductDetailPage({ params }) {
           )}
 
           {/* FINAL INSTITUTIONAL FOOTER - LIGHT THEME (Fixes Navy Background Issue) */}
-          <div className="relative p-12 md:p-24 rounded-[3rem] bg-slate-50 border border-slate-100 text-center shadow-2xl overflow-hidden animate-reveal">
+          <div className="relative p-6 md:p-24 rounded-2xl md:rounded-[3rem] bg-slate-50 border border-slate-100 text-center shadow-2xl overflow-hidden animate-reveal">
              <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[150px] rounded-full animate-subtle-float -translate-y-1/2 translate-x-1/2"></div>
              <div className="relative z-10 max-w-4xl mx-auto">
-                <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-none mb-10 uppercase text-brand-navy">
+                <h2 className="text-3xl md:text-8xl font-black tracking-tighter leading-none mb-6 md:mb-10 uppercase text-brand-navy">
                    READY TO <span className="text-gradient">IMPORT?</span>
                 </h2>
-                <p className="text-slate-400 text-base md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-16 opacity-80">
+                <p className="text-slate-400 text-xs md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-10 md:mb-16 opacity-80">
                    Initialize a professional procurement manifest for {product.name} today. Our institutional export team is ready to assist with custom logistics and documentation.
                 </p>
                 <Link href="/contact">
-                   <button className="group relative px-12 py-6 bg-brand-navy text-white rounded-2xl font-black uppercase tracking-[0.3em] text-xs md:text-sm shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95">
+                   <button className="group relative px-6 py-4 md:px-12 md:py-6 bg-brand-navy text-white rounded-xl md:rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] md:text-sm shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95">
                       Request Institutional Manifest
                    </button>
                 </Link>

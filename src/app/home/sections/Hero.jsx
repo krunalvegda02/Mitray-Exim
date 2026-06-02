@@ -43,7 +43,7 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch gap-4 md:gap-6">
-              <button className="group relative w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 bg-brand-gold rounded-xl text-brand-navy font-black uppercase tracking-[0.2em] text-[10px] md:text-[11px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95 overflow-hidden animate-reveal delay-500 opacity-0 flex items-center justify-center">
+              <button className="group relative w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 bg-brand-gold rounded-xl text-brand-navy font-black uppercase tracking-[0.2em] text-[10px] md:text-[16px] shadow-2xl hover:bg-white transition-all duration-700 active:scale-95 overflow-hidden animate-reveal delay-500 opacity-0 flex items-center justify-center">
                 <span className="relative z-10 flex items-center justify-center gap-3 md:gap-4">
                   Explore Products <FiArrowRight className="text-sm md:text-xl group-hover:translate-x-2 transition-transform duration-500" />
                 </span>
