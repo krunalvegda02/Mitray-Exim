@@ -26,15 +26,15 @@ export function Reviews() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Global Partner Sentiment</span>
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Client Testimonials</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
             TRUSTED BY <br />
-            <span className="text-gradient">THE GIANTS.</span>
+            <span className="text-gradient">OUR CLIENTS.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-200">
-            Institutional grade reliability for agricultural exports. Verified by the world's most demanding procurement offices.
+            Premium reliability for agricultural exports. Trusted by major importers, wholesalers, and supermarkets worldwide.
           </p>
         </div>
 
@@ -56,9 +56,9 @@ export function Reviews() {
             {TESTIMONIALS.map((testimonial, index) => (
               <SwiperSlide key={index}>
                 <div className="relative p-2 md:p-4">
-                  <div className="relative glass-card bg-white/80 rounded-2xl md:rounded-[2rem] overflow-hidden border-white shadow-[0_30px_60px_-15px_rgba(44,74,94,0.1)] group/card">
+                  <div className="relative glass-card bg-white/80 rounded-2xl md:rounded-[2rem] overflow-hidden border-white shadow-[0_30px_60px_-15px_rgba(44,74,94,0.1)] group/card p-4 md:p-8">
                     
-                    <div className="p-6 md:p-12">
+                    <div className="p-4 md:p-8">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 md:mb-10">
                          <div className="flex items-center gap-4 md:gap-6">
                             <div className="relative">
@@ -103,10 +103,10 @@ export function Reviews() {
                          <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2">
                                <FiActivity className="text-brand-gold animate-pulse" />
-                               <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Global Export Operations Verified</span>
+                               <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Global Quality Standards Verified</span>
                             </div>
                          </div>
-                         <div className="text-[9px] font-black text-slate-300 uppercase tracking-[0.3em]">Institutional Trust Manifest</div>
+                         <div className="text-[9px] font-black text-slate-300 uppercase tracking-[0.3em]">Verified Trade Partner</div>
                       </div>
                     </div>
                   </div>

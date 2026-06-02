@@ -22,12 +22,12 @@ export function FeaturedProducts() {
             <span className="text-gradient">PRODUCTS.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
-            Discover a curated selection of India's finest vegetables, fresh fruits, and high-quality spices, engineered for global delivery.
+            Discover a curated selection of India's finest vegetables, fresh fruits, and high-quality spices, prepared for global delivery.
           </p>
         </div>
 
         {/* PRODUCTS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {featured.map((product, index) => (
             <div key={product.slug} className="opacity-0 animate-reveal" style={{ animationDelay: `${600 + (index * 150)}ms` }}>
                <ProductCard product={product} />

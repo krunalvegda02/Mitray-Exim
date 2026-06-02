@@ -6,7 +6,7 @@ import { FiGlobe, FiTruck, FiCheckCircle, FiActivity, FiZap, FiBox, FiChevronRig
 
 const ComposableMap = dynamic(
   () => import("react-simple-maps").then((mod) => mod.ComposableMap),
-  { ssr: false, loading: () => <div className="w-full h-96 bg-slate-50 flex items-center justify-center rounded-xl border border-slate-100"><span className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Syncing Network Hubs...</span></div> }
+  { ssr: false, loading: () => <div className="w-full h-96 bg-slate-50 flex items-center justify-center rounded-xl border border-slate-100"><span className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Loading Global Network...</span></div> }
 );
 
 const Geographies = dynamic(
@@ -113,7 +113,7 @@ export function ExportCountries() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Global Export Corridors</span>
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Global Markets</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">
@@ -121,7 +121,7 @@ export function ExportCountries() {
             <span className="text-gradient">NETWORK.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
-            Mitray Exim powers a high-speed logistics network connecting India’s finest produce to elite trade corridors worldwide.
+            Mitray Exim coordinates swift, temperature-controlled logistics connecting India's finest agricultural produce to international markets worldwide.
           </p>
 
           <div className="flex overflow-x-auto pb-2 -mx-4 px-1 gap-2 no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-8">
@@ -147,7 +147,7 @@ export function ExportCountries() {
              <div className="glass-panel px-4 py-2 rounded-xl border-white shadow-xl pointer-events-auto backdrop-blur-xl bg-white/60">
                 <div className="flex items-center gap-2">
                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                   <span className="text-[8px] md:text-[10px] font-black text-brand-navy uppercase tracking-widest leading-none">Global Terminal Active</span>
+                   <span className="text-[8px] md:text-[10px] font-black text-brand-navy uppercase tracking-widest leading-none">Export Operations Active</span>
                 </div>
              </div>
              
@@ -230,17 +230,16 @@ export function ExportCountries() {
                     <div className="flex items-center gap-6 w-full">
                        <div className="text-5xl md:text-7xl animate-reveal">{EXPORT_COUNTRIES.find(c => c.name === hovered)?.flag}</div>
                        <div className="flex-1">
-                          <p className="text-[8px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">Institutional Trade Hub</p>
+                          <p className="text-[8px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">Global Trade Partner</p>
                           <h3 className="text-xl md:text-3xl font-black text-brand-navy tracking-tighter uppercase leading-none">{hovered}</h3>
                        </div>
                     </div>
                     
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto">
                        {[
-                         { icon: <FiPackage />, label: "Market Volume", val: "High Capacity" },
-                         { icon: <FiZap />, label: "Export Transit", val: "98% Efficiency" },
-                         { icon: <FiShield />, label: "FSSAI Verified", val: "A-Grade" },
-                         { icon: <FiActivity />, label: "Grid Nodes", val: "Active Hub" }
+                         { icon: <FiZap />, label: "Shipment Mode", val: "Air & Sea Freight" },
+                         { icon: <FiShield />, label: "Quality Checked", val: "100% Certified" },
+                         { icon: <FiActivity />, label: "Delivery Status", val: "Direct Sourcing" }
                        ].map((stat, i) => (
                          <div key={i} className="text-center md:text-left animate-reveal" style={{ animationDelay: `${i * 100}ms` }}>
                             <div className="flex items-center justify-center md:justify-start gap-2 text-brand-gold mb-1">
@@ -252,7 +251,7 @@ export function ExportCountries() {
                     </div>
 
                     <button className="w-full lg:w-auto px-10 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl active:scale-95">
-                       Initialize Route
+                       Inquire for Delivery
                     </button>
                   </div>
                </div>

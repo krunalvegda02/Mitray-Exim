@@ -4,7 +4,7 @@ import { FiArrowRight, FiGlobe, FiActivity, FiShield, FiZap, FiCheckCircle, FiTr
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-brand-navy pt-16 md:pt-24">
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-brand-navy pt-12 md:pt-24">
       
       {/* BACKGROUND ARCHITECTURE */}
       <div className="absolute inset-0 z-0">
@@ -90,19 +90,19 @@ export function Hero() {
         <div className="container mx-auto relative z-10">
            <div className="flex gap-12 md:gap-24 overflow-hidden whitespace-nowrap animate-marquee-fast">
               {[
-                { icon: <FiActivity />, label: "Grid Status", val: "Operational" },
-                { icon: <FiShield />, label: "APEDA Certified", val: "A-Grade" },
-                { icon: <FiZap />, label: "Export Ready", val: "Instant Load" },
-                { icon: <FiGlobe />, label: "Global Hubs", val: "20+ Nodes" },
-                { icon: <FiCheckCircle />, label: "Quality Audit", val: "FSSAI Verified" },
-                { icon: <FiTruck />, label: "Fast Logistics", val: "Optimized" },
+                { icon: <FiActivity />, label: "Supply Chain", val: "100% Sourced" },
+                { icon: <FiShield />, label: "APEDA Certified", val: "Premium Grade" },
+                { icon: <FiZap />, label: "Order Delivery", val: "Fast Dispatch" },
+                { icon: <FiGlobe />, label: "Global Export", val: "20+ Countries" },
+                { icon: <FiCheckCircle />, label: "Quality Standards", val: "FSSAI Certified" },
+                { icon: <FiTruck />, label: "Ocean Freight", val: "Fast Transit" },
                 // Loop
-                { icon: <FiActivity />, label: "Grid Status", val: "Operational" },
-                { icon: <FiShield />, label: "APEDA Certified", val: "A-Grade" },
-                { icon: <FiZap />, label: "Export Ready", val: "Instant Load" },
-                { icon: <FiGlobe />, label: "Global Hubs", val: "20+ Nodes" },
-                { icon: <FiCheckCircle />, label: "Quality Audit", val: "FSSAI Verified" },
-                { icon: <FiTruck />, label: "Fast Logistics", val: "Optimized" },
+                { icon: <FiActivity />, label: "Supply Chain", val: "100% Sourced" },
+                { icon: <FiShield />, label: "APEDA Certified", val: "Premium Grade" },
+                { icon: <FiZap />, label: "Order Delivery", val: "Fast Dispatch" },
+                { icon: <FiGlobe />, label: "Global Export", val: "20+ Countries" },
+                { icon: <FiCheckCircle />, label: "Quality Standards", val: "FSSAI Certified" },
+                { icon: <FiTruck />, label: "Ocean Freight", val: "Fast Transit" },
               ].map((m, i) => (
                 <div key={i} className="flex items-center gap-3 md:gap-4">
                    <div className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-brand-gold/10 flex items-center justify-center text-brand-gold text-base md:text-lg shadow-[0_0_20px_rgba(212,165,116,0.1)]">{m.icon}</div>

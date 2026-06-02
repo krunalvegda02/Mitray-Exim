@@ -23,13 +23,6 @@ export default function ProductsPage() {
    const [selectedCategory, setSelectedCategory] = useState("all");
    const [searchQuery, setSearchQuery] = useState("");
    const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-   const [showScrollTop, setShowScrollTop] = useState(false);
-
-   useEffect(() => {
-      const handleScroll = () => setShowScrollTop(window.scrollY > 1000);
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-   }, []);
 
    const filteredProducts = useMemo(() => {
       return PRODUCTS.filter((p) => {
@@ -362,16 +355,8 @@ export default function ProductsPage() {
                   </div>
                </div>
 
-            </Container>
-         </div>
-
-         {/* FLOAT ACTION: SCROLL TO TOP */}
-         <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`fixed bottom-10 right-10 w-16 h-16 rounded-full bg-brand-navy text-brand-gold shadow-2xl border border-white/10 z-50 flex items-center justify-center transition-all duration-700 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
-         >
-            <FiArrowUp className="text-2xl animate-bounce" />
-         </button>
-      </div>
-   );
-}
+             </Container>
+          </div>
+       </div>
+    );
+ }

@@ -19,7 +19,7 @@ export function Certifications() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Compliance & Trust Manifest</span>
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Trust Certifications</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">
@@ -27,7 +27,7 @@ export function Certifications() {
             <span className="text-gradient">CERTIFICATIONS.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
-            MITRAY EXIM maintains the industry's most rigorous export compliance protocols, verified by APEDA, FSSAI, and global food safety authorities.
+            MITRAY EXIM maintains strict export quality and safety standards, verified by APEDA, FSSAI, and international food safety authorities.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export function Certifications() {
               className="group relative animate-reveal opacity-0 hover-lift"
               style={{ animationDelay: `${500 + (index * 150)}ms` }}
             >
-              <div className="relative glass-card p-8 md:p-10 rounded-2xl flex flex-col h-full transition-all duration-700 bg-white/60">
+              <div className="relative glass-card p-4 md:p-10 rounded-2xl flex flex-col h-full transition-all duration-700 bg-white/60">
                 
                 <div className="relative w-24 h-24 mb-8 mx-auto">
                    <div className="absolute inset-0 bg-brand-gold/5 rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000"></div>
@@ -102,7 +102,7 @@ export function Certifications() {
               href="/certifications"
               className="group relative inline-flex items-center gap-4 px-10 py-5 bg-brand-navy rounded-xl text-white font-black uppercase tracking-widest text-[10px] hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-2xl overflow-hidden active:scale-95"
             >
-              <span className="relative z-10">Export Compliance Protocol</span>
+              <span className="relative z-10">View Quality Certificates</span>
               <FiArrowRight className="relative z-10 text-lg group-hover:translate-x-2 transition-transform duration-500" />
             </a>
         </div>

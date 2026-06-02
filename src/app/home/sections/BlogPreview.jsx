@@ -19,7 +19,7 @@ export function BlogPreview() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">MITRAY EXIM Market Intelligence</span>
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Export Insights</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
@@ -27,7 +27,7 @@ export function BlogPreview() {
             <span className="text-gradient">INSIGHTS.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
-            Analyzing global export trends, agricultural innovation, and MITRAY EXIM's strategic market maneuvers.
+            Analyzing global agricultural trends, harvest seasons, export packaging compliance, and direct trade insights from India.
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export function BlogPreview() {
         <div className="text-center animate-reveal delay-1000 opacity-0">
           <Link href="/blog">
             <button className="group relative inline-flex items-center gap-6 px-10 py-5 bg-brand-navy rounded-xl text-white font-black uppercase tracking-widest text-[10px] hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl overflow-hidden active:scale-95">
-              <span className="relative z-10">Access MITRAY Intelligence Archives</span>
+              <span className="relative z-10">Read All Insights & Articles</span>
               <FiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform duration-500" />
             </button>
           </Link>

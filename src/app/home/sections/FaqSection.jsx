@@ -17,15 +17,15 @@ export function FaqSection() {
     },
     {
       q: "What certifications does MITRAY EXIM hold?",
-      a: "MITRAY EXIM maintains a 100% verified compliance manifest. Our active certifications include APEDA, FSSAI, IEC, FIEO, and Spice Board India.",
+      a: "MITRAY EXIM maintains a 100% verified compliance standard. Our active certifications include APEDA, FSSAI, IEC, FIEO, and Spice Board India.",
     },
     {
       q: "Do you provide custom packaging for vegetables?",
-      a: "We offer tailored 'Institutional' packaging. Our solutions are engineered to meet specific market regulations while preserving product integrity.",
+      a: "We offer tailored B2B packaging options. Our solutions meet specific market safety regulations while keeping the produce fresh and intact.",
     },
     {
       q: "What payment methods are accepted?",
-      a: "We facilitate secure global transactions via LC (Letter of Credit), TT (Telegraphic Transfer), and other internationally recognized institutional protocols.",
+      a: "We facilitate secure global transactions via LC (Letter of Credit), TT (Telegraphic Transfer), and other internationally recognized B2B payment methods.",
     },
   ];
 
@@ -47,7 +47,7 @@ export function FaqSection() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">MITRAY EXIM Knowledge Base</span>
+            <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">FAQs</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">
@@ -111,11 +111,13 @@ export function FaqSection() {
 
         {/* FOOTER ACTION */}
         <div className="mt-12 text-center animate-reveal delay-1000 opacity-0">
-           <button className="group relative px-8 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl overflow-hidden active:scale-95">
-              <span className="relative z-10 flex items-center gap-3">
-                 <FiActivity className="group-hover:rotate-12 transition-transform" /> Access Full MITRAY Wiki
-              </span>
-           </button>
+           <a href="/contact">
+              <button className="group relative px-8 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl overflow-hidden active:scale-95">
+                 <span className="relative z-10 flex items-center gap-3">
+                    <FiActivity className="group-hover:rotate-12 transition-transform" /> Contact Our Support Desk
+                 </span>
+              </button>
+           </a>
         </div>
       </div>
     </section>
