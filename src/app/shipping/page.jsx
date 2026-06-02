@@ -3,228 +3,409 @@
 import { useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
-import { ColdStorage } from "./sections/ColdStorage";
-import { Packaging } from "./sections/Packaging";
-import { Documentation } from "./sections/Documentation";
-import { Timeline } from "./sections/Timeline";
+import { 
+  FiShield, 
+  FiGlobe, 
+  FiCheckCircle, 
+  FiActivity, 
+  FiArrowRight, 
+  FiPackage, 
+  FiThermometer, 
+  FiTruck, 
+  FiZap,
+  FiSend,
+  FiFileText
+} from "react-icons/fi";
+import Link from "next/link";
+
+const SERVICES = [
+  {
+    number: "01",
+    title: "Farm Sourcing & Quality Selection",
+    badge: "Fresh From Farms",
+    description: "We source premium onions, potatoes, green chillies, mangoes, and grapes directly from trusted Indian farms. Our team carefully hand-picks and grades every item so only the best, export-grade produce is packed for you.",
+    metric: "100% Quality Checked",
+    icon: <FiCheckCircle className="w-6 h-6 text-brand-gold" />
+  },
+  {
+    number: "02",
+    title: "Cold Chain & Temperature Control",
+    badge: "Freshness Locked",
+    description: "We store fresh crops in temperature-controlled cold rooms at the perfect temperature (between 2°C and 12°C). This locks in natural crispness and freshness, ensuring it stays fresh during long-distance shipping.",
+    metric: "Constant Cooling (2°C - 12°C)",
+    icon: <FiThermometer className="w-6 h-6 text-brand-gold" />
+  },
+  {
+    number: "03",
+    title: "Export-Grade Custom Packaging",
+    badge: "Secure & Safe",
+    description: "We pack our fresh vegetables and fruits in strong, ventilated packaging like breathable mesh bags for onions, sturdy cardboard boxes for fruits, and clean crates to protect them from damage during the journey.",
+    metric: "High-Quality Packaging",
+    icon: <FiPackage className="w-6 h-6 text-brand-gold" />
+  },
+  {
+    number: "04",
+    title: "Global Shipping & Logistics",
+    badge: "Global Delivery",
+    description: "We partner with top international shipping lines (like Maersk, MSC) to deliver your orders quickly and safely. Perishables are shipped in special climate-controlled reefer containers to arrive fresh at your port.",
+    metric: "On-Time Port Delivery",
+    icon: <FiTruck className="w-6 h-6 text-brand-gold" />
+  }
+];
+
+const TRANSIT_ROUTES = [
+  { 
+    region: "Gulf & Middle East Ports", 
+    hub: "Jebel Ali, Hamad, Dammam", 
+    duration: "5 - 7", 
+    unit: "Days",
+    description: "Fast direct sea freight routes for highly perishable fresh vegetables and fruits.",
+    speed: "Fast Direct Transit"
+  },
+  { 
+    region: "Southeast Asia Ports", 
+    hub: "Singapore, Port Klang, Bangkok", 
+    duration: "8 - 10", 
+    unit: "Days",
+    description: "Reliable weekly container shipments for bulk vegetable orders like onions and potatoes.",
+    speed: "Weekly Bulk Shipments"
+  },
+  { 
+    region: "Europe & United Kingdom Ports", 
+    hub: "Rotterdam, Felixstowe, Hamburg", 
+    duration: "18 - 22", 
+    unit: "Days",
+    description: "Climate-controlled containers that preserve absolute freshness during long-distance shipping.",
+    speed: "Temperature Controlled"
+  }
+];
 
 export default function ShippingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <>
+    <div className="bg-white">
+      {/* 1. HIGH-FIDELITY HERO - ALIGNED DESIGN SYSTEM */}
       <PageHero 
-        badge="LOGISTICS & COLD CHAIN"
-        title="Shipping & Logistics"
-        description="Professional cold chain and export logistics services ensuring quality from farm to destination"
+        badge="OUR EXPORT SERVICES & LOGISTICS"
+        title="Services & Logistics."
+        description="We source fresh onions, potatoes, green chillies, mangoes, and grapes directly from trusted Indian farms, packing them securely and shipping them under precise cooling so they arrive perfectly fresh at your port."
         backgroundImage="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Shipping' }
+          { label: 'Services & Logistics' }
         ]}
       />
 
-      <div className="bg-gradient-to-b from-white via-slate-50 to-white py-20">
+      <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
         <Container>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <ColdStorage />
-          <Packaging />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Documentation />
-          
-          <div className="group relative h-full">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-200 to-orange-200 rounded-2xl opacity-0 group-hover:opacity-30 blur transition duration-500"></div>
-            
-            <div className="relative h-full bg-gradient-to-br from-white via-amber-50/50 to-slate-50 p-6 rounded-2xl border-2 border-slate-200 hover:border-amber-300 transition-all hover:shadow-xl flex flex-col">
-              <div className="flex items-start mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md border border-amber-200">
-                  <svg className="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+          {/* 2. EDGY SECTION HEADER */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 md:mb-20">
+             <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                   <div className="h-px w-12 bg-brand-gold"></div>
+                   <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Our Core Workflow</span>
                 </div>
-                <div className="ml-4 flex-1">
-                  <h2 className="text-xl font-bold text-brand-navy mb-2">Shipping Partners</h2>
-                  <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-50 to-orange-50 rounded-full border border-amber-200">
-                    <span className="text-xs font-bold text-amber-700">Trusted Network</span>
+                <h2 className="text-5xl md:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.85]">
+                   WHAT WE <br />
+                   <span className="text-gradient">DELIVER.</span>
+                </h2>
+             </div>
+             <p className="text-slate-500 text-sm md:text-lg font-bold max-w-md uppercase tracking-tight leading-relaxed">
+               From hand-picking fresh produce at Indian farms to safe delivery at global ports, we manage every step with care to ensure you get the freshest vegetables, fruits, and grains.
+             </p>
+          </div>
+
+          {/* 3. PREMIUM GRID OF SERVICES - SHARP EDGES */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-20 md:mb-32">
+            {SERVICES.map((service, index) => (
+              <div 
+                key={service.number}
+                className="animate-reveal opacity-0"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className="group relative h-full bg-white border border-slate-200 hover:border-brand-gold hover:shadow-[0_15px_40px_rgba(212,165,116,0.15)] transition-all duration-500 flex flex-col p-8 relative overflow-hidden">
+                  {/* Corner Accent Edges */}
+                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-brand-gold/10 group-hover:border-brand-gold transition-colors"></div>
+                  
+                  {/* Floating Number */}
+                  <span className="absolute bottom-6 right-8 text-6xl font-black text-slate-100 group-hover:text-brand-gold/10 transition-colors pointer-events-none font-outfit">
+                    {service.number}
+                  </span>
+
+                  <div className="relative z-10 flex flex-col h-full space-y-6">
+                    {/* Badge & Icon Row */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-black text-brand-gold uppercase tracking-widest bg-brand-gold/5 px-3 py-1.5 border border-brand-gold/10">
+                        {service.badge}
+                      </span>
+                      <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center border border-slate-200 group-hover:bg-brand-gold/10 group-hover:border-brand-gold transition-all duration-500">
+                        {service.icon}
+                      </div>
+                    </div>
+
+                    {/* Title & Desc */}
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-black text-brand-navy group-hover:text-brand-gold transition-colors font-outfit uppercase tracking-tight leading-snug">
+                        {service.title}
+                      </h3>
+                      <p className="text-slate-500 text-xs md:text-sm font-semibold uppercase tracking-wide opacity-80 leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    {/* Divider & Metric */}
+                    <div className="pt-6 mt-auto border-t border-slate-100">
+                      <p className="text-[10px] font-black text-brand-navy uppercase tracking-widest flex items-center gap-1.5">
+                        <FiShield className="text-brand-gold" />
+                        {service.metric}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              <p className="text-slate-700 leading-relaxed mb-4 flex-grow">
-                We work with leading container shipping lines and logistics partners to ensure timely and reliable delivery to international ports.
-              </p>
-
-              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200">
-                <div className="text-center">
-                  <p className="text-xs text-slate-500 mb-1">Partners</p>
-                  <p className="text-sm font-bold text-brand-navy">15+ Lines</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-slate-500 mb-1">Coverage</p>
-                  <p className="text-sm font-bold text-brand-navy">Global</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-slate-500 mb-1">Reliability</p>
-                  <p className="text-sm font-bold text-brand-navy">99.5%</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
 
-        <Timeline />
+          {/* 4. TRANSIT TIMELINES TERMINAL - SHARP GLASS */}
+          <div className="relative mb-20 md:mb-32 animate-reveal">
+             <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
+             <div className="relative bg-white border-2 border-slate-100 p-8 md:p-16 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 border-t-8 border-r-8 border-brand-gold/5"></div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                   <div className="lg:col-span-12 space-y-8">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-slate-100">
+                         <div className="flex items-center gap-4">
+                            <div className="w-14 h-14 bg-brand-navy text-brand-gold flex items-center justify-center text-2xl font-black">
+                               <FiGlobe />
+                            </div>
+                            <div>
+                               <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter font-outfit">Logistics & Transit Times</h3>
+                               <p className="text-[10px] font-black text-brand-gold uppercase tracking-widest">Global Ports & Shipping Schedules</p>
+                            </div>
+                         </div>
+                         <div className="flex items-center gap-4">
+                            <span className="text-[10px] font-black text-white bg-emerald-500 px-3 py-1.5 uppercase tracking-widest animate-pulse">
+                              Shipping Lanes: Active
+                            </span>
+                         </div>
+                      </div>
 
-        <div className="text-center mt-12">
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="px-10 py-4 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 inline-flex items-center space-x-2"
-          >
-            <span>Request Quotation</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </button>
-        </div>
+                      <p className="text-sm md:text-xl text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
+                         We ship from India's leading ports (Mundra, Nhava Sheva) directly to major global hubs, maintaining temperature and quality checks throughout the voyage.
+                      </p>
+
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        {TRANSIT_ROUTES.map((route, idx) => (
+                          <div 
+                            key={idx}
+                            className="bg-[#F9FAFB] border border-slate-200 p-6 flex flex-col justify-between hover:border-brand-gold transition-all duration-500 group"
+                          >
+                            <div className="space-y-4">
+                              <div className="flex items-center justify-between">
+                                <span className="text-[9px] font-black text-brand-gold bg-brand-gold/5 border border-brand-gold/15 px-2.5 py-1 uppercase tracking-widest">
+                                  {route.speed}
+                                </span>
+                                <FiZap className="text-brand-gold text-sm animate-pulse" />
+                              </div>
+                              <div>
+                                <h4 className="text-lg font-black text-brand-navy uppercase tracking-tight font-outfit">{route.region}</h4>
+                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{route.hub}</p>
+                              </div>
+                              <p className="text-xs text-slate-500 font-semibold uppercase leading-relaxed tracking-wide">
+                                {route.description}
+                              </p>
+                            </div>
+                            
+                            <div className="mt-8 pt-6 border-t border-slate-200/60 flex items-center justify-between">
+                              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Estimated Transit</span>
+                              <div className="flex items-baseline gap-1">
+                                <span className="text-3xl font-black text-brand-navy group-hover:text-brand-gold transition-colors font-outfit">{route.duration}</span>
+                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{route.unit}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          {/* 5. SPECIFICATION AUDITS SECTION - ALIGNED DESIGN */}
+          <div className="relative mb-24 animate-reveal">
+             <div className="absolute inset-0 bg-brand-navy/5 -translate-x-4 -translate-y-4"></div>
+             <div className="relative bg-white border-2 border-slate-100 p-8 md:p-16 overflow-hidden">
+                <div className="absolute bottom-0 left-0 w-32 h-32 border-b-8 border-l-8 border-brand-gold/5"></div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                   <div className="lg:col-span-7 space-y-8">
+                      <div className="flex items-center gap-4">
+                         <div className="w-16 h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-3xl font-black">
+                            <FiShield />
+                         </div>
+                         <div>
+                            <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter font-outfit">Safe Sourcing & Certified Quality</h3>
+                            <p className="text-[10px] font-black text-brand-gold uppercase tracking-widest">APEDA & FSSAI Certified Partner</p>
+                         </div>
+                      </div>
+                      <p className="text-sm md:text-xl text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
+                         We handle all government quality tests, pest control checks, and customs paperwork so your shipment clears quickly and easily at the destination port.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {[
+                          { name: "Phytosanitary Certification", desc: "Proves produce is fresh, clean, and pest-free" },
+                          { name: "APEDA Approved Sourcing", desc: "Meets strict government standards for export" },
+                          { name: "SGS Quality Testing", desc: "Verifies absolute food safety and zero pesticide residues" },
+                          { name: "Pre-Cooling Checks", desc: "Container temperatures are verified before door sealing" }
+                        ].map((item, i) => (
+                          <div key={i} className="flex items-start gap-4 p-5 bg-[#F9FAFB] border border-slate-200">
+                            <FiCheckCircle className="text-brand-gold text-lg mt-0.5 flex-shrink-0" />
+                            <div>
+                              <h4 className="text-xs md:text-sm font-black text-brand-navy uppercase tracking-widest mb-0.5">{item.name}</h4>
+                              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">{item.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                   </div>
+                   
+                   <div className="lg:col-span-5">
+                      <div className="p-8 md:p-10 bg-brand-navy text-white relative overflow-hidden group">
+                         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 blur-3xl"></div>
+                         <h4 className="text-xl font-black uppercase tracking-tighter mb-4 font-outfit">Get a Custom Quote</h4>
+                         <p className="text-xs font-bold text-white/40 uppercase tracking-widest leading-relaxed mb-8">
+                            Need a specific size of onion, custom packaging boxes, or direct shipping prices? Get in touch with our team today and receive a clear quote within 24 hours.
+                         </p>
+                         <button 
+                            onClick={() => setIsModalOpen(true)}
+                            className="group/btn block w-full py-5 bg-brand-gold text-brand-navy text-xs font-black text-center uppercase tracking-[0.3em] hover:bg-white hover:text-brand-navy transition-all duration-500 relative z-10 cursor-pointer"
+                         >
+                            Request a Quote Now <FiArrowRight className="inline ml-2 group-hover/btn:translate-x-2 transition-transform" />
+                         </button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+
         </Container>
       </div>
 
       {/* Modal */}
       {isModalOpen && <InquiryModal onClose={() => setIsModalOpen(false)} />}
-    </>
+    </div>
   );
 }
 
 function InquiryModal({ onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Inquiry submitted. We will get back to you.");
+    alert("Inquiry successfully transmitted. Our trade specialists will get in touch with you shortly.");
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full sm:max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative w-full sm:max-w-3xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="relative">
-          <div className="absolute inset-0 overflow-hidden rounded-t-3xl sm:rounded-3xl">
-            <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-brand-gold/20 to-orange-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-blue-300/20 to-purple-300/20 rounded-full blur-3xl"></div>
-          </div>
+          <div className="absolute inset-0 bg-[#F9FAFB] rounded-t-3xl sm:rounded-none"></div>
 
-          <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/95 via-slate-50/95 to-white/95 rounded-t-3xl sm:rounded-3xl border-2 border-white/50 p-6 sm:p-8 md:p-10 shadow-2xl">
+          <div className="relative bg-white rounded-t-3xl sm:rounded-none border-2 border-slate-100 p-8 sm:p-10 md:p-12 shadow-2xl">
             
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors"
+              className="absolute top-6 right-6 w-10 h-10 bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center transition-colors text-brand-navy cursor-pointer"
             >
-              <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="text-center mb-6 sm:mb-8">
-              <div className="inline-flex items-center backdrop-blur-md bg-gradient-to-r from-brand-gold/20 to-orange-400/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 border border-brand-gold/30">
-                <svg className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-brand-gold mr-1.5 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <span className="text-xs sm:text-sm font-bold text-brand-navy">Request Quotation</span>
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center bg-brand-gold/10 px-4 py-2 border border-brand-gold/25 mb-4">
+                <FiSend className="text-brand-gold mr-2 text-sm" />
+                <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Inquiry Form</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-brand-navy via-brand-navy-dark to-brand-navy bg-clip-text text-transparent mb-2 sm:mb-3">
-                Get Your Custom Quote
+              <h2 className="text-2xl sm:text-4xl font-black text-brand-navy uppercase tracking-tight font-outfit mb-3">
+                Request Specifications
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 px-4">
-                Fill out the form and our export team will contact you within 24 hours
+              <p className="text-xs sm:text-sm text-slate-500 font-semibold uppercase tracking-wider">
+                Fill out the specifications below to receive trade quotes in 24 hours.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                  <label className="block text-xs font-black text-brand-navy uppercase tracking-widest mb-2">
                     Full Name *
                   </label>
                   <input
                     type="text"
                     required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
+                    className="w-full bg-[#F9FAFB] border border-slate-200 px-4 py-3 focus:border-brand-gold focus:bg-white outline-none transition-all text-sm font-bold uppercase tracking-wider text-brand-navy"
                     placeholder="John Doe"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                  <label className="block text-xs font-black text-brand-navy uppercase tracking-widest mb-2">
                     Email Address *
                   </label>
                   <input
                     type="email"
                     required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
+                    className="w-full bg-[#F9FAFB] border border-slate-200 px-4 py-3 focus:border-brand-gold focus:bg-white outline-none transition-all text-sm font-bold tracking-wider text-brand-navy"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                  <label className="block text-xs font-black text-brand-navy uppercase tracking-widest mb-2">
                     Phone Number *
                   </label>
                   <input
                     type="text"
                     required
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
+                    className="w-full bg-[#F9FAFB] border border-slate-200 px-4 py-3 focus:border-brand-gold focus:bg-white outline-none transition-all text-sm font-bold tracking-wider text-brand-navy"
                     placeholder="+91 XXXXXXXXXX"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                    <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
+                  <label className="block text-xs font-black text-brand-navy uppercase tracking-widest mb-2">
                     Company Name
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all"
+                    className="w-full bg-[#F9FAFB] border border-slate-200 px-4 py-3 focus:border-brand-gold focus:bg-white outline-none transition-all text-sm font-bold uppercase tracking-wider text-brand-navy"
                     placeholder="Your Company"
                   />
                 </div>
               </div>
 
-              <div className="mb-5 sm:mb-6">
-                <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center">
-                  <svg className="w-4 h-4 text-brand-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Product Requirements *
+              <div>
+                <label className="block text-xs font-black text-brand-navy uppercase tracking-widest mb-2">
+                  Commodity Requirements *
                 </label>
                 <textarea
                   rows={4}
                   required
-                  className="w-full bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold outline-none transition-all resize-none"
-                  placeholder="Please specify products and quantities you need..."
+                  className="w-full bg-[#F9FAFB] border border-slate-200 px-4 py-3 focus:border-brand-gold focus:bg-white outline-none transition-all text-sm font-bold uppercase tracking-wider text-brand-navy resize-none"
+                  placeholder="Specify vegetables, fruits, custom sizing or packaging requirements..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white rounded-2xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-2 sm:space-x-3"
+                className="w-full py-4.5 bg-brand-gold text-brand-navy hover:bg-brand-navy hover:text-white font-black text-xs uppercase tracking-[0.3em] shadow-xl transition-all duration-500 flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>Submit Inquiry</span>
-                <svg className="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <span>Transmit Specification Form</span>
+                <FiSend className="text-sm" />
               </button>
             </form>
           </div>

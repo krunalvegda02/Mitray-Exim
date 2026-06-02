@@ -83,15 +83,17 @@ export function Footer() {
             <h4 className="text-[10px] md:text-xs font-black mb-8 uppercase tracking-[0.4em] text-brand-gold/60">Services</h4>
             <ul className="space-y-4">
               {[
-                "Global Logistics",
-                "Quality Inspection",
-                "Custom Packaging",
-                "Cold Chain Management",
-                "Farming Partnerships",
+                { label: "Farm Sourcing & Selection", href: "/shipping" },
+                { label: "Cold Storage & Cooling", href: "/shipping" },
+                { label: "Food-Grade Packaging", href: "/shipping" },
+                { label: "Reefer Sea & Air Freight", href: "/shipping" },
+                { label: "Customs & Quality Clearance", href: "/certifications" },
               ].map((service) => (
-                <li key={service} className="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest flex items-center group cursor-default">
-                  <span className="w-1.5 h-1.5 border border-brand-gold/30 rounded-full mr-3 group-hover:bg-brand-gold transition-colors"></span>
-                  {service}
+                <li key={service.label}>
+                  <Link href={service.href} className="text-slate-400 hover:text-white text-xs md:text-sm transition-all flex items-center group font-bold uppercase tracking-widest">
+                    <span className="w-1.5 h-1.5 border border-brand-gold/30 rounded-full mr-3 group-hover:bg-brand-gold transition-colors"></span>
+                    {service.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -120,8 +122,8 @@ export function Footer() {
                   </svg>
                 </div>
                 <div className="text-xs md:text-sm font-bold uppercase tracking-widest">
-                   <a href="tel:+91XXXXXXXXXX" className="text-slate-300 hover:text-white transition-colors block mb-1">+91 XXXXXXXXXX</a>
-                   <a href="mailto:info@mitrayexim.com" className="text-brand-gold hover:text-white transition-colors block">info@mitrayexim.com</a>
+                   <a href="tel:+919624542426" className="text-slate-300 hover:text-white transition-colors block mb-1">+91 96245 42426</a>
+                   <a href="mailto:exports@mitrayexim.com" className="text-brand-gold hover:text-white transition-colors block">exports@mitrayexim.com</a>
                 </div>
               </div>
             </div>
@@ -135,7 +137,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 animate-reveal opacity-0 delay-1000">
              {CERTIFICATIONS.map((cert) => (
-               <div key={cert.id} className="flex items-center gap-3 md:gap-5 p-2 md:p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl">
+               <Link href="/certifications" key={cert.id} className="flex items-center gap-3 md:gap-5 p-2 md:p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white transition-all duration-700 group/logo shadow-xl cursor-pointer">
                   <div className="w-8 h-8 md:w-16 md:h-16 flex items-center justify-center flex-shrink-0">
                      <img 
                        src={cert.logo} 
@@ -156,7 +158,7 @@ export function Footer() {
                      <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-brand-gold truncate">{cert.name}</p>
                      <p className="text-[6.5px] md:text-[8px] font-black uppercase tracking-[0.1em] text-white/40 group-hover/logo:text-brand-navy/60 transition-colors truncate">Verified Protocol</p>
                   </div>
-               </div>
+               </Link>
              ))}
           </div>
         </div>

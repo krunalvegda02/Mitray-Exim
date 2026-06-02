@@ -23,7 +23,7 @@ export function Header() {
       {/* SLIM INSTITUTIONAL ANNOUNCEMENT BAR */}
       <div className={`w-full bg-brand-navy relative overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-9 opacity-100 border-b border-white/5'}`}>
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-gold/10 to-transparent -skew-x-12 translate-x-[-200%] animate-[scan_8s_infinite] pointer-events-none"></div>
-        <div className="container mx-auto px-6 md:px-12 h-full flex items-center justify-between relative z-10">
+        <div className="max-w-[96%] xl:max-w-[94%] 2xl:max-w-[1600px] mx-auto px-6 md:px-12 h-full flex items-center justify-between relative z-10">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
@@ -43,9 +43,9 @@ export function Header() {
 
       {/* FLOATING CAPSULE NAVIGATION */}
       <div className="w-full transition-all duration-500 pt-4">
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="max-w-[96%] xl:max-w-[94%] 2xl:max-w-[1600px] mx-auto px-2 sm:px-4">
           <div
-            className={`mx-auto max-w-7xl rounded-full transition-all duration-700 flex items-center justify-between px-6 md:px-8 border hover:shadow-brand-gold/5 hover:border-brand-gold/30 hover:scale-[1.01]
+            className={`mx-auto w-full rounded-full transition-all duration-700 flex items-center justify-between px-6 md:px-8 border hover:shadow-brand-gold/5 hover:border-brand-gold/30 hover:scale-[1.01]
               ${isScrolled
                 ? "bg-white/[0.8] backdrop-blur-[30px] border-white/[0.15] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.4)] py-3.5 md:py-4.5"
                 : "bg-brand-navy/70 backdrop-blur-[30px] border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)] py-3.5 md:py-4.5"
@@ -70,6 +70,7 @@ export function Header() {
                 ["Home", "/"],
                 ["About Us", "/about"],
                 ["Products", "/products"],
+                ["Services", "/shipping"],
                 ["Certifications", "/certifications"],
                 ["Blogs", "/blog"],
                 ["Gallery", "/gallery"],
@@ -79,13 +80,13 @@ export function Header() {
                   <Link
                     key={href}
                     href={href}
-                    className={`text-[13px] md:text-[14.5px] font-black uppercase tracking-[0.16em] px-4.5 py-2 md:px-5 md:py-2.5 rounded-full transition-all duration-300 relative group
+                    className={`text-[11px] xl:text-[13.5px] font-black uppercase tracking-[0.1em] xl:tracking-[0.16em] px-3 xl:px-4.5 py-2 xl:py-2.5 rounded-full transition-all duration-300 relative group
                       ${isScrolled
                         ? isActive
-                          ? 'bg-brand-navy text-white shadow-md shadow-brand-navy/10 scale-[1.03]'
-                          : 'text-brand-navy/70 hover:text-brand-navy hover:bg-slate-50'
+                          ? 'bg-brand-navy text-white shadow-md shadow-brand-navy/10'
+                          : 'text-brand-navy/70 hover:text-brand-navy hover:bg-slate-100/80'
                         : isActive
-                          ? 'bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/15 scale-[1.03]'
+                          ? 'bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/15'
                           : 'text-white/80 hover:text-white hover:bg-white/10'
                       }`}
                   >
@@ -99,13 +100,14 @@ export function Header() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className={`hidden md:flex items-center gap-2.5 px-6 py-3.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-500 shadow-sm active:scale-95
+                className={`hidden md:flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 active:scale-95 group relative overflow-hidden shadow-md border
                   ${isScrolled
-                    ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy shadow-brand-navy/10'
-                    : 'bg-brand-gold text-brand-navy hover:bg-white hover:text-brand-navy'
+                    ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy border-white/5 hover:border-brand-gold/10 hover:shadow-brand-gold/25'
+                    : 'bg-brand-gold text-brand-navy hover:bg-white hover:text-brand-navy border-brand-gold/10 hover:border-white/10 hover:shadow-white/20'
                   }`}
               >
-                Inquiry Now <FiSend className="text-[11px]" />
+                Inquiry Now 
+                <FiSend className="text-[11px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </Link>
  
               {/* MOBILE MENU TOGGLE */}
@@ -142,6 +144,7 @@ export function Header() {
               ["Home", "/"],
               ["About Us", "/about"],
               ["Our Products", "/products"],
+              ["Services", "/shipping"],
               ["Certifications", "/certifications"],
               ["Latest News", "/blog"],
               ["Contact Us", "/contact"],
