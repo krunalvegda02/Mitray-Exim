@@ -22,7 +22,7 @@ export function BlogCard({ post, featured = false }) {
       {/* SHARP EDGY SHADOW */}
       <div className="absolute inset-0 bg-brand-gold/5 translate-x-3 translate-y-3 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-500"></div>
       
-      <article className={`relative bg-white border-2 border-brand-navy/5 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-2 group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full`}>
+      <article className={`relative bg-white border-2 border-brand-navy/5 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-2 group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full hover:shadow-lg transition-shadow`} aria-label={`Read more about ${post.title}`}>
         
         {/* VISUAL HUB - SHARP EDGES */}
         <div className={`${featured ? 'md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-[300px] md:h-[500px]' : 'aspect-video'}`}>
@@ -39,14 +39,14 @@ export function BlogCard({ post, featured = false }) {
               </div>
            </div>
 
-           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-60"></div>
+           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-60" aria-hidden="true"></div>
         </div>
 
         {/* CONTENT HUB - EDGY BOX */}
-        <div className={`${featured ? 'md:w-2/5' : 'w-full'} p-8 md:p-12 flex flex-col justify-between bg-white relative`}>
+        <div className={`${featured ? 'md:w-2/5' : 'w-full'} p-6 md:p-12 flex flex-col justify-between bg-white relative`}>
            
            {/* CORNER ACCENT */}
-           <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-slate-100 group-hover:border-brand-gold transition-colors"></div>
+           <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-slate-100 group-hover:border-brand-gold transition-colors" aria-hidden="true"></div>
 
            <div className="space-y-6">
               <div className="flex items-center gap-4 text-[10px] font-black text-brand-gold uppercase tracking-[0.3em]">
@@ -68,17 +68,12 @@ export function BlogCard({ post, featured = false }) {
                     <FiCalendar className="text-brand-gold" />
                     {post.date}
                  </div>
-                 <div className="flex items-center gap-3">
-                    <FiActivity className="text-emerald-500" />
-                    Public Manifest
-                 </div>
+               
               </div>
 
               <div className="flex items-center justify-between group/action">
-                 <span className="text-xs font-black text-brand-navy uppercase tracking-widest group-hover/action:translate-x-2 transition-transform">
-                    Initialize Access <FiArrowRight className="inline ml-2" />
-                 </span>
-                 <div className="text-[10px] font-black text-slate-200 uppercase tracking-[0.2em] group-hover:text-brand-gold transition-colors">
+                 <span className="flex items-center gap-1 text-sm md:text-xs font-medium text-brand-navy uppercase tracking-wider hover:underline transition-colors duration-300 group-hover/action:translate-x-1">Read More <FiArrowRight className="inline text-xs" /></span>
+                    <div className="text-[10px] font-black text-slate-200 uppercase tracking-[0.2em] group-hover:text-brand-gold transition-colors">
                     DocRef: MIT-0{post.slug.length}
                  </div>
               </div>

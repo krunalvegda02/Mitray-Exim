@@ -32,16 +32,16 @@ export function Certifications() {
         </div>
 
         {/* CERTIFICATION GRID - STAGGERED REVEAL */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-center">
           {CERTIFICATIONS.map((cert, index) => (
             <div
               key={cert.id}
-              className="group relative animate-reveal opacity-0 hover-lift"
+              className="group relative animate-reveal opacity-0 hover-lift last:col-span-2"
               style={{ animationDelay: `${500 + (index * 150)}ms` }}
             >
-              <div className="relative glass-card p-4 md:p-10 rounded-2xl flex flex-col h-full transition-all duration-700 bg-white/60">
+              <div className="relative glass-card p-2 md:p-6 rounded-2xl flex flex-col h-full transition-all duration-700 bg-white/60">
                 
-                <div className="relative w-24 h-24 mb-8 mx-auto">
+                <div className="relative w-16 h-16 md:w-24 md:h-24 mb-8 mx-auto">
                    <div className="absolute inset-0 bg-brand-gold/5 rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000"></div>
                    <div className="relative w-full h-full glass-panel rounded-full flex items-center justify-center p-5 border-white shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
                       <img
@@ -61,7 +61,7 @@ export function Certifications() {
 
                 <div className="flex-1 space-y-4 text-center">
                   <div>
-                    <h3 className="text-2xl font-black text-brand-navy tracking-tighter mb-1 group-hover:text-brand-gold transition-colors duration-500">{cert.name}</h3>
+                    <h3 className="text-lg md:text-2xl font-black text-brand-navy tracking-tighter mb-1 group-hover:text-brand-gold transition-colors duration-500">{cert.name}</h3>
                     <p className="text-[8.8px] font-black text-slate-400 uppercase tracking-[0.3em] leading-tight px-2">{cert.fullName}</p>
                   </div>
                   

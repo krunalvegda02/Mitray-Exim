@@ -4,8 +4,9 @@ import { BLOGS } from "@/data/blogs";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
-import { FiArrowRight, FiInfo, FiActivity, FiSearch } from "react-icons/fi";
+import { FiArrowRight, FiInfo, FiActivity, FiSearch, FiZap } from "react-icons/fi";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function BlogPage() {
   const featuredPost = BLOGS[0];
@@ -14,6 +15,12 @@ export default function BlogPage() {
   return (
     <div className="bg-white">
       {/* 1. CINEMATIC HERO - SHARP EDGES */}
+      <Head>
+        <title>Technical Manifest Library – Mitray Exim</title>
+        <meta name="description" content="Access technical manifestos, market insights, and export logistics for the agricultural industry." />
+        <meta property="og:title" content="Technical Manifest Library – Mitray Exim" />
+        <meta property="og:description" content="Access technical manifestos, market insights, and export logistics for the agricultural industry." />
+      </Head>
       <PageHero 
         badge="MARKET INTELLIGENCE HUB"
         title="Institutional. Insights."
@@ -41,16 +48,13 @@ export default function BlogPage() {
                 </h2>
              </div>
              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3 px-6 py-4 bg-white border-2 border-slate-100 shadow-sm">
-                   <FiActivity className="text-emerald-500 animate-pulse" />
-                   <span className="text-xs font-black text-brand-navy uppercase tracking-widest">Real-Time Trade Feed: Active</span>
-                </div>
+           
                 <div className="relative group">
-                   <FiSearch className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-brand-gold transition-colors" />
+                   <FiSearch className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-brand-gold transition-colors" aria-hidden="true" />
                    <input 
                      type="text" 
-                     placeholder="SEARCH MANIFESTS..." 
-                     className="w-full md:w-80 pl-14 pr-6 py-4 bg-white border-2 border-slate-100 outline-none focus:border-brand-gold font-black text-[10px] uppercase tracking-widest transition-all"
+                     placeholder="Search manifests..." 
+                     className="w-full sm:w-72 md:w-80 px-4 py-3 bg-white border-2 border-slate-100 focus:border-brand-gold font-black text-sm uppercase tracking-wider transition-all"
                    />
                 </div>
              </div>
@@ -61,7 +65,7 @@ export default function BlogPage() {
              {featuredPost && (
                 <div className="animate-reveal">
                    <div className="mb-6 flex items-center gap-4">
-                      <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.4em]">Featured Analysis</span>
+                      <span className="text-sm font-black text-brand-gold uppercase tracking-wider">Featured Analysis</span>
                       <div className="h-px flex-1 bg-slate-100"></div>
                    </div>
                    <BlogCard post={featuredPost} featured={true} />
@@ -69,7 +73,7 @@ export default function BlogPage() {
              )}
 
              {/* 4. REMAINING MANIFESTS GRID - SHARP BENTO */}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {remainingPosts.map((post, index) => (
                   <div 
                     key={post.slug}
@@ -90,32 +94,6 @@ export default function BlogPage() {
              )}
           </div>
 
-          {/* 6. NEWSLETTER TERMINAL - SHARP DESIGN */}
-          <div className="mt-20 md:mt-40 relative p-12 md:p-24 bg-brand-navy text-white overflow-hidden animate-reveal">
-             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-gold/5 blur-[150px] rounded-full"></div>
-             <div className="absolute left-0 top-0 w-full h-full opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
-             
-             <div className="relative z-10 max-w-4xl">
-                <div className="flex items-center gap-4 mb-8">
-                   <div className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></div>
-                   <span className="text-xs font-black text-brand-gold uppercase tracking-[0.4em]">Intelligence Sync</span>
-                </div>
-                <h2 className="text-4xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-12 uppercase">
-                   GET THE <br />
-                   <span className="text-gradient">MANIFEST.</span>
-                </h2>
-                <div className="flex flex-col md:flex-row gap-0 max-w-2xl group shadow-2xl">
-                   <input 
-                     type="email" 
-                     placeholder="OFFICIAL@COMPANY.COM"
-                     className="flex-1 bg-white border-2 border-white px-8 py-6 text-sm font-black text-brand-navy outline-none placeholder:text-slate-300 focus:placeholder:text-slate-100 transition-all"
-                   />
-                   <button className="px-12 py-6 bg-brand-gold text-brand-navy font-black uppercase tracking-[0.3em] text-xs md:text-sm hover:bg-white transition-all duration-500 border-2 border-brand-gold">
-                      Initialize
-                   </button>
-                </div>
-             </div>
-          </div>
 
         </Container>
       </div>
