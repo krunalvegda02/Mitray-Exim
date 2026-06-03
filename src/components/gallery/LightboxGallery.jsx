@@ -9,20 +9,20 @@ export function LightboxGallery({ images }) {
   return (
     <>
       {/* SHARP EDGY GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 auto-rows-[1fr]">
         {images.map((img, idx) => (
           <div
             key={idx}
             onClick={() => setSelectedImage(img)}
-            className="group relative cursor-pointer"
+            className="group relative cursor-pointer aspect-square w-full overflow-hidden"
           >
              {/* OFFSET SHADOW PROTOCOL */}
              <div className="absolute inset-0 bg-brand-gold/5 translate-x-3 translate-y-3 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-500"></div>
              
-             <div className="relative bg-white border-2 border-slate-100 overflow-hidden group-hover:border-brand-gold transition-all duration-500 group-hover:-translate-x-2 group-hover:-translate-y-2">
+             <div className="relative w-full h-full bg-white border-2 border-slate-100 overflow-hidden group-hover:border-brand-gold transition-all duration-500 group-hover:-translate-x-2 group-hover:-translate-y-2">
                 
                 {/* IMAGE HUB - GRAYSCALE PROTOCOL */}
-                <div className="aspect-[4/3] relative overflow-hidden bg-slate-50">
+                <div className="absolute inset-0">
                    <img 
                       src={img.src} 
                       alt={img.title} 
@@ -35,22 +35,23 @@ export function LightboxGallery({ images }) {
                          <FiMaximize2 className="text-2xl" />
                       </div>
                    </div>
+                </div>
 
-                   {/* DOC REF BADGE */}
-                   <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-md text-[8px] font-black uppercase tracking-widest text-brand-navy border border-slate-200">
-                      REF: IMG-00{idx + 1}
-                   </div>
+                {/* DOC REF BADGE */}
+                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-md text-[8px] font-black uppercase tracking-widest text-brand-navy border border-slate-200">
+                   REF: IMG-00{idx + 1}
                 </div>
 
                 {/* MANIFEST FOOTER */}
-                <div className="p-6 flex items-center justify-between bg-white border-t border-slate-50">
-                   <div>
-                      <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em] mb-1">Visual Manifest</p>
-                      <h3 className="text-lg font-black text-brand-navy uppercase tracking-tighter leading-none">{img.title}</h3>
-                   </div>
-                   <div className="w-8 h-8 rounded-full border border-slate-100 flex items-center justify-center text-slate-300 group-hover:text-brand-gold group-hover:border-brand-gold transition-all">
-                      <FiArrowRight />
-                   </div>
+                {/* OVERLAY FOOTER – stays within square */}
+                <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-1">VISUAL MANIFEST</p>
+                      <h3 className="text-lg font-black uppercase tracking-tighter leading-none">{img.title}</h3>
+                    </div>
+                    <FiArrowRight className="text-white" />
+                  </div>
                 </div>
              </div>
           </div>

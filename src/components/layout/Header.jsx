@@ -10,6 +10,15 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -128,8 +137,7 @@ export function Header() {
 
       {/* MOBILE COMMAND CENTER OVERLAY */}
       <div
-        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/98 backdrop-blur-2xl transition-all duration-700 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/98 backdrop-blur-2xl transition-all duration-700 ease-in-out overflow-y-auto ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex flex-col h-full p-10 pt-32">
           <button
@@ -145,6 +153,7 @@ export function Header() {
               ["About Us", "/about"],
               ["Our Products", "/products"],
               ["Services", "/shipping"],
+              ["Gallery", "/gallery"],
               ["Certifications", "/certifications"],
               ["Latest News", "/blog"],
               ["Contact Us", "/contact"],

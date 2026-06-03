@@ -87,7 +87,7 @@ export default function GalleryPage() {
                   </div>
 
                   {/* TECHNICAL CATEGORY SELECTOR */}
-                  <div className="flex flex-wrap gap-3 md:gap-4 border-b-2 border-slate-100 pb-8">
+                  <div className="flex items-center gap-3 overflow-x-auto pb-8 border-b-2 border-slate-100 whitespace-nowrap no-scrollbar scroll-smooth" style={{scrollSnapType:'x mandatory'}}>
                      {GALLERY_CATEGORIES.map((cat) => (
                         <button
                            key={cat.id}
@@ -95,13 +95,12 @@ export default function GalleryPage() {
                               setActiveCategory(cat.id);
                               setVisibleCount(12);
                            }}
-                           className={`flex items-center gap-3 px-6 py-4 text-[14px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group ${activeCategory === cat.id
-                                 ? 'bg-brand-navy text-white shadow-xl -translate-y-2'
-                                 : 'bg-white text-slate-400 hover:text-brand-navy hover:bg-slate-50 border border-slate-100'
-                              }`}
+                           className={`flex items-center gap-2 whitespace-nowrap flex-none min-w-[80px] sm:min-w-[100px] md:min-w-[120px] mx-1 px-3 py-1 sm:px-5 sm:py-2 text-sm md:text-base font-black uppercase tracking-[0.2em] rounded-full transition-all duration-300 hover:shadow-md relative group ${activeCategory === cat.id
+                                    ? 'bg-brand-navy text-white shadow-xl'
+                                    : 'bg-white text-slate-400 hover:text-brand-navy hover:bg-slate-50 border border-slate-100'}`}
                         >
-                           <span className={`${activeCategory === cat.id ? 'text-brand-gold' : 'text-slate-300 group-hover:text-brand-gold'}`}>{cat.icon}</span>
-                           {cat.label}
+                           <span className={`${activeCategory === cat.id ? 'text-brand-gold' : 'text-slate-300 group-hover:text-brand-gold'}`} style={{fontSize: '1.125rem'}}>{cat.icon}</span>
+                           <span>{cat.label}</span>
                            {activeCategory === cat.id && (
                               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2 h-2 bg-brand-gold rotate-45"></div>
                            )}
