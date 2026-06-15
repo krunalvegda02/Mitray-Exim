@@ -13,8 +13,8 @@ export default function CertificationsPage() {
     <div className="bg-white">
       {/* 1. HERO SECTION */}
       <PageHero
-        badge="QUALITY CERTIFICATIONS"
-        title="Quality. Certified."
+        badge="QUALITY ASSURANCE"
+        title="TRUSTED. CERTIFICATIONS."
         description="Access our quality assurance certifications and compliance documentation. All products are fully verified and certified to meet international trade standards."
         backgroundImage="https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?q=80&w=2070&auto=format&fit=crop"
         breadcrumbs={[
@@ -23,86 +23,120 @@ export default function CertificationsPage() {
         ]}
       />
 
-      <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
+      <div className="relative z-10 pt-6 sm:pt-8 md:pt-12 lg:pt-16 xl:pt-20 pb-8 sm:pb-12 md:pb-16 lg:pb-24 xl:pb-32 bg-[#F9FAFB]">
         <Container>
           
           {/* 2. SECTION HEADER */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
-             <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                   <div className="h-px w-12 bg-brand-gold"></div>
-                   <span className="text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Global Standards</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4 sm:px-0">
+             <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+                <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                   <div className="h-px w-6 sm:w-8 md:w-10 lg:w-12 bg-brand-gold"></div>
+                   <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-black text-brand-navy uppercase tracking-[0.25em] sm:tracking-[0.3em] md:tracking-[0.35em] lg:tracking-[0.4em]">Global Standards</span>
                 </div>
-                <h2 className="text-5xl md:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.85]">
-                   COMPLIANCE <br />
+                <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.95] sm:leading-[0.9] md:leading-[0.85]">
+                   COMPLIANCE <br className="hidden sm:block" />
                    <span className="text-gradient">STANDARDS.</span>
                 </h2>
              </div>
-             
           </div>
 
           {/* 3. CERTIFICATION GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-12 mb-16 md:mb-24">
-            {CERTIFICATIONS.map((cert, index) => (
-              <div key={cert.id} className="animate-reveal opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
-                <CertificateCard cert={cert} />
-              </div>
-            ))}
+          <div className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 xl:mb-24 px-4 sm:px-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+              {CERTIFICATIONS.slice(0, 3).map((cert, index) => (
+                <div key={cert.id} className="animate-reveal opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
+                  <CertificateCard cert={cert} />
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 mt-4 sm:mt-6 md:mt-8 lg:mt-10">
+              {CERTIFICATIONS.slice(3).map((cert, index) => (
+                <div 
+                  key={cert.id} 
+                  className="w-full sm:w-[calc(50%-8px)] md:w-[calc(33.333%-12px)] lg:w-[calc(33.333%-16px)] animate-reveal opacity-0" 
+                  style={{ animationDelay: `${(index + 3) * 150}ms` }}
+                >
+                  <CertificateCard cert={cert} />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* 4. SECURITY & COMPLIANCE */}
-          <div className="relative mb-24 animate-reveal">
-             <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
-             <div className="relative bg-white border-2 border-slate-100 p-8 md:p-16 overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 border-t-8 border-r-8 border-brand-gold/5"></div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                   <div className="lg:col-span-7 space-y-8">
-                      <div className="flex items-center gap-4">
-                         <div className="w-16 h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-3xl font-black">
+          <div className="relative mb-8 sm:mb-12 md:mb-16 lg:mb-20 xl:mb-24 animate-reveal px-4 sm:px-0">
+             <div className="absolute inset-0 bg-brand-gold/5 translate-x-1 sm:translate-x-2 md:translate-x-3 lg:translate-x-4 translate-y-1 sm:translate-y-2 md:translate-y-3 lg:translate-y-4"></div>
+             <div className="relative bg-white border-2 border-slate-100 p-3 sm:p-4 md:p-6 lg:p-10 xl:p-16 overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 sm:w-20 md:w-24 lg:w-32 h-16 sm:h-20 md:h-24 lg:h-32 border-t-2 sm:border-t-3 md:border-t-4 lg:border-t-6 xl:border-t-8 border-r-2 sm:border-r-3 md:border-r-4 lg:border-r-6 xl:border-r-8 border-brand-gold/5"></div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 items-stretch">
+                   <div className="lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8">
+                      <div className="flex items-start sm:items-center gap-2 sm:gap-3 md:gap-4">
+                         <div className="w-10 sm:w-12 md:w-14 lg:w-16 h-10 sm:h-12 md:h-14 lg:h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-lg sm:text-xl md:text-2xl lg:text-3xl font-black flex-shrink-0">
                             <FiShield />
                          </div>
                          <div>
-                            <h3 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">Quality & Compliance Standards</h3>
+                            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-black text-brand-navy uppercase tracking-tighter leading-tight">
+                               Quality & Compliance Standards
+                            </h3>
                          </div>
                       </div>
-                      <p className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed">
+                      <p className="text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base text-slate-400 font-bold uppercase tracking-tight leading-relaxed">
                          We implement rigorous quality control processes at every stage of sourcing and packing. All shipments are accompanied by comprehensive phytosanitary certificates and export documentation verified by international bodies.
                       </p>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
                          {CERTIFICATIONS.map((cert, i) => (
-                           <div key={i} className="flex items-start gap-5 p-6 bg-slate-50 border border-slate-100 group hover:border-brand-gold transition-all">
-                              <div className="w-20 h-20 bg-white border border-slate-100 flex items-center justify-center p-2 group-hover:scale-110 transition-transform">
-                                 <img 
-                                   src={cert.logo} 
-                                   alt={cert.name} 
+                           <div key={i} className="flex items-start gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 lg:p-6 bg-slate-50 border border-slate-100 group hover:border-brand-gold transition-all">
+                              <div className="w-12 sm:w-14 md:w-16 lg:w-20 h-12 sm:h-14 md:h-16 lg:h-20 bg-white border border-slate-100 flex items-center justify-center p-1 group-hover:scale-110 transition-transform flex-shrink-0">
+                                 <img
+                                   src={cert.logo}
+                                   alt={cert.name}
                                    className="max-w-full max-h-full object-contain transition-all"
                                    onError={(e) => {
                                      e.target.style.display = 'none';
                                      e.target.nextSibling.style.display = 'flex';
                                    }}
                                  />
-                                 <FiShield className="hidden text-brand-gold text-2xl" />
+                                 <FiShield className="hidden text-brand-gold text-sm sm:text-base md:text-lg lg:text-xl" />
                               </div>
-                              <div>
-                                 <h4 className="text-xs md:text-sm font-black text-brand-navy uppercase tracking-widest mb-1">{cert.name} Certification</h4>
-                                 <p className="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-widest">Status: Active & Verified</p>
+                              <div className="min-w-0 justify-center ">
+                                 <h4 className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-black text-brand-navy uppercase tracking-widest mb-0.5 sm:mb-1">{cert.name} Certification</h4>
+                                 <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold text-slate-400 uppercase tracking-widest">Status: Active & Verified</p>
                               </div>
                            </div>
                          ))}
                       </div>
                    </div>
-                   
-                   <div className="lg:col-span-5">
-                      <div className="p-10 bg-brand-navy text-white relative overflow-hidden group">
-                         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 blur-3xl"></div>
-                         <h4 className="text-xl font-black uppercase tracking-tighter mb-6">Document Request</h4>
-                         <p className="text-sm font-bold text-white/40 uppercase tracking-widest leading-relaxed mb-10">
-                            Our documentation team is ready to provide complete compliance certificates, test reports, and export records for your review.
-                         </p>
-                         <Link href="/contact" className="group/btn block w-full py-5 bg-brand-gold text-brand-navy text-xs font-black text-center uppercase tracking-[0.3em] hover:bg-white transition-all duration-700">
-                            Request Certificates <FiArrowRight className="inline ml-2 group-hover/btn:translate-x-2 transition-transform" />
+
+                   <div className="lg:col-span-5 mt-4 sm:mt-6 md:mt-8 lg:mt-0 h-full">
+                      <div className="h-full flex flex-col justify-between p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 bg-brand-navy text-white relative overflow-hidden group min-h-[300px] sm:min-h-[320px] md:min-h-[360px] lg:min-h-full">
+                         <div className="absolute top-0 right-0 w-20 sm:w-24 md:w-28 lg:w-32 h-20 sm:h-24 md:h-28 lg:h-32 bg-brand-gold/10 blur-3xl"></div>
+                         
+                         <div className="relative z-10">
+                           <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-black uppercase tracking-tight leading-tight mb-3 sm:mb-4 md:mb-6">
+                              Documentation<br />Request
+                           </h4>
+                           <p className="text-[10px] sm:text-xs md:text-sm lg:text-base leading-relaxed text-white/70 font-medium mb-4 sm:mb-6 md:mb-8">
+                              Receive complete export documentation, quality certificates, laboratory test reports, phytosanitary certificates, and compliance records before every shipment.
+                           </p>
+                           
+                           <div className="space-y-2 sm:space-y-3 md:space-y-4 mb-6 sm:mb-8 md:mb-10">
+                              {[
+                                 "Phytosanitary Certificate",
+                                 "Certificate of Origin",
+                                 "Quality Inspection Report",
+                                 "Export Documentation",
+                              ].map((item) => (
+                                 <div key={item} className="flex items-center gap-2 sm:gap-3">
+                                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-brand-gold flex-shrink-0" />
+                                    <span className="text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-white/90">{item}</span>
+                                 </div>
+                              ))}
+                           </div>
+                         </div>
+
+                         <Link href="/contact" className="relative z-10 w-full py-2.5 sm:py-3 md:py-4 lg:py-5 bg-brand-gold text-brand-navy text-[10px] sm:text-xs md:text-sm lg:text-base font-black text-center uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em] hover:bg-white transition-all duration-500 flex items-center justify-center gap-2">
+                            Request Certificates <FiArrowRight className="text-xs sm:text-sm md:text-base lg:text-lg group-hover:translate-x-1 transition-transform" />
                          </Link>
                       </div>
                    </div>
@@ -111,24 +145,26 @@ export default function CertificationsPage() {
           </div>
 
           {/* 5. OPERATIONAL METRICS */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-slate-100 bg-white animate-reveal">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-2 border-slate-100 bg-white animate-reveal overflow-hidden">
             {[
               { label: "Compliance Rate", val: 100, suffix: "%" },
               { label: "Export Hubs", val: 5, suffix: "+" },
               { label: "Establishment", val: 2020, suffix: "" },
               { label: "Global Presence", val: 10, suffix: "+" }
             ].map((stat, i) => (
-              <div key={i} className={`p-10 text-center group ${i < 3 ? 'border-r-2' : ''} border-slate-100 hover:bg-slate-50 transition-colors`}>
-                 <div className="text-3xl md:text-5xl font-black text-brand-navy mb-4 group-hover:text-brand-gold transition-colors">
+              <div key={i} className={`p-2 sm:p-3 md:p-4 lg:p-6 xl:p-10 text-center group ${i % 2 === 0 && i !== 3 ? 'border-r-2' : ''} ${i < 2 ? 'border-b-2' : ''} md:border-b-0 ${i < 3 ? 'md:border-r-2' : ''} border-slate-100 hover:bg-slate-50 transition-colors`}>
+                 <div className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-brand-navy mb-1 sm:mb-2 md:mb-3 lg:mb-4 group-hover:text-brand-gold transition-colors">
                     <AnimatedCounter end={stat.val} suffix={stat.suffix} />
                  </div>
-                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">{stat.label}</div>
+                 <div className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm font-black text-slate-400 uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] lg:tracking-[0.3em]">{stat.label}</div>
               </div>
             ))}
           </div>
 
         </Container>
       </div>
+
+    
     </div>
   );
 }

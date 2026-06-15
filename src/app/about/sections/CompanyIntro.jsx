@@ -37,7 +37,7 @@ export function CompanyIntro() {
                {/* KEY METRICS GRID */}
                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 md:mt-16 animate-reveal delay-500 opacity-0">
                   {[
-                    { val: "2020", label: "Establishment", icon: <FiActivity /> },
+                    { val: "2026", label: "Establishment", icon: <FiActivity /> },
                     { val: "20+", label: "Trade Hubs", icon: <FiGlobe /> },
                     { val: "100%", label: "Compliance", icon: <FiShield /> },
                     { val: "Premium", label: "Quality Sourcing", icon: <FiZap /> },

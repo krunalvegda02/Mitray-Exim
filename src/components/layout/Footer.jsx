@@ -21,7 +21,7 @@ export function Footer() {
             JOIN OUR GLOBAL <br className="hidden lg:block" />
             <span className="text-brand-gold">EXPORT NETWORK</span> TODAY.
           </h3>
-          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 md:px-12 py-4 md:py-6 bg-brand-gold text-brand-navy rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-xs hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
+          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 md:px-12 py-4 md:py-6 bg-brand-gold text-brand-navy  font-black uppercase tracking-widest text-[11px] md:text-lg hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
             Partner With Us
           </Link>
         </div>

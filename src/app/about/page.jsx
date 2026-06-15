@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white">
       <PageHero
-        badge="ESTABLISHED 2020"
+        badge="ESTABLISHED 2026"
         title="ABOUT MITRAY EXIM."
         description="A premier merchant exporter from India, delivering nature's finest agricultural treasures to global markets with uncompromising quality standards."
         backgroundImage="https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?q=80&w=2070&auto=format&fit=crop"
