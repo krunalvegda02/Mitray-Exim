@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FiArrowRight, FiCalendar, FiBookOpen, FiArrowUpRight, FiZap, FiActivity } from "react-icons/fi";
+import { FiArrowRight, FiCalendar, FiZap } from "react-icons/fi";
 
 const getBlogImage = (post) => {
   if (post.image && !post.image.startsWith('/images/')) return post.image;
@@ -18,66 +18,84 @@ export function BlogCard({ post, featured = false }) {
   const blogImage = getBlogImage(post);
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group relative block">
-      {/* SHARP EDGY SHADOW */}
-      <div className="absolute inset-0 bg-brand-gold/5 translate-x-3 translate-y-3 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-500"></div>
+    <Link href={`/blog/${post.slug}`} className="group relative block h-full">
+      {/* SHARP SHADOW EFFECT */}
+      <div className="absolute -inset-1 sm:inset-0 bg-brand-gold/10 translate-x-2 sm:translate-x-3 translate-y-2 sm:translate-y-3 transition-transform duration-500 group-hover:translate-x-0 group-hover:translate-y-0"></div>
       
-      <article className={`relative bg-white border-2 border-brand-navy/5 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-2 group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full hover:shadow-lg transition-shadow`} aria-label={`Read more about ${post.title}`}>
+      <article className={`relative bg-white border-2 border-slate-200 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-1 sm:group-hover:-translate-x-2 group-hover:-translate-y-1 sm:group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full hover:shadow-2xl overflow-hidden`} aria-label={`Read more about ${post.title}`}>
         
-        {/* VISUAL HUB - SHARP EDGES */}
-        <div className={`${featured ? 'md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-[300px] md:h-[500px]' : 'aspect-video'}`}>
+        {/* IMAGE SECTION */}
+        <div className={`${featured ? 'w-full md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-40 sm:h-56 md:h-72 lg:h-96' : 'aspect-video'}`}>
            <img 
              src={blogImage} 
              alt={post.title} 
-             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-105 opacity-80"
+             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-110 opacity-75 sm:opacity-80"
+             loading="lazy"
            />
            
-           {/* DATA OVERLAY */}
-           <div className="absolute top-6 left-6 flex items-center gap-2">
-              <div className="px-4 py-1.5 bg-brand-gold text-brand-navy text-[10px] font-black uppercase tracking-widest shadow-xl">
-                 Verified Protocol
+           {/* OVERLAY */}
+           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-50 sm:opacity-60" aria-hidden="true"></div>
+
+           {/* BADGE - TOP LEFT */}
+           <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 z-10">
+              <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 md:py-2.5 bg-brand-gold text-brand-navy text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-widest shadow-lg">
+                 <FiZap className="w-3 h-3 sm:w-4 sm:h-4" />
+                 <span>Verified</span>
               </div>
            </div>
 
-           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-60" aria-hidden="true"></div>
+           {/* DATE - TOP RIGHT */}
+           <div className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6 z-10">
+              <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 md:py-2.5 bg-white/95 backdrop-blur-sm text-brand-navy text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black uppercase tracking-[0.1em] sm:tracking-widest shadow-lg flex-shrink-0 border border-slate-200">
+                 <FiCalendar className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-brand-gold flex-shrink-0" />
+                 <span className="hidden sm:inline">{post.date}</span>
+                 <span className="sm:hidden text-[7px]">{post.date}</span>
+              </div>
+           </div>
         </div>
 
-        {/* CONTENT HUB - EDGY BOX */}
-        <div className={`${featured ? 'md:w-2/5' : 'w-full'} p-6 md:p-12 flex flex-col justify-between bg-white relative`}>
+        {/* CONTENT SECTION */}
+        <div className={`${featured ? 'w-full md:w-2/5' : 'w-full'} p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-between bg-white relative`}>
            
            {/* CORNER ACCENT */}
-           <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-slate-100 group-hover:border-brand-gold transition-colors" aria-hidden="true"></div>
+           <div className="absolute top-0 right-0 w-6 sm:w-8 md:w-10 lg:w-12 h-6 sm:h-8 md:h-10 lg:h-12 border-t-2 sm:border-t-3 md:border-t-4 border-r-2 sm:border-r-3 md:border-r-4 border-slate-200 group-hover:border-brand-gold transition-colors duration-500" aria-hidden="true"></div>
 
-           <div className="space-y-6">
-              <div className="flex items-center gap-4 text-[10px] font-black text-brand-gold uppercase tracking-[0.3em]">
-                 <FiZap className="animate-pulse" /> {post.category}
+           <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 pr-6 sm:pr-8 md:pr-10">
+              {/* CATEGORY */}
+              <div className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-brand-gold uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-widest">
+                 <FiZap className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 animate-pulse" /> 
+                 {post.category}
               </div>
 
-              <h3 className={`font-black text-brand-navy uppercase tracking-tighter leading-none group-hover:text-brand-gold transition-all duration-500 ${featured ? 'text-3xl md:text-6xl' : 'text-xl md:text-3xl'}`}>
+              {/* TITLE */}
+              <h3 className={`font-black text-brand-navy uppercase tracking-tighter leading-tight group-hover:text-brand-gold transition-all duration-500 ${
+                featured 
+                  ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl' 
+                  : 'text-base sm:text-lg md:text-2xl lg:text-3xl'
+              }`}>
                 {post.title}
               </h3>
               
-              <p className="text-xs md:text-sm text-slate-400 font-bold uppercase tracking-tight leading-relaxed line-clamp-3">
+              {/* EXCERPT */}
+              <p className="text-[9px] sm:text-xs md:text-sm lg:text-base text-slate-500 font-semibold uppercase tracking-wide leading-relaxed line-clamp-2 sm:line-clamp-3">
                 {post.excerpt}
               </p>
            </div>
 
-           <div className="mt-12 space-y-8">
-              <div className="flex items-center justify-between text-[10px] font-black text-slate-300 uppercase tracking-widest border-b border-slate-50 pb-6">
-                 <div className="flex items-center gap-3">
-                    <FiCalendar className="text-brand-gold" />
-                    {post.date}
+           {/* FOOTER */}
+           <div className="mt-4 sm:mt-5 md:mt-6 lg:mt-8 space-y-3 sm:space-y-4 md:space-y-6">
+              {/* CTA */}
+              <div className="flex items-center justify-between group/action pt-2 sm:pt-3 md:pt-4 border-t border-slate-100 pb-3 sm:pb-4">
+                 <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm md:text-base font-black text-brand-navy uppercase tracking-wider group-hover/action:text-brand-gold transition-colors duration-300">
+                    <span>Read Article</span>
+                    <FiArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 group-hover/action:translate-x-1 transition-transform duration-300" />
                  </div>
-               
-              </div>
-
-              <div className="flex items-center justify-between group/action">
-                 <span className="flex items-center gap-1 text-sm md:text-xs font-medium text-brand-navy uppercase tracking-wider hover:underline transition-colors duration-300 group-hover/action:translate-x-1">Read More <FiArrowRight className="inline text-xs" /></span>
-                    <div className="text-[10px] font-black text-slate-200 uppercase tracking-[0.2em] group-hover:text-brand-gold transition-colors">
-                    DocRef: MIT-0{post.slug.length}
+                 <div className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-slate-300 uppercase tracking-[0.1em] group-hover/action:text-brand-gold transition-colors duration-300">
+                    MIT-{post.slug.substring(0, 3).toUpperCase()}
                  </div>
               </div>
            </div>
+
         </div>
 
       </article>

@@ -25,7 +25,7 @@ const renderContent = (content) => {
         <div key={idx} className="mb-12 md:mb-16 animate-reveal">
           <div className="flex items-center gap-4 mb-6">
              <div className="h-px w-8 bg-brand-gold"></div>
-             <h2 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-tighter">
+             <h2 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-wide">
                {title}
              </h2>
           </div>

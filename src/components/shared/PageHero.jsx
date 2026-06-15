@@ -65,7 +65,7 @@ export function PageHero({
             )}
 
             {/* Bold Elegant Title */}
-            <h1 className="text-5xl md:text-8xl font-black text-white tracking-wider leading-[0.9] animate-reveal delay-100 opacity-0 uppercase">
+            <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl  font-black text-white tracking-tight sm:tracking-wider leading-[0.95] sm:leading-[0.9] animate-reveal delay-100 opacity-0 uppercase">
                {title.split('.').map((part, i) => (
                  <span key={i} className="block">
                     {part.trim()}
