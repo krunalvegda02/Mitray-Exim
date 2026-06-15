@@ -61,7 +61,6 @@ export function ExportCountries() {
 
   useEffect(() => {
     setIsClient(true);
-    // On mobile screens, default to focusing on Dubai/UAE with zoom 3 to make the map packed and interactive
     if (window.innerWidth < 1024) {
       setPosition({ coordinates: [55.2708, 25.2048], zoom: 3 });
       setHovered("United Arab Emirates");
@@ -73,7 +72,6 @@ export function ExportCountries() {
     setIsStatsOpen(true);
     const isMobile = window.innerWidth < 1024;
     const zoomLevel = country.region === "Gulf" ? (isMobile ? 3.5 : 5) : (isMobile ? 2.5 : 3.5);
-    // Cap vertical center latitude at a minimum of 10 degrees North to prevent pulling up empty southern ocean
     const targetLatitude = Math.max(10, country.coords[1]);
     setPosition({ coordinates: [country.coords[0], targetLatitude], zoom: zoomLevel });
   };
@@ -108,7 +106,7 @@ export function ExportCountries() {
   return (
     <section ref={sectionRef} className="relative py-12 md:py-20 overflow-hidden bg-slate-50">
       <div className="container mx-auto px-4 md:px-12 relative z-10">
-        
+
         {/* STANDARDIZED HEADER ARCHITECTURE */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
@@ -125,39 +123,38 @@ export function ExportCountries() {
           </p>
 
           <div className="flex overflow-x-auto pb-2 -mx-4 px-1 gap-2 no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-8">
-             {EXPORT_COUNTRIES.map(c => (
-                <button 
-                  key={c.code}
-                  onClick={() => handleCountryFocus(c)}
-                  className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl md:rounded-2xl text-[8px] md:text-[12px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${
-                    hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100'
+            {EXPORT_COUNTRIES.map(c => (
+              <button
+                key={c.code}
+                onClick={() => handleCountryFocus(c)}
+                className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl md:rounded-2xl text-[8px] md:text-[12px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100'
                   }`}
-                >
-                  {c.flag} {c.name}
-                </button>
-             ))}
+              >
+                {c.flag} {c.name}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* MAP DASHBOARD TERMINAL */}
         <div className="relative glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden border-white shadow-2xl bg-slate-50/50 min-h-[350px] sm:min-h-[450px] md:min-h-[600px] lg:min-h-[650px] animate-reveal delay-500 opacity-0">
-          
+
           {/* MAP HUD */}
           <div className="absolute top-4 md:top-6 left-4 md:left-6 right-4 md:right-6 z-20 flex justify-between items-start pointer-events-none">
-             <div className="glass-panel px-4 py-2 rounded-xl border-white shadow-xl pointer-events-auto backdrop-blur-xl bg-white/60">
-                <div className="flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                   <span className="text-[8px] md:text-[10px] font-black text-brand-navy uppercase tracking-widest leading-none">Export Operations Active</span>
-                </div>
-             </div>
-             
-             <div className="flex flex-col gap-2 pointer-events-auto">
-                <button onClick={handleZoomIn} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg active:scale-90 bg-white/80"><FiPlus /></button>
-                <button onClick={handleZoomOut} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiMinus /></button>
-                <button onClick={handleResetMap} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiTarget /></button>
-             </div>
+            <div className="glass-panel px-4 py-2 rounded-xl border-white shadow-xl pointer-events-auto backdrop-blur-xl bg-white/60">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span className="text-[8px] md:text-[10px] font-black text-brand-navy uppercase tracking-widest leading-none">Export Operations Active</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 pointer-events-auto">
+              <button onClick={handleZoomIn} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg active:scale-90 bg-white/80"><FiPlus /></button>
+              <button onClick={handleZoomOut} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiMinus /></button>
+              <button onClick={handleResetMap} className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-brand-navy hover:bg-brand-navy hover:text-white transition-all shadow-lg active:scale-90 bg-white/80"><FiTarget /></button>
+            </div>
           </div>
- 
+
           {isClient && (
             <ComposableMap
               projection="geoMercator"
@@ -173,10 +170,10 @@ export function ExportCountries() {
                       const geoName = geo.properties.name;
                       const isIndia = geoName === "India";
                       const isExport = EXPORT_COUNTRIES.some(c => {
-                        const names = { 
-                          "United Arab Emirates": "UAE", 
-                          "United Kingdom": "UK", 
-                          "United States of America": "USA", 
+                        const names = {
+                          "United Arab Emirates": "UAE",
+                          "United Kingdom": "UK",
+                          "United States of America": "USA",
                           "United States": "USA",
                           "Tanzania (East Africa)": "United Republic of Tanzania",
                           "Kenya (East Africa)": "Kenya",
@@ -184,7 +181,7 @@ export function ExportCountries() {
                         };
                         return (names[c.name] || c.name) === (names[geoName] || geoName) || c.name === geoName;
                       });
-                      
+
                       return (
                         <Geography
                           key={geo.rsmKey}
@@ -202,7 +199,7 @@ export function ExportCountries() {
 
                 {EXPORT_COUNTRIES.map((country) => (
                   <Marker key={country.code} coordinates={country.coords}>
-                    <g 
+                    <g
                       className="cursor-pointer"
                       onMouseEnter={() => setHovered(country.name)}
                       onClick={() => handleCountryFocus(country)}
@@ -220,41 +217,41 @@ export function ExportCountries() {
           {/* DATA DRAWER */}
           {hovered && (
             <div className={`absolute bottom-0 left-0 right-0 z-30 transition-transform duration-700 ${isStatsOpen ? 'translate-y-0' : 'translate-y-[calc(100%-60px)]'}`}>
-               <div className="glass-panel p-6 md:p-8 rounded-t-2xl md:rounded-t-[2rem] border-t-white shadow-[0_-20px_60px_-15px_rgba(44,74,94,0.15)] bg-white/95 backdrop-blur-2xl">
-                  
-                  <button onClick={() => setIsStatsOpen(!isStatsOpen)} className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg border border-slate-100 md:hidden">
-                    <FiChevronUp className={`transition-transform duration-500 ${isStatsOpen ? 'rotate-180' : ''}`} />
-                  </button>
+              <div className="glass-panel p-6 md:p-8 rounded-t-2xl md:rounded-t-[2rem] border-t-white shadow-[0_-20px_60px_-15px_rgba(44,74,94,0.15)] bg-white/95 backdrop-blur-2xl">
 
-                  <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-6 w-full">
-                       <div className="text-5xl md:text-7xl animate-reveal">{EXPORT_COUNTRIES.find(c => c.name === hovered)?.flag}</div>
-                       <div className="flex-1">
-                          <p className="text-[8px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">Global Trade Partner</p>
-                          <h3 className="text-xl md:text-3xl font-black text-brand-navy tracking-tighter uppercase leading-none">{hovered}</h3>
-                       </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto">
-                       {[
-                         { icon: <FiZap />, label: "Shipment Mode", val: "Air & Sea Freight" },
-                         { icon: <FiShield />, label: "Quality Checked", val: "100% Certified" },
-                         { icon: <FiActivity />, label: "Delivery Status", val: "Direct Sourcing" }
-                       ].map((stat, i) => (
-                         <div key={i} className="text-center md:text-left animate-reveal" style={{ animationDelay: `${i * 100}ms` }}>
-                            <div className="flex items-center justify-center md:justify-start gap-2 text-brand-gold mb-1">
-                               <span className="text-[10px] font-black uppercase tracking-widest">{stat.label}</span>
-                            </div>
-                            <p className="text-[11px] md:text-[14px] font-black text-brand-navy uppercase tracking-widest">{stat.val}</p>
-                         </div>
-                       ))}
-                    </div>
+                <button onClick={() => setIsStatsOpen(!isStatsOpen)} className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg border border-slate-100 md:hidden">
+                  <FiChevronUp className={`transition-transform duration-500 ${isStatsOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-                    <button className="w-full lg:w-auto px-10 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl active:scale-95">
-                       Inquire for Delivery
-                    </button>
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+                  <div className="flex items-center gap-6 w-full">
+                    <div className="text-5xl md:text-7xl animate-reveal">{EXPORT_COUNTRIES.find(c => c.name === hovered)?.flag}</div>
+                    <div className="flex-1">
+                      <p className="text-[8px] md:text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">Global Trade Partner</p>
+                      <h3 className="text-xl md:text-3xl font-black text-brand-navy tracking-tighter uppercase leading-none">{hovered}</h3>
+                    </div>
                   </div>
-               </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto">
+                    {[
+                      { icon: <FiZap />, label: "Shipment Mode", val: "Air & Sea Freight" },
+                      { icon: <FiShield />, label: "Quality Checked", val: "100% Certified" },
+                      { icon: <FiActivity />, label: "Delivery Status", val: "Direct Sourcing" }
+                    ].map((stat, i) => (
+                      <div key={i} className="text-center md:text-left animate-reveal" style={{ animationDelay: `${i * 100}ms` }}>
+                        <div className="flex items-center justify-center md:justify-start gap-2 text-brand-gold mb-1">
+                          <span className="text-[10px] font-black uppercase tracking-widest">{stat.label}</span>
+                        </div>
+                        <p className="text-[11px] md:text-[14px] font-black text-brand-navy uppercase tracking-widest">{stat.val}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button className="w-full lg:w-auto px-10 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl active:scale-95">
+                    Inquire for Delivery
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

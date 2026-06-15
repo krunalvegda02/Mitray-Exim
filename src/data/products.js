@@ -10,18 +10,6 @@ export const CATEGORIES = [
 export const PRODUCTS = [
   // ==================== FRESH FRUITS ====================
   {
-    slug: "pomegranate",
-    name: "Pomegranate (Bhagwa Variety)",
-    category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1541344999736-83cdc25889bf?q=80&w=2070&auto=format&fit=crop",
-    description:
-      "Premium quality Bhagwa pomegranates, globally famous for their deep red arils, soft seeds, sweet taste, and high juice content. Sourced directly from certified orchards of Maharashtra.",
-    origin: "India",
-    packaging: "3.5 kg / 4 kg carton boxes",
-    moq: "1 x 20 ft Reefer Container",
-    shipping: "Reefer container (5-7°C), 10–12 days to Gulf / Europe",
-  },
-  {
     slug: "banana",
     name: "Banana (G9 Premium)",
     category: "fresh-fruits",
@@ -56,6 +44,18 @@ export const PRODUCTS = [
     packaging: "3 kg / 4 kg carton boxes",
     moq: "1 x 20 ft Reefer Container / Air Cargo",
     shipping: "Reefer container / Air Cargo, 3–15 days globally",
+  },
+  {
+    slug: "pomegranate",
+    name: "Pomegranate (Bhagwa Variety)",
+    category: "fresh-fruits",
+    image: "https://images.unsplash.com/photo-1541344999736-83cdc25889bf?q=80&w=2070&auto=format&fit=crop",
+    description:
+      "Premium quality Bhagwa pomegranates, globally famous for their deep red arils, soft seeds, sweet taste, and high juice content. Sourced directly from certified orchards of Maharashtra.",
+    origin: "India",
+    packaging: "3.5 kg / 4 kg carton boxes",
+    moq: "1 x 20 ft Reefer Container",
+    shipping: "Reefer container (5-7°C), 10–12 days to Gulf / Europe",
   },
   {
     slug: "semi-husked-coconut",

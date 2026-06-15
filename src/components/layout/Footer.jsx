@@ -133,55 +133,55 @@ export function Footer() {
 
       {/* Compliance Bar - Institutional Row */}
       {/* Mobile: Scrollable */}
-     <div className="md:hidden overflow-hidden relative py-8">
-  <div className="flex w-max animate-marquee gap-4 px-4">
-    {[...CERTIFICATIONS, ...CERTIFICATIONS].map((cert, index) => (
-      <Link
-        href="/certifications"
-        key={`${cert.id}-${index}`}
-        className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded flex-shrink-0"
-      >
-        <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-          <img
-            src={cert.logo}
-            alt={cert.name}
-            className="max-h-full max-w-full object-contain"
-            onError={(e) => {
-              e.target.style.display = "none";
-              e.target.nextSibling.style.display = "flex";
-            }}
-          />
-
-          <div className="hidden flex-col items-center justify-center text-center">
-            <svg
-              className="w-5 h-5 text-brand-gold"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <div className="md:hidden overflow-x-auto relative py-8">
+        <div className="flex w-max animate-marquee gap-4 px-4">
+          {[...CERTIFICATIONS, ...CERTIFICATIONS].map((cert, index) => (
+            <Link
+              href="/certifications"
+              key={`${cert.id}-${index}`}
+              className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded flex-shrink-0"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m7 7a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-        </div>
+              <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                <img
+                  src={cert.logo}
+                  alt={cert.name}
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "flex";
+                  }}
+                />
 
-        <div className="block min-w-0 flex-1">
-          <p className="text-xs font-black uppercase tracking-widest text-brand-gold truncate">
-            {cert.name}
-          </p>
+                <div className="hidden flex-col items-center justify-center text-center">
+                  <svg
+                    className="w-5 h-5 text-brand-gold"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m7 7a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
 
-          <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 truncate">
-            Verified Protocol
-          </p>
+              <div className="block min-w-0 flex-1">
+                <p className="text-xs font-black uppercase tracking-widest text-brand-gold truncate">
+                  {cert.name}
+                </p>
+
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 truncate">
+                  Verified Protocol
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
-      </Link>
-    ))}
-  </div>
-</div>
+      </div>
 
       {/* Desktop: Grid Layout */}
       <div className="hidden md:block relative py-8">
@@ -191,7 +191,7 @@ export function Footer() {
               <Link
                 href="/certifications"
                 key={cert.id}
-                className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded"
+                className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded hover:shadow-lg"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
                   <img

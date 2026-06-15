@@ -21,21 +21,27 @@ export function Certifications() {
 
     autoScrollTimeoutRef.current = setTimeout(() => {
       setCurrentIndex((prevIndex) => prevIndex + 1);
-    }, 3000); // Auto-scroll every 1 second
+    }, 3000);
 
     return () => clearTimeout(autoScrollTimeoutRef.current);
   }, [isAutoScroll, currentIndex]);
 
-  useEffect(() => {
+  // Function to center the active card
+  const centerCard = (instant = false) => {
     const container = scrollContainerRef.current;
     const activeCard = activeCardRef.current;
     if (!container || !activeCard) return;
 
+    // container must be relative for offsetLeft to be accurate to the scroll content
     const scrollLeft = activeCard.offsetLeft - (container.clientWidth / 2) + (activeCard.offsetWidth / 2);
     container.scrollTo({
       left: scrollLeft,
-      behavior: isSnapping ? "auto" : "smooth",
+      behavior: instant ? "auto" : "smooth",
     });
+  };
+
+  useEffect(() => {
+    centerCard(isSnapping);
 
     if (isSnapping) {
       const timer = setTimeout(() => setIsSnapping(false), 50);
@@ -46,10 +52,18 @@ export function Certifications() {
         snapTimeoutRef.current = setTimeout(() => {
           setIsSnapping(true);
           setCurrentIndex((prev) => (n * 4) + (prev % n));
-        }, 700); // Wait for CSS transition (700ms) to finish
+        }, 700); // Wait for CSS transition
       }
     }
   }, [currentIndex, isSnapping]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      centerCard(true); // Re-center instantly on resize
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => prevIndex - 1);
@@ -87,8 +101,8 @@ export function Certifications() {
 
       {/* BACKGROUND TEXTURE */}
       <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_90%_10%,rgba(212,165,116,0.03)_0%,transparent_50%))]"></div>
-        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_90%,rgba(44,74,94,0.03)_0%,transparent_50%))]"></div>
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_90%_10%,rgba(212,165,116,0.03)_0%,transparent_50%))]\"></div>
+        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_90%,rgba(44,74,94,0.03)_0%,transparent_50%))]\"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 relative z-10">
@@ -110,7 +124,7 @@ export function Certifications() {
         </div>
 
         {/* HORIZONTAL CARD CAROUSEL - AUTO SCROLLING */}
-        <div className="relative animate-reveal delay-300 opacity-0">
+        <div className="relative animate-reveal delay-300 opacity-0 -mx-4 px-4 md:-mx-12 md:px-12">
           {/* Fade overlays */}
           <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-white via-white to-transparent z-30 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-white via-white to-transparent z-30 pointer-events-none"></div>
@@ -132,7 +146,7 @@ export function Certifications() {
 
           <div
             ref={scrollContainerRef}
-            className={`flex gap-6 overflow-x-auto scroll-smooth pb-4 ${isSnapping ? "is-snapping" : ""}`}
+            className={`relative flex gap-6 overflow-x-auto scroll-smooth py-12 md:py-16 ${isSnapping ? "is-snapping" : ""}`}
             style={{
               scrollBehavior: "smooth",
               scrollbarWidth: "none",
@@ -159,13 +173,13 @@ export function Certifications() {
                 <div
                   key={`${cert.id}-${index}`}
                   ref={isMiddle ? activeCardRef : null}
-                  className="flex-shrink-0 w-72 md:w-80 lg:w-96 transition-all duration-700 ease-out"
+                  className="flex-shrink-0 w-72 md:w-80 lg:w-96 transition-all duration-700 ease-out px-2"
                   style={{
                     transform: isMiddle ? "scale(1)" : "scale(0.85)",
                     opacity: isMiddle ? 1 : 0.6,
                   }}
                 >
-                  <div className={`relative glass-card rounded-2xl md:rounded-3xl flex flex-col h-full transition-all duration-700 group overflow-hidden ${isMiddle
+                  <div className={`relative glass-card rounded-2xl md:rounded-3xl flex flex-col h-full transition-all duration-700 group overflow-visible ${isMiddle
                     ? "p-6 md:p-8 bg-white/90 shadow-2xl ring-2 ring-brand-gold/50"
                     : "p-6 md:p-8 bg-white/60"
                     }`}>
@@ -173,8 +187,8 @@ export function Certifications() {
                     {/* Focus Glow Effect for Middle Card */}
                     {isMiddle && (
                       <>
-                        <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-transparent rounded-2xl md:rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-transparent rounded-2xl md:rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                        <div className="absolute -top-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent pointer-events-none"></div>
                       </>
                     )}
 
@@ -238,7 +252,7 @@ export function Certifications() {
           </div>
 
           {/* Dot Indicators */}
-          <div className="flex items-center justify-center gap-2 mt-6 md:mt-8">
+          <div className="flex items-center justify-center gap-2 mt-8 md:mt-10">
             {CERTIFICATIONS.map((_, index) => (
               <button
                 key={index}
