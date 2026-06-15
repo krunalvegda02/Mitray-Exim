@@ -117,9 +117,38 @@ export default function AboutPage() {
                 </p>
 
                 <a href="/contact">
-                  <button className="group relative px-12 py-6 bg-brand-navy text-white rounded-sm font-black uppercase tracking-[0.3em] text-[14px] shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95 overflow-hidden">
-                    <span className="relative z-10 flex items-center gap-4">
-                      Get in Touch Today <FiArrowRight className="text-xl group-hover:translate-x-2 transition-transform" />
+                  <button
+                    className="
+      group
+      relative
+      px-6 py-3
+      sm:px-8 sm:py-4
+      md:px-10 md:py-5
+      lg:px-12 lg:py-6
+      bg-brand-navy
+      text-white
+      rounded-sm
+      font-black
+      uppercase
+      tracking-[0.12em]
+      sm:tracking-[0.18em]
+      md:tracking-[0.24em]
+      lg:tracking-[0.3em]
+      text-[11px]
+      sm:text-xs
+      md:text-sm
+      shadow-2xl
+      hover:bg-brand-gold
+      hover:text-brand-navy
+      transition-all
+      duration-700
+      active:scale-95
+      overflow-hidden
+    "
+                  >
+                    <span className="relative z-10 flex items-center gap-2 sm:gap-3 md:gap-4">
+                      Get in Touch Today
+                      <FiArrowRight className="text-base sm:text-lg md:text-xl group-hover:translate-x-2 transition-transform duration-300" />
                     </span>
                   </button>
                 </a>

@@ -108,13 +108,13 @@ export default function BlogDetailPage() {
     <div className="bg-white">
       {/* 1. INSTITUTIONAL HERO - EDGY MANIFEST STYLE */}
       <PageHero 
-        badge={`TECHNICAL PUBLICATION • ${blog.category.toUpperCase()}`}
+        badge={`${blog.category.toUpperCase()}`}
         title={`${blog.title}.`}
         description={blog.excerpt}
         backgroundImage={bannerImage}
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Intelligence Terminal', href: '/blog' },
+         //  { label: 'Intelligence Terminal', href: '/blog' },
           { label: 'Publication Manifest' }
         ]}
       />

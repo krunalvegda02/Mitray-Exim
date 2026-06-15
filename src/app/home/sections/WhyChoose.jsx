@@ -36,7 +36,7 @@ export function WhyChoose() {
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
            <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
-              <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Leading Merchant Exporters</span>
+              <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Leading  Exporters</span>
               <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
            </div>
            <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">

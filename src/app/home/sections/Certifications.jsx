@@ -1,20 +1,98 @@
 "use client";
 
 import { CERTIFICATIONS } from "@/data/certifications";
-import { FiAward, FiShield, FiCheckCircle, FiDownload, FiExternalLink, FiArrowRight } from "react-icons/fi";
+import { FiShield, FiCheckCircle, FiDownload, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+
+const n = CERTIFICATIONS.length;
+const extendedCerts = Array(9).fill(CERTIFICATIONS).flat();
 
 export function Certifications() {
+  const scrollContainerRef = useRef(null);
+  const activeCardRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(n * 4); // Start at the middle copy
+  const [isAutoScroll, setIsAutoScroll] = useState(true);
+  const [isSnapping, setIsSnapping] = useState(false);
+  const autoScrollTimeoutRef = useRef(null);
+  const snapTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    if (!isAutoScroll) return;
+
+    autoScrollTimeoutRef.current = setTimeout(() => {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }, 3000); // Auto-scroll every 1 second
+
+    return () => clearTimeout(autoScrollTimeoutRef.current);
+  }, [isAutoScroll, currentIndex]);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    const activeCard = activeCardRef.current;
+    if (!container || !activeCard) return;
+
+    const scrollLeft = activeCard.offsetLeft - (container.clientWidth / 2) + (activeCard.offsetWidth / 2);
+    container.scrollTo({
+      left: scrollLeft,
+      behavior: isSnapping ? "auto" : "smooth",
+    });
+
+    if (isSnapping) {
+      const timer = setTimeout(() => setIsSnapping(false), 50);
+      return () => clearTimeout(timer);
+    } else {
+      if (currentIndex >= n * 7 || currentIndex <= n * 2) {
+        clearTimeout(snapTimeoutRef.current);
+        snapTimeoutRef.current = setTimeout(() => {
+          setIsSnapping(true);
+          setCurrentIndex((prev) => (n * 4) + (prev % n));
+        }, 700); // Wait for CSS transition (700ms) to finish
+      }
+    }
+  }, [currentIndex, isSnapping]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+    setIsAutoScroll(false);
+    clearTimeout(autoScrollTimeoutRef.current);
+    autoScrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScroll(true);
+    }, 5000);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => prevIndex + 1);
+    setIsAutoScroll(false);
+    clearTimeout(autoScrollTimeoutRef.current);
+    autoScrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScroll(true);
+    }, 5000);
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentIndex((prev) => {
+      const currentMod = prev % n;
+      const diff = index - currentMod;
+      return prev + diff;
+    });
+    setIsAutoScroll(false);
+    clearTimeout(autoScrollTimeoutRef.current);
+    autoScrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScroll(true);
+    }, 5000);
+  };
+
   return (
     <section className="relative py-12 md:py-20 overflow-hidden bg-white">
-      
+
       {/* BACKGROUND TEXTURE */}
       <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_90%_10%,rgba(212,165,116,0.03)_0%,transparent_50%)]"></div>
-        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_90%,rgba(44,74,94,0.03)_0%,transparent_50%)]"></div>
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_90%_10%,rgba(212,165,116,0.03)_0%,transparent_50%))]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_90%,rgba(44,74,94,0.03)_0%,transparent_50%))]"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 relative z-10">
-        
+
         {/* STANDARDIZED HEADER ARCHITECTURE */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
@@ -31,80 +109,177 @@ export function Certifications() {
           </p>
         </div>
 
-        {/* CERTIFICATION GRID - STAGGERED REVEAL */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-center">
-          {CERTIFICATIONS.map((cert, index) => (
-            <div
-              key={cert.id}
-              className="group relative animate-reveal opacity-0 hover-lift last:col-span-2"
-              style={{ animationDelay: `${500 + (index * 150)}ms` }}
-            >
-              <div className="relative glass-card p-2 md:p-6 rounded-2xl flex flex-col h-full transition-all duration-700 bg-white/60">
-                
-                <div className="relative w-16 h-16 md:w-24 md:h-24 mb-8 mx-auto">
-                   <div className="absolute inset-0 bg-brand-gold/5 rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000"></div>
-                   <div className="relative w-full h-full glass-panel rounded-full flex items-center justify-center p-5 border-white shadow-xl transition-all duration-700 group-hover:rotate-[360deg]">
-                      <img
-                        src={cert.logo}
-                        alt={cert.fullName}
-                        className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 opacity-40 group-hover:opacity-100"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
-                        }}
-                      />
-                      <div className="hidden flex-col items-center justify-center text-center">
-                         <FiShield className="text-3xl text-brand-gold/40 group-hover:text-brand-gold transition-colors" />
+        {/* HORIZONTAL CARD CAROUSEL - AUTO SCROLLING */}
+        <div className="relative animate-reveal delay-300 opacity-0">
+          {/* Fade overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-white via-white to-transparent z-30 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-white via-white to-transparent z-30 pointer-events-none"></div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-brand-navy text-white rounded-full flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 shadow-lg active:scale-90 -translate-x-16 md:-translate-x-20"
+          >
+            <FiChevronLeft className="text-lg md:text-xl" />
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-brand-navy text-white rounded-full flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 shadow-lg active:scale-90 translate-x-16 md:translate-x-20"
+          >
+            <FiChevronRight className="text-lg md:text-xl" />
+          </button>
+
+          <div
+            ref={scrollContainerRef}
+            className={`flex gap-6 overflow-x-auto scroll-smooth pb-4 ${isSnapping ? "is-snapping" : ""}`}
+            style={{
+              scrollBehavior: "smooth",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {/* Hide scrollbar with CSS */}
+            <style>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+              .is-snapping * {
+                transition: none !important;
+              }
+            `}</style>
+
+            {/* Start Spacer */}
+            <div className="flex-shrink-0 w-[calc(50%-144px-12px)] md:w-[calc(50%-160px-12px)] lg:w-[calc(50%-192px-12px)]" aria-hidden="true"></div>
+
+            {extendedCerts.map((cert, index) => {
+              const isMiddle = index === currentIndex;
+
+              return (
+                <div
+                  key={`${cert.id}-${index}`}
+                  ref={isMiddle ? activeCardRef : null}
+                  className="flex-shrink-0 w-72 md:w-80 lg:w-96 transition-all duration-700 ease-out"
+                  style={{
+                    transform: isMiddle ? "scale(1)" : "scale(0.85)",
+                    opacity: isMiddle ? 1 : 0.6,
+                  }}
+                >
+                  <div className={`relative glass-card rounded-2xl md:rounded-3xl flex flex-col h-full transition-all duration-700 group overflow-hidden ${isMiddle
+                    ? "p-6 md:p-8 bg-white/90 shadow-2xl ring-2 ring-brand-gold/50"
+                    : "p-6 md:p-8 bg-white/60"
+                    }`}>
+
+                    {/* Focus Glow Effect for Middle Card */}
+                    {isMiddle && (
+                      <>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-transparent rounded-2xl md:rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent"></div>
+                      </>
+                    )}
+
+                    {/* Logo Container */}
+                    <div className="relative flex items-center justify-center mb-6 md:mb-8 z-10">
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                        {isMiddle && (
+                          <div className="absolute -inset-4 bg-brand-gold/10 rounded-full blur-xl animate-pulse"></div>
+                        )}
+                        <div className="absolute inset-0 bg-brand-gold/5 rounded-full group-hover:bg-brand-gold/10 transition-colors duration-500"></div>
+                        <div className={`relative w-full h-full glass-panel rounded-full flex items-center justify-center p-4 md:p-5 border-white transition-all duration-500 ${isMiddle ? "group-hover:shadow-2xl group-hover:rotate-6" : "group-hover:shadow-lg group-hover:rotate-6"}`}>
+                          <img
+                            src={cert.logo}
+                            alt={cert.fullName}
+                            className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="hidden flex-col items-center justify-center text-center">
+                            <FiShield className="text-4xl md:text-5xl text-brand-gold/40 group-hover:text-brand-gold transition-colors" />
+                          </div>
+                        </div>
                       </div>
-                   </div>
-                </div>
+                    </div>
 
-                <div className="flex-1 space-y-4 text-center">
-                  <div>
-                    <h3 className="text-lg md:text-2xl font-black text-brand-navy tracking-tighter mb-1 group-hover:text-brand-gold transition-colors duration-500">{cert.name}</h3>
-                    <p className="text-[8.8px] font-black text-slate-400 uppercase tracking-[0.3em] leading-tight px-2">{cert.fullName}</p>
+                    {/* Text Content */}
+                    <div className="relative flex-1 space-y-3 md:space-y-4 text-center z-10">
+                      <div>
+                        <h3 className={`font-black tracking-tight mb-1.5 transition-colors duration-500 ${isMiddle ? "text-lg md:text-xl lg:text-2xl text-brand-gold" : "text-base md:text-lg lg:text-xl text-brand-navy group-hover:text-brand-gold"
+                          }`}>
+                          {cert.name}
+                        </h3>
+                        <p className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider leading-tight px-2">{cert.fullName}</p>
+                      </div>
+
+                      <div className={`h-px mx-auto transition-all duration-500 ${isMiddle ? "w-10 md:w-12 bg-brand-gold" : "w-8 md:w-10 bg-slate-200 group-hover:w-12 group-hover:bg-brand-gold/30"}`}></div>
+
+                      <p className="text-slate-500 text-[10px] md:text-xs lg:text-sm leading-relaxed font-bold tracking-wide opacity-70 line-clamp-3 md:line-clamp-none">
+                        {cert.description}
+                      </p>
+                    </div>
+
+                    {/* Action Buttons - Show only when middle card is in focus */}
+                    <div className={`relative mt-6 md:mt-8 grid grid-cols-2 gap-3 z-10 transition-all duration-500 ${isMiddle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"}`}>
+                      <button className="flex items-center justify-center gap-1.5 py-3 px-2 bg-brand-navy text-white rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg">
+                        <FiDownload className="text-sm md:text-base" /> Cert.
+                      </button>
+                      <button className="flex items-center justify-center gap-1.5 py-3 px-2 border-2 border-brand-gold text-brand-navy rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md">
+                        <FiCheckCircle className="text-sm md:text-base" /> Verify
+                      </button>
+                    </div>
                   </div>
-                  
-                  <div className="h-px w-10 bg-slate-100 mx-auto group-hover:w-full group-hover:bg-brand-gold/20 transition-all duration-700"></div>
-                  
-                  <p className="text-slate-500 text-[10px] leading-relaxed font-bold uppercase tracking-[0.1em] opacity-60 line-clamp-2">
-                    {cert.description}
-                  </p>
                 </div>
+              );
+            })}
 
-                <div className="mt-8 grid grid-cols-2 gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                   <button className="flex items-center justify-center gap-2 py-2.5 bg-brand-navy text-white rounded-lg text-[10.5px] font-black uppercase tracking-widest hover:bg-brand-gold transition-all duration-300">
-                      <FiDownload /> Document
-                   </button>
-                   <button className="flex items-center justify-center gap-2 py-2.5 border border-slate-100 text-brand-navy rounded-lg text-[10.5px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all duration-300">
-                      <FiExternalLink /> Verify
-                   </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            {/* End Spacer */}
+            <div className="flex-shrink-0 w-[calc(50%-144px-12px)] md:w-[calc(50%-160px-12px)] lg:w-[calc(50%-192px-12px)]" aria-hidden="true"></div>
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex items-center justify-center gap-2 mt-6 md:mt-8">
+            {CERTIFICATIONS.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleDotClick(index)}
+                className={`transition-all duration-500 rounded-full ${index === (currentIndex % n)
+                  ? "w-8 h-2 bg-brand-gold shadow-lg shadow-brand-gold/50"
+                  : "w-2 h-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* FOOTER ACTION */}
-        <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-8 animate-reveal delay-1000 opacity-0">
-           <div className="flex items-center gap-4">
-              <div className="flex -space-x-3">
-                 {[1,2,3,4].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-brand-navy text-[10px] font-black hover:z-10 transition-transform hover:-translate-y-1">
-                       {i}
-                    </div>
-                 ))}
-              </div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Trusted by 500+ Global Agricultural Partners</p>
-           </div>
-           
-           <a
-              href="/certifications"
-              className="group relative inline-flex items-center gap-4 px-10 py-5 bg-brand-navy rounded-xl text-white font-black uppercase tracking-widest text-[10px] hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-2xl overflow-hidden active:scale-95"
-            >
-              <span className="relative z-10">View Quality Certificates</span>
-              <FiArrowRight className="relative z-10 text-lg group-hover:translate-x-2 transition-transform duration-500" />
+
+
+        <div className="mt-10 sm:mt-14 md:mt-16 pt-6 sm:pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8 animate-reveal delay-700 opacity-0">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex -space-x-2 sm:-space-x-3">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-brand-navy text-[8px] sm:text-[10px] font-black hover:z-10 transition-transform hover:-translate-y-1">
+                  {i}
+                </div>
+              ))}
+            </div>
+            <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-wider">Trusted by 500+ Partners</p>
+          </div>
+
+
+          <div className="mt-12 text-center animate-reveal delay-1000 opacity-0">
+            <a href="/certifications">
+              <button className="group relative px-8 py-4 bg-brand-navy text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 shadow-xl overflow-hidden active:scale-95">
+                <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10">View All Certificates</span>
+                  <FiArrowRight className="relative z-10 text-base sm:text-lg group-hover:translate-x-1 transition-transform duration-500" />
+
+                </span>
+              </button>
             </a>
+          </div>
+
         </div>
       </div>
     </section>
