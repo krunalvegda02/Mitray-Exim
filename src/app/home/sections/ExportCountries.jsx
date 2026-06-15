@@ -107,8 +107,7 @@ export function ExportCountries() {
     <section ref={sectionRef} className="relative py-12 md:py-20 overflow-hidden bg-slate-50">
       <div className="container mx-auto px-4 md:px-12 relative z-10">
 
-        {/* STANDARDIZED HEADER ARCHITECTURE */}
-        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
+        <div className="text-center max-w-full mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
             <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Global Markets</span>
@@ -122,12 +121,12 @@ export function ExportCountries() {
             Mitray Exim coordinates swift, temperature-controlled logistics connecting India's finest agricultural produce to international markets worldwide.
           </p>
 
-          <div className="flex overflow-x-auto pb-2 -mx-4 px-1 gap-2 no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0 lg:mx-0 lg:px-0 mt-8">
+          <div className="flex overflow-x-auto pb-3 -mx-4 px-4 gap-2 no-scrollbar sm:gap-2 md:gap-2.5 md:overflow-visible md:flex-wrap md:justify-center md:pb-0 md:mx-0 md:px-0 lg:gap-2 lg:-mx-12 lg:px-12 mt-8">
             {EXPORT_COUNTRIES.map(c => (
               <button
                 key={c.code}
                 onClick={() => handleCountryFocus(c)}
-                className={`whitespace-nowrap px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl md:rounded-2xl text-[8px] md:text-[12px] font-black uppercase tracking-widest transition-all duration-500 border shrink-0 ${hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100'
+                className={`whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-3.5 md:py-2.5 lg:px-4 lg:py-3 rounded-lg sm:rounded-lg md:rounded-xl lg:rounded-2xl text-[11px] sm:text-[11px] md:text-[10.5px] lg:text-[13px] font-black uppercase tracking-wide sm:tracking-wide md:tracking-widest transition-all duration-500 border shrink-0 ${hovered === c.name ? 'bg-brand-navy text-white border-brand-navy shadow-lg scale-105' : 'bg-white text-slate-400 border-slate-100 hover:border-slate-200'
                   }`}
               >
                 {c.flag} {c.name}
