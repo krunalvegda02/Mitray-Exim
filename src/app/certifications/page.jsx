@@ -99,7 +99,7 @@ export default function CertificationsPage() {
                                  />
                                  <FiShield className="hidden text-brand-gold text-sm sm:text-base md:text-lg lg:text-xl" />
                               </div>
-                              <div className="min-w-0 justify-center ">
+                              <div className="min-w-0 flex flex-col justify-center flex-1 self-center ">
                                  <h4 className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-black text-brand-navy uppercase tracking-widest mb-0.5 sm:mb-1">{cert.name} Certification</h4>
                                  <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold text-slate-400 uppercase tracking-widest">Status: Active & Verified</p>
                               </div>

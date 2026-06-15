@@ -57,7 +57,7 @@ export default function GalleryPage() {
       <div className="bg-white">
          <PageHero
             badge="VISUAL TRUST PROTOCOLS"
-            title="GALLERY. EXHIBIT."
+            title="GALLERY. EXHIBITION."
             description="A technical exhibit of our operational nodes, export terminals, and verified logistics manifests."
             backgroundImage="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
             breadcrumbs={[
