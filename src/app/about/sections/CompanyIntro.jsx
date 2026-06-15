@@ -35,17 +35,17 @@ export function CompanyIntro() {
                </div>
 
                {/* KEY METRICS GRID */}
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 md:mt-16 animate-reveal delay-500 opacity-0">
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 md:mt-16 animate-reveal delay-500 opacity-0">
                   {[
                     { val: "2020", label: "Establishment", icon: <FiActivity /> },
                     { val: "20+", label: "Trade Hubs", icon: <FiGlobe /> },
                     { val: "100%", label: "Compliance", icon: <FiShield /> },
                     { val: "Premium", label: "Quality Sourcing", icon: <FiZap /> },
                   ].map((stat, idx) => (
-                    <div key={idx} className="glass-card p-6 rounded-sm border-slate-100 bg-slate-50/50 group hover:bg-brand-navy transition-all duration-700 shadow-sm">
-                       <div className="text-brand-gold text-xl mb-3 group-hover:text-white transition-colors">{stat.icon}</div>
-                       <p className="text-2xl md:text-3xl font-black text-brand-navy mb-1 group-hover:text-white tracking-tighter">{stat.val}</p>
-                       <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest group-hover:text-white/40">{stat.label}</p>
+                    <div key={idx} className="glass-card p-6 rounded-sm border border-slate-200 bg-slate-50/50 group hover:bg-brand-navy transition-all duration-700 shadow-sm">
+                       <div className="text-brand-gold text-xl mb-3 group-hover:text-brand-gold transition-colors">{stat.icon}</div>
+                       <p className="text-2xl md:text-3xl font-black text-brand-navy mb-1 group-hover:text-brand-gold tracking-tighter transition-colors">{stat.val}</p>
+                       <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest group-hover:text-brand-gold transition-colors">{stat.label}</p>
                     </div>
                   ))}
                </div>

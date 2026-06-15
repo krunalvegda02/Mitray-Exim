@@ -146,17 +146,20 @@ export function Certifications() {
 
           <div
             ref={scrollContainerRef}
-            className={`relative flex gap-6 overflow-x-auto scroll-smooth py-12 md:py-16 ${isSnapping ? "is-snapping" : ""}`}
+            className={`relative flex gap-6 overflow-x-auto scroll-smooth py-12 md:py-16 no-scrollbar ${isSnapping ? "is-snapping" : ""}`}
             style={{
               scrollBehavior: "smooth",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
+              WebkitScrollbar: "none",
             }}
           >
             {/* Hide scrollbar with CSS */}
             <style>{`
               div::-webkit-scrollbar {
-                display: none;
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
               }
               .is-snapping * {
                 transition: none !important;

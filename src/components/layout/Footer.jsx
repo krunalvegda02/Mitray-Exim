@@ -28,7 +28,7 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 md:px-12 py-12 md:py-24 relative z-10">
+      <div className="container mx-auto px-4 md:px-12 py-12 md:pt-24  md:pb-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
 
           {/* Company Info */}
@@ -133,8 +133,8 @@ export function Footer() {
 
       {/* Compliance Bar - Institutional Row */}
       {/* Mobile: Scrollable */}
-      <div className="md:hidden overflow-x-auto relative py-8">
-        <div className="flex w-max animate-marquee gap-4 px-4">
+      <div className="md:hidden overflow-x-auto no-scrollbar relative py-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="flex w-max animate-marquee gap-4 px-4 ">
           {[...CERTIFICATIONS, ...CERTIFICATIONS].map((cert, index) => (
             <Link
               href="/certifications"
@@ -184,7 +184,7 @@ export function Footer() {
       </div>
 
       {/* Desktop: Grid Layout */}
-      <div className="hidden md:block relative py-8">
+      <div className="hidden md:block relative py-12">
         <div className="container mx-auto px-4 md:px-12 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {CERTIFICATIONS.map((cert) => (
@@ -225,7 +225,7 @@ export function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="container mx-auto px-4 md:px-12 py-8 md:py-12 relative z-10 animate-reveal opacity-0 delay-1000 border-t border-white/5">
+      <div className="container mx-auto px-4 md:px-12 py-8 md:py-8 relative z-10 animate-reveal opacity-0 delay-1000 border-t border-white/5">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
           <p className="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest text-center md:text-left">
             © {currentYear} MITRAY EXIM. <span className="text-brand-gold/60">Handcrafted with Excellence.</span>

@@ -38,7 +38,7 @@ export function Values() {
               <FiZap className="text-2xl md:text-3xl" />
            </div>
            <div>
-              <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Ethics</p>
+              <p className="text-[11px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Ethics</p>
               <h3 className="text-2xl md:text-4xl font-black text-brand-navy tracking-tighter uppercase leading-none">Core Ethics.</h3>
            </div>
         </div>
@@ -47,18 +47,18 @@ export function Values() {
           {values.map((value, idx) => (
             <div key={idx} className="group/item relative p-6 bg-slate-50/50 rounded-sm border border-slate-100 hover:bg-brand-navy transition-all duration-500">
                <div className="text-brand-gold text-xl mb-4 group-hover/item:text-white transition-colors">{value.icon}</div>
-               <h4 className="text-[11px] md:text-[13px] font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
-               <p className="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">
+               <h4 className="text-sm md:text-lg font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
+               <p className="text-sm md:text-lg font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">
                  {value.desc}
                </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
            <div className="flex items-center gap-3">
               <FiActivity className="text-brand-gold animate-pulse" />
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ethical Status: Verified</span>
+              <span className="text-[9px] md:text-[11px]  font-black text-slate-400 uppercase tracking-widest">Ethical Status: Verified</span>
            </div>
            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
         </div>

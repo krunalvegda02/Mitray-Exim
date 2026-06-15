@@ -64,9 +64,9 @@ export default function AboutPage() {
         </div>
 
         {/* SECTION: INSTITUTIONAL METRICS */}
-        <div className="py-12 md:py-20 bg-slate-50/30 border-y border-slate-100 overflow-hidden">
+        <div className="py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-50/30 border-y border-slate-100 overflow-hidden">
           <Container>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-10 px-2 sm:px-0">
               {[
                 { val: 500, label: "Shipments Delivered", color: "text-brand-gold", icon: <FiZap /> },
                 { val: 20, label: "Global Trade Hubs", color: "text-brand-navy", icon: <FiGlobe /> },
@@ -74,15 +74,21 @@ export default function AboutPage() {
                 { val: 4, label: "Years of Excellence", color: "text-brand-navy", icon: <FiActivity /> },
               ].map((stat, idx) => (
                 <div key={idx} className="relative group animate-reveal opacity-0" style={{ animationDelay: `${idx * 150}ms` }}>
-                  <div className="glass-card p-8 md:p-12 rounded-sm bg-white border-slate-100 text-center hover:bg-brand-navy transition-all duration-700 hover-lift shadow-sm">
-                    <div className={`${stat.color} text-2xl md:text-4xl mb-4 flex justify-center group-hover:text-white transition-colors group-hover:rotate-12`}>
+                  {/* GLOW ACCENT */}
+                  <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-brand-gold/30 to-brand-navy/20 rounded-sm blur-lg sm:blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                  
+                  <div className="relative glass-card p-4 sm:p-6 md:p-8 lg:p-12 rounded-sm bg-white border border-slate-200 text-center hover:bg-gradient-to-br hover:from-brand-navy hover:via-brand-navy/95 hover:to-brand-navy/90 transition-all duration-700 hover-lift shadow-sm hover:shadow-2xl">
+                    <div className={`${stat.color} text-lg sm:text-2xl md:text-3xl lg:text-4xl mb-3 sm:mb-4 md:mb-5 lg:mb-6 flex justify-center group-hover:text-brand-gold transition-all duration-500 group-hover:scale-125 sm:group-hover:scale-150 group-hover:rotate-12 origin-center`}>
                       {stat.icon}
                     </div>
-                    <div className={`text-4xl md:text-7xl font-black mb-2 tracking-tighter ${stat.color} group-hover:text-white transition-colors flex items-center justify-center gap-1`}>
+                    <div className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-2 sm:mb-2.5 md:mb-3 lg:mb-3 tracking-tighter ${stat.color} group-hover:text-brand-gold transition-all duration-500 flex items-center justify-center gap-0.5 sm:gap-1`}>
                       <Counter end={stat.val} duration={2000} />
-                      <span className="text-2xl md:text-4xl">+</span>
+                      <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl group-hover:text-brand-gold">+</span>
                     </div>
-                    <p className="text-[9px] md:text-[11px] font-black text-slate-400 uppercase tracking-widest group-hover:text-white/40 transition-colors">{stat.label}</p>
+                    <p className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest group-hover:text-white transition-all duration-500 mb-2 sm:mb-3 md:mb-4 lg:mb-6 leading-tight">{stat.label}</p>
+                    
+                    {/* BOTTOM ACCENT LINE */}
+                    <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-transparent via-brand-gold to-transparent transition-all duration-700 rounded-full"></div>
                   </div>
                 </div>
               ))}

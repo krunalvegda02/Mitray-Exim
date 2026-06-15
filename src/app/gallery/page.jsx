@@ -87,7 +87,7 @@ export default function GalleryPage() {
                   </div>
 
                   {/* TECHNICAL CATEGORY SELECTOR */}
-                  <div className="flex items-center gap-3 overflow-x-auto pb-8 border-b-2 border-slate-100 whitespace-nowrap no-scrollbar scroll-smooth" style={{scrollSnapType:'x mandatory'}}>
+                  <div className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-8 border-b-2 border-slate-100 whitespace-nowrap scroll-smooth" style={{scrollSnapType:'x mandatory'}}>
                      {GALLERY_CATEGORIES.map((cat) => (
                         <button
                            key={cat.id}

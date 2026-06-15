@@ -15,15 +15,15 @@ export function VisionMission() {
               <FiTarget className="text-2xl md:text-3xl" />
            </div>
            <div>
-              <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Manifest</p>
+              <p className="text-[11px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Manifest</p>
               <h3 className="text-2xl md:text-4xl font-black text-brand-navy tracking-tighter uppercase leading-none">Core Intent.</h3>
            </div>
         </div>
 
-        <div className="space-y-10 md:space-y-12 flex-1">
+        <div className="space-y-6 md:space-y-8 flex-1">
           <div className="relative pl-8 border-l-2 border-brand-gold/30 group/item">
             <div className="absolute top-0 -left-[5px] w-2 h-2 rounded-full bg-brand-gold group-hover/item:scale-150 transition-transform"></div>
-            <h4 className="text-[10px] font-black text-brand-gold uppercase tracking-[0.4em] mb-3">Strategic Vision</h4>
+            <h4 className="text-[11px] font-black text-brand-gold uppercase tracking-[0.4em] mb-2">Strategic Vision</h4>
             <p className="text-sm md:text-xl text-brand-navy font-bold uppercase tracking-tight leading-relaxed">
               To be the definitive global benchmark for Indian agricultural exports, recognized for uncompromising quality, institutional compliance, and supply chain reliability.
             </p>
@@ -31,17 +31,25 @@ export function VisionMission() {
 
           <div className="relative pl-8 border-l-2 border-brand-navy/30 group/item">
             <div className="absolute top-0 -left-[5px] w-2 h-2 rounded-full bg-brand-navy group-hover/item:scale-150 transition-transform"></div>
-            <h4 className="text-[10px] font-black text-brand-navy uppercase tracking-[0.4em] mb-3">Mission Protocol</h4>
+            <h4 className="text-[11px] font-black text-brand-navy uppercase tracking-[0.4em] mb-2">Mission Protocol</h4>
             <p className="text-sm md:text-xl text-brand-navy font-bold uppercase tracking-tight leading-relaxed">
               To deliver premium produce with absolute transparency, engineered logistics, and 100% regulatory compliance, empowering our international partners with nature's finest resources.
             </p>
           </div>
+
+          <div className="relative pl-8 border-l-2 border-brand-gold/30 group/item">
+            <div className="absolute top-0 -left-[5px] w-2 h-2 rounded-full bg-brand-gold group-hover/item:scale-150 transition-transform"></div>
+            <h4 className="text-[11px] font-black text-brand-gold uppercase tracking-[0.4em] mb-2">Core Values</h4>
+            <p className="text-sm md:text-xl text-brand-navy font-bold uppercase tracking-tight leading-relaxed">
+              To maintain unwavering commitment to sustainability, ethical partnerships, and continuous innovation that drive lasting value for all stakeholders globally.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
            <div className="flex items-center gap-3">
               <FiActivity className="text-brand-gold animate-pulse" />
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Alignment Status: Optimized</span>
+              <span className="text-[9px] md:text-[11px] font-black text-slate-400 uppercase tracking-widest">Alignment Status: Optimized</span>
            </div>
            <FiZap className="text-brand-navy/20 group-hover:text-brand-gold transition-colors text-2xl" />
         </div>

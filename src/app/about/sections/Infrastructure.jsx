@@ -33,9 +33,9 @@ export function Infrastructure() {
           ].map((item, idx) => (
             <div key={idx} className="flex items-center gap-4 group/item">
                <div className="w-6 h-6 rounded-lg bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover/item:bg-brand-gold group-hover/item:text-brand-navy transition-all duration-500">
-                  <FiCheckCircle className="text-sm" />
+                  <FiCheckCircle className="text-lg" />
                </div>
-               <span className="text-[10px] md:text-[13px] font-black text-brand-navy uppercase tracking-widest opacity-60 group-hover/item:opacity-100 transition-opacity">{item}</span>
+               <span className="text-[10px] md:text-[15px] font-black text-brand-navy uppercase tracking-widest opacity-60 group-hover/item:opacity-100 transition-opacity">{item}</span>
             </div>
           ))}
         </div>
@@ -43,7 +43,7 @@ export function Infrastructure() {
         <div className="mt-12 pt-8 border-t border-slate-100 flex items-center justify-between">
            <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-ping"></div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Network Status: Operational Hub</span>
+              <span className="text-[9px] md:text-[11px] font-black text-slate-400 uppercase tracking-widest">Network Status: Operational Hub</span>
            </div>
            <FiZap className="text-brand-navy/20 group-hover:text-brand-gold transition-colors text-2xl" />
         </div>
