@@ -78,25 +78,25 @@ export default function ContactPage() {
                   {[
                     { 
                       label: "Direct Trade Line", 
-                      val: "+91 96245 42426", 
+                      val: "+91 8878963333", 
                       icon: <FiPhone className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8" />, 
-                      link: "tel:+919624542426", 
+                      link: "tel:+918878963333", 
                       color: "from-blue-500 to-blue-600",
                       bgColor: "bg-blue-50 group-hover:bg-blue-100"
                     },
                     { 
                       label: "Email Our Desk", 
-                      val: "exports@mitrayexim.com", 
+                      val: "mitrayexim6@gmail.com", 
                       icon: <FiMail className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8" />, 
-                      link: "mailto:exports@mitrayexim.com", 
+                      link: "mailto:mitrayexim6@gmail.com", 
                       color: "from-purple-500 to-purple-600",
                       bgColor: "bg-purple-50 group-hover:bg-purple-100"
                     },
                     { 
                       label: "Chat on WhatsApp", 
-                      val: "+91 96245 42426", 
+                      val: "+91 8878963333", 
                       icon: <FiMessageCircle className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8" />, 
-                      link: "https://wa.me/919624542426", 
+                      link: "https://wa.me/918878963333", 
                       color: "from-emerald-500 to-emerald-600",
                       bgColor: "bg-emerald-50 group-hover:bg-emerald-100"
                     },
@@ -266,7 +266,7 @@ export default function ContactPage() {
                                     onFocus={() => setFocusedField('phone')}
                                     onBlur={() => setFocusedField(null)}
                                     className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm placeholder:text-slate-400"
-                                    placeholder="+91 96245 42426"
+                                    placeholder="+91 8878963333"
                                  />
                               </div>
                            </div>
@@ -371,8 +371,8 @@ export default function ContactPage() {
                          <div>
                             <h4 className="text-xs sm:text-sm md:text-base lg:text-lg font-black text-brand-navy uppercase tracking-wider mb-1 sm:mb-1.5">Primary Headquarters</h4>
                             <p className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-slate-600 uppercase tracking-wide leading-relaxed">
-                               Plot No. 12, Export Hub, GIDC Estate, <br />
-                               Ahmedabad, Gujarat, India - 380001
+                               PLOT NO 57, GROUND FLOOR R.S. NO 21 MAIN ROAD ROAD, <br />
+                               LAKHABAVAL JAMNAGAR, GUJRAT 361006
                             </p>
                          </div>
                       </div>

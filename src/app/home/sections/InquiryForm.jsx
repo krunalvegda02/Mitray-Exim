@@ -51,7 +51,7 @@ export function InquiryForm() {
                 { id: 'name', label: 'Full Name', icon: <FiUser />, placeholder: 'E.g. Harshil Shah', type: 'text' },
                 { id: 'company', label: 'Company Name', icon: <FiBriefcase />, placeholder: 'E.g. Mitray Exim', type: 'text' },
                 { id: 'email', label: 'Email Address', icon: <FiMail />, placeholder: 'name@company.com', type: 'email' },
-                { id: 'phone', label: 'Phone Number', icon: <FiPhone />, placeholder: 'E.g. +91 96245 42426', type: 'text' },
+                { id: 'phone', label: 'Phone Number', icon: <FiPhone />, placeholder: 'E.g. +91 8878963333', type: 'text' },
               ].map((field, idx) => (
                 <div key={field.id} className="space-y-2 animate-reveal" style={{ animationDelay: `${700 + (idx * 100)}ms` }}>
                   <label className="flex items-center gap-2 text-[10px] font-black text-brand-navy uppercase tracking-[0.2em] opacity-50 ml-4">

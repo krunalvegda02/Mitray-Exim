@@ -13,7 +13,7 @@ export const PRODUCTS = [
     slug: "banana",
     name: "Banana (G9 Premium)",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534039/WhatsApp_Image_2026-06-15_at_10.52.19_si4fif.jpg",
     description:
       "Premium Grand Naine (G9) bananas. Grade-A quality, hand-picked, washed and treated for export. Features large uniform size, delicious sweet flavor, and excellent shelf life.",
     origin: "India",
@@ -25,7 +25,9 @@ export const PRODUCTS = [
     slug: "kesar-mango",
     name: "Kesar Mango",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534038/WhatsApp_Image_2026-06-15_at_10.57.08_qgldwo.jpg?q=80&w=2070&auto=format&fit=crop",
+
+
     description:
       "The queen of mangoes, Gir Kesar mangoes are known for their intense aroma, fiberless saffron pulp, and exceptional sweetness. Certified for export to USA, UK, and Gulf.",
     origin: "India",
@@ -37,7 +39,7 @@ export const PRODUCTS = [
     slug: "alphanso-mango",
     name: "Alphonso Mango",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534032/WhatsApp_Image_2026-06-15_at_10.58.21_j0mvnp.jpg?q=80&w=2070&auto=format&fit=crop",
     description:
       "The legendary Hapus (Alphonso) mango, characterized by its rich golden-yellow skin, smooth texture, and unrivaled sweet flavor profile. Carefully selected and hot-water treated.",
     origin: "India",
@@ -49,7 +51,7 @@ export const PRODUCTS = [
     slug: "pomegranate",
     name: "Pomegranate (Bhagwa Variety)",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1541344999736-83cdc25889bf?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534037/WhatsApp_Image_2026-06-15_at_10.54.12_vqww0s.jpg?q=80&w=2070&auto=format&fit=crop",
     description:
       "Premium quality Bhagwa pomegranates, globally famous for their deep red arils, soft seeds, sweet taste, and high juice content. Sourced directly from certified orchards of Maharashtra.",
     origin: "India",

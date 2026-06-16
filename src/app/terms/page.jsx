@@ -221,7 +221,7 @@ export default function TermsOfServicePage() {
                        This Agreement and all bilateral purchase orders shall be governed by, analyzed, and enforced in accordance with the laws of the Republic of India. 
                      </p>
                      <p className="text-xs md:text-sm text-slate-500 font-bold uppercase tracking-tight leading-loose opacity-80">
-                       Any dispute, claim, cargo grading mismatch, or credit issue arising from wholesale shipments shall be referred to and settled under arbitration rules of the Indian Council of Arbitration. The legal venue for all arbitration acts and court hearings shall be strictly within the jurisdiction of Ahmedabad, Gujarat, India.
+                       Any dispute, claim, cargo grading mismatch, or credit issue arising from wholesale shipments shall be referred to and settled under arbitration rules of the Indian Council of Arbitration. The legal venue for all arbitration acts and court hearings shall be strictly within the jurisdiction of LAKHABAVAL JAMNAGAR, GUJRAT, India.
                      </p>
                   </div>
  
