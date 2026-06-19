@@ -123,11 +123,11 @@ export default function ProductDetailPage({ params }) {
                      <div className="h-px w-12 bg-brand-gold"></div>
                      <span className="text-[10px] md:text-xs font-black text-brand-navy uppercase tracking-[0.4em]">Export Specifications</span>
                   </div>
-                  <h2 className="text-3xl md:text-7xl font-black text-brand-navy tracking-tighter uppercase leading-[0.9]">
+                  <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-brand-navy tracking-tighter uppercase leading-[0.9]">
                      EXPORT <br />
                      <span className="text-gradient">SPECIFICATIONS.</span>
                   </h2>
-                  <p className="text-xs md:text-lg text-slate-400 font-bold uppercase tracking-tight leading-relaxed max-w-2xl opacity-80">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-400 font-bold uppercase tracking-tight leading-relaxed max-w-2xl opacity-80">
                      Official specifications for our high-quality agricultural exports. All products are 100% certified and meet international export standards.
                   </p>
                </div>
@@ -206,10 +206,10 @@ export default function ProductDetailPage({ params }) {
           <div className="relative p-6 md:p-24 rounded-2xl md:rounded-[3rem] bg-slate-50 border border-slate-100 border-t-4 border-t-brand-gold text-center shadow-2xl overflow-hidden animate-reveal">
              <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[150px] rounded-full animate-subtle-float -translate-y-1/2 translate-x-1/2"></div>
              <div className="relative z-10 max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-8xl font-black tracking-tighter leading-none mb-6 md:mb-10 uppercase text-brand-navy">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-none mb-6 md:mb-10 uppercase text-brand-navy">
                    READY TO <span className="text-gradient">IMPORT?</span>
                 </h2>
-                <p className="text-slate-400 text-xs md:text-2xl font-bold uppercase tracking-tight leading-relaxed mb-10 md:mb-16 opacity-80">
+                <p className="text-xs sm:text-sm md:text-xl lg:text-2xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed mb-10 md:mb-16 opacity-80">
                    Request a custom quote or sample for {product.name} today. Our dedicated export team is ready to assist you with direct farm sourcing, custom packing, and shipping logistics.
                 </p>
                 <Link href="/contact">

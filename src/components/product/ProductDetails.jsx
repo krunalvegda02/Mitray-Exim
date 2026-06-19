@@ -10,8 +10,8 @@ export function ProductDetails({ product }) {
         </span>
       </div>
       
-      <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">{product.name}</h2>
-      <p className="text-slate-700 text-lg leading-relaxed mb-10">{product.description}</p>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-6">{product.name}</h2>
+      <p className="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed mb-10">{product.description}</p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <div className="p-5 bg-slate-50 rounded-xl border border-slate-200">
@@ -22,7 +22,7 @@ export function ProductDetails({ product }) {
             </svg>
             <h3 className="font-bold text-brand-navy">Origin</h3>
           </div>
-          <p className="text-slate-700 text-lg">{product.origin}</p>
+          <p className="text-sm sm:text-base md:text-lg text-slate-700">{product.origin}</p>
         </div>
         <div className="p-5 bg-slate-50 rounded-xl border border-slate-200">
           <div className="flex items-center mb-3">
@@ -31,7 +31,7 @@ export function ProductDetails({ product }) {
             </svg>
             <h3 className="font-bold text-brand-navy">Packaging</h3>
           </div>
-          <p className="text-slate-700 text-lg">{product.packaging}</p>
+          <p className="text-sm sm:text-base md:text-lg text-slate-700">{product.packaging}</p>
         </div>
         <div className="p-5 bg-slate-50 rounded-xl border border-slate-200">
           <div className="flex items-center mb-3">
@@ -40,7 +40,7 @@ export function ProductDetails({ product }) {
             </svg>
             <h3 className="font-bold text-brand-navy">MOQ</h3>
           </div>
-          <p className="text-slate-700 text-lg">{product.moq}</p>
+          <p className="text-sm sm:text-base md:text-lg text-slate-700">{product.moq}</p>
         </div>
         <div className="p-5 bg-slate-50 rounded-xl border border-slate-200">
           <div className="flex items-center mb-3">
@@ -49,12 +49,12 @@ export function ProductDetails({ product }) {
             </svg>
             <h3 className="font-bold text-brand-navy">Shipping</h3>
           </div>
-          <p className="text-slate-700 text-lg">{product.shipping}</p>
+          <p className="text-sm sm:text-base md:text-lg text-slate-700">{product.shipping}</p>
         </div>
       </div>
 
       <a href="/landing" className="block">
-        <button className="w-full px-10 py-5 text-lg bg-brand-gold text-white rounded-xl font-semibold hover:bg-brand-gold-light transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+        <button className="w-full px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-sm sm:text-base md:text-lg bg-brand-gold text-white rounded-xl font-semibold hover:bg-brand-gold-light transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
           Request Quotation for {product.name}
         </button>
       </a>

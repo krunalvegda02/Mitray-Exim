@@ -318,7 +318,7 @@ export default function ProductsPage() {
                            <div className="w-px h-8 md:h-12 bg-gradient-to-b from-brand-gold to-transparent mb-6 md:mb-8"></div>
                            <button
                               onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
-                              className="group relative px-10 py-4.5 md:px-14 md:py-5.5 bg-brand-navy text-white rounded-full font-black uppercase tracking-[0.4em] text-[9px] md:text-[12px] shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95"
+                              className="group relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-brand-navy text-white rounded-full font-black uppercase tracking-[0.4em] text-xs sm:text-sm shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95"
                            >
                               Show More Products
                            </button>
@@ -340,14 +340,14 @@ export default function ProductsPage() {
                         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/20 blur-[150px] rounded-full animate-subtle-float"></div>
                      </div>
                      <div className="relative z-10 max-w-4xl mx-auto">
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none mb-6 md:mb-8 uppercase text-brand-navy">
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-none mb-6 md:mb-8 uppercase text-brand-navy">
                            BULK <span className="text-gradient">INQUIRY.</span>
                         </h2>
                         <p className="text-slate-600 text-xs sm:text-sm md:text-lg lg:text-xl font-bold uppercase tracking-tight leading-relaxed mb-8 md:mb-10 opacity-80">
                            Need specialized pricing quotes or custom packaging solutions? Connect with our dedicated export sales desk today.
                         </p>
                         <Link href="/contact">
-                           <button className="group relative px-8 py-4.5 md:px-10 md:py-5 bg-brand-navy text-white rounded-full font-black uppercase tracking-[0.3em] text-[10px] md:text-[11px] shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95">
+                           <button className="group relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-brand-navy text-white rounded-full font-black uppercase tracking-[0.3em] text-xs sm:text-sm shadow-2xl hover:bg-brand-gold hover:text-brand-navy transition-all duration-700 active:scale-95">
                               Inquire About Bulk Orders
                            </button>
                         </Link>

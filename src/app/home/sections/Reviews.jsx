@@ -20,7 +20,7 @@ export function Reviews() {
         <div className="absolute bottom-1/4 -left-20 w-[600px] h-[600px] bg-brand-navy/5 blur-[120px] rounded-full animate-subtle-float delay-700"></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-12 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 relative z-10">
 
         {/* STANDARDIZED HEADER ARCHITECTURE */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
@@ -29,11 +29,11 @@ export function Reviews() {
             <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Client Testimonials</span>
             <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
             TRUSTED BY <br />
             <span className="text-gradient">OUR CLIENTS.</span>
           </h2>
-          <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-200">
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-200">
             Premium reliability for agricultural exports. Trusted by major importers, wholesalers, and supermarkets worldwide.
           </p>
         </div>

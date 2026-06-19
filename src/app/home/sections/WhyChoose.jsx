@@ -30,7 +30,7 @@ const reasons = [
 export function WhyChoose() {
   return (
     <section className="relative py-12 md:py-20 overflow-hidden bg-slate-50">
-      <div className="container mx-auto px-4 md:px-12 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 relative z-10">
         
         {/* STANDARDIZED HEADER ARCHITECTURE */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
@@ -39,11 +39,11 @@ export function WhyChoose() {
               <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Leading  Exporters</span>
               <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
            </div>
-           <h2 className="text-4xl md:text-7xl lg:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">
+           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-brand-navy mb-6 tracking-tighter leading-[0.85] animate-reveal opacity-0">
               TRUSTED EXPORT <br />
               <span className="text-gradient">PARTNER.</span>
            </h2>
-           <p className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
+           <p className="text-sm sm:text-base md:text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-tight opacity-0 animate-reveal delay-300">
               MITRAY EXIM bridges the gap between India's rich agricultural heritage and the global demand for premium quality produce.
            </p>
         </div>

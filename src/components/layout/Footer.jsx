@@ -16,19 +16,19 @@ export function Footer() {
 
       {/* Top CTA Bar */}
       <div className="relative z-10 bg-brand-gold/10 border-b border-white/5">
-        <div className="container mx-auto px-4 md:px-12 py-8 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left">
-          <h3 className="text-2xl md:text-5xl lg:text-6xl font-black font-outfit uppercase tracking-tighter leading-tight md:leading-[0.85] max-w-2xl animate-reveal opacity-0">
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left">
+          <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black font-outfit uppercase tracking-tighter leading-tight md:leading-[0.85] max-w-2xl animate-reveal opacity-0">
             JOIN OUR GLOBAL <br className="hidden lg:block" />
             <span className="text-brand-gold">EXPORT NETWORK</span> TODAY.
           </h3>
-          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 md:px-12 py-4 md:py-6 bg-brand-gold text-brand-navy  font-black uppercase tracking-widest text-[11px] md:text-lg hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
+          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-brand-gold text-brand-navy  font-black uppercase tracking-widest text-xs sm:text-sm md:text-base lg:text-lg hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
             Partner With Us
           </Link>
         </div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 md:px-12 py-12 md:pt-24  md:pb-8 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-12 md:pt-24 md:pb-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
 
           {/* Company Info */}
@@ -185,7 +185,7 @@ export function Footer() {
 
       {/* Desktop: Grid Layout */}
       <div className="hidden md:block relative py-12">
-        <div className="container mx-auto px-4 md:px-12 relative z-10">
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {CERTIFICATIONS.map((cert) => (
               <Link
@@ -225,7 +225,7 @@ export function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="container mx-auto px-4 md:px-12 py-8 md:py-8 relative z-10 animate-reveal opacity-0 delay-1000 border-t border-white/5">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 relative z-10 animate-reveal opacity-0 delay-1000 border-t border-white/5">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
           <p className="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest text-center md:text-left">
             © {currentYear} MITRAY EXIM. <span className="text-brand-gold/60">Handcrafted with Excellence.</span>

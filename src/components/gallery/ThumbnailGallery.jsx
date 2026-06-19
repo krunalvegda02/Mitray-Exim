@@ -1,6 +1,6 @@
 export function ThumbnailGallery({ images }) {
   return (
-    <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
       {images.map((img, idx) => (
         <div
           key={idx}

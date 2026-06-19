@@ -76,15 +76,15 @@ export function ProductCard({ product, onQuoteClick }) {
       <div className={`relative z-10 mt-auto p-6 md:p-8 flex flex-col gap-4 transition-transform duration-700 ${isActive ? 'translate-y-0' : 'translate-y-12 md:translate-y-8 group-hover:translate-y-0'}`}>
 
         <div className="space-y-1">
-          <p className="text-brand-gold text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em]">{product.category}</p>
-          <h3 className={`text-xl md:text-3xl font-black transition-colors duration-500 tracking-tighter leading-none ${isActive ? 'text-brand-gold' : 'text-white group-hover:text-brand-gold'}`}>
+          <p className="text-brand-gold text-xs font-black uppercase tracking-[0.4em]">{product.category}</p>
+          <h3 className={`text-xl sm:text-2xl md:text-3xl font-black transition-colors duration-500 tracking-tighter leading-none ${isActive ? 'text-brand-gold' : 'text-white group-hover:text-brand-gold'}`}>
             {product.name}
           </h3>
         </div>
 
         {/* REVEALABLE SPECS */}
         <div className={`flex flex-col gap-4 transition-all duration-700 delay-100 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0'}`}>
-          <p className="text-white/60 text-[10px] md:text-[12px] font-bold uppercase tracking-widest leading-relaxed line-clamp-2">
+          <p className="text-white/60 text-xs sm:text-sm font-bold uppercase tracking-widest leading-relaxed line-clamp-2">
             {product.description}
           </p>
 

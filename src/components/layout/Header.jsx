@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { FiGlobe, FiSend, FiMenu, FiX, FiActivity, FiArrowUpRight, FiZap } from "react-icons/fi";
+import clsx from "clsx";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,31 +29,31 @@ export function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500">
+    <header className={clsx('fixed', 'top-0', 'left-0', 'right-0', 'z-[100]', 'transition-all', 'duration-500')}>
       {/* SLIM INSTITUTIONAL ANNOUNCEMENT BAR */}
       <div className={`w-full bg-brand-navy relative overflow-hidden transition-all duration-500 ${isScrolled ? 'h-0 opacity-0' : 'h-9 opacity-100 border-b border-white/5'}`}>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-gold/10 to-transparent -skew-x-12 translate-x-[-200%] animate-[scan_8s_infinite] pointer-events-none"></div>
-        <div className="max-w-[96%] xl:max-w-[94%] 2xl:max-w-[1600px] mx-auto px-6 md:px-12 h-full flex items-center justify-between relative z-10">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></div>
-              <span className="text-[9px] font-black text-white/60 uppercase tracking-[0.2em]">Global Export Network Active</span>
+        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-transparent', 'via-brand-gold/10', 'to-transparent', '-skew-x-12', 'translate-x-[-200%]', 'animate-[scan_8s_infinite]', 'pointer-events-none')}></div>
+        <div className={clsx('w-full', 'max-w-[1920px]', 'mx-auto', 'px-4', 'sm:px-6', 'md:px-8', 'lg:px-10', 'xl:px-12', 'h-full', 'flex', 'items-center', 'justify-between', 'relative', 'z-10')}>
+          <div className={clsx('flex', 'items-center', 'gap-6')}>
+            <div className={clsx('flex', 'items-center', 'gap-2')}>
+              <div className={clsx('w-1.5', 'h-1.5', 'rounded-full', 'bg-brand-gold', 'animate-pulse')}></div>
+              <span className={clsx('text-[9px]', 'font-black', 'text-white/60', 'uppercase', 'tracking-[0.2em]')}>Global Export Network Active</span>
             </div>
-            <div className="hidden lg:flex items-center gap-2">
-              <FiZap className="text-brand-gold text-[9px]" />
-              <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em]">Premium Indian Produce</span>
+            <div className={clsx('hidden', 'lg:flex', 'items-center', 'gap-2')}>
+              <FiZap className={clsx('text-brand-gold', 'text-[9px]')} />
+              <span className={clsx('text-[9px]', 'font-black', 'text-white/40', 'uppercase', 'tracking-[0.2em]')}>Premium Indian Produce</span>
             </div>
           </div>
-          <div className="hidden sm:flex items-center gap-4">
-            <span className="text-[9px] font-black text-brand-gold uppercase tracking-[0.2em]">Institutional Partnerships</span>
-            <FiArrowUpRight className="text-brand-gold text-[9px]" />
+          <div className={clsx('hidden', 'sm:flex', 'items-center', 'gap-4')}>
+            <span className={clsx('text-[9px]', 'font-black', 'text-brand-gold', 'uppercase', 'tracking-[0.2em]')}>Institutional Partnerships</span>
+            <FiArrowUpRight className={clsx('text-brand-gold', 'text-[9px]')} />
           </div>
         </div>
       </div>
 
       {/* FLOATING CAPSULE NAVIGATION */}
-      <div className="w-full transition-all duration-500 pt-4">
-        <div className="max-w-[96%] xl:max-w-[94%] 2xl:max-w-[1600px] mx-auto px-2 sm:px-4">
+      <div className={clsx('w-full', 'transition-all', 'duration-500', 'pt-4')}>
+        <div className={clsx('w-full', 'max-w-[1920px]', 'mx-auto', 'px-4', 'sm:px-6', 'md:px-8', 'lg:px-10', 'xl:px-12')}>
           <div
             className={`mx-auto w-full rounded-full transition-all duration-700 flex items-center justify-between px-6 md:px-8 border hover:shadow-brand-gold/5 hover:border-brand-gold/30 hover:scale-[1.01]
               ${isScrolled
@@ -61,20 +62,20 @@ export function Header() {
               }`}
           >
             {/* LOGO */}
-            <Link href="/" className="group flex items-center space-x-4 transition-transform duration-500 hover:scale-[1.02]">
+            <Link href="/" className={clsx('group', 'flex', 'items-center', 'space-x-4', 'transition-transform', 'duration-500', 'hover:scale-[1.02]')}>
               <img
                 src="/newLogo.png"
                 alt="MITRAY EXIM"
                 className={`object-contain transition-all duration-500 ${
                   isScrolled 
-                    ? "w-[110px] md:w-[175px] brightness-100" 
-                    : "w-[110px] md:w-[185px] brightness-0 invert"
+                    ? "w-[90px] sm:w-[110px] md:w-[130px] lg:w-[140px] xl:w-[160px] brightness-100" 
+                    : "w-[90px] sm:w-[110px] md:w-[130px] lg:w-[140px] xl:w-[160px] brightness-0 invert"
                 }`}
               />
             </Link>
  
             {/* NAV LINKS */}
-            <nav className="hidden lg:flex items-center space-x-1.5">
+            <nav className={clsx('hidden', 'lg:flex', 'items-center', 'space-x-0.5', 'xl:space-x-1.5')}>
               {[
                 ["Home", "/"],
                 ["About Us", "/about"],
@@ -89,7 +90,7 @@ export function Header() {
                   <Link
                     key={href}
                     href={href}
-                    className={`text-[11px] xl:text-[13.5px] font-black uppercase tracking-[0.1em] xl:tracking-[0.16em] px-3 xl:px-4.5 py-2 xl:py-2.5 rounded-full transition-all duration-300 relative group
+                    className={`text-[9px] xl:text-[11px] 2xl:text-[12px] font-black uppercase tracking-widest xl:tracking-[0.1em] px-2 xl:px-3.5 py-1.5 xl:py-2 rounded-full transition-all duration-300 relative group
                       ${isScrolled
                         ? isActive
                           ? 'bg-brand-navy text-white shadow-md shadow-brand-navy/10'
@@ -106,17 +107,17 @@ export function Header() {
             </nav>
  
             {/* ACTIONS */}
-            <div className="flex items-center gap-3">
+            <div className={clsx('flex', 'items-center', 'gap-3')}>
               <Link
                 href="/contact"
-                className={`hidden md:flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 active:scale-95 group relative overflow-hidden shadow-md border
+                className={`hidden md:flex items-center gap-2 px-4 xl:px-5 py-2.5 xl:py-3 rounded-full text-[10px] xl:text-[11px] font-black uppercase tracking-widest transition-all duration-300 active:scale-95 group relative overflow-hidden shadow-md border
                   ${isScrolled
                     ? 'bg-brand-navy text-white hover:bg-brand-gold hover:text-brand-navy border-white/5 hover:border-brand-gold/10 hover:shadow-brand-gold/25'
                     : 'bg-brand-gold text-brand-navy hover:bg-white hover:text-brand-navy border-brand-gold/10 hover:border-white/10 hover:shadow-white/20'
                   }`}
               >
                 Inquiry Now 
-                <FiSend className="text-[11px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <FiSend className={clsx('text-[11px]', 'group-hover:translate-x-0.5', 'group-hover:-translate-y-0.5', 'transition-transform', 'duration-300')} />
               </Link>
  
               {/* MOBILE MENU TOGGLE */}
@@ -137,17 +138,17 @@ export function Header() {
 
       {/* MOBILE COMMAND CENTER OVERLAY */}
       <div
-        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/98 backdrop-blur-2xl transition-all duration-700 ease-in-out overflow-y-auto ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`lg:hidden fixed inset-0 z-50 bg-brand-navy/98 backdrop-blur-2xl transition-all duration-700 ease-in-out overflow-hidden ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex flex-col h-full p-10 pt-32">
+        <div className={clsx('flex', 'flex-col', 'h-full', 'px-6', 'sm:px-10', 'py-6', 'sm:py-10', 'pt-20', 'sm:pt-28', 'pb-8')}>
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-10 right-10 w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-white"
+            className={clsx('absolute', 'top-10', 'right-10', 'w-14', 'h-14', 'rounded-full', 'bg-white/10', 'flex', 'items-center', 'justify-center', 'text-white')}
           >
             <FiX className="text-3xl" />
           </button>
 
-          <nav className="flex flex-col space-y-4">
+          <nav className={clsx('flex', 'flex-col', 'space-y-2', 'sm:space-y-4', 'overflow-y-auto', 'no-scrollbar')}>
             {[
               ["Home", "/"],
               ["About Us", "/about"],
@@ -161,7 +162,7 @@ export function Header() {
               <Link
                 key={href}
                 href={href}
-                className="text-3xl font-black text-white uppercase tracking-tighter hover:text-brand-gold transition-colors py-4 border-b border-white/5"
+                className={clsx('text-4xl', 'font-black', 'text-white', 'uppercase', 'tracking-tighter', 'hover:text-brand-gold', 'transition-colors', 'py-2', 'sm:py-3', 'border-b', 'border-white/5')}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {label}
@@ -169,12 +170,12 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="mt-auto pt-10 flex items-center justify-between border-t border-white/10">
-            <div className="flex items-center gap-3">
-              <FiGlobe className="text-brand-gold text-2xl" />
-              <span className="text-xs font-black uppercase text-white/40 tracking-[0.3em]">MITRAY EXIM Hub</span>
+          <div className={clsx('mt-4', 'sm:mt-auto', 'pt-4', 'sm:pt-8', 'flex', 'items-center', 'justify-between', 'border-t', 'border-white/10', 'shrink-0')}>
+            <div className={clsx('flex', 'items-center', 'gap-3')}>
+              <FiGlobe className={clsx('text-brand-gold', 'text-2xl')} />
+              <span className={clsx('text-xs', 'font-black', 'uppercase', 'text-white/40', 'tracking-[0.3em]')}>MITRAY EXIM Hub</span>
             </div>
-            <FiActivity className="text-emerald-400 animate-pulse" />
+            <FiActivity className={clsx('text-emerald-400', 'animate-pulse')} />
           </div>
         </div>
       </div>

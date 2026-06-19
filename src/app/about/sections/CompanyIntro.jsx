@@ -11,7 +11,7 @@ export function CompanyIntro() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[120px] rounded-full animate-subtle-float"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
           
           {/* CONTENT MANIFEST */}
@@ -21,15 +21,15 @@ export function CompanyIntro() {
                   <div className="h-px bg-brand-gold animate-line-grow w-0"></div>
                   <span className="text-[10px] font-black text-brand-gold uppercase tracking-[0.5em] animate-reveal opacity-0">Company Overview</span>
                </div>
-               <h2 className="text-4xl md:text-8xl font-black text-brand-navy mb-8 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
+               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-brand-navy mb-8 tracking-tighter leading-[0.85] animate-reveal delay-100 opacity-0">
                   HERITAGE OF <br />
                   <span className="text-gradient">EXCELLENCE.</span>
                 </h2>
                <div className="space-y-6 md:space-y-8 animate-reveal delay-300 opacity-0">
-                  <p className="text-sm md:text-xl text-slate-500 font-bold uppercase tracking-tight leading-relaxed max-w-3xl">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-500 font-bold uppercase tracking-tight leading-relaxed max-w-3xl">
                      MITRAY EXIM stands as a premier merchant exporter from India, specializing in the reliable delivery of nature's finest agricultural treasures—including premium vegetables, fresh fruits, and high-grade spices—to international markets.
                   </p>
-                  <p className="text-xs md:text-lg text-slate-400 font-medium uppercase tracking-tight leading-relaxed max-w-3xl opacity-70">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-400 font-medium uppercase tracking-tight leading-relaxed max-w-3xl opacity-70">
                      Our business is built on quality, strict compliance, and complete supply chain reliability. We bridge the gap between India's most fertile agricultural regions and the sophisticated demand of global trade hubs in the Gulf, Europe, and North America.
                   </p>
                </div>
