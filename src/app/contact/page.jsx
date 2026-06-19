@@ -23,24 +23,44 @@ export default function ContactPage() {
   const [focusedField, setFocusedField] = useState(null);
   const [errors, setErrors] = useState({});
 
+  const validateField = (name, value) => {
+    let error = null;
+    const val = value.trim();
+    switch (name) {
+      case 'name':
+        if (!val) error = "Full Name is required";
+        else if (val.length < 2) error = "Name must be at least 2 characters";
+        else if (/[^a-zA-Z\s.-]/.test(val)) error = "Name can only contain letters";
+        break;
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!val) error = "Email Address is required";
+        else if (!emailRegex.test(val)) error = "Please enter a valid email address";
+        break;
+      case 'phone':
+        const phoneRegex = /^\+?[\d\s\-\(\)]{8,20}$/;
+        if (!val) error = "Phone Number is required";
+        else if (!phoneRegex.test(val)) error = "Please enter a valid phone number";
+        break;
+      case 'company':
+        if (!val) error = "Company Name is required";
+        break;
+      case 'message':
+        if (!val) error = "Message is required";
+        else if (val.length < 10) error = "Message must be at least 10 characters";
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Full Name is required";
-    else if (formData.name.trim().length < 2) newErrors.name = "Name must be at least 2 characters";
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) newErrors.email = "Email Address is required";
-    else if (!emailRegex.test(formData.email)) newErrors.email = "Please enter a valid email address";
-
-    const phoneRegex = /^\+?[\d\s\-\(\)]{8,20}$/;
-    if (!formData.phone.trim()) newErrors.phone = "Phone Number is required";
-    else if (!phoneRegex.test(formData.phone)) newErrors.phone = "Please enter a valid phone number";
-
-    if (!formData.company.trim()) newErrors.company = "Company Name is required";
-
-    if (!formData.message.trim()) newErrors.message = "Message is required";
-    else if (formData.message.trim().length < 10) newErrors.message = "Message must be at least 10 characters";
-
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key]);
+      if (error) newErrors[key] = error;
+    });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -57,10 +77,21 @@ export default function ContactPage() {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: null });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Validate instantly if there's already an error to clear it
+    if (errors[name]) {
+      const error = validateField(name, value);
+      setErrors(prev => ({ ...prev, [name]: error }));
     }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setFocusedField(null);
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   return (
@@ -244,7 +275,7 @@ export default function ContactPage() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('name')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onBlur={handleBlur}
                                     required
                                     className={`relative w-full bg-white border-2 ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="Your name"
@@ -267,7 +298,7 @@ export default function ContactPage() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('email')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onBlur={handleBlur}
                                     required
                                     className={`relative w-full bg-white border-2 ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="you@company.com"
@@ -293,7 +324,7 @@ export default function ContactPage() {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('phone')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onBlur={handleBlur}
                                     required
                                     className={`relative w-full bg-white border-2 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="+91 8878963333"
@@ -316,7 +347,7 @@ export default function ContactPage() {
                                     value={formData.company}
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('company')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onBlur={handleBlur}
                                     required
                                     className={`relative w-full bg-white border-2 ${errors.company ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="Your company"
@@ -339,7 +370,7 @@ export default function ContactPage() {
                                  value={formData.message}
                                  onChange={handleChange}
                                  onFocus={() => setFocusedField('message')}
-                                 onBlur={() => setFocusedField(null)}
+                                 onBlur={handleBlur}
                                  required
                                  rows="5"
                                  className={`relative w-full bg-white border-2 ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm resize-none placeholder:text-slate-400`}
@@ -418,7 +449,7 @@ export default function ContactPage() {
                    <div className="absolute -inset-4 sm:-inset-6 md:-inset-8 bg-gradient-to-r from-brand-gold/25 via-brand-navy/20 to-brand-gold/25 rounded-2xl sm:rounded-3xl md:rounded-4xl blur-2xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
                    <div className="relative p-1 sm:p-2 md:p-3 rounded-lg sm:rounded-2xl md:rounded-3xl bg-white shadow-2xl overflow-hidden aspect-video md:aspect-square border-2 border-slate-200 hover:border-brand-gold/50 transition-all duration-500">
                       <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117506.30514102914!2d72.5072045952136!3d23.019243555239634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fccd1170aff2f4!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1715875000000!5m2!1sen!2sin" 
+                        src="https://maps.google.com/maps?q=PLOT+NO+57,+GROUND+FLOOR+R.S.+NO+21+MAIN+ROAD+ROAD,+LAKHABAVAL+JAMNAGAR,+GUJRAT+361006&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                         className="w-full h-full rounded-lg sm:rounded-2xl md:rounded-2xl"
                         loading="lazy"
                       ></iframe>

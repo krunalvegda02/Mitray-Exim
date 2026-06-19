@@ -25,7 +25,7 @@ const renderContent = (content) => {
         <div key={idx} className="mb-12 md:mb-16 animate-reveal">
           <div className="flex items-center gap-4 mb-6">
              <div className="h-px w-8 bg-brand-gold"></div>
-             <h2 className="text-2xl md:text-4xl font-black text-brand-navy uppercase tracking-wide">
+             <h2 className="text-2xl md:text-3xl xl:text-4xl font-black text-brand-navy uppercase tracking-wide">
                {title}
              </h2>
           </div>
@@ -37,7 +37,7 @@ const renderContent = (content) => {
                     <div className="w-6 h-6 bg-slate-50 border border-slate-100 flex items-center justify-center mt-1 group-hover/item:border-brand-gold transition-colors">
                        <div className="w-1.5 h-1.5 bg-brand-gold rotate-45"></div>
                     </div>
-                    <p className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
+                    <p className="text-sm md:text-base xl:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
                       {line.replace(/^-\s*/, '')}
                     </p>
                   </div>
@@ -45,7 +45,7 @@ const renderContent = (content) => {
               }
               if (line.trim()) {
                 return (
-                  <p key={i} className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed opacity-80">
+                  <p key={i} className="text-sm md:text-lg xl:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed opacity-80">
                     {line}
                   </p>
                 );
@@ -67,7 +67,7 @@ const renderContent = (content) => {
                   <div className="w-6 h-6 bg-slate-50 border border-slate-100 flex items-center justify-center mt-1 group-hover/item:border-brand-gold transition-colors">
                      <div className="w-1.5 h-1.5 bg-brand-gold rotate-45"></div>
                   </div>
-                  <p className="text-sm md:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
+                  <p className="text-sm md:text-base xl:text-lg text-slate-500 font-bold uppercase tracking-tight leading-relaxed">
                     {line.replace(/^-\s*/, '')}
                   </p>
                 </div>
@@ -75,7 +75,7 @@ const renderContent = (content) => {
             }
             if (line.trim()) {
               return (
-                <p key={i} className="text-sm md:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed mb-6 opacity-80">
+                <p key={i} className="text-sm md:text-lg xl:text-xl text-slate-400 font-bold uppercase tracking-tight leading-relaxed mb-6 opacity-80">
                   {line}
                 </p>
               );
@@ -122,10 +122,10 @@ export default function BlogDetailPage() {
       <div className="relative z-10 pt-12 md:pt-20 pb-20 md:pb-32 bg-[#F9FAFB]">
         <Container>
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 md:gap-12 xl:gap-20 items-start">
             
             {/* LEFT: PUBLICATION CONTENT */}
-            <div className="lg:col-span-8 space-y-12 animate-reveal delay-300 opacity-0">
+            <div className="xl:col-span-8 space-y-8 md:space-y-12 animate-reveal delay-300 opacity-0">
                
                {/* FEATURED ASSET - SHARP EDGES */}
                <div className="relative group">
@@ -145,7 +145,7 @@ export default function BlogDetailPage() {
                </div>
 
                {/* ARTICLE BODY */}
-               <div className="bg-white border-2 border-slate-100 p-8 md:p-16 relative shadow-sm">
+               <div className="bg-white border-2 border-slate-100 p-6 md:p-10 xl:p-16 relative shadow-sm">
                   {/* CORNER ACCENT */}
                   <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-slate-50"></div>
                   
@@ -155,10 +155,10 @@ export default function BlogDetailPage() {
 
                   {/* KEY TAKEAWAYS - SHARP EDGY BOX */}
                   {blog.keyTakeaways && (
-                    <div className="mt-16 p-10 bg-brand-navy text-white relative overflow-hidden group">
+                    <div className="mt-10 md:mt-16 p-6 md:p-10 bg-brand-navy text-white relative overflow-hidden group">
                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 blur-[100px]"></div>
                        <div className="relative z-10">
-                          <div className="flex items-center gap-4 mb-10">
+                          <div className="flex items-center gap-4 mb-8 md:mb-10">
                              <FiZap className="text-brand-gold text-2xl animate-pulse" />
                              <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Strategic Intelligence</h3>
                           </div>
@@ -186,10 +186,10 @@ export default function BlogDetailPage() {
             </div>
 
             {/* RIGHT: PUBLICATION METADATA SIDEBAR */}
-            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 animate-reveal delay-500 opacity-0">
+            <div className="xl:col-span-4 space-y-6 md:space-y-8 xl:sticky xl:top-32 animate-reveal delay-500 opacity-0">
                
                {/* AUTHOR TERMINAL */}
-               <div className="p-10 bg-white border-2 border-slate-100 shadow-xl relative group">
+               <div className="p-6 md:p-10 bg-white border-2 border-slate-100 shadow-xl relative group">
                   <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-brand-gold/10 group-hover:border-brand-gold transition-colors"></div>
                   <div className="flex items-center gap-6 mb-10">
                      <div className="w-16 h-16 bg-brand-navy text-brand-gold flex items-center justify-center text-3xl font-black shadow-xl">
@@ -222,7 +222,7 @@ export default function BlogDetailPage() {
                </div>
 
                {/* STRATEGIC HUB CTA */}
-               <div className="p-10 bg-slate-50 border-2 border-brand-gold/10 border-dashed relative overflow-hidden group">
+               <div className="p-6 md:p-10 bg-slate-50 border-2 border-brand-gold/10 border-dashed relative overflow-hidden group">
                   <div className="relative z-10">
                      <h4 className="text-lg font-black text-brand-navy uppercase tracking-tighter mb-4">Strategic Partnership?</h4>
                      <p className="text-[13px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed mb-8">

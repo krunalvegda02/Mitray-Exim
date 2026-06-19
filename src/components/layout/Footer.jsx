@@ -16,12 +16,12 @@ export function Footer() {
 
       {/* Top CTA Bar */}
       <div className="relative z-10 bg-brand-gold/10 border-b border-white/5">
-        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 text-center md:text-left">
-          <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black font-outfit uppercase tracking-tighter leading-tight md:leading-[0.85] max-w-2xl animate-reveal opacity-0">
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 md:py-12 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 text-center lg:text-left">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black font-outfit uppercase tracking-tighter leading-tight md:leading-[0.85] max-w-2xl animate-reveal opacity-0">
             JOIN OUR GLOBAL <br className="hidden lg:block" />
             <span className="text-brand-gold">EXPORT NETWORK</span> TODAY.
           </h3>
-          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-brand-gold text-brand-navy  font-black uppercase tracking-widest text-xs sm:text-sm md:text-base lg:text-lg hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
+          <Link href="/contact" className="animate-reveal delay-300 opacity-0 px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-xs sm:text-sm md:text-base hover:bg-white transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95 whitespace-nowrap">
             Partner With Us
           </Link>
         </div>
