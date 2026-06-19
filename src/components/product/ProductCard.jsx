@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { FiGlobe, FiPackage, FiShield, FiArrowUpRight, FiZap } from "react-icons/fi";
 
 export function ProductCard({ product, onQuoteClick }) {
@@ -47,10 +48,12 @@ export function ProductCard({ product, onQuoteClick }) {
 
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src={product.image || getProductImage(product.category)}
           alt={product.name}
-          className={`w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-110 opacity-40' : 'group-hover:scale-110 opacity-70 group-hover:opacity-40'}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-110 opacity-40' : 'group-hover:scale-110 opacity-70 group-hover:opacity-40'}`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent opacity-80"></div>
       </div>

@@ -41,7 +41,7 @@ export function LightboxGallery({ images }) {
                 
                 {/* IMAGE */}
                 <div className="absolute inset-0">
-                   <img 
+                   <img loading="lazy" decoding="async" 
                       src={img.src} 
                       alt={img.title} 
                       className="w-full h-full object-cover grayscale opacity-75 sm:opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
@@ -108,7 +108,7 @@ export function LightboxGallery({ images }) {
               <div className="flex-1 relative group w-full">
                  <div className="absolute inset-0 bg-brand-gold/10 translate-x-2 sm:translate-x-3 md:translate-x-4 translate-y-2 sm:translate-y-3 md:translate-y-4"></div>
                  <div className="relative border-2 sm:border-3 md:border-4 border-white/20 shadow-2xl overflow-hidden">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                        src={selectedImage.src} 
                        alt={selectedImage.title} 
                        className="w-full h-auto max-h-[50vh] sm:max-h-[60vh] md:max-h-[65vh] object-contain"

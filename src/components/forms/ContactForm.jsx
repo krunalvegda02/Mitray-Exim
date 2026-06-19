@@ -2,10 +2,41 @@
 
 import { Button } from "@/components/shared/Button";
 
+import { useState } from "react";
+import emailjs from '@emailjs/browser';
+
 export default function ContactForm() {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Contact form submitted. We will get back to you.");
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+
+    try {
+      await emailjs.send(
+        'service_489ts7p',
+        'template_99y4k67',
+        {
+          from_name: formData.get('name'),
+          from_email: formData.get('email'),
+          phone: formData.get('phone'),
+          company: formData.get('company'),
+          message: formData.get('message'),
+          to_email: 'mitrayexim6@gmail.com'
+        },
+        'J8zYYgRTPwF7rion2'
+      );
+
+      alert("Message sent successfully!");
+      e.target.reset();
+    } catch (error) {
+      console.error('Email send failed:', error);
+      alert("Failed to send message. Please try again.");
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -17,6 +48,7 @@ export default function ContactForm() {
           </label>
           <input
             type="text"
+            name="name"
             required
             className="w-full border border-gray-300 rounded-lg px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
           />
@@ -27,6 +59,7 @@ export default function ContactForm() {
           </label>
           <input
             type="text"
+            name="company"
             className="w-full border border-gray-300 rounded-lg px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
           />
         </div>
@@ -38,6 +71,7 @@ export default function ContactForm() {
           </label>
           <input
             type="email"
+            name="email"
             required
             className="w-full border border-gray-300 rounded-lg px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
           />
@@ -48,6 +82,7 @@ export default function ContactForm() {
           </label>
           <input
             type="text"
+            name="phone"
             required
             className="w-full border border-gray-300 rounded-lg px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
           />
@@ -58,12 +93,14 @@ export default function ContactForm() {
           Message
         </label>
         <textarea
+          name="message"
           rows={4}
+          required
           className="w-full border border-gray-300 rounded-lg px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
         ></textarea>
       </div>
-      <Button type="submit" className="w-full sm:w-auto px-8 py-3 text-sm sm:text-base">
-        Send Message
+      <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto px-8 py-3 text-sm sm:text-base disabled:opacity-50">
+        {isSubmitting ? 'Sending...' : 'Send Message'}
       </Button>
     </form>
   );

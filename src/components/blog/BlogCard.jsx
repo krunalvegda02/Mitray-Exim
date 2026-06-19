@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { FiArrowRight, FiCalendar, FiZap } from "react-icons/fi";
 
 const getBlogImage = (post) => {
@@ -26,11 +27,12 @@ export function BlogCard({ post, featured = false }) {
         
         {/* IMAGE SECTION */}
         <div className={`${featured ? 'w-full md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-40 sm:h-56 md:h-72 lg:h-96' : 'aspect-video'}`}>
-           <img 
+           <Image 
              src={blogImage} 
              alt={post.title} 
-             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-110 opacity-75 sm:opacity-80"
-             loading="lazy"
+             fill
+             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+             className="object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-110 opacity-75 sm:opacity-80"
            />
            
            {/* OVERLAY */}

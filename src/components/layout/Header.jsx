@@ -63,7 +63,7 @@ export function Header() {
           >
             {/* LOGO */}
             <Link href="/" className={clsx('group', 'flex', 'items-center', 'space-x-4', 'transition-transform', 'duration-500', 'hover:scale-[1.02]')}>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/newLogo.png"
                 alt="MITRAY EXIM"
                 className={`object-contain transition-all duration-500 ${

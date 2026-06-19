@@ -203,7 +203,7 @@ export function Certifications() {
                         )}
                         <div className="absolute inset-0 bg-brand-gold/5 rounded-full group-hover:bg-brand-gold/10 transition-colors duration-500"></div>
                         <div className={`relative w-full h-full glass-panel rounded-full flex items-center justify-center p-4 md:p-5 border-white transition-all duration-500 ${isMiddle ? "group-hover:shadow-2xl group-hover:rotate-6" : "group-hover:shadow-lg group-hover:rotate-6"}`}>
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={cert.logo}
                             alt={cert.fullName}
                             className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100"

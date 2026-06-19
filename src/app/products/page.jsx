@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import { PRODUCTS } from "@/data/products";
@@ -258,10 +259,12 @@ export default function ProductsPage() {
 
                                  {/* Visual Manifest */}
                                  <div className="relative aspect-[4/5] overflow-hidden bg-slate-50">
-                                    <img
+                                    <Image
                                        src={product.image}
                                        alt={product.name}
-                                       className="w-full h-full object-cover transition-all duration-[2000ms] group-hover/card:scale-110 group-hover/card:rotate-2"
+                                       fill
+                                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                       className="object-cover transition-all duration-[2000ms] group-hover/card:scale-110 group-hover/card:rotate-2"
                                     />
 
                                     {/* Overlay Hub (Appears on Hover) */}

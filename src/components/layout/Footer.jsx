@@ -142,7 +142,7 @@ export function Footer() {
               className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded flex-shrink-0"
             >
               <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                <img
+                <img loading="lazy" decoding="async"
                   src={cert.logo}
                   alt={cert.name}
                   className="max-h-full max-w-full object-contain"
@@ -194,7 +194,7 @@ export function Footer() {
                 className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 hover:border-brand-gold hover:bg-white/10 transition-all duration-500 group/logo shadow-sm cursor-pointer rounded hover:shadow-lg"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={cert.logo}
                     alt={cert.name}
                     className="max-h-full max-w-full object-contain"

@@ -131,7 +131,7 @@ export default function BlogDetailPage() {
                <div className="relative group">
                   <div className="absolute inset-0 bg-brand-gold/5 translate-x-4 translate-y-4"></div>
                   <div className="relative bg-white border-2 border-slate-100 overflow-hidden shadow-2xl">
-                     <img 
+                     <img loading="lazy" decoding="async" 
                        src={bannerImage} 
                        alt={blog.title} 
                        className="w-full h-[300px] md:h-[500px] object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"

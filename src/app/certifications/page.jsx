@@ -89,7 +89,7 @@ export default function CertificationsPage() {
                          {CERTIFICATIONS.map((cert, i) => (
                            <div key={i} className={clsx('flex', 'items-start', 'gap-2', 'sm:gap-3', 'md:gap-4', 'p-2', 'sm:p-3', 'md:p-4', 'lg:p-6', 'bg-slate-50', 'border', 'border-slate-100', 'group', 'hover:border-brand-gold', 'transition-all')}>
                               <div className={clsx('w-12', 'sm:w-14', 'md:w-16', 'lg:w-20', 'h-12', 'sm:h-14', 'md:h-16', 'lg:h-20', 'bg-white', 'border', 'border-slate-100', 'flex', 'items-center', 'justify-center', 'p-1', 'group-hover:scale-110', 'transition-transform', 'flex-shrink-0')}>
-                                 <img
+                                 <img loading="lazy" decoding="async"
                                    src={cert.logo}
                                    alt={cert.name}
                                    className={clsx('max-w-full', 'max-h-full', 'object-contain', 'transition-all')}

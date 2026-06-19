@@ -18,7 +18,7 @@ export function PageHero({
       <div className={clsx('absolute', 'inset-0', 'z-0')}>
         {backgroundImage ? (
           <>
-            <img
+            <img loading="lazy" decoding="async"
               src={backgroundImage}
               alt={title}
               className={clsx('w-full', 'h-full', 'object-cover', 'opacity-75', 'animate-subtle-zoom')}

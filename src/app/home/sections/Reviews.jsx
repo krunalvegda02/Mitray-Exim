@@ -64,13 +64,13 @@ export function Reviews() {
                           <div className="relative">
                             <div className="w-12 h-12 md:w-20 md:h-20 bg-brand-navy rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-xl relative z-10 border-2 border-white overflow-hidden">
                               {testimonial.avatar ? (
-                                <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000" />
+                                <img loading="lazy" decoding="async" src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000" />
                               ) : (
                                 <span>{testimonial.name.charAt(0)}</span>
                               )}
                             </div>
                             <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-brand-gold rounded-lg border-2 border-white flex items-center justify-center shadow-lg z-20">
-                              <img src={`https://flagcdn.com/w80/${testimonial.countryCode}.png`} alt={testimonial.location} className="w-4 rounded-sm" />
+                              <img loading="lazy" decoding="async" src={`https://flagcdn.com/w80/${testimonial.countryCode}.png`} alt={testimonial.location} className="w-4 rounded-sm" />
                             </div>
                           </div>
                           <div className="text-left">

@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import { PRODUCTS } from "@/data/products";
@@ -60,11 +61,13 @@ export default function ProductDetailPage({ params }) {
             <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-4 md:space-y-8 animate-reveal delay-300 opacity-0">
                <div className="relative group">
                   <div className="absolute -inset-4 bg-brand-gold/5 blur-3xl rounded-[3rem]"></div>
-                  <div className="relative glass-card p-2 rounded-2xl md:rounded-[2.5rem] bg-slate-100 shadow-2xl border-white overflow-hidden">
-                     <img 
+                  <div className="relative glass-card p-2 rounded-2xl md:rounded-[2.5rem] bg-slate-100 shadow-2xl border-white overflow-hidden h-[300px] sm:h-[400px] md:h-[550px]">
+                     <Image
                        src={productImage} 
-                       alt={product.name} 
-                       className="w-full h-[300px] sm:h-[400px] md:h-[550px] object-cover rounded-xl md:rounded-[2rem] transition-all duration-[2000ms] group-hover:scale-105"
+                       alt={product.name}
+                       fill
+                       sizes="(max-width: 768px) 100vw, 50vw"
+                       className="object-cover rounded-xl md:rounded-[2rem] transition-all duration-[2000ms] group-hover:scale-105"
                      />
                      <div className="absolute bottom-4 left-4 right-4 md:bottom-10 md:left-10 md:right-10">
                         <div className="glass-panel p-4 md:p-6 rounded-xl md:rounded-2xl border-white/20 bg-brand-navy/60 backdrop-blur-xl">
@@ -184,16 +187,16 @@ export default function ProductDetailPage({ params }) {
                      View All Products <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
                   </Link>
                </div>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
                   {relatedProducts.map((rel, idx) => (
                     <Link key={rel.slug} href={`/products/${rel.slug}`} className="group/rel animate-reveal opacity-0" style={{ animationDelay: `${idx * 150}ms` }}>
-                       <div className="glass-card bg-white rounded-[2.5rem] overflow-hidden border-slate-100 shadow-sm hover:border-brand-gold hover:shadow-2xl transition-all duration-700 hover-lift h-full flex flex-col">
+                       <div className="glass-card bg-white rounded-2xl md:rounded-[2.5rem] overflow-hidden border-slate-100 shadow-sm hover:border-brand-gold hover:shadow-2xl transition-all duration-700 hover-lift h-full flex flex-col">
                           <div className="relative aspect-[1/1] md:aspect-[4/5] overflow-hidden bg-slate-50">
-                             <img src={getHighResImage(rel)} alt={rel.name} className="w-full h-full object-cover transition-all duration-1000 group-hover/rel:scale-110" />
+                             <Image src={getHighResImage(rel)} alt={rel.name} fill sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw" className="object-cover transition-all duration-1000 group-hover/rel:scale-110" />
                           </div>
-                          <div className="p-6 md:p-8">
-                             <h4 className="text-sm md:text-xl font-black text-brand-navy uppercase tracking-tighter mb-2 group-hover/rel:text-brand-gold transition-colors">{rel.name}</h4>
-                             <div className="h-px w-8 bg-slate-100 group-hover/rel:w-full group-hover/rel:bg-brand-gold transition-all duration-700"></div>
+                          <div className="p-3 md:p-6 lg:p-8">
+                             <h4 className="text-[10px] sm:text-xs md:text-xl font-black text-brand-navy uppercase tracking-tighter mb-1.5 md:mb-2 group-hover/rel:text-brand-gold transition-colors line-clamp-2">{rel.name}</h4>
+                             <div className="h-px w-6 md:w-8 bg-slate-100 group-hover/rel:w-full group-hover/rel:bg-brand-gold transition-all duration-700"></div>
                           </div>
                        </div>
                     </Link>

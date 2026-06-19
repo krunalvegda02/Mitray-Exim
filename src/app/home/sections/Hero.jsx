@@ -8,7 +8,7 @@ export function Hero() {
       
       {/* BACKGROUND ARCHITECTURE */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <img loading="lazy" decoding="async" 
           src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1920&h=1080&fit=crop" 
           alt="MITRAY EXIM Premium Agricultural Exports India" 
           className="w-full h-full object-cover opacity-65 animate-subtle-zoom"
@@ -72,7 +72,7 @@ export function Hero() {
               ].map((item, i) => (
                 <div key={i} className={`relative glass-card p-1 rounded-xl md:rounded-2xl overflow-hidden group shadow-2xl transition-all duration-1000 animate-reveal ${i % 2 !== 0 ? 'translate-y-4 animate-subtle-float delay-300' : '-translate-y-4 animate-subtle-float delay-100'}`} style={{ animationDelay: `${500 + (i * 200)}ms` }}>
                   <div className="relative aspect-[4/5] rounded-lg md:rounded-xl overflow-hidden">
-                    <img src={item.img} alt={item.label} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80" />
+                    <img loading="lazy" decoding="async" src={item.img} alt={item.label} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80" />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-60"></div>
                     <div className="absolute bottom-4 left-4 right-4">
                        <p className="text-[9px] font-black text-white uppercase tracking-[0.3em] leading-none">{item.label}</p>

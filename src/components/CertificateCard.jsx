@@ -32,7 +32,7 @@ export function CertificateCard({ cert }) {
              {/* CORNER ACCENT */}
              <div className="absolute top-0 right-0 w-6 sm:w-8 md:w-10 lg:w-12 h-6 sm:h-8 md:h-10 lg:h-12 border-t-2 sm:border-t-3 md:border-t-4 border-r-2 sm:border-r-3 md:border-r-4 border-slate-200 group-hover:border-brand-gold transition-colors duration-500"></div>
              
-             <img
+             <img loading="lazy" decoding="async"
                src={cert.logo}
                alt={cert.fullName}
                className="max-w-[80%] max-h-[80%] object-contain transition-all duration-700 group-hover:scale-110 drop-shadow-sm"
@@ -125,7 +125,7 @@ export function CertificateCard({ cert }) {
 
             {/* Modal Body - Image Preview */}
             <div className="flex-1 overflow-auto p-3 sm:p-4 md:p-6 lg:p-8 flex items-center justify-center bg-slate-50 min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
-              <img
+              <img loading="lazy" decoding="async"
                 src={cert.logo}
                 alt={cert.fullName}
                 className="max-w-full max-h-full object-contain drop-shadow-lg"

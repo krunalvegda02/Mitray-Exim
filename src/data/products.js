@@ -89,7 +89,7 @@ export const PRODUCTS = [
     slug: "onion",
     name: "Fresh Red Onion",
     category: "fresh-vegetables",
-    image: "https://images.unsplash.com/photo-1618268331562-b9cf78a1bc1b?q=80&w=2070&auto=format&fit=crop",
+    image: "https://drive.google.com/file/d/1KkEPT4rPwH7EtTUbqQdcW5VJEPuZO_vw/view?usp=sharing",
     description:
       "Premium Nashik red onions, globally preferred for their strong flavor, crisp texture, and excellent storage life. Hand-graded for size, color, and skin quality.",
     origin: "India",
@@ -101,7 +101,7 @@ export const PRODUCTS = [
     slug: "green-chilli",
     name: "Fresh Green Chilli (G4/Teja)",
     category: "fresh-vegetables",
-    image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534036/jonas-ducker-4ijhsBXLY0c-unsplash_zzf1jo.jpg",
     description:
       "Extremely fresh, vibrant green chillies with high heat quotient. Selected for consistent length, deep green color, and high shelf stability under cold chain transport.",
     origin: "India",
@@ -223,7 +223,7 @@ export const PRODUCTS = [
     slug: "garam-masala",
     name: "Signature Garam Masala Blend",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534033/gerome-oberste-lehn-HPQOy7x6mAA-unsplash_x9j2d7.jpg",
     description:
       "Authentic Indian spice blend crafted from premium cardamom, cloves, cinnamon, cumin, and black pepper. Perfect balancing agent for diverse global cuisines.",
     origin: "India",
@@ -237,7 +237,7 @@ export const PRODUCTS = [
     slug: "basmati-rice-1121",
     name: "1121 Basmati Rice (XXL Grain)",
     category: "rice",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534032/WhatsApp_Image_2026-06-15_at_11.49.34_zs8d6x.jpg",
     description:
       "World-famous 1121 Steam/Sella Basmati Rice. Features extra-long grains (average length 8.35mm+), delightful natural aroma, and a non-sticky fluffiness when cooked.",
     origin: "India",
@@ -249,7 +249,7 @@ export const PRODUCTS = [
     slug: "non-basmati-rice",
     name: "Premium Non-Basmati Rice",
     category: "rice",
-    image: "https://images.unsplash.com/photo-1536304997881-a372c179924b?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534048/milled-rice-bowl-wooden-spoon-black-cement-floor_qp7wtm.jpg",
     description:
       "Premium polished long-grain non-basmati rice (PR11/Sona Masoori varieties). Highly popular across Middle East and African markets for daily consumption.",
     origin: "India",
@@ -261,7 +261,7 @@ export const PRODUCTS = [
     slug: "ir64-rice",
     name: "IR64 Long Grain White/Parboiled Rice",
     category: "rice",
-    image: "https://images.unsplash.com/photo-1536304997881-a372c179924b?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop",
     description:
       "High-yield IR64 Parboiled Rice, characterized by long grains and high nutritional retention. Extremely competitive pricing for bulk procurement and food security.",
     origin: "India",
@@ -287,7 +287,7 @@ export const PRODUCTS = [
     slug: "onion-flakes",
     name: "Dehydrated Onion Flakes",
     category: "dehydrated",
-    image: "https://images.unsplash.com/photo-1508747703725-719ae2c73ee8?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534049/Onion-Flakes_qbtql5.jpg",
     description:
       "High quality dehydrated onion flakes. Perfect moisture control, authentic sharp onion taste, and ideal for food packaging, ready-to-eat mixes, and culinary seasoning.",
     origin: "India",
@@ -299,7 +299,7 @@ export const PRODUCTS = [
     slug: "garlic-flakes",
     name: "Dehydrated Garlic Flakes",
     category: "dehydrated",
-    image: "https://images.unsplash.com/photo-1581062039912-32b03fb4050e?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534036/olga-kovalski-w8_BZ4OpNvE-unsplash_lupxgj.jpg",
     description:
       "Dehydrated garlic slices of premium Grade-A quality. Aromatic, clean, and free of defects, prepared under state-of-the-art dehydration facilities.",
     origin: "India",
@@ -323,7 +323,7 @@ export const PRODUCTS = [
     slug: "onion-powder",
     name: "Dehydrated Onion Powder",
     category: "dehydrated",
-    image: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534040/organic-food-powder-background_o86pu7.jpg",
     description:
       "Free-flowing fine dehydrated onion powder. No artificial additives, intense natural flavor, and highly soluble in water, popular in industrial food seasoning.",
     origin: "India",
@@ -335,7 +335,7 @@ export const PRODUCTS = [
     slug: "garlic-powder",
     name: "Dehydrated Garlic Powder",
     category: "dehydrated",
-    image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534032/WhatsApp_Image_2026-06-15_at_12.07.32_pd35an.jpg",
     description:
       "Pure dehydrated garlic powder with powerful aromatic characteristics. Ideal for sauces, soups, meat processing, and high-fidelity spice blending.",
     origin: "India",
@@ -349,7 +349,7 @@ export const PRODUCTS = [
     slug: "wheat-flour",
     name: "Premium Whole Wheat Flour (Atta)",
     category: "wheat-flour",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070&auto=format&fit=crop",
+    image: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534036/flour-wheat-flat-lay-wooden_gxvxmw.jpg",
     description:
       "100% natural, premium stone-ground whole wheat flour. Sourced from high-gluten Sharbati and Lokwan wheat varieties of Madhya Pradesh, perfect for flatbreads and bakery goods.",
     origin: "India",

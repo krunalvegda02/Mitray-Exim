@@ -56,7 +56,7 @@ export function CompanyIntro() {
                {/* VISUAL ASSET TERMINAL */}
                <div className={clsx('xl:col-span-5', 'relative', 'hidden', 'xl:block', 'animate-reveal', 'delay-700', 'opacity-0')}>
                   <div className={clsx('relative', 'glass-card', 'p-2', 'rounded-sm', 'bg-slate-100', 'shadow-2xl', 'overflow-hidden', 'border-white')}>
-                     <img
+                     <img loading="lazy" decoding="async"
                         src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=1000&fit=crop"
                         alt="MITRAY EXIM Operational Excellence"
                         className={clsx('w-full', 'h-full', 'object-cover', 'rounded-sm', 'opacity-90', 'grayscale', 'hover:grayscale-0', 'transition-all', 'duration-1000', 'scale-105', 'hover:scale-100')}
