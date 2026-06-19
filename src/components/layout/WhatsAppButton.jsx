@@ -1,8 +1,6 @@
 "use client";
 
 export function WhatsAppButton() {
-  const phone = "+91XXXXXXXXXX"; // replace
-
   return (
     <div
       className="fixed right-6 bottom-6 z-50 group"
@@ -12,7 +10,7 @@ export function WhatsAppButton() {
       <div className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 animate-ping group-hover:opacity-0 transition-opacity duration-500"></div>
       
       <a
-        href={`https://wa.me/${phone}`}
+        href="https://wa.me/qr/2BFZ6ZDAMN2BC1"
         target="_blank"
         rel="noopener noreferrer"
         className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_8px_30px_rgba(37,211,102,0.4)] hover:bg-[#20ba5a] hover:scale-110 active:scale-95 transition-all duration-300"

@@ -146,7 +146,7 @@ export default function CertificationsPage() {
           </div>
 
           {/* 5. OPERATIONAL METRICS */}
-          <div className={clsx('grid', 'grid-cols-2', 'md:grid-cols-4', 'gap-0', 'border-2', 'border-slate-100', 'bg-white', 'animate-reveal', 'overflow-hidden')}>
+          <div className={clsx('grid', 'grid-cols-2', 'lg:grid-cols-4', 'gap-0', 'border-2', 'border-slate-100', 'bg-white', 'animate-reveal', 'overflow-hidden')}>
             {[
               { label: "Compliance Rate", val: 100, suffix: "%" },
               { label: "Export Hubs", val: 5, suffix: "+" },

@@ -184,7 +184,7 @@ export default function ProductDetailPage({ params }) {
                      View All Products <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
                   </Link>
                </div>
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                   {relatedProducts.map((rel, idx) => (
                     <Link key={rel.slug} href={`/products/${rel.slug}`} className="group/rel animate-reveal opacity-0" style={{ animationDelay: `${idx * 150}ms` }}>
                        <div className="glass-card bg-white rounded-[2.5rem] overflow-hidden border-slate-100 shadow-sm hover:border-brand-gold hover:shadow-2xl transition-all duration-700 hover-lift h-full flex flex-col">

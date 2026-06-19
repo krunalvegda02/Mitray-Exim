@@ -95,7 +95,7 @@ export function GlobalPresence() {
                         </p>
                      </div>
                      
-                     <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
+                     <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
                         {region.countries.map((country, cidx) => (
                           <div 
                             key={cidx} 
@@ -114,7 +114,7 @@ export function GlobalPresence() {
           </div>
 
           {/* TELEMETRY FOOTER */}
-          <div className="mt-8 sm:mt-12 md:mt-20 lg:mt-28 pt-6 sm:pt-8 md:pt-12 lg:pt-14 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-1 sm:px-2 md:px-0">
+          <div className="mt-8 sm:mt-12 md:mt-20 lg:mt-28 pt-6 sm:pt-8 md:pt-12 lg:pt-14 border-t border-white/5 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-1 sm:px-2 md:px-0">
              <div className="flex flex-col items-center justify-center text-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
                 <FiMap className="text-brand-gold text-sm sm:text-base md:text-lg lg:text-xl" />
                 <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight">4</span>

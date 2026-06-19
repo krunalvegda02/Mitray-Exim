@@ -21,9 +21,33 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [focusedField, setFocusedField] = useState(null);
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Full Name is required";
+    else if (formData.name.trim().length < 2) newErrors.name = "Name must be at least 2 characters";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) newErrors.email = "Email Address is required";
+    else if (!emailRegex.test(formData.email)) newErrors.email = "Please enter a valid email address";
+
+    const phoneRegex = /^\+?[\d\s\-\(\)]{8,20}$/;
+    if (!formData.phone.trim()) newErrors.phone = "Phone Number is required";
+    else if (!phoneRegex.test(formData.phone)) newErrors.phone = "Please enter a valid phone number";
+
+    if (!formData.company.trim()) newErrors.company = "Company Name is required";
+
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    else if (formData.message.trim().length < 10) newErrors.message = "Message must be at least 10 characters";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     setIsSubmitting(true);
     await new Promise(resolve => setTimeout(resolve, 1500));
     setSubmitStatus("success");
@@ -34,6 +58,9 @@ export default function ContactPage() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: null });
+    }
   };
 
   return (
@@ -96,7 +123,7 @@ export default function ContactPage() {
                       label: "Chat on WhatsApp", 
                       val: "+91 8878963333", 
                       icon: <FiMessageCircle className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:h-7 lg:h-8" />, 
-                      link: "https://wa.me/918878963333", 
+                      link: "https://wa.me/qr/2BFZ6ZDAMN2BC1", 
                       color: "from-emerald-500 to-emerald-600",
                       bgColor: "bg-emerald-50 group-hover:bg-emerald-100"
                     },
@@ -219,10 +246,11 @@ export default function ContactPage() {
                                     onFocus={() => setFocusedField('name')}
                                     onBlur={() => setFocusedField(null)}
                                     required
-                                    className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm placeholder:text-slate-400"
+                                    className={`relative w-full bg-white border-2 ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="Your name"
                                  />
                               </div>
+                              {errors.name && <p className="text-red-500 text-[9px] sm:text-[10px] font-bold mt-1 uppercase tracking-wide">{errors.name}</p>}
                            </div>
 
                            {/* Email Field */}
@@ -241,10 +269,11 @@ export default function ContactPage() {
                                     onFocus={() => setFocusedField('email')}
                                     onBlur={() => setFocusedField(null)}
                                     required
-                                    className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm placeholder:text-slate-400"
+                                    className={`relative w-full bg-white border-2 ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="you@company.com"
                                  />
                               </div>
+                              {errors.email && <p className="text-red-500 text-[9px] sm:text-[10px] font-bold mt-1 uppercase tracking-wide">{errors.email}</p>}
                            </div>
                         </div>
 
@@ -265,10 +294,12 @@ export default function ContactPage() {
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('phone')}
                                     onBlur={() => setFocusedField(null)}
-                                    className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm placeholder:text-slate-400"
+                                    required
+                                    className={`relative w-full bg-white border-2 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="+91 8878963333"
                                  />
                               </div>
+                              {errors.phone && <p className="text-red-500 text-[9px] sm:text-[10px] font-bold mt-1 uppercase tracking-wide">{errors.phone}</p>}
                            </div>
 
                            {/* Company Field */}
@@ -286,10 +317,12 @@ export default function ContactPage() {
                                     onChange={handleChange}
                                     onFocus={() => setFocusedField('company')}
                                     onBlur={() => setFocusedField(null)}
-                                    className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm placeholder:text-slate-400"
+                                    required
+                                    className={`relative w-full bg-white border-2 ${errors.company ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                     placeholder="Your company"
                                  />
                               </div>
+                              {errors.company && <p className="text-red-500 text-[9px] sm:text-[10px] font-bold mt-1 uppercase tracking-wide">{errors.company}</p>}
                            </div>
                         </div>
 
@@ -309,10 +342,11 @@ export default function ContactPage() {
                                  onBlur={() => setFocusedField(null)}
                                  required
                                  rows="5"
-                                 className="relative w-full bg-white border-2 border-slate-200 rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all duration-300 shadow-sm resize-none placeholder:text-slate-400"
+                                 className={`relative w-full bg-white border-2 ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm resize-none placeholder:text-slate-400`}
                                  placeholder="Tell us about your requirements..."
                               ></textarea>
                            </div>
+                           {errors.message && <p className="text-red-500 text-[9px] sm:text-[10px] font-bold mt-1 uppercase tracking-wide">{errors.message}</p>}
                         </div>
 
                         {/* Submit Button */}

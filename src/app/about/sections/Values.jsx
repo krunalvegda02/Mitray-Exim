@@ -34,12 +34,12 @@ export function Values() {
       <div className="relative h-full glass-card p-8 md:p-12 rounded-sm bg-white/70 backdrop-blur-xl border-white transition-all duration-700 hover-lift flex flex-col">
         
         <div className="flex items-center gap-4 mb-10 md:mb-12">
-           <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-gold rounded-sm flex items-center justify-center text-brand-navy shadow-xl group-hover:rotate-12 transition-transform duration-700">
+           <div className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 bg-brand-gold rounded-sm flex items-center justify-center text-brand-navy shadow-xl group-hover:rotate-12 transition-transform duration-700">
               <FiZap className="text-2xl md:text-3xl" />
            </div>
-           <div>
-              <p className="text-[11px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1">MITRAY EXIM Ethics</p>
-              <h3 className="text-2xl md:text-4xl font-black text-brand-navy tracking-tighter uppercase leading-none">Core Ethics.</h3>
+           <div className="min-w-0 flex-1">
+              <p className="text-[8px] sm:text-[9px] md:text-[11px] font-black text-brand-gold uppercase tracking-widest md:tracking-[0.3em] mb-1 break-words">MITRAY EXIM Ethics</p>
+              <h3 className="text-xl sm:text-2xl md:text-4xl font-black text-brand-navy tracking-tighter uppercase leading-none break-words">Core Ethics.</h3>
            </div>
         </div>
 
@@ -47,8 +47,8 @@ export function Values() {
           {values.map((value, idx) => (
             <div key={idx} className="group/item relative p-6 bg-slate-50/50 rounded-sm border border-slate-100 hover:bg-brand-navy transition-all duration-500">
                <div className="text-brand-gold text-xl mb-4 group-hover/item:text-white transition-colors">{value.icon}</div>
-               <h4 className="text-sm md:text-lg font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
-               <p className="text-sm md:text-lg font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">
+               <h4 className="text-xs md:text-sm lg:text-base font-black text-brand-navy uppercase tracking-widest mb-2 group-hover/item:text-white transition-colors">{value.title}</h4>
+               <p className="text-[10px] md:text-xs lg:text-sm font-bold text-slate-400 uppercase tracking-tight leading-relaxed group-hover/item:text-white/60 transition-colors">
                  {value.desc}
                </p>
             </div>
