@@ -20,13 +20,13 @@ export const CERTIFICATIONS = [
     description: "Authorized by DGFT for international trade operations",
     logo: "/images/certifications/iec.png",
   },
-  {
-    id: "spice-board",
-    name: "Spice Board India",
-    fullName: "Spice Board of India",
-    description: "Registered for spice exports from India",
-    logo: "/images/certifications/spice-board.png",
-  },
+  // {
+  //   id: "spice-board",
+  //   name: "Spice Board India",
+  //   fullName: "Spice Board of India",
+  //   description: "Registered for spice exports from India",
+  //   logo: "/images/certifications/spice-board.png",
+  // },
   {
     id: "fieo",
     name: "FIEO",

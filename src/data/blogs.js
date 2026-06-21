@@ -1,3 +1,5 @@
+
+
 export const BLOGS = [
   {
     slug: "vegetable-export-india-to-uae",
@@ -10,7 +12,7 @@ export const BLOGS = [
       role: "Export Consultant",
       image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh",
     },
-    featuredImage: "https://images.unsplash.com/photo-1488459716781-6f3ee3c3d1b4?w=1200&h=600&fit=crop",
+    featuredImage: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534033/gerome-oberste-lehn-HPQOy7x6mAA-unsplash_x9j2d7.jpg",
     readTime: "8 min read",
     keyTakeaways: [
       "APEDA registration and certification are mandatory for vegetable exports",
@@ -63,7 +65,7 @@ Top vegetables in demand include tomatoes, cucumbers, bell peppers, leafy greens
       role: "Trade Specialist",
       image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya",
     },
-    featuredImage: "https://images.unsplash.com/photo-1599599810694-b5ac4dd64b73?w=1200&h=600&fit=crop",
+    featuredImage: "/products/shallot-background.jpg",
     readTime: "6 min read",
     keyTakeaways: [
       "Gulf countries prefer red onions with specific size grades (60-80mm)",
@@ -117,7 +119,7 @@ All shipments require phytosanitary certificates confirming pest-free status. He
       role: "Compliance Officer",
       image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Amit",
     },
-    featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=600&fit=crop",
+    featuredImage: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1781534036/olga-kovalski-w8_BZ4OpNvE-unsplash_lupxgj.jpg",
     readTime: "10 min read",
     keyTakeaways: [
       "APEDA registration is mandatory for all agricultural product exports from India",

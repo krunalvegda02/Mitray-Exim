@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { FiMaximize2, FiX, FiActivity, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export function LightboxGallery({ images }) {
@@ -41,11 +42,13 @@ export function LightboxGallery({ images }) {
                 
                 {/* IMAGE */}
                 <div className="absolute inset-0">
-                   <img loading="lazy" decoding="async" 
+                   <Image
                       src={img.src} 
                       alt={img.title} 
-                      className="w-full h-full object-cover grayscale opacity-75 sm:opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
-                      loading="lazy"
+                      fill
+                      unoptimized={true}
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
+                      className="object-cover opacity-75 sm:opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
                    />
                    
                    {/* OVERLAY */}
@@ -73,87 +76,111 @@ export function LightboxGallery({ images }) {
 
       {/* LIGHTBOX MODAL */}
       {selectedImage && (
-        <div
-          className="fixed inset-0 bg-brand-navy/98 z-[500] flex items-start md:items-center justify-center p-3 sm:p-6 md:p-8 lg:p-12 animate-in fade-in duration-500 overflow-y-auto pt-4 sm:pt-8 md:pt-0"
-          onClick={() => setSelectedImage(null)}
-        >
-           {/* CLOSE BUTTON */}
+        <div className="fixed inset-0 z-[99999] animate-in fade-in zoom-in-95 duration-300">
+           {/* BACKGROUND OVERLAY */}
+           <div 
+             className="absolute inset-0 bg-brand-navy/98 backdrop-blur-sm" 
+             onClick={() => setSelectedImage(null)}
+           ></div>
+
+           {/* FIXED HUD BUTTONS (Outside scroll area so they NEVER move) */}
            <button 
              onClick={() => setSelectedImage(null)}
-             className="absolute top-4 sm:top-6 md:top-8 lg:top-12 right-4 sm:right-6 md:right-8 lg:right-12 w-10 sm:w-12 md:w-14 lg:w-16 h-10 sm:h-12 md:h-14 lg:h-16 bg-white/5 hover:bg-brand-gold hover:text-brand-navy border-2 border-white/10 hover:border-brand-gold flex items-center justify-center text-white transition-all duration-500 group z-50"
+             className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 sm:w-12 h-10 sm:h-12 bg-white/10 hover:bg-brand-gold hover:text-brand-navy border-2 border-white/20 hover:border-brand-gold flex items-center justify-center text-white transition-all duration-300 rounded-full z-[600] shadow-2xl"
            >
-              <FiX className="w-5 sm:w-6 md:w-7 lg:w-8 h-5 sm:h-6 md:w-7 lg:h-8 group-hover:rotate-90 transition-transform duration-500" />
+              <FiX className="w-5 sm:w-6 h-5 sm:h-6 group-hover:rotate-90 transition-transform duration-300" />
            </button>
 
-           {/* NAVIGATION BUTTONS */}
            <button 
              onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-             className="absolute left-4 sm:left-6 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14 bg-white/10 hover:bg-brand-gold text-white hover:text-brand-navy border-2 border-white/10 hover:border-brand-gold flex items-center justify-center transition-all duration-500 group z-50"
+             className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 bg-white/10 hover:bg-brand-gold text-white hover:text-brand-navy border-2 border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-300 rounded-full z-[600] shadow-2xl hidden sm:flex"
            >
-              <FiChevronLeft className="w-5 sm:w-6 md:w-7 h-5 sm:h-6 md:h-7 group-hover:-translate-x-1 transition-transform" />
+              <FiChevronLeft className="w-5 sm:w-6 h-5 sm:h-6 group-hover:-translate-x-1 transition-transform" />
            </button>
 
            <button 
              onClick={(e) => { e.stopPropagation(); handleNext(); }}
-             className="absolute right-4 sm:right-6 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14 bg-white/10 hover:bg-brand-gold text-white hover:text-brand-navy border-2 border-white/10 hover:border-brand-gold flex items-center justify-center transition-all duration-500 group z-50"
+             className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-10 sm:h-12 bg-white/10 hover:bg-brand-gold text-white hover:text-brand-navy border-2 border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-300 rounded-full z-[600] shadow-2xl hidden sm:flex"
            >
-              <FiChevronRight className="w-5 sm:w-6 md:w-7 h-5 sm:h-6 md:h-7 group-hover:translate-x-1 transition-transform" />
+              <FiChevronRight className="w-5 sm:w-6 h-5 sm:h-6 group-hover:translate-x-1 transition-transform" />
            </button>
 
-           <div 
-             className="max-w-6xl w-full flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-start lg:items-center"
-             onClick={(e) => e.stopPropagation()}
-           >
-              {/* IMAGE CONTAINER */}
-              <div className="flex-1 relative group w-full">
-                 <div className="absolute inset-0 bg-brand-gold/10 translate-x-2 sm:translate-x-3 md:translate-x-4 translate-y-2 sm:translate-y-3 md:translate-y-4"></div>
-                 <div className="relative border-2 sm:border-3 md:border-4 border-white/20 shadow-2xl overflow-hidden">
-                    <img loading="lazy" decoding="async" 
-                       src={selectedImage.src} 
-                       alt={selectedImage.title} 
-                       className="w-full h-auto max-h-[50vh] sm:max-h-[60vh] md:max-h-[65vh] object-contain"
-                    />
-                 </div>
-              </div>
-
-              {/* DATA PANEL */}
-              <div className="w-full lg:w-80 xl:w-96 space-y-4 sm:space-y-6 md:space-y-8 animate-in slide-in-from-right duration-700">
-                 <div className="space-y-2 sm:space-y-3 md:space-y-4">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                       <div className="w-1.5 h-1.5 bg-brand-gold"></div>
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-brand-gold uppercase tracking-[0.2em] sm:tracking-[0.3em]">Metadata Analysis</span>
-                    </div>
-                    <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-white uppercase tracking-tight leading-tight">
-                       {selectedImage.title}
-                    </h2>
-                 </div>
-
-                 <div className="p-4 sm:p-5 md:p-6 lg:p-8 bg-white/5 border-2 border-white/10 space-y-3 sm:space-y-4 md:space-y-6">
-                    <div className="flex items-center justify-between pb-3 sm:pb-4 md:pb-6 border-b-2 border-white/5">
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-white/40 uppercase tracking-widest">Protocol Type</span>
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-white uppercase tracking-widest">Operational Hub</span>
-                    </div>
-                    <div className="flex items-center justify-between pb-3 sm:pb-4 md:pb-6 border-b-2 border-white/5">
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-white/40 uppercase tracking-widest">Verification</span>
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5 sm:gap-2">
-                          <FiActivity className="w-3 sm:w-4 h-3 sm:h-4" /> Active
-                       </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-white/40 uppercase tracking-widest">Index</span>
-                       <span className="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-black text-white uppercase tracking-widest">{currentIndex + 1} / {images.length}</span>
-                    </div>
-                    <p className="text-[9px] sm:text-xs md:text-sm lg:text-base font-bold text-white/70 leading-relaxed uppercase tracking-tight pt-2 sm:pt-3 md:pt-4 border-t-2 border-white/5">
-                       Detailed visual documentation of our {selectedImage.title.toLowerCase()} manifesting strict compliance with global export standards.
-                    </p>
-                 </div>
-
-                 <button 
-                   onClick={() => setSelectedImage(null)} 
-                   className="w-full py-3 sm:py-4 md:py-5 lg:py-6 bg-brand-gold hover:bg-brand-gold/90 text-brand-navy text-[10px] sm:text-xs md:text-sm lg:text-base font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] transition-all duration-500 border-2 border-brand-gold hover:border-white"
+           {/* SCROLLABLE CONTENT AREA */}
+           <div className="absolute inset-0 overflow-y-auto pointer-events-none">
+              <div 
+                 className="min-h-full w-full grid place-items-center py-20 px-4 sm:px-12 md:px-20 pointer-events-auto"
+                 onClick={(e) => {
+                    if (e.target === e.currentTarget) setSelectedImage(null);
+                 }}
+              >
+                 <div 
+                   className="w-full max-w-7xl flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 items-center justify-center relative z-10"
+                   onClick={(e) => e.stopPropagation()}
                  >
-                    Close Terminal
-                 </button>
+                    {/* IMAGE CONTAINER */}
+                    <div className="flex-1 w-full flex justify-center items-center">
+                       <div className="relative w-full max-w-4xl mx-auto">
+                          <div className="absolute -inset-2 sm:-inset-4 bg-brand-gold/10 blur-2xl rounded-full translate-y-4"></div>
+                          <div className="relative border-2 sm:border-4 border-white/10 shadow-2xl overflow-hidden bg-brand-navy rounded-xl sm:rounded-2xl p-2 sm:p-4">
+                             <img loading="lazy" decoding="async" 
+                                src={selectedImage.src} 
+                                alt={selectedImage.title} 
+                                className="w-full h-auto max-h-[60vh] lg:max-h-[85vh] object-contain rounded-lg sm:rounded-xl"
+                             />
+                          </div>
+                          
+                          {/* MOBILE NAV BUTTONS (Visible only on mobile below image) */}
+                          <div className="flex justify-center gap-4 mt-6 sm:hidden">
+                             <button onClick={handlePrevious} className="w-12 h-12 bg-white/10 hover:bg-brand-gold hover:text-brand-navy border-2 border-white/20 rounded-full flex items-center justify-center text-white">
+                                <FiChevronLeft className="w-6 h-6" />
+                             </button>
+                             <button onClick={handleNext} className="w-12 h-12 bg-white/10 hover:bg-brand-gold hover:text-brand-navy border-2 border-white/20 rounded-full flex items-center justify-center text-white">
+                                <FiChevronRight className="w-6 h-6" />
+                             </button>
+                          </div>
+                       </div>
+                    </div>
+
+                    {/* DATA PANEL */}
+                    <div className="w-full lg:w-[400px] xl:w-[450px] space-y-6 sm:space-y-8 pb-12 lg:pb-0">
+                       <div className="space-y-3 sm:space-y-4 text-center lg:text-left">
+                          <div className="flex items-center justify-center lg:justify-start gap-3">
+                             <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
+                             <span className="text-[10px] sm:text-xs font-black text-brand-gold uppercase tracking-[0.3em]">Metadata Analysis</span>
+                          </div>
+                          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight leading-tight">
+                             {selectedImage.title}
+                          </h2>
+                       </div>
+
+                       <div className="p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl space-y-4 sm:space-y-6 backdrop-blur-sm">
+                          <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-white/10">
+                             <span className="text-[10px] sm:text-xs font-black text-white/40 uppercase tracking-widest">Protocol</span>
+                             <span className="text-[10px] sm:text-xs font-black text-white uppercase tracking-widest">Operational Hub</span>
+                          </div>
+                          <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-white/10">
+                             <span className="text-[10px] sm:text-xs font-black text-white/40 uppercase tracking-widest">Status</span>
+                             <span className="text-[10px] sm:text-xs font-black text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                                <FiActivity className="w-4 h-4" /> Active
+                             </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                             <span className="text-[10px] sm:text-xs font-black text-white/40 uppercase tracking-widest">Index</span>
+                             <span className="text-[10px] sm:text-xs font-black text-white uppercase tracking-widest px-3 py-1 bg-white/10 rounded-full">{currentIndex + 1} / {images.length}</span>
+                          </div>
+                          <p className="text-xs sm:text-sm font-medium text-white/60 leading-relaxed pt-4 border-t border-white/10">
+                             Detailed visual documentation of our {selectedImage.title.toLowerCase()} manifesting strict compliance with global export standards.
+                          </p>
+                       </div>
+
+                       <button 
+                         onClick={() => setSelectedImage(null)} 
+                         className="w-full py-4 sm:py-5 bg-brand-gold hover:bg-white text-brand-navy text-xs sm:text-sm font-black uppercase tracking-[0.2em] transition-all duration-300 rounded-xl shadow-xl shadow-brand-gold/20"
+                       >
+                          Close Terminal
+                       </button>
+                    </div>
+                 </div>
               </div>
            </div>
         </div>

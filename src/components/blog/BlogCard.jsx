@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FiArrowRight, FiCalendar, FiZap } from "react-icons/fi";
 
 const getBlogImage = (post) => {
-  if (post.image && !post.image.startsWith('/images/')) return post.image;
+  if (post.featuredImage) return post.featuredImage;
   const categoryImages = {
     'Export Guide': 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop',
     'Market Trends': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
@@ -26,13 +26,13 @@ export function BlogCard({ post, featured = false }) {
       <article className={`relative bg-white border-2 border-slate-200 transition-all duration-500 group-hover:border-brand-gold group-hover:-translate-x-1 sm:group-hover:-translate-x-2 group-hover:-translate-y-1 sm:group-hover:-translate-y-2 flex flex-col ${featured ? 'md:flex-row' : ''} h-full hover:shadow-2xl overflow-hidden`} aria-label={`Read more about ${post.title}`}>
         
         {/* IMAGE SECTION */}
-        <div className={`${featured ? 'w-full md:w-3/5' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-40 sm:h-56 md:h-72 lg:h-96' : 'aspect-video'}`}>
+        <div className={`${featured ? 'w-full md:w-3/5 md:absolute md:inset-y-0 md:left-0' : 'w-full'} relative overflow-hidden bg-slate-900 ${featured ? 'h-48 sm:h-64 md:h-auto' : 'aspect-video'}`}>
            <Image 
              src={blogImage} 
              alt={post.title} 
              fill
              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-             className="object-cover grayscale hover:grayscale-0 transition-all duration-[1500ms] group-hover:scale-110 opacity-75 sm:opacity-80"
+             className="object-cover transition-all duration-[1500ms] group-hover:scale-110"
            />
            
            {/* OVERLAY */}
@@ -57,7 +57,7 @@ export function BlogCard({ post, featured = false }) {
         </div>
 
         {/* CONTENT SECTION */}
-        <div className={`${featured ? 'w-full md:w-2/5' : 'w-full'} p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-between bg-white relative`}>
+        <div className={`${featured ? 'w-full md:w-2/5 md:ml-auto' : 'w-full'} p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-between bg-white relative`}>
            
            {/* CORNER ACCENT */}
            <div className="absolute top-0 right-0 w-6 sm:w-8 md:w-10 lg:w-12 h-6 sm:h-8 md:h-10 lg:h-12 border-t-2 sm:border-t-3 md:border-t-4 border-r-2 sm:border-r-3 md:border-r-4 border-slate-200 group-hover:border-brand-gold transition-colors duration-500" aria-hidden="true"></div>

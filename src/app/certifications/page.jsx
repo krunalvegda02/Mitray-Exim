@@ -43,20 +43,9 @@ export default function CertificationsPage() {
 
           {/* 3. CERTIFICATION GRID */}
           <div className={clsx('mb-8', 'sm:mb-12', 'md:mb-16', 'lg:mb-20', 'xl:mb-24', 'px-4', 'sm:px-0')}>
-            <div className={clsx('grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'gap-3', 'sm:gap-4', 'md:gap-6', 'lg:gap-8', 'xl:gap-10')}>
-              {CERTIFICATIONS.slice(0, 3).map((cert, index) => (
-                <div key={cert.id} className={clsx('animate-reveal', 'opacity-0')} style={{ animationDelay: `${index * 150}ms` }}>
-                  <CertificateCard cert={cert} />
-                </div>
-              ))}
-            </div>
-            <div className={clsx('flex', 'flex-wrap', 'justify-center', 'gap-3', 'sm:gap-4', 'md:gap-6', 'lg:gap-8', 'xl:gap-10', 'mt-4', 'sm:mt-6', 'md:mt-8', 'lg:mt-10')}>
-              {CERTIFICATIONS.slice(3).map((cert, index) => (
-                <div 
-                  key={cert.id} 
-                  className={clsx('w-full', 'sm:w-[calc(50%-8px)]', 'md:w-[calc(33.333%-12px)]', 'lg:w-[calc(33.333%-16px)]', 'animate-reveal', 'opacity-0')} 
-                  style={{ animationDelay: `${(index + 3) * 150}ms` }}
-                >
+            <div className={clsx('grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-4', 'sm:gap-6', 'md:gap-8', 'lg:gap-10')}>
+              {CERTIFICATIONS.map((cert, index) => (
+                <div key={cert.id} className={clsx('animate-reveal', 'opacity-0', 'h-full')} style={{ animationDelay: `${index * 150}ms` }}>
                   <CertificateCard cert={cert} />
                 </div>
               ))}

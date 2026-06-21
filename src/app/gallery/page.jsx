@@ -15,31 +15,17 @@ const GALLERY_CATEGORIES = [
 ];
 
 const ALL_IMAGES = [
-   // LOGISTICS
-   { id: 1, category: "logistics", src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070", title: "Logistics Hub Alpha" },
-   { id: 2, category: "logistics", src: "https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=2070", title: "Global Transit Grid" },
-   { id: 3, category: "logistics", src: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070", title: "Dispatch Terminal" },
-   { id: 4, category: "logistics", src: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=2070", title: "Supply Corridor" },
-   { id: 5, category: "logistics", src: "https://images.unsplash.com/photo-1473445717345-4cc44663e0c7?q=80&w=2070", title: "Port Manifest 04" },
-
-   // PACKAGING
-   { id: 6, category: "packaging", src: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=1935", title: "Packaging Protocol" },
-   { id: 7, category: "packaging", src: "https://images.unsplash.com/photo-1530124560677-bdaeaef2f9cd?q=80&w=1935", title: "Export Grading" },
-   { id: 8, category: "packaging", src: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1935", title: "Vacuum Sealed Manifest" },
-   { id: 9, category: "packaging", src: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=1935", title: "Unit Synchronization" },
-
-   // WAREHOUSE
-   { id: 10, category: "warehouse", src: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=1965", title: "Warehouse Terminal 01" },
-   { id: 11, category: "warehouse", src: "https://images.unsplash.com/photo-1587293855946-82116ab78965?q=80&w=1965", title: "Cold Storage Grid" },
-   { id: 12, category: "warehouse", src: "https://images.unsplash.com/photo-1504184581180-3556a1c49511?q=80&w=1965", title: "Inventory Matrix" },
-
-   // QUALITY
-   { id: 13, category: "quality", src: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=2070", title: "QA Inspection Protocol" },
-   { id: 14, category: "quality", src: "https://images.unsplash.com/photo-1521791136064-7986c2959663?q=80&w=2070", title: "Verification Lab" },
-   { id: 15, category: "quality", src: "https://images.unsplash.com/photo-1454165833767-027eeef1593e?q=80&w=2070", title: "Protocol Audit" },
-
-   { id: 16, category: "logistics", src: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=2070", title: "Air Cargo Terminal" },
-   { id: 17, category: "packaging", src: "https://images.unsplash.com/photo-1620455805861-79b0fcac5e45?q=80&w=1935", title: "Manual Sort Hub" },
+   { id: 1, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519301/IMG_5096_gub3pj.jpg", title: "Showcase Image 1" },
+   { id: 2, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519291/20251229_092143_bree3q.jpg", title: "Showcase Image 2" },
+   { id: 3, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519235/20251228_133115_o97hyh.jpg", title: "Showcase Image 3" },
+   { id: 4, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519228/20251229_092239_khvdar.jpg", title: "Showcase Image 4" },
+   { id: 5, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519185/20251228_110625_wcz2h0.jpg", title: "Showcase Image 5" },
+   { id: 6, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519129/20251228_110611_b1wpqu.jpg", title: "Showcase Image 6" },
+   { id: 7, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519069/20251229_092248_igaxj7.jpg", title: "Showcase Image 7" },
+   { id: 8, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519056/20251229_092237_xadbq1.jpg", title: "Showcase Image 8" },
+   { id: 9, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519023/20251228_110601_a1b85w.jpg", title: "Showcase Image 9" },
+   { id: 10, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772519003/20251229_092254_llu4y1.jpg", title: "Showcase Image 10" },
+   { id: 11, category: "all", src: "https://res.cloudinary.com/dtkdcrra2/image/upload/v1772518938/20260129_110600_kicodw.jpg", title: "Showcase Image 11" }
 ];
 
 export default function GalleryPage() {
@@ -90,6 +76,7 @@ export default function GalleryPage() {
                </div>
 
                {/* CATEGORY FILTER */}
+               {/* 
                <div className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4 sm:px-0">
                   <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar pb-4 sm:pb-6 border-b-2 border-slate-200 whitespace-nowrap scroll-smooth">
                      {GALLERY_CATEGORIES.map((cat) => (
@@ -117,6 +104,7 @@ export default function GalleryPage() {
                      ))}
                   </div>
                </div>
+               */}
 
                {/* GALLERY GRID */}
                <div className="min-h-[600px] px-4 sm:px-0 mb-8 sm:mb-12 md:mb-16 lg:mb-20">
