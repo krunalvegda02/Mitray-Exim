@@ -36,10 +36,12 @@ export default function ProductDetailPage({ params }) {
    const relatedProducts = PRODUCTS.filter(p => p.category === product.category && p.slug !== product.slug).slice(0, 4);
 
    return (
-      <div className="bg-white relative overflow-hidden">
+      <div className="bg-white relative">
          {/* Decorative premium ambient glow */}
-         <div className="absolute top-[40vh] left-0 w-[500px] h-[500px] bg-brand-gold/5 blur-[120px] rounded-full pointer-events-none animate-subtle-float"></div>
-         <div className="absolute top-[80vh] right-0 w-[600px] h-[600px] bg-brand-navy/5 blur-[150px] rounded-full pointer-events-none animate-subtle-float delay-1000"></div>
+         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div className="absolute top-[40vh] left-0 w-[500px] h-[500px] bg-brand-gold/5 blur-[120px] rounded-full animate-subtle-float"></div>
+            <div className="absolute top-[80vh] right-0 w-[600px] h-[600px] bg-brand-navy/5 blur-[150px] rounded-full animate-subtle-float delay-1000"></div>
+         </div>
 
          <PageHero
             badge={`${product.category.toUpperCase()} • MANIFEST ${product.slug.toUpperCase()}`}

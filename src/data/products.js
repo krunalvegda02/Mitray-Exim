@@ -63,7 +63,7 @@ export const PRODUCTS = [
     slug: "semi-husked-coconut",
     name: "Semi Husked Coconut",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1560155016-bd4879ae8f21?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/is-full-paddy.jpg",
     description:
       "Fresh semi-husked mature coconuts. Sourced from coastal southern India, featuring high water content, thick white kernel, and rich in natural oil. Ideal for wholesale, retail, and food processing.",
     origin: "India",
@@ -75,7 +75,7 @@ export const PRODUCTS = [
     slug: "peanuts",
     name: "Premium Raw Peanuts (Groundnuts)",
     category: "fresh-fruits",
-    image: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/assortment-peanuts.jpg",
     description:
       "Premium quality Bold and Java peanuts. Hand-selected, high oil content, and completely aflatoxin-tested. Ideal for confectionery, roasting, butter manufacture, and snacking.",
     origin: "India",
@@ -89,7 +89,7 @@ export const PRODUCTS = [
     slug: "onion",
     name: "Fresh Red Onion",
     category: "fresh-vegetables",
-    image: "https://drive.google.com/file/d/1KkEPT4rPwH7EtTUbqQdcW5VJEPuZO_vw/view?usp=sharing",
+    image: "/products/shallot-background.jpg",
     description:
       "Premium Nashik red onions, globally preferred for their strong flavor, crisp texture, and excellent storage life. Hand-graded for size, color, and skin quality.",
     origin: "India",
@@ -113,7 +113,7 @@ export const PRODUCTS = [
     slug: "drumstick",
     name: "Fresh Drumstick (Moringa Pods)",
     category: "fresh-vegetables",
-    image: "https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/spencerwing-moringa-pods-6497162_1920.jpg",
     description:
       "Premium fresh green drumsticks (Moringa pods). Tender, rich in iron, protein, and essential nutrients. Ideal for culinary use and herbal applications.",
     origin: "India",
@@ -125,7 +125,7 @@ export const PRODUCTS = [
     slug: "suran",
     name: "Suran (Elephant Foot Yam)",
     category: "fresh-vegetables",
-    image: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/image.png",
     description:
       "Fresh, high-density Elephant Foot Yam (Suran). Sourced from fertile soils, thoroughly cleaned, and cured for long-distance transport and shelf life stability.",
     origin: "India",
@@ -137,7 +137,7 @@ export const PRODUCTS = [
     slug: "tomato",
     name: "Fresh Hybrid Tomato",
     category: "fresh-vegetables",
-    image: "https://images.unsplash.com/photo-1595855759920-86582396756a?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/top-view-fresh-tomatoes-surface.jpg",
     description:
       "High-grade fresh red tomatoes. Handpicked at the perfect maturity index to ensure maximum shelf-life and robust texture during transit. Fully compliant with import phytosanitary standards.",
     origin: "India",
@@ -151,7 +151,7 @@ export const PRODUCTS = [
     slug: "red-chilli-powder",
     name: "Premium Red Chilli Powder",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/close-up-chilli-powder.jpg",
     description:
       "Pure ground red chilli powder sourced from premium dried red chillies (Guntur/Byadgi varieties). Deep red color, intense aroma, and consistent heat (SHU) levels.",
     origin: "India",
@@ -163,7 +163,7 @@ export const PRODUCTS = [
     slug: "turmeric-powder",
     name: "Pure Turmeric Powder",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/close-up-turmeric-powder.jpg",
     description:
       "High curcumin content turmeric powder. Sourced from the finest Nizamabad & Salem turmeric bulbs, finely ground under strict hygienic protocols.",
     origin: "India",
@@ -175,7 +175,7 @@ export const PRODUCTS = [
     slug: "green-cardamon",
     name: "Green Cardamom (Elaichi)",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1544982503-9f984c14501a?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/anise-seeds-texture-background-top-view.jpg",
     description:
       "Premium bold green cardamom pods (sizes 7mm to 8mm+). Highly aromatic, rich olive green color, harvested from Kerala's Western Ghats. Fully graded for export quality.",
     origin: "India",
@@ -187,7 +187,7 @@ export const PRODUCTS = [
     slug: "cumin",
     name: "Premium Cumin Seeds (Jeera)",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1615485737457-f0709e03650c?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/is-full-paddy.jpg",
     description:
       "High purity (99%+) machine-cleaned cumin seeds. Features deep earthy flavor, rich aroma, and high essential oil content, ideal for global spice blenders and cuisines.",
     origin: "India",
@@ -199,7 +199,7 @@ export const PRODUCTS = [
     slug: "black-pepper",
     name: "Whole Black Pepper (Malabar Grade)",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1508737804141-4c9b68c7a0b6?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/black-milled-pepper-corns-as-background-high-quality-photo.jpg",
     description:
       "Malabar high-density whole black pepper seeds. Robust pungency, strong piperine kick, and carefully cleaned to meet FDA, FSSAI, and EU guidelines.",
     origin: "India",
@@ -211,7 +211,7 @@ export const PRODUCTS = [
     slug: "clove",
     name: "Premium Whole Cloves",
     category: "spices",
-    image: "https://images.unsplash.com/photo-1599940794943-7f3c4c9fa30f?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/carnation-close-up-macro-as-background-texture.jpg",
     description:
       "Premium hand-selected whole cloves. High essential oil concentration (eugenol), warm spicy flavor, and perfectly dried for culinary, baking, and medicinal exports.",
     origin: "India",
@@ -261,7 +261,7 @@ export const PRODUCTS = [
     slug: "ir64-rice",
     name: "IR64 Long Grain White/Parboiled Rice",
     category: "rice",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/carnation-close-up-macro-as-background-texture.jpg",
     description:
       "High-yield IR64 Parboiled Rice, characterized by long grains and high nutritional retention. Extremely competitive pricing for bulk procurement and food security.",
     origin: "India",
@@ -273,7 +273,7 @@ export const PRODUCTS = [
     slug: "broken-rice",
     name: "Broken Rice (100% Broken)",
     category: "rice",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/healthy-raw-rice-with-wooden-spoon-wooden-table.jpg",
     description:
       "Double polished 100% broken rice. Widely exported for food processing, starch manufacture, brewing, and pet food industries.",
     origin: "India",
@@ -311,7 +311,7 @@ export const PRODUCTS = [
     slug: "chilli-flakes",
     name: "Dehydrated Chilli Flakes",
     category: "dehydrated",
-    image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=2070&auto=format&fit=crop",
+    image: "/products/vibrant-red-pepper-flakes-close-up.jpg",
     description:
       "Crushed red pepper chilli flakes. Perfect seed ratio, vibrant color, and standard spice heat, widely exported to international gourmet markets.",
     origin: "India",
