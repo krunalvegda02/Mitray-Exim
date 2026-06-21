@@ -33,11 +33,14 @@ export function Footer() {
 
           {/* Company Info */}
           <div className="md:col-span-2 lg:col-span-4 space-y-6 md:space-y-8 animate-reveal opacity-0 delay-400">
-            <Link href="/" className="flex items-center space-x-4 group">
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-brand-gold to-brand-gold-dark rounded-xl flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-110 flex-shrink-0">
-                <span className="text-2xl md:text-3xl font-black text-brand-navy">M</span>
+            <Link href="/" className="inline-block group">
+              <div className="bg-white px-6 py-3 rounded-2xl shadow-lg transition-transform duration-500 group-hover:scale-105 inline-flex">
+                <img 
+                  src="/newLogo.png" 
+                  alt="Mitray Exim" 
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
               </div>
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-black font-outfit tracking-tighter uppercase">MITRAY <span className="text-brand-gold">EXIM.</span></h3>
             </Link>
             <p className="text-slate-400 text-sm md:text-base lg:text-lg leading-relaxed font-bold uppercase tracking-wide opacity-80 max-w-md">
               A premier merchant exporter from India, delivering nature's finest agricultural treasures to global markets with uncompromising quality standards.
