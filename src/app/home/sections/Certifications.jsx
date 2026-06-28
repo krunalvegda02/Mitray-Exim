@@ -3,6 +3,7 @@
 import { CERTIFICATIONS } from "@/data/certifications";
 import { FiShield, FiCheckCircle, FiDownload, FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const n = CERTIFICATIONS.length;
 const extendedCerts = Array(9).fill(CERTIFICATIONS).flat();
@@ -206,7 +207,7 @@ export function Certifications() {
                           <img loading="lazy" decoding="async"
                             src={cert.logo}
                             alt={cert.fullName}
-                            className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100"
+                            className="max-w-full max-h-full object-contain transition-all duration-500 opacity-90 group-hover:opacity-100"
                             onError={(e) => {
                               e.target.style.display = 'none';
                               e.target.nextSibling.style.display = 'flex';
@@ -238,12 +239,29 @@ export function Certifications() {
 
                     {/* Action Buttons - Show only when middle card is in focus */}
                     <div className={`relative mt-6 md:mt-8 grid grid-cols-2 gap-3 z-10 transition-all duration-500 ${isMiddle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"}`}>
-                      <button className="flex items-center justify-center gap-1.5 py-3 px-2 bg-brand-navy text-white rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg">
+                      <button 
+                        onClick={() => {
+                          if (cert.downloadLink) {
+                            window.open(cert.downloadLink, '_blank', 'noopener,noreferrer');
+                          } else {
+                            const link = document.createElement('a');
+                            link.href = cert.logo;
+                            link.download = `${cert.name}-Certificate.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }
+                        }}
+                        className="flex items-center justify-center gap-1.5 py-3 px-2 bg-brand-navy text-white rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg"
+                      >
                         <FiDownload className="text-sm md:text-base" /> Cert.
                       </button>
-                      <button className="flex items-center justify-center gap-1.5 py-3 px-2 border-2 border-brand-gold text-brand-navy rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md">
+                      <Link 
+                        href="/certifications"
+                        className="flex items-center justify-center gap-1.5 py-3 px-2 border-2 border-brand-gold text-brand-navy rounded-xl text-[9px] md:text-[10px] lg:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-white transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+                      >
                         <FiCheckCircle className="text-sm md:text-base" /> Verify
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

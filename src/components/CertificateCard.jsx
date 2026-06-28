@@ -7,12 +7,16 @@ export function CertificateCard({ cert }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = cert.logo;
-    link.download = `${cert.name}-Certificate.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (cert.downloadLink) {
+      window.open(cert.downloadLink, '_blank', 'noopener,noreferrer');
+    } else {
+      const link = document.createElement('a');
+      link.href = cert.logo;
+      link.download = `${cert.name}-Certificate.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const handlePreview = () => {
