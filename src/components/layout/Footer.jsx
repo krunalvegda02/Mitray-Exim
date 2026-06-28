@@ -35,9 +35,9 @@ export function Footer() {
           <div className="md:col-span-2 lg:col-span-4 space-y-6 md:space-y-8 animate-reveal opacity-0 delay-400">
             <Link href="/" className="inline-block group">
               <div className="bg-white px-6 py-3 rounded-2xl shadow-lg transition-transform duration-500 group-hover:scale-105 inline-flex">
-                <img 
-                  src="/newLogo.png" 
-                  alt="Mitray Exim" 
+                <img
+                  src="/newLogo.png"
+                  alt="Mitray Exim"
                   className="h-10 md:h-12 w-auto object-contain"
                 />
               </div>
@@ -126,7 +126,7 @@ export function Footer() {
                 </div>
                 <div className="text-xs md:text-sm font-bold uppercase tracking-widest">
                   <a href="tel:+918878963333" className="text-slate-300 hover:text-white transition-colors block mb-1">+91 8878963333</a>
-                  <a href="mailto:mitrayexim6@gmail.com" className="text-brand-gold hover:text-white transition-colors block">mitrayexim6@gmail.com</a>
+                  <a href="mailto:info@mitrayexim.com" className="text-brand-gold hover:text-white transition-colors block">info@mitrayexim.com</a>
                 </div>
               </div>
             </div>

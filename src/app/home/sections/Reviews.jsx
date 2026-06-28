@@ -63,12 +63,8 @@ export function Reviews() {
                       <div className={clsx('flex', 'flex-col', 'md:flex-row', 'md:items-center', 'justify-between', 'gap-6', 'mb-8', 'md:mb-10')}>
                         <div className={clsx('flex', 'items-center', 'gap-4', 'md:gap-6')}>
                           <div className="relative">
-                            <div className={clsx('w-12', 'h-12', 'md:w-20', 'md:h-20', 'bg-brand-navy', 'rounded-xl', 'flex', 'items-center', 'justify-center', 'text-white', 'font-black', 'text-2xl', 'shadow-xl', 'relative', 'z-10', 'border-2', 'border-white', 'overflow-hidden')}>
-                              {testimonial.avatar ? (
-                                <img loading="lazy" decoding="async" src={testimonial.avatar} alt={testimonial.name} className={clsx('w-full', 'h-full', 'object-cover', 'grayscale', 'group-hover/card:grayscale-0', 'transition-all', 'duration-1000')} />
-                              ) : (
-                                <span>{testimonial.name.charAt(0)}</span>
-                              )}
+                            <div className={clsx('w-12', 'h-12', 'md:w-20', 'md:h-20', 'bg-gradient-to-br from-brand-gold to-brand-navy', 'rounded-xl', 'flex', 'items-center', 'justify-center', 'text-white', 'font-black', 'text-xl', 'md:text-4xl', 'shadow-xl', 'relative', 'z-10', 'border-2', 'border-white', 'overflow-hidden')}>
+                              <span>{testimonial.name.charAt(0).toUpperCase()}</span>
                             </div>
                             <div className={clsx('absolute', '-bottom-1', '-right-1', 'w-7', 'h-7', 'bg-brand-gold', 'rounded-lg', 'border-2', 'border-white', 'flex', 'items-center', 'justify-center', 'shadow-lg', 'z-20')}>
                               <img loading="lazy" decoding="async" src={`https://flagcdn.com/w80/${testimonial.countryCode}.png`} alt={testimonial.location} className={clsx('w-4', 'rounded-sm')} />

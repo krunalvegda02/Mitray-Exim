@@ -24,7 +24,7 @@ export default function ContactForm() {
           phone: formData.get('phone'),
           company: formData.get('company'),
           message: formData.get('message'),
-          to_email: 'mitrayexim6@gmail.com'
+          to_email: 'info@mitrayexim.com'
         },
         'J8zYYgRTPwF7rion2'
       );

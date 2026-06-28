@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FiGlobe, FiPackage, FiShield, FiArrowUpRight, FiZap } from "react-icons/fi";
+import clsx from "clsx";
 
 export function ProductCard({ product, onQuoteClick }) {
   const [isActive, setIsActive] = useState(false);
@@ -47,7 +48,7 @@ export function ProductCard({ product, onQuoteClick }) {
     >
 
       {/* BACKGROUND IMAGE */}
-      <div className="absolute inset-0 z-0">
+      <div className={clsx('absolute', 'inset-0', 'z-0')}>
         <Image
           src={product.image || getProductImage(product.category)}
           alt={product.name}
@@ -55,19 +56,16 @@ export function ProductCard({ product, onQuoteClick }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-110 opacity-40' : 'group-hover:scale-110 opacity-70 group-hover:opacity-40'}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent opacity-80"></div>
+        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-t', 'from-brand-navy', 'via-brand-navy/10', 'to-transparent', 'opacity-80')}></div>
       </div>
 
       {/* TOP STRIP */}
-      <div className="relative z-10 p-5 md:p-6 flex justify-between items-start">
-        <div className="flex flex-col gap-2">
-          <div className={`flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg border border-white/20 transition-all duration-500 ${isActive ? 'bg-brand-gold/20 border-brand-gold/30' : ''}`}>
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-            <span className="text-[8px] font-black text-white uppercase tracking-widest">A-Grade Certified</span>
-          </div>
-          <div className="flex items-center gap-2 text-brand-gold">
+      <div className={clsx('relative', 'z-10', 'p-5', 'md:p-6', 'flex', 'justify-between', 'items-start')}>
+        <div className={clsx('flex', 'flex-col', 'gap-2')}>
+         
+          <div className={clsx('flex', 'items-center', 'gap-2', 'text-white')}>
             <FiGlobe className="text-xs" />
-            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Origin: India</span>
+            <span className={clsx('text-[9px]', 'font-black', 'uppercase', 'tracking-[0.2em]')}>Origin: India</span>
           </div>
         </div>
         <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white text-lg transition-all duration-500 ${isActive ? 'bg-brand-gold text-brand-navy rotate-12 scale-110' : 'group-hover:bg-brand-gold group-hover:text-brand-navy group-hover:rotate-12 group-hover:scale-110'}`}>
@@ -79,7 +77,7 @@ export function ProductCard({ product, onQuoteClick }) {
       <div className={`relative z-10 mt-auto p-6 md:p-8 flex flex-col gap-4 transition-transform duration-700 ${isActive ? 'translate-y-0' : 'translate-y-12 md:translate-y-8 group-hover:translate-y-0'}`}>
 
         <div className="space-y-1">
-          <p className="text-brand-gold text-xs font-black uppercase tracking-[0.4em]">{product.category}</p>
+          <p className={clsx('text-white  ', 'text-xs', 'font-black', 'uppercase', 'tracking-[0.4em]')}>{product.category}</p>
           <h3 className={`text-xl sm:text-2xl md:text-3xl font-black transition-colors duration-500 tracking-tighter leading-none ${isActive ? 'text-brand-gold' : 'text-white group-hover:text-brand-gold'}`}>
             {product.name}
           </h3>
@@ -87,19 +85,16 @@ export function ProductCard({ product, onQuoteClick }) {
 
         {/* REVEALABLE SPECS */}
         <div className={`flex flex-col gap-4 transition-all duration-700 delay-100 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0'}`}>
-          <p className="text-white/60 text-xs sm:text-sm font-bold uppercase tracking-widest leading-relaxed line-clamp-2">
+          <p className={clsx('text-white/60', 'text-xs', 'sm:text-sm', 'font-bold', 'uppercase', 'tracking-widest', 'leading-relaxed', 'line-clamp-2')}>
             {product.description}
           </p>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white/5 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/10">
-              <p className="text-[7px] font-black text-brand-gold uppercase tracking-widest mb-1 flex items-center gap-1.5"><FiPackage /> Packing</p>
-              <p className="text-[9px] md:text-[10px] font-black text-white uppercase truncate">{product.packaging}</p>
+          <div className={clsx('grid', 'grid-cols-2', 'gap-3')}>
+            <div className={clsx('bg-white/5', 'backdrop-blur-md', 'rounded-xl', 'p-3', 'md:p-4', 'border', 'border-white/10')}>
+              <p className={clsx('text-[7px]', 'font-black', 'text-brand-gold', 'uppercase', 'tracking-widest', 'mb-1', 'flex', 'items-center', 'gap-1.5')}><FiPackage /> Packing</p>
+              <p className={clsx('text-[9px]', 'md:text-[10px]', 'font-black', 'text-white', 'uppercase', 'truncate')}>{product.packaging}</p>
             </div>
-            <div className="bg-white/5 backdrop-blur-md rounded-xl p-3 md:p-4 border border-white/10">
-              <p className="text-[7px] font-black text-brand-gold uppercase tracking-widest mb-1 flex items-center gap-1.5"><FiShield /> Safety</p>
-              <p className="text-[9px] md:text-[10px] font-black text-white uppercase truncate">Grade AAA</p>
-            </div>
+        
           </div>
         </div>
 
@@ -107,13 +102,13 @@ export function ProductCard({ product, onQuoteClick }) {
         <div className={`flex gap-3 pt-2 transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-16 md:translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100'}`}>
           <button
             onClick={() => onQuoteClick ? onQuoteClick() : window.location.href = '/contact'}
-            className="flex-1 bg-brand-gold text-brand-navy font-black text-[9px] md:text-[10px] uppercase tracking-[0.3em] py-4 rounded-xl shadow-2xl hover:bg-white transition-all duration-500 flex items-center justify-center gap-2"
+            className={clsx('flex-1', 'bg-brand-gold', 'text-brand-navy', 'font-black', 'text-[9px]', 'md:text-[10px]', 'uppercase', 'tracking-[0.3em]', 'py-4', 'rounded-xl', 'shadow-2xl', 'hover:bg-white', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2')}
           >
             Quote <FiArrowUpRight className="text-lg" />
           </button>
           <a
             href={`/products/${product.slug}`}
-            className="w-12 h-12 md:w-14 md:h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-brand-navy-light transition-all duration-500"
+            className={clsx('w-12', 'h-12', 'md:w-14', 'md:h-14', 'bg-white/10', 'backdrop-blur-xl', 'border', 'border-white/20', 'rounded-xl', 'flex', 'items-center', 'justify-center', 'text-white', 'hover:bg-brand-navy-light', 'transition-all', 'duration-500')}
           >
             <FiZap className="text-xl" />
           </a>
@@ -121,8 +116,8 @@ export function ProductCard({ product, onQuoteClick }) {
       </div>
 
       {/* DYNAMIC SHINE EFFECT */}
-      <div className="absolute inset-0 pointer-events-none z-20">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1500"></div>
+      <div className={clsx('absolute', 'inset-0', 'pointer-events-none', 'z-20')}>
+        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-transparent', 'via-white/5', 'to-transparent', '-skew-x-12', 'translate-x-[-200%]', 'group-hover:translate-x-[200%]', 'transition-transform', 'duration-1500')}></div>
       </div>
 
       {/* BORDER GLOW */}

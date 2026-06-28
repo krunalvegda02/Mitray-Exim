@@ -3,6 +3,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { FiArrowRight, FiGlobe, FiActivity, FiShield, FiZap, FiCheckCircle, FiTruck } from "react-icons/fi";
+import { TypeAnimation } from 'react-type-animation';
 
 export function Hero() {
   return (
@@ -11,12 +12,12 @@ export function Hero() {
       {/* BACKGROUND ARCHITECTURE */}
       <div className={clsx('absolute', 'inset-0', 'z-0')}>
         <img loading="lazy" decoding="async" 
-          src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1920&h=1080&fit=crop" 
+          src="/homeHero.png" 
           alt="MITRAY EXIM Premium Agricultural Exports India" 
-          className={clsx('w-full', 'h-full', 'object-cover', 'opacity-65', 'animate-subtle-zoom')}
+          className={clsx('w-full', 'h-full', 'object-cover', 'opacity-75', 'animate-subtle-zoom')}
         />
-        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-brand-navy', 'via-brand-navy/35', 'to-transparent')}></div>
-        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-t', 'from-brand-navy/90', 'via-transparent', 'to-brand-navy/15')}></div>
+        {/* MINIMAL THEME OVERLAY (LEFT TO RIGHT) */}
+        <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-brand-navy/95', 'via-brand-navy/70', 'to-transparent')}></div>
         
         {/* DATA SCANNER SWEEP */}
         <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-transparent', 'via-brand-gold/5', 'to-transparent', '-skew-x-12', 'translate-x-[-200%]', 'animate-[scan_8s_infinite]', 'pointer-events-none')}></div>
@@ -26,7 +27,7 @@ export function Hero() {
         <div className={clsx('grid', 'grid-cols-1', 'lg:grid-cols-12', 'gap-8', 'lg:gap-16', 'items-center')}>
           
           {/* MAIN MANIFEST */}
-          <div className={clsx('lg:col-span-7', 'flex', 'flex-col', 'items-center', 'md:items-start', 'text-center', 'md:text-left')}>
+          <div className={clsx('lg:col-span-12', 'flex', 'flex-col', 'items-center', 'md:items-start', 'text-center', 'md:text-left')}>
             
             {/* BRAND MICRO-INDICATOR */}
             <div className={clsx('inline-flex', 'items-center', 'gap-2', 'md:gap-3', 'px-3', 'md:px-5', 'py-1', 'md:py-2', 'bg-brand-gold/10', 'rounded-xl', 'mb-6', 'md:mb-8', 'animate-reveal-right', 'border', 'border-brand-gold/20', 'backdrop-blur-md')}>
@@ -35,16 +36,33 @@ export function Hero() {
             </div>
 
             {/* INTEGRATED BRAND HEADLINE */}
-            <h1 className={clsx('text-4xl', 'sm:text-5xl', 'md:text-6xl', 'lg:text-6xl', 'xl:text-[5.5rem]', '2xl:text-7xl', 'font-black', 'text-white', 'mb-4', 'md:mb-6', 'tracking-tight', 'leading-[1]', 'md:leading-[0.95]')}>
+            <h1 className={clsx('text-4xl', 'sm:text-5xl', 'md:text-6xl', 'lg:text-6xl', 'xl:text-[5.5rem]', '2xl:text-7xl', 'font-black', 'text-white', 'mb-4', 'md:mb-6', 'tracking-tight', 'leading-[1]', 'md:leading-[0.95]', 'min-h-[120px]', 'sm:min-h-[140px]', 'md:min-h-[160px]')}>
               <span className={clsx('block', 'animate-reveal', 'opacity-0')}>MITRAY <span className="text-gradient">EXIM.</span></span>
-              <span className={clsx('block', 'animate-reveal', 'delay-200', 'opacity-0', 'text-white/40', 'uppercase')}>Global Excellence.</span>
+              <div className={clsx('block', 'animate-reveal', 'delay-500', 'opacity-0', 'text-white/40', 'uppercase', 'mt-2')}>
+                <TypeAnimation
+                  sequence={[
+                    'Bridging india to the World.',
+                    2500,
+                    'GLOBAL EXCELLENCE.',
+                    2500,
+                    'PREMIUM QUALITY.',
+                    2500,
+                    'WORLDWIDE EXPORT.',
+                    2500,
+                  ]}
+                  wrapper="span"
+                  speed={20}
+                  repeat={Infinity}
+                  className="inline-block"
+                />
+              </div>
             </h1>
 
-            <p className={clsx('text-xs', 'sm:text-sm', 'md:text-lg', 'lg:text-xl', 'xl:text-2xl', 'text-slate-300', 'font-medium', 'max-w-2xl', 'mb-6', 'md:mb-10', 'leading-relaxed', 'animate-reveal', 'delay-400', 'opacity-0', 'uppercase', 'tracking-tight')}>
+            <p className={clsx('text-xs', 'sm:text-sm', 'md:text-lg', 'lg:text-xl', 'xl:text-2xl', 'text-slate-300', 'font-medium', 'max-w-4xl', 'mb-6', 'md:mb-10', 'leading-relaxed', 'typewriter-paragraph', 'opacity-100', 'uppercase', 'tracking-tight')}>
               India's leading merchant exporter delivering <span className={clsx('text-white', 'font-black', 'decoration-brand-gold', 'decoration-2', 'underline', 'underline-offset-4', 'md:underline-offset-8')}>Fresh Vegetables</span>, Fruits, and Spices to strategic global markets.
             </p>
 
-            <div className={clsx('flex', 'flex-col', 'sm:flex-row', 'items-stretch', 'gap-4', 'md:gap-6')}>
+            <div className={clsx('flex', 'flex-col', 'sm:flex-row', 'items-stretch', 'justify-center', 'sm:justify-start', 'gap-4', 'md:gap-6')}>
               <Link href="/products" className={clsx('group', 'relative', 'w-full', 'sm:w-auto', 'px-8', 'md:px-10', 'py-4', 'md:py-5', 'bg-brand-gold', 'rounded-xl', 'text-brand-navy', 'font-black', 'uppercase', 'tracking-[0.2em]', 'text-xs', 'sm:text-sm', 'md:text-base', 'shadow-2xl', 'hover:bg-white', 'transition-all', 'duration-700', 'active:scale-95', 'overflow-hidden', 'animate-reveal', 'delay-500', 'opacity-0', 'flex', 'items-center', 'justify-center')}>
                 <span className={clsx('relative', 'z-10', 'flex', 'items-center', 'justify-center', 'gap-3', 'md:gap-4')}>
                   Explore Products <FiArrowRight className={clsx('text-sm', 'md:text-xl', 'group-hover:translate-x-2', 'transition-transform', 'duration-500')} />
@@ -64,7 +82,7 @@ export function Hero() {
           </div>
 
           {/* VISUAL ASSET TERMINAL - FLOATING CARDS */}
-          <div className={clsx('lg:col-span-5', 'relative', 'hidden', 'lg:block', 'w-full', 'max-w-md', 'lg:max-w-sm', 'xl:max-w-lg', 'mx-auto', 'lg:ml-auto', 'lg:mr-0')}>
+          {/* <div className={clsx('lg:col-span-5', 'relative', 'hidden', 'lg:block', 'w-full', 'max-w-md', 'lg:max-w-sm', 'xl:max-w-lg', 'mx-auto', 'lg:ml-auto', 'lg:mr-0')}>
             <div className={clsx('relative', 'z-10', 'grid', 'grid-cols-2', 'gap-3', 'md:gap-4', 'xl:gap-6')}>
               {[
                 { label: "Fresh Vegetables", img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=800&fit=crop" },
@@ -83,7 +101,7 @@ export function Hero() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

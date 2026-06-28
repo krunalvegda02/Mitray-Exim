@@ -82,7 +82,7 @@ export default function ContactPage() {
                phone: formData.phone,
                company: formData.company,
                message: formData.message,
-               to_email: 'mitrayexim6@gmail.com'
+               to_email: 'info@mitrayexim.com'
             },
             'J8zYYgRTPwF7rion2'
          );
@@ -166,9 +166,9 @@ export default function ContactPage() {
                            },
                            {
                               label: "Email Our Desk",
-                              val: "mitrayexim6@gmail.com",
+                              val: "info@mitrayexim.com",
                               icon: <FiMail className={clsx('w-5', 'sm:w-6', 'md:w-7', 'lg:w-8', 'h-5', 'sm:h-6', 'md:h-7', 'lg:h-8')} />,
-                              link: "mailto:mitrayexim6@gmail.com",
+                              link: "mailto:info@mitrayexim.com",
                               color: "from-purple-500 to-purple-600",
                               bgColor: "bg-purple-50 group-hover:bg-purple-100"
                            },

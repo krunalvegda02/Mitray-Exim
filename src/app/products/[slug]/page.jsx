@@ -106,7 +106,7 @@ export default function ProductDetailPage({ params }) {
                               <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">
                                  <FiMail />
                               </div>
-                              <span className="text-xs md:text-sm font-bold uppercase tracking-widest">mitrayexim6@gmail.com</span>
+                              <span className="text-xs md:text-sm font-bold uppercase tracking-widest">info@mitrayexim.com</span>
                            </div>
                            <div className="flex items-center gap-3 md:gap-4 text-slate-500">
                               <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-brand-gold border border-slate-100">

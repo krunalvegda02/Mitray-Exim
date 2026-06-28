@@ -11,7 +11,7 @@ export function NewsletterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.target);
 
     try {
@@ -22,18 +22,18 @@ export function NewsletterForm() {
           from_name: 'Newsletter Subscriber',
           from_email: formData.get('email'),
           message: 'New newsletter subscription request.',
-          to_email: 'mitrayexim6@gmail.com'
+          to_email: 'info@mitrayexim.com'
         },
         'J8zYYgRTPwF7rion2'
       );
-      
+
       alert("Thank you for subscribing to our newsletter!");
       e.target.reset();
     } catch (error) {
       console.error('Subscription failed:', error);
       alert("Failed to subscribe. Please try again.");
     }
-    
+
     setIsSubmitting(false);
   };
 
