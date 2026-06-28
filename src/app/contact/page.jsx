@@ -28,29 +28,42 @@ export default function ContactPage() {
    const validateField = (name, value) => {
       let error = null;
       const val = value.trim();
+      
       switch (name) {
          case 'name':
-            if (!val) error = "Full Name is required";
-            else if (val.length < 2) error = "Name must be at least 2 characters";
-            else if (/[^a-zA-Z\s.-]/.test(val)) error = "Name can only contain letters";
+            const nameRegex = /^[a-zA-Z\s.-]+$/;
+            if (!val) error = "Please provide your full name.";
+            else if (val.length < 2) error = "Please enter a valid name (at least 2 characters).";
+            else if (val.length > 50) error = "This name is a bit too long (max 50 characters).";
+            else if (!nameRegex.test(val)) error = "Please use only letters, spaces, hyphens, and periods.";
             break;
+            
          case 'email':
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!val) error = "Email Address is required";
-            else if (!emailRegex.test(val)) error = "Please enter a valid email address";
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
+            if (!val) error = "We need your email to respond to you.";
+            else if (!emailRegex.test(val)) error = "Please double-check your email address format.";
             break;
+            
          case 'phone':
-            const phoneRegex = /^\+?[\d\s\-\(\)]{8,20}$/;
-            if (!val) error = "Phone Number is required";
-            else if (!phoneRegex.test(val)) error = "Please enter a valid phone number";
+            const phoneRegex = /^\+?[\d\s\-()]{8,20}$/;
+            const digitCount = (val.match(/\d/g) || []).length;
+            if (!val) error = "A phone number is required so we can call you back.";
+            else if (!phoneRegex.test(val)) error = "Please use numbers and standard formatting characters.";
+            else if (digitCount < 8 || digitCount > 15) error = "Your phone number seems to be missing some digits.";
             break;
+            
          case 'company':
-            if (!val) error = "Company Name is required";
+            if (!val) error = "Please let us know your company name.";
+            else if (val.length < 2) error = "Company name must be at least 2 characters.";
+            else if (val.length > 100) error = "Company name is too long (max 100 characters).";
             break;
+            
          case 'message':
-            if (!val) error = "Message is required";
-            else if (val.length < 10) error = "Message must be at least 10 characters";
+            if (!val) error = "Please tell us how we can help you.";
+            else if (val.length < 10) error = "Please provide a little more detail in your message.";
+            else if (val.length > 1000) error = "Your message is quite long! Please keep it under 1000 characters.";
             break;
+            
          default:
             break;
       }
@@ -100,6 +113,17 @@ export default function ContactPage() {
 
    const handleChange = (e) => {
       const { name, value } = e.target;
+      
+      // Strict input blocking BEFORE updating state
+      if (name === 'phone' && value !== "") {
+         // Allow only digits, plus, hyphens, parentheses, and spaces
+         if (!/^[\d\s\-()+]*$/.test(value)) return;
+      }
+      if (name === 'name' && value !== "") {
+         // Allow only letters, spaces, hyphens, and periods
+         if (!/^[a-zA-Z\s.-]*$/.test(value)) return;
+      }
+
       setFormData(prev => ({ ...prev, [name]: value }));
 
       // Validate instantly if there's already an error to clear it
@@ -311,6 +335,7 @@ export default function ContactPage() {
                                           onFocus={() => setFocusedField('name')}
                                           onBlur={handleBlur}
                                           required
+                                          maxLength={50}
                                           className={`relative w-full bg-white border-2 ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                           placeholder="Your name"
                                        />
@@ -334,6 +359,7 @@ export default function ContactPage() {
                                           onFocus={() => setFocusedField('email')}
                                           onBlur={handleBlur}
                                           required
+                                          maxLength={100}
                                           className={`relative w-full bg-white border-2 ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                           placeholder="you@company.com"
                                        />
@@ -360,6 +386,7 @@ export default function ContactPage() {
                                           onFocus={() => setFocusedField('phone')}
                                           onBlur={handleBlur}
                                           required
+                                          maxLength={20}
                                           className={`relative w-full bg-white border-2 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                           placeholder="+91 8878963333"
                                        />
@@ -383,6 +410,7 @@ export default function ContactPage() {
                                           onFocus={() => setFocusedField('company')}
                                           onBlur={handleBlur}
                                           required
+                                          maxLength={100}
                                           className={`relative w-full bg-white border-2 ${errors.company ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm placeholder:text-slate-400`}
                                           placeholder="Your company"
                                        />
@@ -406,6 +434,7 @@ export default function ContactPage() {
                                        onFocus={() => setFocusedField('message')}
                                        onBlur={handleBlur}
                                        required
+                                       maxLength={1000}
                                        rows="5"
                                        className={`relative w-full bg-white border-2 ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-500/10' : 'border-slate-200 focus:border-brand-gold focus:ring-brand-gold/10'} rounded-lg sm:rounded-xl px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-brand-navy outline-none transition-all duration-300 shadow-sm resize-none placeholder:text-slate-400`}
                                        placeholder="Tell us about your requirements..."

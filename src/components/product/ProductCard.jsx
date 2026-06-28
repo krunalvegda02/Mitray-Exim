@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { FiGlobe, FiPackage, FiShield, FiArrowUpRight, FiZap } from "react-icons/fi";
+import { FiGlobe, FiPackage, FiShield, FiArrowUpRight, FiZap, FiArrowRight } from "react-icons/fi";
 import clsx from "clsx";
 
 export function ProductCard({ product, onQuoteClick }) {
@@ -100,18 +100,18 @@ export function ProductCard({ product, onQuoteClick }) {
 
         {/* ACTIONS */}
         <div className={`flex gap-3 pt-2 transition-all duration-700 delay-200 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-16 md:translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100'}`}>
-          <button
-            onClick={() => onQuoteClick ? onQuoteClick() : window.location.href = '/contact'}
-            className={clsx('flex-1', 'bg-brand-gold', 'text-brand-navy', 'font-black', 'text-[9px]', 'md:text-[10px]', 'uppercase', 'tracking-[0.3em]', 'py-4', 'rounded-xl', 'shadow-2xl', 'hover:bg-white', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2')}
-          >
-            Quote <FiArrowUpRight className="text-lg" />
-          </button>
           <a
             href={`/products/${product.slug}`}
-            className={clsx('w-12', 'h-12', 'md:w-14', 'md:h-14', 'bg-white/10', 'backdrop-blur-xl', 'border', 'border-white/20', 'rounded-xl', 'flex', 'items-center', 'justify-center', 'text-white', 'hover:bg-brand-navy-light', 'transition-all', 'duration-500')}
+            className={clsx('flex-1', 'bg-white/10', 'backdrop-blur-xl', 'border', 'border-white/20', 'text-white', 'font-black', 'text-[9px]', 'md:text-[10px]', 'uppercase', 'tracking-[0.2em]', 'md:tracking-[0.3em]', 'py-3', 'md:py-4', 'rounded-xl', 'hover:bg-white/20', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2')}
           >
-            <FiZap className="text-xl" />
+            Details
           </a>
+          <button
+            onClick={() => onQuoteClick ? onQuoteClick() : window.location.href = '/contact'}
+            className={clsx('flex-1', 'bg-brand-gold', 'text-brand-navy', 'font-black', 'text-[9px]', 'md:text-[10px]', 'uppercase', 'tracking-[0.2em]', 'md:tracking-[0.3em]', 'py-3', 'md:py-4', 'rounded-xl', 'shadow-2xl', 'hover:bg-white', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2')}
+          >
+            Quote <FiArrowUpRight className="text-base md:text-lg" />
+          </button>
         </div>
       </div>
 
