@@ -4,6 +4,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { FiArrowRight, FiGlobe, FiActivity, FiShield, FiZap, FiCheckCircle, FiTruck } from "react-icons/fi";
 import { TypeAnimation } from 'react-type-animation';
+import Image from 'next/image';
 
 export function Hero() {
   return (
@@ -11,10 +12,12 @@ export function Hero() {
       
       {/* BACKGROUND ARCHITECTURE */}
       <div className={clsx('absolute', 'inset-0', 'z-0')}>
-        <img loading="lazy" decoding="async" 
+        <Image 
           src="/homeHero.png" 
           alt="MITRAY EXIM Premium Agricultural Exports India" 
-          className={clsx('w-full', 'h-full', 'object-cover', 'opacity-75', 'animate-subtle-zoom')}
+          fill
+          priority={true}
+          className={clsx('object-cover', 'opacity-75', 'animate-subtle-zoom')}
         />
         {/* MINIMAL THEME OVERLAY (LEFT TO RIGHT) */}
         <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-brand-navy/95', 'via-brand-navy/70', 'to-transparent')}></div>

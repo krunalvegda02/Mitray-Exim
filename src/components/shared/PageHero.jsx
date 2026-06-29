@@ -3,6 +3,7 @@
 import { Container } from "./Container";
 import { FiChevronRight, FiShield, FiGlobe, FiZap } from "react-icons/fi";
 import clsx from "clsx";
+import Image from "next/image";
 
 export function PageHero({
   badge,
@@ -18,10 +19,13 @@ export function PageHero({
       <div className={clsx('absolute', 'inset-0', 'z-0')}>
         {backgroundImage ? (
           <>
-            <img loading="lazy" decoding="async"
+            <Image
               src={backgroundImage}
               alt={title}
-              className={clsx('w-full', 'h-full', 'object-cover', 'opacity-75', 'animate-subtle-zoom')}
+              fill
+              priority={true}
+              unoptimized={true}
+              className={clsx('object-cover', 'opacity-75', 'animate-subtle-zoom')}
             />
             {/* Elegant Gradient Overlays */}
             <div className={clsx('absolute', 'inset-0', 'bg-gradient-to-r', 'from-brand-navy', 'via-brand-navy/30', 'to-transparent')}></div>

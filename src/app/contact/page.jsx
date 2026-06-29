@@ -28,7 +28,7 @@ export default function ContactPage() {
    const validateField = (name, value) => {
       let error = null;
       const val = value.trim();
-      
+
       switch (name) {
          case 'name':
             const nameRegex = /^[a-zA-Z\s.-]+$/;
@@ -37,13 +37,13 @@ export default function ContactPage() {
             else if (val.length > 50) error = "This name is a bit too long (max 50 characters).";
             else if (!nameRegex.test(val)) error = "Please use only letters, spaces, hyphens, and periods.";
             break;
-            
+
          case 'email':
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
             if (!val) error = "We need your email to respond to you.";
             else if (!emailRegex.test(val)) error = "Please double-check your email address format.";
             break;
-            
+
          case 'phone':
             const phoneRegex = /^\+?[\d\s\-()]{8,20}$/;
             const digitCount = (val.match(/\d/g) || []).length;
@@ -51,19 +51,19 @@ export default function ContactPage() {
             else if (!phoneRegex.test(val)) error = "Please use numbers and standard formatting characters.";
             else if (digitCount < 8 || digitCount > 15) error = "Your phone number seems to be missing some digits.";
             break;
-            
+
          case 'company':
             if (!val) error = "Please let us know your company name.";
             else if (val.length < 2) error = "Company name must be at least 2 characters.";
             else if (val.length > 100) error = "Company name is too long (max 100 characters).";
             break;
-            
+
          case 'message':
             if (!val) error = "Please tell us how we can help you.";
             else if (val.length < 10) error = "Please provide a little more detail in your message.";
             else if (val.length > 1000) error = "Your message is quite long! Please keep it under 1000 characters.";
             break;
-            
+
          default:
             break;
       }
@@ -113,7 +113,7 @@ export default function ContactPage() {
 
    const handleChange = (e) => {
       const { name, value } = e.target;
-      
+
       // Strict input blocking BEFORE updating state
       if (name === 'phone' && value !== "") {
          // Allow only digits, plus, hyphens, parentheses, and spaces
@@ -499,7 +499,7 @@ export default function ContactPage() {
                               <div>
                                  <h4 className={clsx('text-xs', 'sm:text-sm', 'md:text-base', 'lg:text-lg', 'font-black', 'text-brand-navy', 'uppercase', 'tracking-wider', 'mb-1', 'sm:mb-1.5')}>Primary Headquarters</h4>
                                  <p className={clsx('text-[8px]', 'sm:text-[9px]', 'md:text-xs', 'lg:text-sm', 'font-semibold', 'text-slate-600', 'uppercase', 'tracking-wide', 'leading-relaxed')}>
-                                    PLOT NO 57, GROUND FLOOR R.S. NO 21 MAIN ROAD ROAD, <br />
+                                    PLOT NO 57, GROUND FLOOR R.S. NO 21 MAIN ROAD, <br />
                                     LAKHABAVAL JAMNAGAR, GUJRAT 361006
                                  </p>
                               </div>

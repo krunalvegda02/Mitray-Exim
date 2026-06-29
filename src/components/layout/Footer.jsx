@@ -114,7 +114,7 @@ export function Footer() {
                   </svg>
                 </div>
                 <p className="text-slate-300 text-xs md:text-sm font-bold uppercase tracking-widest leading-relaxed opacity-80">
-                  PLOT NO 57, GROUND FLOOR<br />R.S. NO 21 MAIN ROAD ROAD,<br />LAKHABAVAL JAMNAGAR, GUJRAT 361006
+                  PLOT NO 57, GROUND FLOOR<br />R.S. NO 21 MAIN ROAD,<br />LAKHABAVAL JAMNAGAR, GUJRAT 361006
                 </p>
               </div>
 

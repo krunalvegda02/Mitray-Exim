@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
@@ -25,6 +25,7 @@ export default function ProductsPage() {
    const [selectedCategory, setSelectedCategory] = useState("all");
    const [searchQuery, setSearchQuery] = useState("");
    const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+   const loadMoreRef = useRef(null);
 
    const filteredProducts = useMemo(() => {
       return PRODUCTS.filter((p) => {
@@ -35,9 +36,29 @@ export default function ProductsPage() {
    }, [selectedCategory, searchQuery]);
 
    const displayedProducts = filteredProducts.slice(0, visibleCount);
+   // Precalculate the next batch of products so we can fetch their images proactively in the background
+   const nextBatchProducts = filteredProducts.slice(visibleCount, visibleCount + ITEMS_PER_PAGE);
+
+   useEffect(() => {
+      if (!loadMoreRef.current) return;
+      const observer = new IntersectionObserver((entries) => {
+         if (entries[0].isIntersecting && visibleCount < filteredProducts.length) {
+            setVisibleCount(prev => prev + ITEMS_PER_PAGE);
+         }
+      }, { rootMargin: '800px' }); // Load aggressively early
+      
+      observer.observe(loadMoreRef.current);
+      return () => observer.disconnect();
+   }, [filteredProducts.length, visibleCount]);
 
    return (
       <div className="bg-white">
+         {/* INVISIBLE PRELOADER FOR NEXT BATCH */}
+         <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+            {nextBatchProducts.map((p) => (
+               <img key={`preload-${p.slug}`} src={p.image?.replace('/upload/', '/upload/f_auto,q_auto,w_400/')} alt="" loading="eager" />
+            ))}
+         </div>
          <PageHero
             badge="AGRICULTURAL EXPORTS"
             title="PRODUCT CATALOG."
@@ -259,13 +280,16 @@ export default function ProductsPage() {
                               <div className={clsx('relative', 'glass-card', 'bg-white', 'rounded-[2rem]', 'overflow-hidden', 'border-slate-100', 'shadow-sm', 'hover:shadow-2xl', 'transition-all', 'duration-700', 'hover-lift', 'h-full', 'flex', 'flex-col', 'group/card')}>
 
                                  {/* Visual Manifest */}
-                                 <div className={clsx('relative', 'aspect-[4/5]', 'overflow-hidden', 'bg-slate-50')}>
+                                 <div className={clsx('relative', 'aspect-[4/5]', 'overflow-hidden', 'bg-slate-200', 'animate-pulse')}>
                                     <Image
-                                       src={product.image}
+                                       src={product.image?.replace('/upload/', '/upload/f_auto,q_auto,w_400/')}
                                        alt={product.name}
                                        fill
+                                       unoptimized={true}
+                                       priority={true}
                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                        className={clsx('object-cover', 'transition-all', 'duration-[2000ms]', 'group-hover/card:scale-110', 'group-hover/card:rotate-2')}
+                                       onLoad={(e) => { e.currentTarget.parentElement.classList.remove('animate-pulse'); e.currentTarget.parentElement.classList.add('bg-transparent'); }}
                                     />
 
                                     {/* Overlay Hub (Appears on Hover) */}
@@ -316,16 +340,11 @@ export default function ProductsPage() {
                         ))}
                      </div>
 
-                     {/* DYNAMIC LOAD TRIGGER */}
+                     {/* DYNAMIC LOAD TRIGGER / INFINITE SCROLL OBSERVER */}
                      {visibleCount < filteredProducts.length && (
-                        <div className={clsx('flex', 'flex-col', 'items-center', 'py-8', 'md:py-12', 'animate-reveal')}>
-                           <div className={clsx('w-px', 'h-8', 'md:h-12', 'bg-gradient-to-b', 'from-brand-gold', 'to-transparent', 'mb-6', 'md:mb-8')}></div>
-                           <button
-                              onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
-                              className={clsx('group', 'relative', 'px-6', 'sm:px-8', 'md:px-10', 'py-3', 'sm:py-4', 'md:py-5', 'bg-brand-navy', 'text-white', 'rounded-full', 'font-black', 'uppercase', 'tracking-[0.4em]', 'text-xs', 'sm:text-sm', 'shadow-2xl', 'hover:bg-brand-gold', 'hover:text-brand-navy', 'transition-all', 'duration-700', 'active:scale-95')}
-                           >
-                              Show More Products
-                           </button>
+                        <div ref={loadMoreRef} className={clsx('flex', 'flex-col', 'items-center', 'py-8', 'md:py-12', 'animate-reveal')}>
+                           <div className={clsx('w-8', 'h-8', 'border-4', 'border-brand-gold', 'border-t-transparent', 'rounded-full', 'animate-spin')}></div>
+                           <p className={clsx('mt-4', 'text-[10px]', 'font-black', 'text-slate-400', 'uppercase', 'tracking-widest')}>Syncing manifest...</p>
                         </div>
                      )}
                   </>

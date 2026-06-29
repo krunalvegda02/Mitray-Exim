@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { LightboxGallery } from "@/components/gallery/LightboxGallery";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
@@ -29,18 +29,40 @@ const ALL_IMAGES = [
 ];
 
 export default function GalleryPage() {
-   const [activeCategory, setActiveCategory] = useState("all");
+   const [selectedCategory, setSelectedCategory] = useState("all");
    const [visibleCount, setVisibleCount] = useState(12);
+   const loadMoreRef = useRef(null);
 
    const filteredImages = useMemo(() => {
-      if (activeCategory === "all") return ALL_IMAGES;
-      return ALL_IMAGES.filter(img => img.category === activeCategory);
-   }, [activeCategory]);
+      return selectedCategory === "all"
+         ? ALL_IMAGES
+         : ALL_IMAGES.filter(img => img.category === selectedCategory);
+   }, [selectedCategory]);
 
    const displayedImages = filteredImages.slice(0, visibleCount);
+   // Precalculate the next batch of images so we can fetch them proactively in the background
+   const nextBatchImages = filteredImages.slice(visibleCount, visibleCount + 12);
+
+   useEffect(() => {
+      if (!loadMoreRef.current) return;
+      const observer = new IntersectionObserver((entries) => {
+         if (entries[0].isIntersecting && visibleCount < filteredImages.length) {
+            setVisibleCount(prev => prev + 12);
+         }
+      }, { rootMargin: '800px' }); // Load aggressively early
+      
+      observer.observe(loadMoreRef.current);
+      return () => observer.disconnect();
+   }, [filteredImages.length, visibleCount]);
 
    return (
       <div className="bg-white">
+         {/* INVISIBLE PRELOADER FOR NEXT BATCH */}
+         <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+            {nextBatchImages.map((img) => (
+               <img key={`preload-${img.id}`} src={img.src?.replace('/upload/', '/upload/f_auto,q_auto,w_800/')} alt="" loading="eager" />
+            ))}
+         </div>
          <PageHero
             badge="VISUAL TRUST PROTOCOLS"
             title="GALLERY. EXHIBITION."
@@ -110,19 +132,11 @@ export default function GalleryPage() {
                <div className="min-h-[600px] px-4 sm:px-0 mb-8 sm:mb-12 md:mb-16 lg:mb-20">
                   <LightboxGallery images={displayedImages} />
 
-                  {/* LOAD MORE BUTTON */}
+                  {/* INFINITE SCROLL OBSERVER */}
                   {visibleCount < filteredImages.length && (
-                     <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex justify-center">
-                        <button
-                           onClick={() => setVisibleCount(prev => prev + 12)}
-                           className="group relative px-6 sm:px-10 md:px-16 py-3 sm:py-4 md:py-6 bg-white border-2 border-slate-200 text-brand-navy font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] lg:tracking-[0.4em] text-[10px] sm:text-xs md:text-sm lg:text-base hover:border-brand-gold transition-all duration-500 overflow-hidden"
-                        >
-                           <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
-                              Initialize Next Batch 
-                              <FiPlus className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 group-hover:rotate-90 transition-transform duration-500" />
-                           </span>
-                           <div className="absolute inset-0 bg-brand-gold/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                        </button>
+                     <div ref={loadMoreRef} className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex flex-col items-center">
+                        <div className="w-8 h-8 border-4 border-brand-gold border-t-transparent rounded-full animate-spin"></div>
+                        <p className="mt-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Syncing manifest...</p>
                      </div>
                   )}
                </div>

@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import "../styles/global.css";
+import clsx from "clsx";
 
 export const metadata = {
   title: "MITRAY EXIM – Premium Vegetable & Fruit Exporter from India",
@@ -31,6 +32,11 @@ export const metadata = {
     card: "summary_large_image",
     site: "@mitrayexim",
   },
+  icons: {
+    icon: '/MItrayTab.png',
+    shortcut: '/MItrayTab.png',
+    apple: '/MItrayTab.png',
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -39,6 +45,9 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect to Cloudinary to eliminate 300ms DNS/TCP/TLS handshake delay for images */}
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Google Analytics */}
@@ -54,7 +63,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white antialiased text-slate-900 font-inter selection:bg-brand-gold selection:text-brand-navy">
+      <body className={clsx('min-h-screen', 'flex', 'flex-col', 'bg-white', 'antialiased', 'text-slate-900', 'font-inter', 'selection:bg-brand-gold', 'selection:text-brand-navy')}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -93,9 +102,9 @@ export default function RootLayout({ children }) {
         {/* UNIFIED NAVIGATION SYSTEM */}
         <Header />
 
-        <main id="main-content" className="flex-1 relative">
+        <main id="main-content" className={clsx('flex-1', 'relative')}>
            {/* SMOOTH SECTION TRANSITION MASK */}
-           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div>
+           <div className={clsx('absolute', 'top-0', 'left-0', 'w-full', 'h-32', 'bg-gradient-to-b', 'from-white', 'to-transparent', 'pointer-events-none', 'z-10')}></div>
            
            {children}
         </main>

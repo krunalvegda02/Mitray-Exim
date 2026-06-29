@@ -41,14 +41,16 @@ export function LightboxGallery({ images }) {
              <div className="relative w-full h-full bg-white border-2 border-slate-200 overflow-hidden group-hover:border-brand-gold transition-all duration-500 group-hover:-translate-x-1 sm:group-hover:-translate-x-2 group-hover:-translate-y-1 sm:group-hover:-translate-y-2">
                 
                 {/* IMAGE */}
-                <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-slate-200 animate-pulse">
                    <Image
-                      src={img.src} 
+                      src={img.src?.replace('/upload/', '/upload/f_auto,q_auto,w_800/')} 
                       alt={img.title} 
                       fill
                       unoptimized={true}
+                      priority={idx < 10}
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
                       className="object-cover opacity-75 sm:opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
+                      onLoad={(e) => { e.currentTarget.parentElement.classList.remove('animate-pulse'); e.currentTarget.parentElement.classList.add('bg-transparent'); }}
                    />
                    
                    {/* OVERLAY */}
@@ -122,8 +124,8 @@ export function LightboxGallery({ images }) {
                        <div className="relative w-full max-w-4xl mx-auto">
                           <div className="absolute -inset-2 sm:-inset-4 bg-brand-gold/10 blur-2xl rounded-full translate-y-4"></div>
                           <div className="relative border-2 sm:border-4 border-white/10 shadow-2xl overflow-hidden bg-brand-navy rounded-xl sm:rounded-2xl p-2 sm:p-4">
-                             <img loading="lazy" decoding="async" 
-                                src={selectedImage.src} 
+                             <img loading={selectedImage === images[0] ? "eager" : "lazy"} decoding="async" 
+                                src={selectedImage.src?.replace('/upload/', '/upload/f_auto,q_auto,w_1600/')} 
                                 alt={selectedImage.title} 
                                 className="w-full h-auto max-h-[60vh] lg:max-h-[85vh] object-contain rounded-lg sm:rounded-xl"
                              />
