@@ -4,7 +4,8 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { FiArrowRight, FiShoppingBag } from "react-icons/fi";
 
 export function FeaturedProducts() {
-  const featured = PRODUCTS.slice(0, 3);
+  const featuredSlugs = ['pomegranate', 'red-chilli-powder', 'basmati-rice-1121'];
+  const featured = featuredSlugs.map(slug => PRODUCTS.find(p => p.slug === slug)).filter(Boolean);
 
   return (
     <section className="relative py-12 md:py-20 overflow-hidden bg-white">
