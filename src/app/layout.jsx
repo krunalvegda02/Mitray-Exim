@@ -33,9 +33,9 @@ export const metadata = {
     site: "@mitrayexim",
   },
   icons: {
-    icon: '/MItrayTab.png',
-    shortcut: '/MItrayTab.png',
-    apple: '/MItrayTab.png',
+    icon: '/mitrayTab.png',
+    shortcut: '/mitrayTab.png',
+    apple: '/mitrayTab.png',
   },
 };
 
@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-        
+
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-CR6BTGXZGZ"></script>
         <script
@@ -98,15 +98,15 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        
+
         {/* UNIFIED NAVIGATION SYSTEM */}
         <Header />
 
         <main id="main-content" className={clsx('flex-1', 'relative')}>
-           {/* SMOOTH SECTION TRANSITION MASK */}
-           <div className={clsx('absolute', 'top-0', 'left-0', 'w-full', 'h-32', 'bg-gradient-to-b', 'from-white', 'to-transparent', 'pointer-events-none', 'z-10')}></div>
-           
-           {children}
+          {/* SMOOTH SECTION TRANSITION MASK */}
+          <div className={clsx('absolute', 'top-0', 'left-0', 'w-full', 'h-32', 'bg-gradient-to-b', 'from-white', 'to-transparent', 'pointer-events-none', 'z-10')}></div>
+
+          {children}
         </main>
 
         <Footer />
