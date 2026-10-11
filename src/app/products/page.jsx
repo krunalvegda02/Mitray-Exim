@@ -46,7 +46,7 @@ export default function ProductsPage() {
             setVisibleCount(prev => prev + ITEMS_PER_PAGE);
          }
       }, { rootMargin: '800px' }); // Load aggressively early
-      
+
       observer.observe(loadMoreRef.current);
       return () => observer.disconnect();
    }, [filteredProducts.length, visibleCount]);
@@ -380,8 +380,8 @@ export default function ProductsPage() {
                   </div>
                </div>
 
-             </Container>
-          </div>
-       </div>
-    );
- }
+            </Container>
+         </div>
+      </div>
+   );
+}
