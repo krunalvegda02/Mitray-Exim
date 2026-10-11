@@ -84,11 +84,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: '/favicon/svg/SVG/512.svg',
-    shortcut: '/favicon/svg/SVG/512.svg',
-    apple: '/favicon/svg/SVG/512.svg',
-  },
 };
 
 export default function RootLayout({ children }) {
