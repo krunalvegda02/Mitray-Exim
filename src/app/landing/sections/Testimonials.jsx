@@ -20,7 +20,7 @@ export function Testimonials() {
 
         {/* Testimonial Layout */}
         <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          
+
           {/* Left Side - Quote */}
           <div className="relative">
             {/* Large Quote Icon */}

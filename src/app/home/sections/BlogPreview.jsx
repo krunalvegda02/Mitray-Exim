@@ -6,7 +6,7 @@ import { FiArrowRight, FiBook, FiClock, FiCheckCircle, FiActivity, FiZap, FiShie
 export function BlogPreview() {
   return (
     <section className="relative py-12 md:py-20 overflow-hidden bg-slate-50/50">
-      
+
       {/* ATMOSPHERIC BACKGROUND SYSTEM */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-brand-gold/5 blur-[120px] rounded-full animate-subtle-float"></div>
@@ -14,7 +14,7 @@ export function BlogPreview() {
       </div>
 
       <div className="container mx-auto px-4 md:px-12 relative z-10">
-        
+
         {/* STANDARDIZED HEADER ARCHITECTURE */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
@@ -35,19 +35,19 @@ export function BlogPreview() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {BLOGS.slice(0, 2).map((post, index) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group relative animate-reveal opacity-0" style={{ animationDelay: `${500 + (index * 200)}ms` }}>
-              <div 
+              <div
                 className="relative glass-card p-8 md:p-12 rounded-2xl md:rounded-[2rem] overflow-hidden flex flex-col h-full bg-white/70 transition-all duration-700 hover-lift border-white"
               >
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="flex items-center justify-between mb-8 md:mb-10">
                     <div className="flex items-center gap-3">
-                       <span className="px-4 py-1.5 bg-brand-navy text-white rounded-lg text-[8px] font-black uppercase tracking-widest transition-all group-hover:bg-brand-gold group-hover:text-brand-navy">
-                         {post.category}
-                       </span>
+                      <span className="px-4 py-1.5 bg-brand-navy text-white rounded-lg text-[8px] font-black uppercase tracking-widest transition-all group-hover:bg-brand-gold group-hover:text-brand-navy">
+                        {post.category}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-400">
-                       <FiZap className="text-brand-gold animate-pulse" />
-                       <span className="text-[8px] font-black uppercase tracking-widest">{post.readTime}</span>
+                      <FiZap className="text-brand-gold animate-pulse" />
+                      <span className="text-[8px] font-black uppercase tracking-widest">{post.readTime}</span>
                     </div>
                   </div>
 
@@ -62,18 +62,18 @@ export function BlogPreview() {
                   <div className="mt-auto pt-8 border-t border-slate-100 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="relative">
-                         <div className="w-12 h-12 md:w-14 md:h-14 bg-brand-navy rounded-xl flex items-center justify-center text-white font-black text-lg shadow-xl relative z-10 border-2 border-white group-hover:scale-110 transition-transform duration-500">
-                           {post.author.name.charAt(0)}
-                         </div>
+                        <div className="w-12 h-12 md:w-14 md:h-14 bg-brand-navy rounded-xl flex items-center justify-center text-white font-black text-lg shadow-xl relative z-10 border-2 border-white group-hover:scale-110 transition-transform duration-500">
+                          {post.author.name.charAt(0)}
+                        </div>
                       </div>
                       <div>
                         <p className="text-[10px] md:text-xs font-black text-brand-navy uppercase tracking-widest leading-none mb-1">{post.author.name}</p>
                         <p className="text-[7px] md:text-[8px] text-slate-400 font-bold uppercase tracking-widest opacity-60 leading-none">{post.author.role}</p>
                       </div>
                     </div>
-                    
+
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-50 flex items-center justify-center text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-all duration-500 shadow-sm">
-                       <FiArrowRight className="text-lg md:text-xl group-hover:translate-x-1 transition-transform" />
+                      <FiArrowRight className="text-lg md:text-xl group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </div>

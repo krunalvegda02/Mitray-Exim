@@ -134,6 +134,7 @@ export function Certifications() {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrev}
+            aria-label="Previous certification"
             className={clsx('absolute', 'left-0', 'top-1/2', '-translate-y-1/2', 'z-40', 'w-10', 'h-10', 'md:w-12', 'md:h-12', 'bg-brand-navy', 'text-white', 'rounded-full', 'flex', 'items-center', 'justify-center', 'hover:bg-brand-gold', 'hover:text-brand-navy', 'transition-all', 'duration-300', 'shadow-lg', 'active:scale-90', '-translate-x-16', 'md:-translate-x-20')}
           >
             <FiChevronLeft className={clsx('text-lg', 'md:text-xl')} />
@@ -141,6 +142,7 @@ export function Certifications() {
 
           <button
             onClick={handleNext}
+            aria-label="Next certification"
             className={clsx('absolute', 'right-0', 'top-1/2', '-translate-y-1/2', 'z-40', 'w-10', 'h-10', 'md:w-12', 'md:h-12', 'bg-brand-navy', 'text-white', 'rounded-full', 'flex', 'items-center', 'justify-center', 'hover:bg-brand-gold', 'hover:text-brand-navy', 'transition-all', 'duration-300', 'shadow-lg', 'active:scale-90', 'translate-x-16', 'md:translate-x-20')}
           >
             <FiChevronRight className={clsx('text-lg', 'md:text-xl')} />
@@ -243,7 +245,7 @@ export function Certifications() {
 
                     {/* Action Buttons - Show only when middle card is in focus */}
                     <div className={`relative mt-6 md:mt-8 grid grid-cols-2 gap-3 z-10 transition-all duration-500 ${isMiddle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"}`}>
-                      <button 
+                      <button
                         onClick={() => {
                           if (cert.downloadLink) {
                             window.open(cert.downloadLink, '_blank', 'noopener,noreferrer');
@@ -260,7 +262,7 @@ export function Certifications() {
                       >
                         <FiDownload className={clsx('text-sm', 'md:text-base')} /> Cert.
                       </button>
-                      <Link 
+                      <Link
                         href="/certifications"
                         className={clsx('flex', 'items-center', 'justify-center', 'gap-1.5', 'py-3', 'px-2', 'border-2', 'border-brand-gold', 'text-brand-navy', 'rounded-xl', 'text-[9px]', 'md:text-[10px]', 'lg:text-xs', 'font-black', 'uppercase', 'tracking-wider', 'hover:bg-brand-gold', 'hover:text-white', 'transition-all', 'duration-300', 'active:scale-95', 'shadow-sm', 'hover:shadow-md')}
                       >
@@ -281,6 +283,7 @@ export function Certifications() {
             {CERTIFICATIONS.map((_, index) => (
               <button
                 key={index}
+                aria-label={`Go to certification slide ${index + 1}`}
                 onClick={() => handleDotClick(index)}
                 className={`transition-all duration-500 rounded-full ${index === (currentIndex % n)
                   ? "w-8 h-2 bg-brand-gold shadow-lg shadow-brand-gold/50"
@@ -308,15 +311,13 @@ export function Certifications() {
 
 
           <div className={clsx('mt-12', 'text-center', 'animate-reveal', 'delay-1000', 'opacity-0')}>
-            <a href="/certifications">
-              <button className={clsx('group', 'relative', 'px-8', 'py-4', 'bg-brand-navy', 'text-white', 'rounded-xl', 'text-[10px]', 'font-black', 'uppercase', 'tracking-widest', 'hover:bg-brand-gold', 'hover:text-brand-navy', 'transition-all', 'duration-700', 'shadow-xl', 'overflow-hidden', 'active:scale-95')}>
-                <span className={clsx('relative', 'z-10', 'flex', 'items-center', 'gap-3')}>
-                  <span className={clsx('relative', 'z-10')}>View All Certificates</span>
-                  <FiArrowRight className={clsx('relative', 'z-10', 'text-base', 'sm:text-lg', 'group-hover:translate-x-1', 'transition-transform', 'duration-500')} />
+            <Link href="/certifications" className={clsx('inline-block group', 'relative', 'px-8', 'py-4', 'bg-brand-navy', 'text-white', 'rounded-xl', 'text-[10px]', 'font-black', 'uppercase', 'tracking-widest', 'hover:bg-brand-gold', 'hover:text-brand-navy', 'transition-all', 'duration-700', 'shadow-xl', 'overflow-hidden', 'active:scale-95')}>
+              <span className={clsx('relative', 'z-10', 'flex', 'items-center', 'gap-3')}>
+                <span className={clsx('relative', 'z-10')}>View All Certificates</span>
+                <FiArrowRight className={clsx('relative', 'z-10', 'text-base', 'sm:text-lg', 'group-hover:translate-x-1', 'transition-transform', 'duration-500')} />
 
-                </span>
-              </button>
-            </a>
+              </span>
+            </Link>
           </div>
 
         </div>
