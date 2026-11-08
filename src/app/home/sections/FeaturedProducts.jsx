@@ -82,7 +82,7 @@ export function FeaturedProducts() {
   ];
 
   return (
-    <section className="relative py-14 md:py-24 bg-white overflow-hidden">
+    <section className="relative py-10 sm:py-16 md:py-24 bg-white overflow-hidden">
       
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -93,87 +93,87 @@ export function FeaturedProducts() {
       <Container className="relative z-10">
         
         {/* Unified Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12 md:mb-16">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-brand-gold"></span>
-            <span className="text-[10px] sm:text-[11px] font-black text-brand-gold uppercase tracking-[0.4em]">
+        <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-12 md:mb-16">
+          <div className="flex items-center justify-center gap-3 mb-3 sm:mb-4">
+            <span className="w-6 sm:w-8 h-px bg-brand-gold"></span>
+            <span className="text-[10px] sm:text-[11px] font-black text-brand-gold uppercase tracking-[0.3em] sm:tracking-[0.4em]">
               Export Commodity Portfolio
             </span>
-            <span className="w-8 h-px bg-brand-gold"></span>
+            <span className="w-6 sm:w-8 h-px bg-brand-gold"></span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-brand-navy tracking-tight leading-[1.1] mb-6">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-brand-navy tracking-tight leading-[1.15] mb-3 sm:mb-6">
             Agricultural Products <br />
             <span className="text-gradient">Exporter Worldwide</span>
           </h2>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-base md:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
             We export a comprehensive portfolio of APEDA and FSSAI certified agro-commodities directly from India&apos;s fertile harvesting belts — fresh fruits, vegetables, authentic spices, premium Basmati rice, stone-milled wheat flour, and dehydrated products with precision cold-chain and maritime container dispatch.
           </p>
         </div>
 
         {/* 6 Product Categories Grid with H3 Headings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {exportProducts.map((item, idx) => (
             <div 
               key={idx}
-              className="group flex flex-col rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 hover:border-brand-gold/40 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+              className="group flex flex-col rounded-xl sm:rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 hover:border-brand-gold/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2"
             >
               {/* Image Box */}
-              <div className="relative aspect-[16/11] w-full overflow-hidden bg-slate-900">
+              <div className="relative aspect-[16/9] sm:aspect-[16/10] md:aspect-[16/11] w-full overflow-hidden bg-slate-900">
                 <Image
                   src={item.image}
                   alt={item.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/85 via-transparent to-transparent"></div>
                 
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4 bg-brand-navy/90 backdrop-blur-md px-3 py-1 rounded-md border border-white/20 text-white">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-brand-gold">{item.category}</span>
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-brand-navy/90 backdrop-blur-md px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-md border border-white/20 text-white">
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-brand-gold">{item.category}</span>
                 </div>
               </div>
 
               {/* Content Box */}
-              <div className="p-6 sm:p-7 flex flex-col flex-1">
+              <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-1">
                 {/* H3 Heading */}
-                <h3 className="text-xl sm:text-2xl font-black text-brand-navy tracking-tight mb-2 group-hover:text-brand-gold transition-colors">
+                <h3 className="text-base sm:text-lg lg:text-xl font-black text-brand-navy tracking-tight mb-1 sm:mb-1.5 group-hover:text-brand-gold transition-colors line-clamp-1">
                   {item.heading}
                 </h3>
 
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 sm:mb-3">
                   {item.title}
                 </p>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-6 flex-1">
+                <p className="text-xs sm:text-[13px] lg:text-sm text-slate-600 leading-relaxed font-medium mb-3.5 sm:mb-5 flex-1 line-clamp-2 sm:line-clamp-3">
                   {item.desc}
                 </p>
 
                 {/* Specifications */}
-                <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-200/60 mb-6 text-[11px]">
-                  <div className="flex items-center gap-2 text-slate-500">
-                    <FiPackage className="text-brand-gold shrink-0" />
+                <div className="grid grid-cols-2 gap-2 pt-3 sm:pt-4 border-t border-slate-200/60 mb-3.5 sm:mb-5 text-[10px] sm:text-[11px]">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-slate-500">
+                    <FiPackage className="text-brand-gold shrink-0 text-xs sm:text-sm" />
                     <span className="truncate">{item.packaging}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-500">
-                    <FiThermometer className="text-brand-gold shrink-0" />
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-slate-500">
+                    <FiThermometer className="text-brand-gold shrink-0 text-xs sm:text-sm" />
                     <span className="truncate">{item.temp}</span>
                   </div>
                 </div>
 
                 {/* Action Links */}
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-2 sm:gap-3">
                   <Link
                     href={`/products/${item.slug}`}
-                    className="flex-1 text-center py-2.5 px-4 rounded-xl bg-white border border-slate-200 text-brand-navy text-xs font-black uppercase tracking-wider hover:bg-slate-100 transition-colors"
+                    className="flex-1 text-center py-2 sm:py-2.5 px-2.5 sm:px-4 rounded-lg sm:rounded-xl bg-white border border-slate-200 text-brand-navy text-[10px] sm:text-xs font-black uppercase tracking-wider hover:bg-slate-100 transition-colors"
                   >
                     Specifications
                   </Link>
                   <Link
                     href="/contact"
-                    className="flex-1 text-center py-2.5 px-4 rounded-xl bg-brand-navy text-white text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-brand-navy transition-colors shadow-sm"
+                    className="flex-1 text-center py-2 sm:py-2.5 px-2.5 sm:px-4 rounded-lg sm:rounded-xl bg-brand-navy text-white text-[10px] sm:text-xs font-black uppercase tracking-wider hover:bg-brand-gold hover:text-brand-navy transition-colors shadow-sm"
                   >
                     Request Quote
                   </Link>
@@ -184,13 +184,13 @@ export function FeaturedProducts() {
         </div>
 
         {/* Full Catalog Banner */}
-        <div className="mt-14 text-center">
+        <div className="mt-8 sm:mt-12 md:mt-14 text-center">
           <Link 
             href="/products"
-            className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 bg-brand-navy text-white font-black text-xs sm:text-sm uppercase tracking-widest rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-xl active:scale-95"
+            className="inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 bg-brand-navy text-white font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider sm:tracking-widest rounded-xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-xl active:scale-95 w-full sm:w-auto"
           >
             <span>Explore Complete Export Portfolio (Fruits, Vegetables, Spices, Rice, Flour)</span>
-            <FiArrowRight />
+            <FiArrowRight className="shrink-0" />
           </Link>
         </div>
 
