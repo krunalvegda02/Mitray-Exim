@@ -16,8 +16,8 @@ export function NewsletterForm() {
 
     try {
       await emailjs.send(
-        'service_489ts7p',
-        'template_99y4k67',
+        'service_30d1i4w',
+        'template_lkehwov',
         {
           from_name: 'Newsletter Subscriber',
           from_email: formData.get('email'),

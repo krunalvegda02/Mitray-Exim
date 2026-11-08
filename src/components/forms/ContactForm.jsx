@@ -16,8 +16,8 @@ export default function ContactForm() {
 
     try {
       await emailjs.send(
-        'service_489ts7p',
-        'template_99y4k67',
+        'service_30d1i4w',
+        'template_lkehwov',
         {
           from_name: formData.get('name'),
           from_email: formData.get('email'),
