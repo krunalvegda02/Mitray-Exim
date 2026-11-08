@@ -68,7 +68,7 @@ export const PRODUCTS = [
     name: "Semi Husked Coconut",
     alt: "Fresh Coconut Exporter from India",
     category: "fresh-fruits",
-    image: "/products/is-full-paddy.jpg",
+    image: "/products/semi-husked-coconut.jpg",
     description:
       "Fresh semi-husked mature coconuts. Sourced from coastal southern India, featuring high water content, thick white kernel, and rich in natural oil. Ideal for wholesale, retail, and food processing.",
     origin: "India",
