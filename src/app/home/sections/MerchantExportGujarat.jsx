@@ -10,7 +10,7 @@ export function MerchantExportGujarat() {
   const advantages = [
     {
       title: "Strategic Maritime Ports",
-      desc: "Direct access to Mundra, Kandla, and Pipavav ports in Gujarat ensures rapid vessel turnaround and shortest maritime transit times to Jebel Ali, Dammam, Rotterdam, and Newark.",
+      desc: "Direct access to Mundra (Gujarat), Nhava Sheva / JNPT (Mumbai), and Cochin (Kerala) ensures rapid vessel turnaround and shortest maritime transit times to Jebel Ali, Dammam, Rotterdam, and Newark.",
       icon: <FiAnchor className="text-xl text-brand-gold" />
     },
     {
@@ -101,23 +101,23 @@ export function MerchantExportGujarat() {
               {/* Floating Port Telemetry Card */}
               <div className="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-brand-navy/90 backdrop-blur-xl border border-white/15 text-white">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-black text-brand-gold uppercase tracking-widest">Gujarat Export Gateways</span>
+                  <span className="text-[10px] font-black text-brand-gold uppercase tracking-widest">India&apos;s Export Gateways</span>
                   <span className="inline-flex items-center gap-1.5 text-[9px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Ports Active
                   </span>
                 </div>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between border-b border-white/10 pb-1.5">
-                    <span className="text-slate-300">Mundra Port (INMUN1)</span>
+                    <span className="text-slate-300">Gujarat – Mundra (Adani)</span>
                     <span className="font-bold text-white">Reefer Hub</span>
                   </div>
                   <div className="flex justify-between border-b border-white/10 pb-1.5">
-                    <span className="text-slate-300">Kandla / Deendayal Port</span>
-                    <span className="font-bold text-white">Agro-Bulk Terminal</span>
+                    <span className="text-slate-300">Mumbai – Nhava Sheva (JNPT)</span>
+                    <span className="font-bold text-white">Container Terminal</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-300">Pipavav Port (INPAV1)</span>
-                    <span className="font-bold text-white">Container Express</span>
+                    <span className="text-slate-300">Kerala – Cochin (Vallarpadam)</span>
+                    <span className="font-bold text-white">Spices &amp; Transshipment</span>
                   </div>
                 </div>
               </div>
