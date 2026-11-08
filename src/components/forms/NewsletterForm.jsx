@@ -4,6 +4,7 @@ import { Button } from "@/components/shared/Button";
 
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, DEFAULT_TO_EMAIL } from "@/lib/emailjs";
 
 export function NewsletterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,15 +17,19 @@ export function NewsletterForm() {
 
     try {
       await emailjs.send(
-        'service_30d1i4w',
-        'template_lkehwov',
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
+          title: 'Newsletter Subscription',
+          name: 'Newsletter Subscriber',
           from_name: 'Newsletter Subscriber',
+          email: formData.get('email'),
           from_email: formData.get('email'),
+          reply_to: formData.get('email'),
           message: 'New newsletter subscription request.',
-          to_email: 'info@mitrayexim.com'
+          to_email: DEFAULT_TO_EMAIL
         },
-        'J8zYYgRTPwF7rion2'
+        EMAILJS_PUBLIC_KEY
       );
 
       alert("Thank you for subscribing to our newsletter!");

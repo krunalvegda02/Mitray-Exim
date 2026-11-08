@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, DEFAULT_TO_EMAIL } from "@/lib/emailjs";
 import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import {
@@ -307,10 +309,45 @@ export default function ShippingPage() {
 }
 
 function InquiryModal({ onClose }) {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Inquiry successfully transmitted. Our trade specialists will get in touch with you shortly.");
-    onClose();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const phone = formData.get('phone') || '';
+    const company = formData.get('company') || '';
+    const requirements = formData.get('requirements') || '';
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          title: 'Shipping Specifications Request',
+          name: name,
+          from_name: name,
+          email: email,
+          from_email: email,
+          reply_to: email,
+          phone: phone,
+          company: company,
+          message: requirements,
+          to_email: DEFAULT_TO_EMAIL
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      alert("Inquiry successfully transmitted! Our trade specialists will get in touch with you shortly.");
+      onClose();
+    } catch (error) {
+      console.error('Email send failed:', error);
+      alert("Failed to send inquiry. Please try again or email us directly at " + DEFAULT_TO_EMAIL);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -349,6 +386,7 @@ function InquiryModal({ onClose }) {
                 <input
                   type="text"
                   id="modal-name"
+                  name="name"
                   required
                   className={clsx('w-full', 'bg-[#F9FAFB]', 'border', 'border-slate-200', 'px-3', 'sm:px-4', 'py-2', 'sm:py-3', 'focus:border-brand-gold', 'focus:bg-white', 'outline-none', 'transition-all', 'text-xs', 'sm:text-sm', 'font-bold', 'uppercase', 'tracking-wider', 'text-brand-navy')}
                   placeholder="John Doe"
@@ -362,6 +400,7 @@ function InquiryModal({ onClose }) {
                 <input
                   type="email"
                   id="modal-email"
+                  name="email"
                   required
                   className={clsx('w-full', 'bg-[#F9FAFB]', 'border', 'border-slate-200', 'px-3', 'sm:px-4', 'py-2', 'sm:py-3', 'focus:border-brand-gold', 'focus:bg-white', 'outline-none', 'transition-all', 'text-xs', 'sm:text-sm', 'font-bold', 'tracking-wider', 'text-brand-navy')}
                   placeholder="john@example.com"
@@ -375,6 +414,7 @@ function InquiryModal({ onClose }) {
                 <input
                   type="text"
                   id="modal-phone"
+                  name="phone"
                   required
                   className={clsx('w-full', 'bg-[#F9FAFB]', 'border', 'border-slate-200', 'px-3', 'sm:px-4', 'py-2', 'sm:py-3', 'focus:border-brand-gold', 'focus:bg-white', 'outline-none', 'transition-all', 'text-xs', 'sm:text-sm', 'font-bold', 'tracking-wider', 'text-brand-navy')}
                   placeholder="+91 7778886559"
@@ -388,6 +428,7 @@ function InquiryModal({ onClose }) {
                 <input
                   type="text"
                   id="modal-company"
+                  name="company"
                   className={clsx('w-full', 'bg-[#F9FAFB]', 'border', 'border-slate-200', 'px-3', 'sm:px-4', 'py-2', 'sm:py-3', 'focus:border-brand-gold', 'focus:bg-white', 'outline-none', 'transition-all', 'text-xs', 'sm:text-sm', 'font-bold', 'uppercase', 'tracking-wider', 'text-brand-navy')}
                   placeholder="Your Company"
                 />
@@ -400,6 +441,7 @@ function InquiryModal({ onClose }) {
               </label>
               <textarea
                 id="modal-requirements"
+                name="requirements"
                 rows={4}
                 required
                 className={clsx('w-full', 'bg-[#F9FAFB]', 'border', 'border-slate-200', 'px-3', 'sm:px-4', 'py-2', 'sm:py-3', 'focus:border-brand-gold', 'focus:bg-white', 'outline-none', 'transition-all', 'text-xs', 'sm:text-sm', 'font-bold', 'uppercase', 'tracking-wider', 'text-brand-navy', 'resize-none')}
@@ -409,9 +451,10 @@ function InquiryModal({ onClose }) {
 
             <button
               type="submit"
-              className={clsx('w-full', 'py-3', 'sm:py-4', 'md:py-5', 'bg-brand-gold', 'text-brand-navy', 'hover:bg-brand-navy', 'hover:text-white', 'font-black', 'text-[10px]', 'sm:text-xs', 'md:text-sm', 'uppercase', 'tracking-[0.2em]', 'sm:tracking-[0.25em]', 'md:tracking-[0.3em]', 'shadow-xl', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2')}
+              disabled={isSubmitting}
+              className={clsx('w-full', 'py-3', 'sm:py-4', 'md:py-5', 'bg-brand-gold', 'text-brand-navy', 'hover:bg-brand-navy', 'hover:text-white', 'font-black', 'text-[10px]', 'sm:text-xs', 'md:text-sm', 'uppercase', 'tracking-[0.2em]', 'sm:tracking-[0.25em]', 'md:tracking-[0.3em]', 'shadow-xl', 'transition-all', 'duration-500', 'flex', 'items-center', 'justify-center', 'gap-2', 'disabled:opacity-50')}
             >
-              <span>Transmit Specification Form</span>
+              <span>{isSubmitting ? 'Transmitting...' : 'Transmit Specification Form'}</span>
               <FiSend className={clsx('text-xs', 'sm:text-sm')} />
             </button>
           </form>

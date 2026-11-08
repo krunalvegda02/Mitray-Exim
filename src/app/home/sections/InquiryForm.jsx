@@ -1,18 +1,50 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, DEFAULT_TO_EMAIL } from "@/lib/emailjs";
 import { FiSend, FiUser, FiBriefcase, FiMail, FiPhone, FiMessageSquare, FiShield, FiActivity, FiZap, FiArrowRight } from "react-icons/fi";
 
 export function InquiryForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    const formData = new FormData(e.target);
+    const name = formData.get('inquiry-name') || '';
+    const email = formData.get('inquiry-email') || '';
+    const phone = formData.get('inquiry-phone') || '';
+    const company = formData.get('inquiry-company') || '';
+    const message = formData.get('inquiry-requirements') || '';
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          title: 'Homepage Inquiry',
+          name: name,
+          from_name: name,
+          email: email,
+          from_email: email,
+          reply_to: email,
+          phone: phone,
+          company: company,
+          message: message,
+          to_email: DEFAULT_TO_EMAIL
+        },
+        EMAILJS_PUBLIC_KEY
+      );
       alert("Inquiry received successfully! Our export team will get back to you shortly.");
-    }, 2000);
+      e.target.reset();
+    } catch (error) {
+      console.error('Email send failed:', error);
+      alert("Failed to submit inquiry. Please try again or email us directly at " + DEFAULT_TO_EMAIL);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

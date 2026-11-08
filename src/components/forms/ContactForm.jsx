@@ -4,6 +4,7 @@ import { Button } from "@/components/shared/Button";
 
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, DEFAULT_TO_EMAIL } from "@/lib/emailjs";
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,17 +17,21 @@ export default function ContactForm() {
 
     try {
       await emailjs.send(
-        'service_30d1i4w',
-        'template_lkehwov',
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
+          title: 'New Client Inquiry',
+          name: formData.get('name'),
           from_name: formData.get('name'),
+          email: formData.get('email'),
           from_email: formData.get('email'),
+          reply_to: formData.get('email'),
           phone: formData.get('phone'),
           company: formData.get('company'),
           message: formData.get('message'),
-          to_email: 'info@mitrayexim.com'
+          to_email: DEFAULT_TO_EMAIL
         },
-        'J8zYYgRTPwF7rion2'
+        EMAILJS_PUBLIC_KEY
       );
 
       alert("Message sent successfully!");

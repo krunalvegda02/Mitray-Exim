@@ -4,6 +4,7 @@ import { Container } from "@/components/shared/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, DEFAULT_TO_EMAIL } from "@/lib/emailjs";
 import {
    FiMail, FiPhone, FiMapPin, FiClock, FiSend,
    FiGlobe, FiMessageCircle, FiActivity, FiArrowRight,
@@ -87,17 +88,21 @@ export default function ContactPage() {
 
       try {
          await emailjs.send(
-            'service_30d1i4w',
-            'template_lkehwov',
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
             {
+               title: 'New Client Inquiry',
+               name: formData.name,
                from_name: formData.name,
+               email: formData.email,
                from_email: formData.email,
+               reply_to: formData.email,
                phone: formData.phone,
                company: formData.company,
                message: formData.message,
-               to_email: 'info@mitrayexim.com'
+               to_email: DEFAULT_TO_EMAIL
             },
-            'J8zYYgRTPwF7rion2'
+            EMAILJS_PUBLIC_KEY
          );
 
          setSubmitStatus("success");
