@@ -43,39 +43,39 @@ export function FeaturedProducts() {
     }
   ];
 
-  const spiceVegExports = [
+  const spiceExports = [
     {
-      heading: "Onion Exporter India",
-      title: "Fresh Nashik Red Onion",
-      slug: "onion",
-      alt: "Onion Exporter in India",
-      image: "/products/shallot-background.jpg",
-      variety: "Nashik Red & Garwa Pink",
-      packaging: "10 kg / 25 kg mesh bags",
-      temp: "Ventilated Reefer",
-      desc: "As a prominent onion exporter in India, Mitray ships premium red and pink onions (sizes 45mm to 60mm+) sorted for pungency, firmness, and moisture control, ideal for global wholesale distributors."
+      heading: "Turmeric Powder Exporter",
+      title: "Pure High-Curcumin Turmeric",
+      slug: "turmeric-powder",
+      alt: "Pure Turmeric Powder Exporter India",
+      image: "/products/close-up-turmeric-powder.jpg",
+      variety: "Salem & Nizamabad (High Curcumin)",
+      packaging: "25 kg multi-wall bags / PP",
+      temp: "Dry Ambient Storage",
+      desc: "As an authentic Indian spices exporter, Mitray supplies export-grade golden turmeric powder ground from sun-cured rhizomes with high natural curcumin, rich aroma, and strict purity standards."
     },
     {
-      heading: "Green Chilli Exporter",
-      title: "Fresh G4 & Teja Green Chilli",
-      slug: "green-chilli",
-      alt: "Green Chilli Exporter Gujarat",
-      image: "https://res.cloudinary.com/dtkdcrra2/image/upload/f_auto,q_auto,w_800,c_fit/v1781534036/jonas-ducker-4ijhsBXLY0c-unsplash_zzf1jo.jpg",
-      variety: "G4 / Teja (High Heat)",
-      packaging: "4 kg / 5 kg thermocol + ice",
-      temp: "4°C – 6°C Reefer / Air",
-      desc: "Operating as an experienced green chilli exporter from Gujarat, Mitray delivers vibrant, spicy fresh green chillies preserved in temperature-controlled thermocol cartons for international markets."
-    },
-    {
-      heading: "Indian Spices Exporter",
-      title: "Pure Turmeric & Red Chilli Powder",
+      heading: "Red Chilli Powder Exporter",
+      title: "Pure Stemless Red Chilli Powder",
       slug: "red-chilli-powder",
-      alt: "Indian Spices Exporter",
+      alt: "Indian Red Chilli Powder Exporter",
       image: "/products/close-up-chilli-powder.jpg",
-      variety: "Guntur Chilli & Salem Turmeric",
-      packaging: "25 kg / 50 kg multi-wall bags",
+      variety: "Guntur & Byadgi Stemless",
+      packaging: "25 kg / 50 kg laminated bags",
       temp: "Dry Ambient Container",
-      desc: "As an authentic Indian spices exporter, Mitray exports high-curcumin turmeric powder, vibrant Guntur red chilli powder, cumin seeds, coriander seeds, and whole green cardamom with strict quality grading."
+      desc: "Supplying premium Guntur and Byadgi ground red chilli powder boasting natural bright crimson coloration, controlled heat levels, and certified pesticide residue compliance for global food manufacturers."
+    },
+    {
+      heading: "Black Pepper Exporter",
+      title: "Malabar Whole Black Pepper",
+      slug: "black-pepper",
+      alt: "Malabar Black Pepper Exporter India",
+      image: "/products/black-milled-pepper-corns-as-background-high-quality-photo.jpg",
+      variety: "Malabar Bold (550G/L+ Density)",
+      packaging: "25 kg / 50 kg jute / PP bags",
+      temp: "Dry Ventilated Container",
+      desc: "Sourced from the southern Malabar coast, our high-density whole black pepper corns deliver robust pungent flavor, high piperine concentration, and aromatic essential oils for international culinary brands."
     }
   ];
 
@@ -195,7 +195,7 @@ export function FeaturedProducts() {
             <div className="flex items-center justify-center gap-3 mb-4">
               <span className="w-8 h-px bg-brand-gold"></span>
               <span className="text-[10px] sm:text-[11px] font-black text-brand-gold uppercase tracking-[0.4em]">
-                Spices & Agri-Commodities
+                Spices Division
               </span>
               <span className="w-8 h-px bg-brand-gold"></span>
             </div>
@@ -206,13 +206,13 @@ export function FeaturedProducts() {
             </h2>
 
             <p className="text-sm sm:text-base md:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-              Renowned worldwide as an authentic <strong className="text-brand-navy font-bold">Indian spices exporter</strong> and premier agricultural supplier, Mitray exports wholesale pure ground spices, Nashik onions, and vibrant green chillies directly from India's richest harvesting clusters.
+              Renowned worldwide as an authentic <strong className="text-brand-navy font-bold">Indian spices exporter</strong>, Mitray exports wholesale pure high-curcumin turmeric powder, vibrant Guntur red chilli powder, Malabar black pepper, and whole aromatic spices directly from India&apos;s richest harvesting clusters.
             </p>
           </div>
 
-          {/* Spices & Vegetables Grid with H3 Headings */}
+          {/* Spices Grid with H3 Headings */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {spiceVegExports.map((item, idx) => (
+            {spiceExports.map((item, idx) => (
               <div 
                 key={idx}
                 className="group flex flex-col rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 hover:border-brand-gold/40 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
