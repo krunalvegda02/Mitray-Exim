@@ -89,8 +89,8 @@ export function MerchantExportGujarat() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-brand-navy">
               <div className="relative aspect-[4/5] w-full">
                 <Image
-                  src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&h=1000&fit=crop"
-                  alt="Indian Spices, Grains, Agro Commodities & Export Gateways"
+                  src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=1000&fit=crop"
+                  alt="India Major Export Ports - Cargo Container Ship & Maritime Dispatch"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover opacity-85 hover:scale-105 transition-transform duration-700"
